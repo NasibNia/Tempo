@@ -8,7 +8,7 @@ module.exports = {
                     path: 'show',
                     populate: {
                     path: 'band',
-                    model: 'Bands'
+                    model: 'Band'
                     } 
                 })
                 .sort({date: -1})
