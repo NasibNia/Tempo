@@ -1,0 +1,20 @@
+#background-overlay {
+    overflow: hidden;
+    height: 100vh;
+    background: #edeae8;
+    position: relative;
+}
+
+video {
+    position: absolute;
+
+    /* Vertical and Horizontal center*/
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    /* establishes a semi-responsive background */
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}

@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Splash from "./components/Splash";
 import Footer from "./components/Footer";
 import NoMatch from "./components/NoMatch";
-import './App.css';
 import VenueHome from './components/VenueHome';
 import Testing from './components/Testing';
 

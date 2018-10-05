@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Navbar from "../Navbar"
+import Avatar from '@material-ui/core/Avatar';
+
+import "./VenueHome.css";
 
 const styles = {
     // container: {
@@ -17,16 +20,19 @@ class VenueHome extends Component {
         return (
             <Grid container direction="row" justify="center" alignItems="flex-start" spacing={24}>
             <Navbar />
-                <Grid item xs={2}>
-                    <Paper >User Information</Paper>
+                <Grid item xs={4}>
+                    <Paper >
+                        <p class = "title">Calendar</p>
+                        <hr></hr>
+                    </Paper>
 
                 </Grid>
                 <Grid item xs={6}>
-                    <Paper >Test</Paper>
+                    <Paper >
+                        <p class = "title">News Feed</p>
+                        <hr></hr>
 
-                </Grid>
-                <Grid item xs={2}>
-                    <Paper >Test</Paper>
+                    </Paper>
 
                 </Grid>
             </Grid>

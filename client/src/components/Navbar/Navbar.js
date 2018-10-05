@@ -17,23 +17,23 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { createMuiTheme } from '@material-ui/core/styles';
-
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 
 import "./Navbar.css";
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      light: '#757ce8',
-      main: '#3f50b5',
+      light: '#E55934',
+      main: '#D9594C',
       dark: '#002884',
       contrastText: '#fff',
     },
     secondary: {
-      light: '#ff7961',
-      main: '#f44336',
-      dark: '#ba000d',
-      contrastText: '#000',
+      light: '#5B85AA',
+      main: '#414770',
+      dark: '#372248',
+      contrastText: '#fff',
     },
   },
 });
@@ -186,6 +186,7 @@ class Navbar extends React.Component {
 
     return (
       <div className={classes.root}>
+      <MuiThemeProvider theme={theme}>
         <AppBar position="static">
           <Toolbar>
             <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
@@ -237,6 +238,7 @@ class Navbar extends React.Component {
         </AppBar>
         {renderMenu}
         {renderMobileMenu}
+        </MuiThemeProvider>
       </div>
     );
   }
