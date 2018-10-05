@@ -1,8 +1,10 @@
 const router = require('express').Router();
-const venueRoutes = require('./venue');
-const bandRoutes = require('./band');
+const venueRoutes = require('./venues');
+const bandRoutes = require('./shows');
 
-router.use("/venue", venueRoutes);
-router.use("/band", bandRoutes);
+router.use("/venues", venueRoutes);
+router.use("/bands", bandRoutes);
+router.use("/shows", bandRoutes);
+
 
 module.exports = router;
