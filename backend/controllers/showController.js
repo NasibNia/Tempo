@@ -4,6 +4,8 @@ module.exports = {
 
     findAllShows : function(req,res){
         db.Show.find({})
+                .populate("band")
+                .populate("venue")
                 .sort({date: -1})
                 .then(showsRes =>{
                     res.json(showsRes);
@@ -11,7 +13,7 @@ module.exports = {
     },
 
     create: function(req,res){
-        db.show.create(req.body)
+        db.Show.create(req.body)
                 .then(showsRes => {
                     res.json(showsRes);
                 });

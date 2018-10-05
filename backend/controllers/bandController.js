@@ -4,8 +4,13 @@ module.exports = {
 
     findAllBands : function(req,res){
         db.Band.find({})
-                .populate("show")
-
+                .populate({
+                    path: 'show',
+                    populate: {
+                    path: 'venue',
+                    model: 'Venue'
+                    } 
+                })
                 .sort({date: -1})
                 .then(bandsRes =>{
                     res.json(bandsRes);
