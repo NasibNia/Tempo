@@ -1,0 +1,17 @@
+#github{
+    color: rgb(122, 132, 209);
+    transition: 0.3 ease-in-out;
+    text-decoration: none;
+}
+
+.fa-github{
+    transition: 0.3 ease-in-out;
+}
+
+#github:hover{
+    color: rgb(255, 216, 89);
+}
+
+#github:active{
+    color: rgb(238, 193, 44);
+}

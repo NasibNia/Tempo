@@ -1,28 +1,35 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import Navbar from "../Navbar"
+
+const styles = {
+    // container: {
+    //     margin: "0px 10% 0px 10%"
+    // }
+
+}
 
 class VenueHome extends Component {
 
     render() {
 
         return (
-            <div>
-                <Grid container spacing={24}>
-                    <Grid item xs={4}>
-                        <Paper className={classes.paper}>Test</Paper>
+            <Grid container direction="row" justify="center" alignItems="flex-start" spacing={24}>
+            <Navbar />
+                <Grid item xs={2}>
+                    <Paper >User Information</Paper>
 
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Paper className={classes.paper}>Test</Paper>
-
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Paper className={classes.paper}>Test</Paper>
-
-                    </Grid>
                 </Grid>
-            </div>
+                <Grid item xs={6}>
+                    <Paper >Test</Paper>
+
+                </Grid>
+                <Grid item xs={2}>
+                    <Paper >Test</Paper>
+
+                </Grid>
+            </Grid>
         )
     }
 
