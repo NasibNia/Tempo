@@ -5,6 +5,8 @@ import Footer from "./components/Footer";
 import NoMatch from "./components/NoMatch";
 import './App.css';
 import VenueHome from './components/VenueHome';
+import Testing from './components/Testing';
+
 
 const App = () => (
   <Router>
@@ -12,6 +14,8 @@ const App = () => (
       <Switch>
         <Route exact path="/" component={Splash} />
         <Route exact path="/venue" component={VenueHome} />
+        <Route exact path="/testing" component={Testing} />
+
         {/* <Route exact path="/signup" component={} /> */}
         <Route component={NoMatch} />
       </Switch>
