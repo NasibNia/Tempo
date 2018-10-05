@@ -7,31 +7,51 @@ const bandSchema = new Schema ({
         type:String,
         required : true
     },
-    members : [
-        {
-            name     : String,
-            imageUrl : String,
-            role     : String,
-            bio      : String
-        }
-    ],
-    pastPerformances : [
-        {
-            date : Date,
-            location : {type : Schema.ObjectId , ref : 'Venue'} ,
-        }
-    ],
-    ratings  : {
-        type : Number
+    // members : [
+    //     {
+    //         name     : String,
+    //         imageUrl : String,
+    //         role     : String,
+    //         bio      : String
+    //     }
+    // ],
+
+    stats  : {
+        showsPlayed :{
+            type:Number
+        },
+        showsCancelled : {
+            type: Number
+        },
+        showsLate: {
+            type : Number
+        },
+
+        venueRating : {
+            type : Number        
+        },
     },
+    genre : [
+        {
+            type: String,
+        }
+    ],
+
     lookingForVenue : [
         {
             from : Date,
             to   : Date,
             zipCode : String
         }
-    ]   
+    ],
+    show : [
+        type: {type : Schema.Types.ObjectId , ref : 'Show'}
+    ]
 });
 
 const Band = mongoose.model("Band", bandSchema);
 module.exports = Band;
+
+
+
+

@@ -23,7 +23,7 @@ module.exports = {
                     res.json(venuesRes);
                 });
     },
-    deletOneVenue : function(req,res){
+    deleteOneVenue : function(req,res){
         db.Venue.remove({_id : req.params.id})
                 .then(venuesRes => {
                     res.json(venuesRes);
