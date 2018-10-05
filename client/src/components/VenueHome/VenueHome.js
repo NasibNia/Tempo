@@ -10,15 +10,15 @@ class VenueHome extends Component {
             <div>
                 <Grid container spacing={24}>
                     <Grid item xs={4}>
-                        <Paper className={classes.paper}>Test</Paper>
+                        <Paper >Test</Paper>
 
                     </Grid>
                     <Grid item xs={4}>
-                        <Paper className={classes.paper}>Test</Paper>
+                        <Paper >Test</Paper>
 
                     </Grid>
                     <Grid item xs={4}>
-                        <Paper className={classes.paper}>Test</Paper>
+                        <Paper >Test</Paper>
 
                     </Grid>
                 </Grid>
