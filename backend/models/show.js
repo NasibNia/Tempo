@@ -1,16 +1,28 @@
-var obj = {
-    show: [{
+const mongoose = require ("mongoose");
+const Schema = mongoose.Schema;
 
-        name: name,
-        date: date,
-        time: time,
-        venueContact: venueContact,
-        venue: venueID,
-        lineup: [
-            {
-                name: artistID
-            }
-        ],
-
-    }]
+const showSchema = new Schema(
+    {name : {
+        type: String
+    },
+    time_start : {
+        type : Date,
+        required : true
+    },
+    time_end : {
+        type: Date,
+        required : true
+    },    
+    venue: {
+        type: Schema.Types.ObjectId,
+        ref: "Venue"
+    },   
+    bands: [{
+        type: Schema.Types.ObjectId,
+        ref: "Band"
+    }]    
 }
+);
+
+const Show = mongoose.model("Show", showSchema);
+module.exports = Show;

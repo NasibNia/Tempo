@@ -30,7 +30,7 @@ const bandSchema = new Schema ({
         venueRating : {
             type : Number        
         },
-
+    },
     genre : [
         {
             type: String,
@@ -44,10 +44,9 @@ const bandSchema = new Schema ({
             zipCode : String
         }
     ],
-    show : [{
-        date : Date,
-        type: {type : Schema.ObjectId , ref : 'Show'}
-    }]
+    show : [
+        type: {type : Schema.Types.ObjectId , ref : 'Show'}
+    ]
 });
 
 const Band = mongoose.model("Band", bandSchema);
