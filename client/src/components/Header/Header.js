@@ -4,14 +4,12 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import Input from '@material-ui/core/Input';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
@@ -19,19 +17,19 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import { createMuiTheme } from '@material-ui/core/styles';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 
-import "./Navbar.css";
+import "./Header.css";
 
 const theme = createMuiTheme({
   palette: {
     primary: {
       light: '#E55934',
-      main: '#D9594C',
+      main: '#741D2B',
       dark: '#002884',
       contrastText: '#fff',
     },
     secondary: {
       light: '#5B85AA',
-      main: '#414770',
+      main: '#FF4025',
       dark: '#372248',
       contrastText: '#fff',
     },
@@ -54,30 +52,6 @@ const styles = theme => ({
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
-  },
-  search: {
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing.unit * 2,
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing.unit * 3,
-      width: 'auto',
-    },
-  },
-  searchIcon: {
-    width: theme.spacing.unit * 9,
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   inputRoot: {
     color: 'inherit',
@@ -109,7 +83,7 @@ const styles = theme => ({
 });
 
 
-class Navbar extends React.Component {
+class Header extends React.Component {
   state = {
     anchorEl: null,
     mobileMoreAnchorEl: null,
@@ -187,7 +161,7 @@ class Navbar extends React.Component {
     return (
       <div className={classes.root}>
       <MuiThemeProvider theme={theme}>
-        <AppBar position="static">
+        <AppBar position="fixed">
           <Toolbar>
             <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
               <MenuIcon />
@@ -195,19 +169,7 @@ class Navbar extends React.Component {
             <Typography className={classes.title} variant="title" color="inherit" noWrap>
               Tempo
             </Typography>
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <Input
-                placeholder="Search…"
-                disableUnderline
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-              />
-            </div>
+
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
               <IconButton color="inherit">
@@ -244,8 +206,8 @@ class Navbar extends React.Component {
   }
 }
 
-Navbar.propTypes = {
+Header.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Navbar);
+export default withStyles(styles)(Header);

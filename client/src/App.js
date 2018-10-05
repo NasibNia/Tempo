@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Splash from "./components/Splash";
 import Footer from "./components/Footer";
 import NoMatch from "./components/NoMatch";
-import VenueHome from './components/VenueHome';
+import VenueHome from './pages/VenueHome';
 import Testing from './components/Testing';
-
+import "./App.css";
 
 const App = () => (
   <Router>
