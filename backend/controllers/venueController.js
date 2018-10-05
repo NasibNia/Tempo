@@ -4,6 +4,13 @@ module.exports = {
     
     findAllVenues : function(req,res){
         db.Venue.find({})
+                .populate({
+                    path: 'show',
+                    populate: {
+                    path: 'band',
+                    model: 'Bands'
+                    } 
+                })
                 .sort({date: -1})
                 .then(venuesRes =>{
                     res.json(venuesRes);
