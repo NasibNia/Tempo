@@ -3,7 +3,9 @@ const db = require("../models");
 module.exports = {
 
     findAllBands : function(req,res){
-        db.Band.findAll({})
+        db.Band.find({})
+                .populate("show")
+
                 .sort({date: -1})
                 .then(bandsRes =>{
                     res.json(bandsRes);
@@ -18,19 +20,19 @@ module.exports = {
     },
 
     findOneBand : function (req, res){
-        db.Book.findById({_id : req.params.id})
+        db.Band.findById({_id : req.params.id})
                 .then(bandsRes => {
                     res.json(bandsRes);
                 });
     },
-    deletOneBand : function(req,res){
-        db.Book.remove({_id : req.params.id})
+    deleteOneBand : function(req,res){
+        db.Band.remove({_id : req.params.id})
                 .then(bandsRes => {
                     res.json(bandsRes);
                 });
     },
     updateOneBand : function(req,res){
-        db.Book.findOneAndUpdate({_id:req.params.id} , req.body)
+        db.Band.findOneAndUpdate({_id:req.params.id} , req.body)
         .then(dbBands => res.json(dbBands));
     }
 };

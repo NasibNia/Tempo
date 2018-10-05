@@ -1,9 +1,9 @@
 const db = require("../models");
 
 module.exports = {
-
+    
     findAllVenues : function(req,res){
-        db.Venue.findAll({})
+        db.Venue.find({})
                 .sort({date: -1})
                 .then(venuesRes =>{
                     res.json(venuesRes);
@@ -23,7 +23,7 @@ module.exports = {
                     res.json(venuesRes);
                 });
     },
-    deletOneVenue : function(req,res){
+    deleteOneVenue : function(req,res){
         db.Venue.remove({_id : req.params.id})
                 .then(venuesRes => {
                     res.json(venuesRes);
