@@ -3,7 +3,9 @@ const db = require("../models");
 module.exports = {
 
     findAllBands : function(req,res){
-        db.Band.findAll({})
+        db.Band.find({})
+                .populate("show")
+
                 .sort({date: -1})
                 .then(bandsRes =>{
                     res.json(bandsRes);

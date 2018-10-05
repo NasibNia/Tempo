@@ -1,9 +1,9 @@
 const db = require("../models");
 
 module.exports = {
-
+    
     findAllVenues : function(req,res){
-        db.Venue.findAll({})
+        db.Venue.find({})
                 .sort({date: -1})
                 .then(venuesRes =>{
                     res.json(venuesRes);

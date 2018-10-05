@@ -45,7 +45,7 @@ const bandSchema = new Schema ({
         }
     ],
     show : [
-        type: {type : Schema.Types.ObjectId , ref : 'Show'}
+        {type : Schema.Types.ObjectId , ref : 'Show'}
     ]
 });
 
