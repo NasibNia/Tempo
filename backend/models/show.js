@@ -17,7 +17,7 @@ const showSchema = new Schema(
         type: Schema.Types.ObjectId,
         ref: "Venue"
     },   
-    bands: [{
+    band: [{
         type: Schema.Types.ObjectId,
         ref: "Band"
     }]    
