@@ -18,7 +18,7 @@ class VenueHome extends Component {
             <Grid container direction="row" justify="center" alignItems="flex-start" spacing={24}>
             <Navbar />
                 <Grid item xs={2}>
-                    <Paper >Test</Paper>
+                    <Paper >User Information</Paper>
 
                 </Grid>
                 <Grid item xs={6}>
