@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const passportLocalMongoose = require('passport-local-mongoose');
+const bcrypt   = require('bcrypt-nodejs');
 
 const Schema = mongoose.Schema;
 
@@ -7,6 +9,15 @@ const bandSchema = new Schema ({
         type:String,
         required : true
     },
+    email: {
+        type: String,
+        required: true,
+        unique: true
+      },
+      password: {
+        type: String,
+        required: true
+      },
     // members : [
     //     {
     //         name     : String,
@@ -48,6 +59,22 @@ const bandSchema = new Schema ({
         {type : Schema.Types.ObjectId , ref : 'Show'}
     ]
 });
+
+bandSchema.plugin(passportLocalMongoose, {
+    //Updating username field to email rather than default "username" from LocalStrategy
+    usernameField: 'email',
+  });
+
+// methods ======================
+// generating a hash
+bandSchema.methods.generateHash = function(password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
+
+// checking if password is valid
+bandSchema.methods.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.local.password);
+};
 
 const Band = mongoose.model("Band", bandSchema);
 module.exports = Band;
