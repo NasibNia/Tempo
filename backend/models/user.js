@@ -5,11 +5,7 @@ const Schema = mongoose.Schema;
 // const userSchema = new Schema({
 module.exports = function(schema) {
     schema.add({
-      local            : {
-        email        : String,
-        password     : String,
-        role         : String
-    }
+      role         : String
 
 // userSchema.plugin(passportLocalMongoose, {
 //   //Updating username field to email rather than default "username" from LocalStrategy

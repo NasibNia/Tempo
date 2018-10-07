@@ -8,32 +8,27 @@ const Schema = mongoose.Schema;
 const venueSchema = new Schema ({
     name : {
         type:String,
-        required : true
+        // required : true
     },
     address : {
         type : String,
-        required : true,
+        // required : true,
     },
     city : {
         type: String,
-        required : true
+        // required : true
     },
     state: {
         type: String,
-        required : true
+        // required : true
     },
-    email: {
-        type: String,
-        required: true,
-        unique: true
-      },
-      password: {
-        type: String,
-        required: true
-      },
+    local            : {
+        email        : String,
+        password     : String
+    },
    capacity : {
        type : Number,
-       required : true
+    //    required : true
     },
     genre: {
         type : String

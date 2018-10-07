@@ -8,12 +8,12 @@ const requireRole = require("../config/requireRole");
 const passport = require('passport');
 
 //============== new for test :Nasib
-router.post('/signup', passport.authenticate('local-signup', {
+router.post('/signup', passport.authenticate('venue-local-signup', {
       successRedirect : '/start/profile',
       failureRedirect : 'signup'
   }));
   
-  router.post('/login', passport.authenticate('local-login', {
+  router.post('/login', passport.authenticate('venue-local-login', {
       successRedirect : '/start/profile',
       failureRedirect : 'login'
   }));
@@ -26,6 +26,10 @@ router.post('/signup', passport.authenticate('local-signup', {
           'message': 'successfully logout'
       });
   });
+
+
+
+
 //============== new for test :Nasib
 // router.route('/signup')
 //       .post(loginController.signUp, loginController.login);
