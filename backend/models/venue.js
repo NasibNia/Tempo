@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const passportLocalMongoose = require('passport-local-mongoose');
 const bcrypt   = require('bcrypt-nodejs');
+const user = require("./user");
 
 const Schema = mongoose.Schema;
 
@@ -62,6 +63,8 @@ const venueSchema = new Schema ({
         ref: "Show"
     }    
 });
+
+// venueSchema.plugin(user);
 
 venueSchema.plugin(passportLocalMongoose, {
     //Updating username field to email rather than default "username" from LocalStrategy

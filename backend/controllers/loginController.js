@@ -1,5 +1,5 @@
 const db = require("../models");
-const passport =require ("../conifg")
+const passport =require ("../config")
 
 module.exports = {
 
