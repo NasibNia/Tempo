@@ -8,15 +8,26 @@ const requireRole = require("../config/requireRole");
 const passport = require('passport');
 
 //============== new for test :Nasib
-router.post('/signup', passport.authenticate('venue-local-signup', {
+router.post('/venue/signup', passport.authenticate('venue-local-signup', {
       successRedirect : '/start/profile',
-      failureRedirect : 'signup'
+      failureRedirect : '/venue/signup'
   }));
   
-  router.post('/login', passport.authenticate('venue-local-login', {
+  router.post('/venue/login', passport.authenticate('venue-local-login', {
       successRedirect : '/start/profile',
-      failureRedirect : 'login'
+      failureRedirect : '/venue/login'
   }));
+
+    router.post('/band/signup', passport.authenticate('band-local-signup', {
+        successRedirect : '/start/profile',
+        failureRedirect : '/band/signup'
+    }));
+
+    router.post('/band/login', passport.authenticate('band-local-login', {
+        successRedirect : '/start/profile',
+        failureRedirect : '/band/login'
+    }));
+
   router.get('/profile', isLoggedIn, (req, res) => {
       res.status(200).json(req.user);
   });
@@ -26,8 +37,6 @@ router.post('/signup', passport.authenticate('venue-local-signup', {
           'message': 'successfully logout'
       });
   });
-
-
 
 
 //============== new for test :Nasib
