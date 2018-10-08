@@ -1,0 +1,30 @@
+.title{
+    text-align: center;
+    font-size: 36px;
+    padding: 0 auto;    
+}
+
+/* .column{
+    position: fixed;
+} */
+
+#nav{
+    width: 30%;
+}
+
+#main{
+
+    /* align-content: center; */
+    width: auto;
+    height: 150vh;
+}
+
+/* #news{
+    width: 50%;
+    height: 150vh;
+} */
+
+#gigs{
+    width: 15%;
+}
+

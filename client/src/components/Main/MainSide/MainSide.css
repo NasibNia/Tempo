@@ -1,0 +1,44 @@
+.main-side {
+    width: 300px;
+    margin: 5px;
+}
+
+.side-wrap {
+    width: 140px;
+}
+
+.side-icon {
+    height: 25px;
+    width: 25px;
+    background-color: gray;
+    border-radius: 25px;
+}
+
+.side-item {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+.side-text {
+    padding-left: 5px;
+}
+
+.side-chunk {
+    padding: 5px;
+    margin-bottom: 15px;
+}
+
+.side-item:hover {
+    background-color: white;
+}
+
+
+.side-chunk h2 {
+    font-weight: bold;    
+    margin-bottom: 5px;
+}
+
+.side-chunk h4 {
+    font-weight: normal;  
+}

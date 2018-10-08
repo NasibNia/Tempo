@@ -1,0 +1,5 @@
+.bodyWrap {
+    display: flex;
+    background-color: lightgray;
+    padding: 20px;
+}
