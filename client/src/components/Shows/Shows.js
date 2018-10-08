@@ -1,23 +1,21 @@
 import React, { Component } from 'react';
-import Panel from "../Panel";
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
 //Temporary Main 
 
-class Main extends Component {
+class Shows extends Component {
 
     render() {
         return (
 
-            <div id="main">
-                <p class="title">News Feed</p>
+            <div id="gigs">
+                <p class="title">Gigs</p>
                 <hr></hr>
-
-                <Panel />
+                test
             </div>
         )
     }
 }
 
-export default Main;
+export default Shows;

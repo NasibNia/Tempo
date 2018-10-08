@@ -4,14 +4,17 @@ import Paper from '@material-ui/core/Paper';
 import Header from "../../components/Header"
 import Nav from "../../components/Nav";
 import Main from "../../components/Main";
+import Shows from "../../components/Shows";
 import Avatar from '@material-ui/core/Avatar';
 
 import "./VenueHome.css";
 
 const styles = {
-    // container: {
-    //     margin: "0px 10% 0px 10%"
-    // } GAAAAAYYYYYYYYYYYYYYY
+
+    column: {
+        position: "fixed"
+    }
+
 
 }
 
@@ -22,17 +25,10 @@ class VenueHome extends Component {
         return (
             <div>
                 <Header />
-                <Grid container direction="row" justify="center" alignItems="flex-start" spacing={24} style={{ marginTop: "3%" }}>
-                    <Nav />
+                <Grid container direction="row" justify="center" alignItems="flex-start" spacing={24} style={{ marginTop: "5%" }}>
+                    <Nav className = {styles.column}/>
                     <Main />
-                    <Grid item xs={3}>
-                            <div className="tester">
-                                <p class="title">Gigs</p>
-                                <hr></hr>
-                                test
-                        </div>
-
-                    </Grid>
+                    <Shows className = {styles.column}/>
                 </Grid>
             </div>
         )

@@ -8,14 +8,12 @@ class Nav extends Component {
 
     render() {
         return (
-            <Grid item xs={2}>
-                <div class="tester">
-                    <p class="title">Calendar</p>
-                    <hr></hr>
-                    test
-                        </div>
+            <div id = "nav">
+                <p className="title">Calendar</p>
+                <hr></hr>
+                test
+            </div>
 
-            </Grid>
         )
     }
 }

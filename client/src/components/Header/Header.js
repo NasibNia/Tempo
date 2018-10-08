@@ -19,22 +19,6 @@ import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 
 import "./Header.css";
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      light: '#E55934',
-      main: '#741D2B',
-      dark: '#002884',
-      contrastText: '#fff',
-    },
-    secondary: {
-      light: '#5B85AA',
-      main: '#FF4025',
-      dark: '#372248',
-      contrastText: '#fff',
-    },
-  },
-});
 
 const styles = theme => ({
   root: {
@@ -160,7 +144,6 @@ class Header extends React.Component {
 
     return (
       <div className={classes.root}>
-      <MuiThemeProvider theme={theme}>
         <AppBar position="fixed">
           <Toolbar>
             <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
@@ -200,7 +183,6 @@ class Header extends React.Component {
         </AppBar>
         {renderMenu}
         {renderMobileMenu}
-        </MuiThemeProvider>
       </div>
     );
   }
