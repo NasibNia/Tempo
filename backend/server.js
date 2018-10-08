@@ -48,7 +48,7 @@ app.use('/', routes);
 
 
 mongoose.connect(
-    process.env.MONGODB_URI || "mongodb://localhost/tempoDBNew2"
+    process.env.MONGODB_URI || "mongodb://localhost/tempoDB"
 );
 
 app.listen(PORT, function (){
