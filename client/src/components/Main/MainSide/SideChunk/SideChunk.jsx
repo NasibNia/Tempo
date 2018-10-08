@@ -6,10 +6,10 @@ class SideChunk extends Component {
    render(props) {
        return(
        <div className="side-chunk">
-           <h2>Title</h2>
-               <SideItem text="test"/>
-               <SideItem text="test"/>
-               <SideItem text="test"/>
+        <h2>Title</h2>
+            <SideItem text="test" subtext="subtext"/>
+            <SideItem text="test" subtext="subtext"/>
+            <SideItem text="test" subtext="subtext"/>
        </div>
        )
    }

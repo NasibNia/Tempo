@@ -46,7 +46,7 @@ const App = () => (
           <Route exact path="/signup" component={SignUp} />
           <Route component={NoMatch} />
         </Switch>
-        <Footer />
+        {/* <Footer /> */}
       </MuiThemeProvider>
     </div>
   </Router>

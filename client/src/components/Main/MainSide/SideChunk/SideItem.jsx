@@ -6,7 +6,10 @@ class SideItem extends Component {
         return(
         <div className="side-item">
             <div className="side-icon"></div>
-            <h4 className="side-text">{this.props.text}</h4>
+            <div className="side-text">
+                <h4>{this.props.text}</h4>
+                <p>{this.props.subtext}</p>
+            </div>
         </div>
         )
     }
