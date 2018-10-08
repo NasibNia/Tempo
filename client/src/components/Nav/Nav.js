@@ -9,7 +9,7 @@ class Nav extends Component {
     render() {
         return (
             <div id = "nav">
-                <p className="title">Calendar</p>
+                <p className="title">Nav</p>
                 <hr></hr>
                 test
             </div>

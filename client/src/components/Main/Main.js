@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import Panel from "../Panel";
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
+import Navigate from "../Navigate";
+import MainSide from "./MainSide";
+import MainMiddle from "./MainMiddle";
 
-//Temporary Main 
+
+import "./Main.css";
 
 class Main extends Component {
 
     render() {
         return (
 
-            <div id="main">
-                <p class="title">News Feed</p>
-                <hr></hr>
-
-                <Panel />
+            <div className="main">
+                <MainMiddle />
+                <MainSide />
             </div>
         )
     }

@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import NavigateItem from './NavigateItem'
+import "./Navigate.css"
 
 class Navigate extends Component {
     render() {
-        <div>
+        return(
+        <div className="navigate-wrap">
             <div className="navigate-chunk">
+                <h2>Your Profile</h2>
                 <NavigateItem icon="imgURL" text="ProfileName"/>
+                <NavigateItem icon="imgURL" text="PostAGig"/>
+                <NavigateItem icon="imgURL" text="PastGigs"/>
             </div>
             <div className="navigate-chunk">
                 <h2>Community</h2>
@@ -13,12 +18,8 @@ class Navigate extends Component {
                 <NavigateItem icon="imgURL" text="ProfileName"/>
                 <NavigateItem icon="imgURL" text="ProfileName"/>
             </div>
-            <div className="navigate-chunk">
-                <h2>Your Profile</h2>
-                <NavigateItem icon="imgURL" text="ProfileName"/>
-                <NavigateItem icon="imgURL" text="ProfileName"/>
-            </div>
         </div>
+        )
     }
 }
 

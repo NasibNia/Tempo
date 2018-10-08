@@ -1,0 +1,39 @@
+.navigate-wrap {
+    width: 140px;
+}
+
+.navigate-icon {
+    height: 25px;
+    width: 25px;
+    background-color: gray;
+    border-radius: 25px;
+}
+
+.navigate-item {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+.navigate-text {
+    padding-left: 5px;
+}
+
+.navigate-chunk {
+    padding: 5px;
+    margin-bottom: 15px;
+}
+
+.navigate-item:hover {
+    background-color: white;
+}
+
+
+.navigate-chunk h2 {
+    font-weight: bold;    
+    margin-bottom: 5px;
+}
+
+.navigate-chunk h4 {
+    font-weight: normal;  
+}

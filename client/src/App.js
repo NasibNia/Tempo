@@ -5,9 +5,12 @@ import Footer from "./components/Footer";
 import NoMatch from "./components/NoMatch";
 import Testing from './components/Testing';
 
+//PAGES
 import VenueHome from './pages/VenueHome';
 import ArtistHome from "./pages/ArtistHome";
+import SignUp from "./pages/SignUp";
 
+//STYLING
 import { createMuiTheme } from '@material-ui/core/styles';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 
@@ -16,15 +19,15 @@ import "./App.css";
 const theme = createMuiTheme({
   palette: {
     primary: {
-      light: '#E55934',
+      light: '#8D4651',
       main: '#741D2B',
-      dark: '#002884',
+      dark: '#551620',
       contrastText: '#fff',
     },
     secondary: {
-      light: '#5B85AA',
+      light: '#FF7460',
       main: '#FF4025',
-      dark: '#372248',
+      dark: '#E83B22',
       contrastText: '#fff',
     },
   },
@@ -40,8 +43,7 @@ const App = () => (
           <Route exact path="/venue" component={VenueHome} />
           <Route exact path="/artist" component={ArtistHome} />
           <Route exact path="/testing" component={Testing} />
-
-          {/* <Route exact path="/signup" component={} /> */}
+          <Route exact path="/signup" component={SignUp} />
           <Route component={NoMatch} />
         </Switch>
         <Footer />

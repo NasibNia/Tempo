@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import "./Navigate.css"
 
 class NavigateItem extends Component {
     render(props) {
+        return(
         <div className="navigate-item">
-            <div className="navigate-icon">{props.icon}</div>
-            <h3 className="navigate-text">{props.text}</h3>
+            <div className="navigate-icon"></div>
+            <h4 className="navigate-text">{this.props.text}</h4>
         </div>
+        )
     }
 }
 

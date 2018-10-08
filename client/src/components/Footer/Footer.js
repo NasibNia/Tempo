@@ -10,7 +10,7 @@ const styles = {
         height: "25vh",
         width: "100%",
         margin: "20px 0 0 0",
-        backgroundImage: "linear-gradient(#010131, #000022)",
+        backgroundImage: "linear-gradient(#741D2B, #551620)",
         color: "rgb(195, 200, 240)"
     }
 }

@@ -6,6 +6,8 @@ import Nav from "../../components/Nav";
 import Main from "../../components/Main";
 import Shows from "../../components/Shows";
 import Avatar from '@material-ui/core/Avatar';
+import API from "../../utils/API";
+
 
 import "./VenueHome.css";
 
@@ -19,6 +21,25 @@ const styles = {
 }
 
 class VenueHome extends Component {
+
+    state = {
+        bands: [],
+        name: "",
+        description: "",
+        statistics: ""
+      };
+    
+      componentDidMount() {
+        this.loadBands();
+      }
+    
+      loadBands = () => {
+        API.getBands()
+          .then(res =>
+            this.setState({ bands: res.data, name: "", description: "", statistics: "" })
+          )
+          .catch(err => console.log(err));
+      };
 
     render() {
 
