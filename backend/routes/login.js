@@ -20,7 +20,7 @@ router.post('/venue/signup', passport.authenticate('venue-local-signup', {
 
     router.post('/band/signup', passport.authenticate('band-local-signup', {
         successRedirect : '/start/profile',
-        failureRedirect : '/band/signup'
+        failureRedirect : '/start/signup'
     }));
 
     router.post('/band/login', passport.authenticate('band-local-login', {
@@ -36,7 +36,12 @@ router.post('/venue/signup', passport.authenticate('venue-local-signup', {
       res.status(200).json({
           'message': 'successfully logout'
       });
-  });
+    });
+    
+    router.get('/signup', function (req, res) {
+        console.log("get start/signup");
+        res.json("User not found");
+    });
 
 
 //============== new for test :Nasib

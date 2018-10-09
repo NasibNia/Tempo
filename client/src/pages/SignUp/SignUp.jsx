@@ -13,6 +13,9 @@ import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
+import API from "../../utils/API.js";
+import axios from "axios";
+
 
 
 import "./signup.css"
@@ -59,19 +62,21 @@ class SignUp extends Component {
 
     //   componentDidMount() {}
 
-    handleClick = () => {
+    handleClick = event => {
+        event.preventDefault();
         console.log("click")
 
         // const newBand = bands;
         this.postTheBand();
+        
     }
 
     postTheBand = () => {
-        console.log("inside postTheBand")
-        // axios.post("/api/bands" , bands)
-        // .then(results => 
-        //     console.log(results)
-        // );
+        const newUser = {email : this.state.email, password : this.state.password}
+        axios.post("/start/band/signup" , newUser)
+        .then(results => 
+            console.log(results)
+        );
     };
 
     handleInputChange = event => {
@@ -161,7 +166,11 @@ class SignUp extends Component {
                             control={<Checkbox value="remember" color="secondary" />}
                             label="Remember me"
                         />
-                        <Button variant="contained" color="secondary">
+                        <Button variant="contained" 
+                                color="secondary"
+                                onClick = {this.handleClick}
+
+                        >
                             Sign Up for Tempo
                         {/* <Icon className="">+</Icon> */}
                         </Button>

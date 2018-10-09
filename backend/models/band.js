@@ -2,6 +2,8 @@
 
 // const bcrypt   = require('bcrypt-nodejs');
 // // const Sequelize = require('sequelize');
+const bcrypt = require("bcrypt");
+
 
 
 module.exports = function(sequelize , DataTypes){
@@ -14,7 +16,8 @@ module.exports = function(sequelize , DataTypes){
         },
         email : {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true
         },
         password : {
             type: DataTypes.STRING,
@@ -51,13 +54,22 @@ module.exports = function(sequelize , DataTypes){
         
     // } ,
     // {
-    //     instanceMethods: {
-    //       generateHash: function (password) {
-    //         return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-    //       },
-    //       validPassword: function (password) {
-    //         return bcrypt.compareSync(password, this.password);
-    //       }
+        // instanceMethods: {
+        //   generateHash: function (password) {
+        //     return bcrypt.hashSync(password, 8, null);
+        //   },
+        //   validPassword: function (password) {
+        //     return bcrypt.compareSync(password, this.password);
+        //   }
+        // }
+
+        // instanceMethods: {
+            // generateHash : function (password) {
+            //     return bcrypt.hash(password, bcrypt.genSaltSync(8));
+            // },
+            // validPassword : function (password) {
+            //     return bcrypt.compare(password, this.password);
+            // }
         // }
     });
 

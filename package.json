@@ -1,5 +1,7 @@
 {
+  "main": "./backend/server",
   "dependencies": {
     "react-router-dom": "^4.3.1"
   }
+
 }
