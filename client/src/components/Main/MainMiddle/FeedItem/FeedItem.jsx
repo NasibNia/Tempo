@@ -6,7 +6,7 @@ class FeedItem extends Component {
     render(props) {
         return(
         <div className="feed-item">
-            <h2>Item Name</h2>
+            <h2>{this.props.title}</h2>
             <WidgetItem />
         </div>
         )

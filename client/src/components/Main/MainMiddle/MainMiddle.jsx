@@ -6,11 +6,11 @@ class MainMiddle extends Component {
     render(props) {
         return(
         <div className="middle-feed">
-            <FeedItem />
+            <FeedItem title="Add a Gig" />
+            <FeedItem title="Calendar" />
         </div>
         )
     }
 }
-
 
 export default MainMiddle;

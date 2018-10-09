@@ -1,11 +1,12 @@
 .navigate-wrap {
-    width: 140px;
+    width: 180px;
+    padding: 10px 0;
 }
 
 .navigate-icon {
     height: 25px;
     width: 25px;
-    background-color: gray;
+    background-color: lightgray;
     border-radius: 25px;
 }
 
@@ -13,6 +14,7 @@
     display: flex;
     align-items: center;
     padding: 5px;
+    border: 1px solid #E9EBEE;
 }
 
 .navigate-text {
@@ -26,12 +28,13 @@
 
 .navigate-item:hover {
     background-color: white;
+    border: 1px solid lightgray;
 }
-
 
 .navigate-chunk h2 {
     font-weight: bold;    
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    color: #676767;
 }
 
 .navigate-chunk h4 {

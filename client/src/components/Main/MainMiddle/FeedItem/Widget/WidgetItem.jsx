@@ -5,7 +5,6 @@ class WidgetItem extends Component {
     render(props) {
         return(
         <div className="widget-item">  
-            <h1>Hi</h1>
         </div>
         )
     }

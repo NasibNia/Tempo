@@ -9,7 +9,7 @@ const styles = {
         position: "relative",
         height: "25vh",
         width: "100%",
-        margin: "20px 0 0 0",
+        margin: "0px",
         backgroundImage: "linear-gradient(#741D2B, #551620)",
         color: "rgb(195, 200, 240)"
     }

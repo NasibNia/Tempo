@@ -1,0 +1,43 @@
+.header {
+    background-color: #741D2B;
+    display: flex;
+    height: 42px;
+    justify-content: center;;
+}
+
+.header-contents {
+    max-width: 960px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-contents .logo {
+    align-items: center;
+    display: flex;
+}
+
+.header-contents h1 {
+    color: white;
+    font-size: 20px;
+    padding: 5px;
+
+}
+
+.header-items {
+    display: flex;
+    padding: 0 10px;
+}
+
+.header-item .header-icon {
+    height: 25px;
+    width: 25px;
+    border-radius: 25px;
+    background-color: lightgray;
+    margin: 3px;
+}
+
+.header-item {
+    display: flex;
+    align-items: center;
+}

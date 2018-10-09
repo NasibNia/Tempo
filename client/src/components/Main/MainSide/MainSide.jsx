@@ -7,6 +7,7 @@ class MainSide extends Component {
         return(
         <div className="main-side">
             <SideChunk />
+            <SideChunk />
         </div>
         )
     }

@@ -1,5 +1,11 @@
 .middle-feed {
     display: flex;
     width: 100%;
-    margin: 5px;
+    flex-direction: column;
+    align-content: center;
 }
+
+.middle-feed h2 {
+    color: #676767;
+}
+

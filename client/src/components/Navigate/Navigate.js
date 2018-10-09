@@ -8,15 +8,16 @@ class Navigate extends Component {
         <div className="navigate-wrap">
             <div className="navigate-chunk">
                 <h2>Your Profile</h2>
-                <NavigateItem icon="imgURL" text="ProfileName"/>
-                <NavigateItem icon="imgURL" text="PostAGig"/>
-                <NavigateItem icon="imgURL" text="PastGigs"/>
+                <NavigateItem icon="imgURL" text="Profile Name"/>
+                <NavigateItem icon="imgURL" text="Post A Gig"/>
+                <NavigateItem icon="imgURL" text="Past Gigs"/>
             </div>
             <div className="navigate-chunk">
                 <h2>Community</h2>
-                <NavigateItem icon="imgURL" text="ProfileName"/>
-                <NavigateItem icon="imgURL" text="ProfileName"/>
-                <NavigateItem icon="imgURL" text="ProfileName"/>
+                <NavigateItem icon="imgURL" text="News Feed"/>
+                <NavigateItem icon="imgURL" text="Calendar"/>
+                <NavigateItem icon="imgURL" text="Local Events"/>
+                <NavigateItem icon="imgURL" text="Venue Directory"/>
             </div>
         </div>
         )
