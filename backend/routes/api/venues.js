@@ -6,8 +6,8 @@ router.route("/")
         .post(venueController.create);
 
 router.route("/:id")
-      .get(venueController.findOneVenue)
-      .delete(venueController.deleteOneVenue)
-      .put(venueController.updateOneVenue);
+      .get(venueController.findVenue)
+      .delete(venueController.deleteVenue)
+      .put(venueController.updateVenue);
 
 module.exports = router;

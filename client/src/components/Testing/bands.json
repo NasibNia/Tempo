@@ -1,21 +1,28 @@
 {
-    "name" : "NasiBadasses",
-    "stats" : {
-        "showsPlayed" : 50,
-        "showsCancelled" : 2,
-        "showsLate" : 2,
-        "venueRating" : 4.7
-    },
-    "genre" : [ 
-        "punk", 
-        "metal"
-    ],
-    "lookingForVenue" : [ 
-        {
-            "from" : "2018-04-06",
-            "to" : "2018-04-10",
-            "zipCode" : "98037"
-        }
-    ],
-    "__v" : 0
+
+"name" : {
+    type : DataTypes.STRING,
+    allowNull: false
+},
+"email" : {
+    type: DataTypes.STRING,
+    allowNull: false
+},
+"password" : {
+    type: DataTypes.STRING,
+    allowNull: false
+},
+"showsPlayed" :{
+    type: DataTypes.INTEGER
+},
+"showsCancelled" : {
+    type: DataTypes.INTEGER
+},
+"showsLate": {
+    type : DataTypes.INTEGER
+},
+"rating" : {
+    
+}
+
 }

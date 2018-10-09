@@ -19,8 +19,9 @@ class Testing extends Component {
 
     
     state = {
-        username : "",
+        email : "",
         password : "",
+        role:""
     
     }
     
@@ -44,22 +45,43 @@ class Testing extends Component {
         const {name,value} = event.target;
         this.setState({[name] : value});
     };
-    handleSubmitForm = event =>{
+    handleSignUp= event =>{
         event.preventDefault();
 
-        if (this.state.name && this.state.password) {
-            const thisUser = {
-                name : this.state.name,
-                password : this.state.passwrod
+        if (this.state.name && this.state.password && this.state.role) {
+            const currentUser = {
+                email : this.state.name,
+                password : this.state.passwrod,
+                role : this.state.role
             };
-            // check if user already exist in the database, 
-            if (this.searchUser) {
-                console.log("welcome back to the page")
-            } 
-            //if not add it to the database
-            else {
-                this.addUser(thisUser);
+            if (this.state.role === "band"){
+                // I am not sure about this part
+                axios.post("/band/signup" , currentUser)
+            } else if (this.state.role === "venue"){
+                // I am not sure about this part
+                axios.post("/venue/signup" , currentUser)
             }
+            
+        }
+
+    }
+    handleSignIn= event =>{
+        event.preventDefault();
+
+        if (this.state.name && this.state.password && this.state.role) {
+            const currentUser = {
+                email : this.state.name,
+                password : this.state.passwrod,
+                role : this.state.role
+            };
+            if (this.state.role === "band"){
+                // I am not sure about this part
+                axios.post("/band/signIn" , currentUser)
+            } else if (this.state.role === "venue"){
+                // I am not sure about this part
+                axios.post("/venue/signIn" , currentUser)
+            }
+            
         }
 
     }
@@ -72,7 +94,7 @@ class Testing extends Component {
     searchUser = (user) => {
         // axios.get("/api/bands")
         // .then(results =>{
-        //     const isUserinBands = results.find({"username" : user.username});
+        //     const isUserinBands = results.find({"email" : user.email});
         // });
         console.log("user exists");
         return true;
@@ -97,10 +119,10 @@ class Testing extends Component {
                 <form>Form
                     <label>name</label>
                     <input  type="text" 
-                            name="username" 
+                            name="email" 
                             placeholder="Your name.." 
                             onChange={this.handleInputChange}
-                            value = {this.state.username}
+                            value = {this.state.email}
                             />
                     <label>password</label>
                     <input  type="password" 
@@ -109,9 +131,22 @@ class Testing extends Component {
                             onChange={this.handleInputChange}
                             value = {this.state.password}
                             />
+                    <label><input type="checkbox" 
+                                  name = "venue"
+                                  value={this.state.role}
+                                  onChange = {this.handleInputChange}
+                                  />venue</label>
+                    <label><input type="checkbox" 
+                                  name = "band"
+                                  value={this.state.role}
+                                  onChange = {this.handleInputChange}
+                                  />band</label>
                     <button type="submit" 
                             value="Submit"
-                            onClick={this.handleSubmitForm}>Submit</button>
+                            onClick={this.handleSingIn}>SignIn</button>
+                    <button type="submit" 
+                            value="Submit"
+                            onClick={this.handleSingUp}>SignUp</button>
                 </form>
 
                 <button onClick = {this.handleGoogleSignIn}> Google Sign in Button</button> 

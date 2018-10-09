@@ -4,8 +4,9 @@
 var LocalStrategy   = require('passport-local').Strategy;
 
 // load up the user model
-var Band            = require('../app/models/band');
-var Venue            = require('../app/models/venue');
+var Band    = require('../models/band');
+var Venue   = require('../models/venue');
+// var User    = require('../models/User');
 
 
 // expose this function to our app using module.exports
@@ -24,84 +25,235 @@ module.exports = function(passport) {
 
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
-        Band.findById(id, function(err, user) {
+        Band.findOne({where: {id : id}}, function(err, user) {
             done(err, user);
         });
-        Venue.findById(id, function(err, user) {
+        Venue.findOne({where: {id : id}}, function(err, user) {
             done(err, user);
         });
     });
 
     // =========================================================================
-    // LOCAL SIGNUP ============================================================
+    // LOCAL LOGIN =============================================================
     // =========================================================================
-    // we are using named strategies since we have one for login and one for signup
-    // by default, if there was no name, it would just be called 'local'
-
-    passport.use('local-signup', new LocalStrategy({
+    passport.use('band-local-login', new LocalStrategy({
         // by default, local strategy uses username and password, we will override with email
         usernameField : 'email',
         passwordField : 'password',
-        passReqToCallback : true // allows us to pass back the entire request to the callback
+        passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
     },
     function(req, email, password, done) {
+        if (email)
+            email = email.toLowerCase(); // Use lower-case e-mails to avoid case-sensitive e-mail matching
 
         // asynchronous
-        // User.findOne wont fire unless data is sent back
         process.nextTick(function() {
+            Band.findOne({ 'email' :  email }, function(err, user) {
+                // if there are any errors, return the error
+                if (err)
+                    return done(err);
 
-        // find a user whose email is the same as the forms email
-        // we are checking to see if the user trying to login already exists
-        Band.findOne({ 'local.email' :  email }, function(err, band) {
-            // if there are any errors, return the error
-            if (err)
-                return done(err);
+                // if no user is found, return the message
+                if (!user)
+                    return done(null, false);
 
-            // check to see if theres already a user with that email
-            if (band) {
-                // log the band in and go to band page
-                return done(null, band);
-            } else {
-                // if not found search venues
-                Venue.findOne({ 'local.email' :  email }, function(err, venue) {
+                if (!user.validPassword(password))
+                    return done(null, false);
+
+                // all is well, return user
+                else
+                    return done(null, user);
+            });
+        });
+
+    }));
+
+// =========================================================================
+// LOCAL SIGNUP ============================================================
+// =========================================================================
+passport.use('band-local-signup', new LocalStrategy({
+        // by default, local strategy uses username and password, we will override with email
+        usernameField : 'email',
+        passwordField : 'password',
+        passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
+    },
+    function(req, email, password, done) {
+        if (email)
+            email = email.toLowerCase(); // Use lower-case e-mails to avoid case-sensitive e-mail matching
+
+        // asynchronous
+        process.nextTick(function() {
+            // if the user is not already logged in:
+            if (!req.user) {
+                Band.findOne({where: { 'email' :  email }}, function(err, user) {
                     // if there are any errors, return the error
                     if (err)
                         return done(err);
-        
+
                     // check to see if theres already a user with that email
-                    if (venue) {
-                        // log in venue and go to venue page
-                        return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+                    if (user) {
+                        return done(null, false);
                     } else {
-                        // go to signup page
-                        // if there is no user with that email
+
                         // create the user
-                        /*
-                        var newUser            = new User();
+                        var newUser            = new Band();
 
-                        // set the user's local credentials
-                        newUser.local.email    = email;
-                        newUser.local.password = newUser.generateHash(password);
+                        newUser.email    = email;
+                        newUser.password = newUser.generateHash(password);
 
-                        // save the user
                         newUser.save(function(err) {
                             if (err)
-                                throw err;
+                                return done(err);
+
                             return done(null, newUser);
-                            */
+                        });
+                    }
+
                 });
+                // if the user is logged in but has no local account...
+            } else if ( !req.user.local.email ) {
+                // ...presumably they're trying to connect a local account
+                // BUT let's check if the email used to connect a local account is being used by another user
+                Band.findOne({where: { 'email' :  email }}, function(err, user) {
+                    if (err)
+                        return done(err);
+
+                    if (user) {
+                        return done(null, false);
+                        // Using 'loginMessage instead of signupMessage because it's used by /connect/local'
+                    } else {
+                        var user = req.user;
+                        user.email = email;
+                        user.password = user.generateHash(password);
+                        user.save(function (err) {
+                            if (err)
+                                return done(err);
+
+                            return done(null,user);
+                        });
+                    }
+                });
+            } else {
+                // user is logged in and already has a local account. Ignore signup. (You should log out before trying to create a new account, user!)
+                return done(null, req.user);
             }
 
-        });    
+        });
+
+    }));
+
+
+///Similarly for venues
+// =========================================================================
+    // LOCAL LOGIN =============================================================
+    // =========================================================================
+    passport.use('venue-local-login', new LocalStrategy({
+        // by default, local strategy uses username and password, we will override with email
+        usernameField : 'email',
+        passwordField : 'password',
+        passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
+    },
+    function(req, email, password, done) {
+        if (email)
+            email = email.toLowerCase(); // Use lower-case e-mails to avoid case-sensitive e-mail matching
+
+        // asynchronous
+        process.nextTick(function() {
+            Venue.findOne({where:{ 'email' :  email }}, function(err, user) {
+                // if there are any errors, return the error
+                if (err)
+                    return done(err);
+
+                // if no user is found, return the message
+                if (!user)
+                    return done(null, false);
+
+                if (!user.validPassword(password))
+                    return done(null, false);
+
+                // all is well, return user
+                else
+                    return done(null, user);
+            });
+        });
+
+    }));
+
+// =========================================================================
+// LOCAL SIGNUP ============================================================
+// =========================================================================
+passport.use('venue-local-signup', new LocalStrategy({
+        // by default, local strategy uses username and password, we will override with email
+        usernameField : 'email',
+        passwordField : 'password',
+        passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
+    },
+    function(req, email, password, done) {
+        if (email)
+            email = email.toLowerCase(); // Use lower-case e-mails to avoid case-sensitive e-mail matching
+
+        // asynchronous
+        process.nextTick(function() {
+            // if the user is not already logged in:
+            if (!req.user) {
+                Venue.findOne({where:{ 'email' :  email }}, function(err, user) {
+                    // if there are any errors, return the error
+                    if (err)
+                        return done(err);
+
+                    // check to see if theres already a user with that email
+                    if (user) {
+                        return done(null, false);
+                    } else {
+
+                        // create the user
+                        var newUser            = new Venue();
+
+                        newUser.email    = email;
+                        newUser.password = newUser.generateHash(password);
+
+                        newUser.save(function(err) {
+                            if (err)
+                                return done(err);
+
+                            return done(null, newUser);
+                        });
+                    }
+
+                });
+                // if the user is logged in but has no local account...
+            } else if ( !req.user.email ) {
+                // ...presumably they're trying to connect a local account
+                // BUT let's check if the email used to connect a local account is being used by another user
+                Venue.findOne({where:{ 'email' :  email }}, function(err, user) {
+                    if (err)
+                        return done(err);
+
+                    if (user) {
+                        return done(null, false);
+                        // Using 'loginMessage instead of signupMessage because it's used by /connect/local'
+                    } else {
+                        var user = req.user;
+                        user.email = email;
+                        user.password = user.generateHash(password);
+                        user.save(function (err) {
+                            if (err)
+                                return done(err);
+
+                            return done(null,user);
+                        });
+                    }
+                });
+            } else {
+                // user is logged in and already has a local account. Ignore signup. (You should log out before trying to create a new account, user!)
+                return done(null, req.user);
+            }
 
         });
 
     }));
 
 };
-
-
-
 
 // Band.findOne({ 'local.email' :  email }, function(err, user) {
 //     // if there are any errors, return the error
