@@ -52,7 +52,7 @@ const styles = theme => ({
 class SignUp extends Component {
 
     state = {
-        username: "",
+        email: "",
         password: "",
 
     }
@@ -150,6 +150,7 @@ class SignUp extends Component {
                             label="Password"
                             className={classes.textField}
                             type="password"
+                            name="password"
                             autoComplete="current-password"
                             margin="normal"
                             variant="filled"
