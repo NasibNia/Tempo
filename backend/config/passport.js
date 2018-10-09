@@ -25,10 +25,10 @@ module.exports = function(passport) {
 
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
-        Band.findById(id, function(err, user) {
+        Band.findOne({where: {id : id}}, function(err, user) {
             done(err, user);
         });
-        Venue.findById(id, function(err, user) {
+        Venue.findOne({where: {id : id}}, function(err, user) {
             done(err, user);
         });
     });
@@ -48,7 +48,7 @@ module.exports = function(passport) {
 
         // asynchronous
         process.nextTick(function() {
-            Band.findOne({ 'local.email' :  email }, function(err, user) {
+            Band.findOne({ 'email' :  email }, function(err, user) {
                 // if there are any errors, return the error
                 if (err)
                     return done(err);
@@ -85,7 +85,7 @@ passport.use('band-local-signup', new LocalStrategy({
         process.nextTick(function() {
             // if the user is not already logged in:
             if (!req.user) {
-                Band.findOne({ 'local.email' :  email }, function(err, user) {
+                Band.findOne({where: { 'email' :  email }}, function(err, user) {
                     // if there are any errors, return the error
                     if (err)
                         return done(err);
@@ -98,8 +98,8 @@ passport.use('band-local-signup', new LocalStrategy({
                         // create the user
                         var newUser            = new Band();
 
-                        newUser.local.email    = email;
-                        newUser.local.password = newUser.generateHash(password);
+                        newUser.email    = email;
+                        newUser.password = newUser.generateHash(password);
 
                         newUser.save(function(err) {
                             if (err)
@@ -114,7 +114,7 @@ passport.use('band-local-signup', new LocalStrategy({
             } else if ( !req.user.local.email ) {
                 // ...presumably they're trying to connect a local account
                 // BUT let's check if the email used to connect a local account is being used by another user
-                Band.findOne({ 'local.email' :  email }, function(err, user) {
+                Band.findOne({where: { 'email' :  email }}, function(err, user) {
                     if (err)
                         return done(err);
 
@@ -123,8 +123,8 @@ passport.use('band-local-signup', new LocalStrategy({
                         // Using 'loginMessage instead of signupMessage because it's used by /connect/local'
                     } else {
                         var user = req.user;
-                        user.local.email = email;
-                        user.local.password = user.generateHash(password);
+                        user.email = email;
+                        user.password = user.generateHash(password);
                         user.save(function (err) {
                             if (err)
                                 return done(err);
@@ -159,7 +159,7 @@ passport.use('band-local-signup', new LocalStrategy({
 
         // asynchronous
         process.nextTick(function() {
-            Venue.findOne({ 'local.email' :  email }, function(err, user) {
+            Venue.findOne({where:{ 'email' :  email }}, function(err, user) {
                 // if there are any errors, return the error
                 if (err)
                     return done(err);
@@ -196,7 +196,7 @@ passport.use('venue-local-signup', new LocalStrategy({
         process.nextTick(function() {
             // if the user is not already logged in:
             if (!req.user) {
-                Venue.findOne({ 'local.email' :  email }, function(err, user) {
+                Venue.findOne({where:{ 'email' :  email }}, function(err, user) {
                     // if there are any errors, return the error
                     if (err)
                         return done(err);
@@ -209,8 +209,8 @@ passport.use('venue-local-signup', new LocalStrategy({
                         // create the user
                         var newUser            = new Venue();
 
-                        newUser.local.email    = email;
-                        newUser.local.password = newUser.generateHash(password);
+                        newUser.email    = email;
+                        newUser.password = newUser.generateHash(password);
 
                         newUser.save(function(err) {
                             if (err)
@@ -222,10 +222,10 @@ passport.use('venue-local-signup', new LocalStrategy({
 
                 });
                 // if the user is logged in but has no local account...
-            } else if ( !req.user.local.email ) {
+            } else if ( !req.user.email ) {
                 // ...presumably they're trying to connect a local account
                 // BUT let's check if the email used to connect a local account is being used by another user
-                Venue.findOne({ 'local.email' :  email }, function(err, user) {
+                Venue.findOne({where:{ 'email' :  email }}, function(err, user) {
                     if (err)
                         return done(err);
 
@@ -234,8 +234,8 @@ passport.use('venue-local-signup', new LocalStrategy({
                         // Using 'loginMessage instead of signupMessage because it's used by /connect/local'
                     } else {
                         var user = req.user;
-                        user.local.email = email;
-                        user.local.password = user.generateHash(password);
+                        user.email = email;
+                        user.password = user.generateHash(password);
                         user.save(function (err) {
                             if (err)
                                 return done(err);

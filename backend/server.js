@@ -1,8 +1,11 @@
 
 const express = require ("express");
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 const passport = require('passport');
 const app = express();
+
+
+
 
 /// ====
 var morgan       = require('morgan');
@@ -31,6 +34,8 @@ app.use(passport.session()); // persistent login sessions
 
 const PORT = process.env.PORT || 3001;
 
+var db = require("./models");
+
 require('./config/passport')(passport); // pass passport for configuration
 
 
@@ -47,10 +52,20 @@ const routes = require ("./routes");
 app.use('/', routes);
 
 
-mongoose.connect(
-    process.env.MONGODB_URI || "mongodb://localhost/tempoDB"
-);
+// mongoose.connect(
+//     process.env.MONGODB_URI || "mongodb://localhost/tempoDB"
+// );
 
-app.listen(PORT, function (){
-    console.log(`listening on port ${PORT}`);
-});
+// app.listen(PORT, function (){
+//     console.log(`listening on port ${PORT}`);
+// });
+
+
+// Syncing our sequelize models and then starting our Express app
+// =============================================================
+// Requiring our models for syncing
+db.sequelize.sync({ force: false }).then(function() {
+    app.listen(PORT, function() {
+      console.log("App listening on PORT " + PORT);
+    });
+  });
