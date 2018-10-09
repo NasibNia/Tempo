@@ -33,6 +33,20 @@ class ControlledExpansionPanels extends React.Component {
         });
     };
 
+    // panelGenerator = (props) => {
+    //     <ExpansionPanel expanded={expanded === `panel + ${props.num}`} onChange={this.handleChange(`panel + ${props.num}`)}>
+    //                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+    //                     <Typography className={classes.heading}>{props.title}</Typography>
+    //                     <Typography className={classes.secondaryHeading}>{props.subtitle}</Typography>
+    //                 </ExpansionPanelSummary>
+    //                 <ExpansionPanelDetails>
+    //                     <Typography>
+    //                         {props.description}
+    //         </Typography>
+    //                 </ExpansionPanelDetails>
+    //             </ExpansionPanel>
+    // }
+
     render() {
         const { classes } = this.props;
         const { expanded } = this.state;

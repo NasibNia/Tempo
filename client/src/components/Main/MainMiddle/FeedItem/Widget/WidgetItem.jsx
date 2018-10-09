@@ -13,17 +13,17 @@ class WidgetItem extends Component {
         statistics: ""
     };
 
-    componentDidMount() {
-        this.loadShows();
-    }
+    // componentDidMount() {
+    //     this.loadShows();
+    // }
 
-    loadShows = () => {
-        API.getShows()
-            .then(res =>
-                this.setState({ shows: res.data, name: "", description: "", statistics: "" })
-            )
-            .catch(err => console.log(err));
-    };
+    // loadShows = () => {
+    //     API.getShows()
+    //         .then(res =>
+    //             this.setState({ shows: res.data, name: "", description: "", statistics: "" })
+    //         )
+    //         .catch(err => console.log(err));
+    // };
 
     checkType = (props) => {
         switch (props.type) {

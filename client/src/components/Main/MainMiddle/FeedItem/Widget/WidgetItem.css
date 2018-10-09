@@ -6,6 +6,10 @@
     width: 100%;
 }
 
-#calendar2 {
+#calendar > div {
     width: 100%;
+}
+
+#calendar > .react-calendar__tile {
+    height: 150px;
 }
