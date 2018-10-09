@@ -3,7 +3,7 @@ import WidgetItem from "./Widget";
 import "./FeedItem.css"
 
 class FeedItem extends Component {
-    render(props) {
+    render() {
         return(
         <div className="feed-item">
             <h2>{this.props.title}</h2>

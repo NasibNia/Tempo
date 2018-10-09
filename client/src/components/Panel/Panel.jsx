@@ -51,6 +51,7 @@ class ControlledExpansionPanels extends React.Component {
             </Typography>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
+                
                 <ExpansionPanel expanded={expanded === 'panel2'} onChange={this.handleChange('panel2')}>
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                         <Typography className={classes.heading}>Band Name</Typography>

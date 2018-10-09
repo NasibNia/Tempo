@@ -6,8 +6,8 @@ class MainMiddle extends Component {
     render(props) {
         return(
         <div className="middle-feed">
-            <FeedItem title="Add a Gig" />
-            <FeedItem title="Calendar" type="calendar"/>
+            <FeedItem title="Gig Board" type="gigboard" />
+            <FeedItem title="Calendar" type="calendar" />
         </div>
         )
     }
