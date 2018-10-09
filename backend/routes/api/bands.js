@@ -6,9 +6,9 @@ router.route("/")
         .post(bandController.create);
 
 router.route("/:id")
-      .get(bandController.findOneBand)
-      .delete(bandController.deleteOneBand)
-      .put(bandController.updateOneBand);
+      .get(bandController.findBand)
+      .delete(bandController.deleteBand)
+      .put(bandController.updateBand);
 
 module.exports = router;
 

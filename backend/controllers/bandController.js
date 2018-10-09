@@ -2,35 +2,26 @@ const db = require("../models");
 
 module.exports = {
 
+    // tested and working    
     findAllBands : function(req,res){
         db.Band.findAll({
             include : [{
-                model : db.Show({
-                    include : [{
-                        model : db.Show
-                    }]
-                })
+                model : db.Show
+                // ({
+                //     include : [{
+                //         model : db.Show
+                    // }]
+                // })
             }],  
-            order : ['updatedAt', 'DESC']
+            
+            order: [['updatedAt', 'DESC']]
         })
         .then(bandsRes =>{
             res.json(bandsRes);
         });
-
-        // db.Band.find({})
-        //         .populate({
-        //             path: 'show',
-        //             populate: {
-        //             path: 'venue',
-        //             model: 'Venue'
-        //             } 
-        //         })
-        //         .sort({date: -1})
-        //         .then(bandsRes =>{
-        //             res.json(bandsRes);
-        //         });
     },
 
+    // tested and working
     create: function(req,res){
         console.log("before create    ",req.body);
         db.Band.create(req.body)
@@ -40,7 +31,8 @@ module.exports = {
                 });
     },
 
-    findOneBand : function (req, res){
+    // tested and working
+    findBand : function (req, res){
         db.Band.findOne({
             where : {
                 id : req.params.id
@@ -50,12 +42,11 @@ module.exports = {
             .then(bandsRes => {
                 res.json(bandsRes);
             });
-        // db.Band.findOne({_id : req.params.id})
-        //         .then(bandsRes => {
-        //             res.json(bandsRes);
-        //         });
     },
-    deleteOneBand : function(req,res){
+
+    // tested and works
+    deleteBand : function(req,res){
+        console.log("delete band")
         db.Band.destroy({
             where : {
                 id : req.params.id
@@ -64,12 +55,9 @@ module.exports = {
         .then(bandsRes => {
             res.json(bandsRes);
         });
-        // db.Band.remove({_id : req.params.id})
-        //         .then(bandsRes => {
-        //             res.json(bandsRes);
-        //         });
+
     },
-    updateOneBand : function(req,res){
+    updateBand : function(req,res){
         db.Band.update(
             req.body,
             {where :{
@@ -77,9 +65,6 @@ module.exports = {
             }
         })
         .then(dbBands => res.json(dbBands));
-
-        // db.Band.findOneAndUpdate({_id:req.params.id} , req.body)
-        // .then(dbBands => res.json(dbBands));
     }
     
 };

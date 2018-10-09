@@ -13,11 +13,14 @@ module.exports = function(sequelize , DataTypes){
     });
 
     Show.associate = function(models){
-        Show.belongsToMany(models.Venue, {through: {model : models.VenueShow}});
-    };
-    Show.associate = function(models){
         Show.belongsToMany(models.Band, {through: {model : models.BandShow}});
+        Show.belongsToMany(models.Venue, {through: {model : models.VenueShow}});
+
+
     };
+    // Show.associate = function(models){
+    //     Show.belongsToMany(models.Band, {through: {model : models.BandShow}});
+    // };
     return Show;
 };
     
