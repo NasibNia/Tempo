@@ -7,7 +7,7 @@ class FeedItem extends Component {
         return(
         <div className="feed-item">
             <h2>{this.props.title}</h2>
-            <WidgetItem />
+            <WidgetItem type={this.props.type} />
         </div>
         )
     }

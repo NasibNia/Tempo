@@ -7,7 +7,7 @@ class MainMiddle extends Component {
         return(
         <div className="middle-feed">
             <FeedItem title="Add a Gig" />
-            <FeedItem title="Calendar" />
+            <FeedItem title="Calendar" type="calendar"/>
         </div>
         )
     }

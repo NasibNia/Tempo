@@ -15,6 +15,7 @@
     align-items: center;
     padding: 5px;
     border: 1px solid #E9EBEE;
+    cursor: pointer;
 }
 
 .navigate-text {

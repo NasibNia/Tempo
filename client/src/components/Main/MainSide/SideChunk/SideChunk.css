@@ -9,3 +9,12 @@
 .side-chunk h2 {
     color: #676767;
 }
+.side-item {
+    transition: .2s ease;
+}
+
+.side-item:hover {
+    margin: 10px auto;
+    padding-left: 10px;
+    cursor: pointer;
+}

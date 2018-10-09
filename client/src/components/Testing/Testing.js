@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
-import bands from "../Testing/bands.json";
+// import bands from "../Testing/bands.json";
 // import Button from "./button.js";
 import axios from "axios";
 
@@ -29,16 +29,16 @@ class Testing extends Component {
     handleClick = () =>{
          console.log("click")
     
-            const newBand = bands;
+            // const newBand = bands;
             this.postTheBand();      
     }
-    postTheBand = ()=>{
-        console.log("inside postTheBand")
-        axios.post("/api/bands" , bands)
-        .then(results => 
-            console.log(results)
-        );
-    };
+    // postTheBand = ()=>{
+    //     console.log("inside postTheBand")
+    //     axios.post("/api/bands" , bands)
+    //     .then(results => 
+    //         console.log(results)
+    //     );
+    // };
     
     handleInputChange = event => {
 
