@@ -4,10 +4,10 @@
 // // var LocalStrategy   = require('passport-local').Strategy;
 
 // // // load up the user model
-var Band    = require('../models/band');
+// var Band    = require('../models/band');
 // var Venue   = require('../models/venue');
-// var db   = require('../models');
-// var bcrypt = require("bcrypt-nodejs");
+var db   = require('../models');
+var bCrypt = require("bcrypt-nodejs");
 
 // // var User    = require('../models/User');
 
@@ -318,33 +318,42 @@ module.exports = function (passport) {
         },
 
         function (req, email, password, done) {
-            var generateHash = function (password) {
-                return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
-            };
-
-            Band.findOne({
+            console.log("I'm the req/body    " ,req.body);
+            var passwordHash = bCrypt.hashSync(password, bCrypt.genSaltSync(8));
+            
+            console.log(passwordHash);
+            console.log("before db.band");
+            console.log("password is   " ,password);
+            db.Band.findOne({
                 where: {
                     email: email
                 }
             }).then(function (user) {
+                // console.log("~~~~~~~~~~~~\nnew user is   : " ,user);
+
                 if (user) {
-                    return done(null, false, {
-                        message: 'That email is already taken'
-                    });
+                    console.log("user doesnt exist");
+                    // return done(null, false, {
+                        
+                    //     message: 'That email is already taken'
+                    // });
 
                 } else {
-                    var userPassword = generateHash(password);
+                    console.log("user doesnt exist");
                     var data =
-                    {
-                        userEmail: email,
-                        userPassword: userPassword,
-                        // userName: req.body.name,
-                    };
-                    Band.create(data).then(function (newUser,created) {
+                        {
+                            email: email,
+                            password: passwordHash,
+                            // userName: req.body.name,
+                        };
+                    db.Band.create(data).then(function (newUser) {
+                        console.log('inside db.band.create    ', newUser);
                         if (!newUser) {
+                            console.log("not a newUser");
                             return done(null, false);
                         }
                         if (newUser) {
+                            console.log("newUser")
                             return done(null, newUser);
                         }
                     });
@@ -353,46 +362,62 @@ module.exports = function (passport) {
         }
     ));
 
-    // //LOCAL SIGNIN
-    // passport.use('band-local-signin', new LocalStrategy(
-    //     {
-    //         // by default, local strategy uses username and password, we will override with email
-    //         usernameField: 'email',
-    //         passwordField: 'password',
-    //         passReqToCallback: true // allows us to pass back the entire request to the callback
-    //     },
+    //LOCAL SIGNIN
+    passport.use('band-local-login', new LocalStrategy(
+        {
+            // by default, local strategy uses username and password, we will override with email
+            usernameField: 'email',
+            passwordField: 'password',
+            passReqToCallback: true // allows us to pass back the entire request to the callback
+        },
 
-    //     function (req, email, password, done) {
-    //         var User = user;
-    //         var isValidPassword = function (userpass, password) {
-    //             return bCrypt.compareSync(password, userpass);
-    //         }
-    //         User.findOne({
-    //             where: {
-    //                 userEmail: email
-    //             }
-    //         }).then(function (user) {
-    //             if (!user) {
-    //                 return done(null, false, {
-    //                     message: 'Email does not exist'
-    //                 });
-    //             }
-    //             if (!isValidPassword(user.userPassword, password)) {
-    //                 return done(null, false, {
-    //                     message: 'Incorrect password.'
-    //                 });
-    //             }
+        function (req, email, password, done) {
+            console.log("I'm the req/body    " ,req.body);
 
-    //             var userinfo = user.get();
-    //             return done(null, userinfo);
-    //         }).catch(function (err) {
-    //             console.log("Error:", err);
-    //             return done(null, false, {
-    //                 message: 'Something went wrong with your Signin'
-    //             });
-    //         });
-    //     }
-    // ));
+            // var User = user;
+            var isValidPassword = function (userpass, password) {
+                return bCrypt.compareSync(password, userpass);
+            }
+
+            console.log("before db.band.findOnee");
+            console.log("password is   " ,password);
+            db.Band.findOne({
+                where: {
+                    email: email
+                }
+            }).then(function (user) {
+
+                // console.log("~~~~~~~~~~~~\nnew user is   : " ,user);
+
+                if (!user) {
+                    console.log("~~~~~~~~~~`\nnot a user");
+                    return done(null, false, {
+                        message: 'Email does not exist'
+                    });
+                }
+                console.log("~~~~~~~/beforevalidPassword");
+                console.log("~~~~~~~/user.password" , user.password);
+                console.log("~~~~~~~/password" , password);
+                if (!isValidPassword(user.password, password)) {
+                    console.log("~~~~~~~~~~`\nuserPassword" , user.password);
+                    console.log("~~~~~~~~~~`\n[password]" , password);
+
+                    console.log("Incorrect Password");
+                    return done(null, false, {
+                        message: 'Incorrect password.'
+                    });
+                }
+
+                var userinfo = user.get();
+                return done(null, userinfo);
+            }).catch(function (err) {
+                console.log("Error:", err);
+                return done(null, false, {
+                    message: 'Something went wrong with your Signin'
+                });
+            });
+        }
+    ));
 
     //serialize
     passport.serializeUser(function (user, done) {
@@ -404,7 +429,7 @@ module.exports = function (passport) {
     // deserialize user 
     passport.deserializeUser(function (id, done) {
 
-        Band.findById(id).then(function (user) {
+        db.Band.findById(id).then(function (user) {
 
             if (user) {
 

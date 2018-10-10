@@ -14,23 +14,24 @@ router.post('/venue/signup', passport.authenticate('venue-local-signup', {
   }));
   
   router.post('/venue/login', passport.authenticate('venue-local-login', {
-      successRedirect : '/start/profile',
+      successRedirect : '/start/InfoForm',
       failureRedirect : '/venue/login'
   }));
 
     router.post('/band/signup', passport.authenticate('band-local-signup', {
-        successRedirect : '/start/profile',
-        failureRedirect : '/start/signup'
+        successRedirect : '/',
+        failureRedirect : '/signup'
     }));
 
     router.post('/band/login', passport.authenticate('band-local-login', {
-        successRedirect : '/start/profile',
+        successRedirect : '/',
         failureRedirect : '/band/login'
     }));
 
-  router.get('/profile', isLoggedIn, (req, res) => {
-      res.status(200).json(req.user);
+  router.get('/InfoForm', isLoggedIn, (req, res) => {
+    res.json("band login success");
   });
+
   router.get('/logout', isLoggedIn, (req, res) => {
       req.logout();
       res.status(200).json({
@@ -38,10 +39,10 @@ router.post('/venue/signup', passport.authenticate('venue-local-signup', {
       });
     });
     
-    router.get('/signup', function (req, res) {
-        console.log("get start/signup");
-        res.json("User not found");
-    });
+router.get('/signup', function (req, res) {
+    console.log("get /signup");
+    res.json("User not found");
+});
 
 
 //============== new for test :Nasib

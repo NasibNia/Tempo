@@ -10,35 +10,35 @@ module.exports = function(sequelize , DataTypes){
 //     // console.log(DataTypes)
     const Band = sequelize.define("Band" , {
 
-        name : {
-            type : DataTypes.STRING,
-            allowNull: false
-        },
+        // name : {
+        //     type : DataTypes.STRING,
+        //     // allowNull: false
+        // },
         email : {
             type: DataTypes.STRING,
-            allowNull: false,
+            // allowNull: false,
             unique: true
         },
         password : {
             type: DataTypes.STRING,
-            allowNull: false
+            // allowNull: false
         },
-        genre : {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        showsPlayed :{
-            type: DataTypes.INTEGER
-        },
-        showsCancelled : {
-            type: DataTypes.INTEGER
-        },
-        showsLate: {
-            type : DataTypes.INTEGER
-        },
-        venueRating : {
-            type : DataTypes.INTEGER        
-        },
+        // genre : {
+        //     type: DataTypes.STRING,
+        //     // allowNull: false
+        // },
+        // showsPlayed :{
+        //     type: DataTypes.INTEGER
+        // },
+        // showsCancelled : {
+        //     type: DataTypes.INTEGER
+        // },
+        // showsLate: {
+        //     type : DataTypes.INTEGER
+        // },
+        // venueRating : {
+        //     type : DataTypes.INTEGER        
+        // },
 
         // genre : [
         //         type: DataTypes.STRING

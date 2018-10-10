@@ -1,8 +1,12 @@
 
 const express = require ("express");
 // const mongoose = require("mongoose");
-const passport = require('passport');
 const app = express();
+
+const passport = require('passport');
+
+
+require('./config/passport')(passport); // pass passport for configuration
 
 
 
@@ -36,7 +40,7 @@ const PORT = process.env.PORT || 3001;
 
 var db = require("./models");
 
-require('./config/passport')(passport); // pass passport for configuration
+
 
 
 app.use(express.urlencoded({ extended : true }));

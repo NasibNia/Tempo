@@ -73,7 +73,7 @@ class SignUp extends Component {
 
     postTheBand = () => {
         const newUser = {email : this.state.email, password : this.state.password}
-        axios.post("/start/band/signup" , newUser)
+        axios.post("/band/signup" , newUser)
         .then(results => 
             console.log(results)
         );
@@ -171,7 +171,7 @@ class SignUp extends Component {
                                 onClick = {this.handleClick}
 
                         >
-                            Sign Up for Tempo
+                         Login
                         {/* <Icon className="">+</Icon> */}
                         </Button>
                     </form>
