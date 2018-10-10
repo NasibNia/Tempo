@@ -1,5 +1,10 @@
-.main-side {
+.main-side-container {
     width: 300px;
+}
+
+.main-side {
+    width: 216px;
+    position: fixed;
 }
 
 .side-wrap {

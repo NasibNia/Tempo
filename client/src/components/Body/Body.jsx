@@ -8,6 +8,7 @@ import "./body.css";
 class Body extends Component {
 
     state = {
+        userType: this.props.userType,
         mainComponent: "newsFeed"
     }
 
@@ -21,8 +22,8 @@ class Body extends Component {
             <div>
                 <HeaderBar/>
                 <div className="body-wrap">
-                    <Navigate method={this.changeState} />
-                    <Main />
+                    <Navigate method={this.changeState} userType={this.state.userType} />
+                    <Main userType={this.state.userType} />
                 </div>
             </div>
         )

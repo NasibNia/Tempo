@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import VenueHome from './pages/VenueHome';
 import ArtistHome from './pages/ArtistHome';
 import SignUp from "./pages/SignUp";
+// import Threejs from "./pages/Threejs";
 
 //STYLING
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -42,7 +43,9 @@ const App = () => (
           <Route exact path="/venue" component={VenueHome} />
           <Route exact path="/artist" component={ArtistHome} />
           {/* <Route exact path="/testing" component={Testing} /> */}
-          <Route exact path="/signup" component={SignUp} />
+          <Route exact path="/signup" component={SignUp} />         
+          {/* <Route exact path="/threejs" component={Threejs} /> */}
+
           {/* <Route component={NoMatch} /> */}
         </Switch>
         {/* <Footer /> */}

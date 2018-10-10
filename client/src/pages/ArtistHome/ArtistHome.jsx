@@ -12,7 +12,8 @@ class ArtistHome extends Component {
         shows: [],
         name: "",
         description: "",
-        statistics: ""
+        statistics: "",
+        user: "artist"
       };
     
       componentDidMount() {
@@ -31,7 +32,7 @@ class ArtistHome extends Component {
 
        return (
            <div>
-               <Body />
+               <Body userType = {this.state.user}/>
            </div>
            )
    }

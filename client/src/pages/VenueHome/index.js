@@ -1,1 +1,1 @@
-export { default } from "./VenueHome";
+export { default } from "./VenueHome.jsx";

@@ -1,6 +1,11 @@
-.navigate-wrap {
+.navigate-container{
     width: 180px;
     padding: 10px 0;
+}
+
+.navigate-wrap {
+    width: 180px;
+    position: fixed;
 }
 
 .navigate-icon {
