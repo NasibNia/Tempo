@@ -2,11 +2,7 @@
     background-color: #741D2B;
     display: flex;
     height: 42px;
-    justify-content: center;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 10;
+    justify-content: center;;
 }
 
 .header-contents {

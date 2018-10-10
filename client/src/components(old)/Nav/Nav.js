@@ -9,11 +9,10 @@ class Nav extends Component {
     render() {
         return (
             <div id = "nav">
-                <p className="title">Nav</p>
+                <p className="title" onClick={this.props.onClick}>Nav</p>
                 <hr></hr>
                 test
             </div>
-
         )
     }
 }

@@ -8,7 +8,7 @@ class Navigate extends Component {
         <div className="navigate-wrap">
             <div className="navigate-chunk">
                 <h2>Your Profile</h2>
-                <NavigateItem icon="imgURL" text="Profile Name"/>
+                <NavigateItem icon="imgURL" text="Profile Name" type ={"profile"} click={this.props.click}/>
                 <NavigateItem icon="imgURL" text="Post A Gig"/>
                 <NavigateItem icon="imgURL" text="Past Gigs"/>
             </div>

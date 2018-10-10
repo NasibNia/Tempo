@@ -7,7 +7,7 @@ import Testing from './components/Testing';
 
 //PAGES
 import VenueHome from './pages/VenueHome';
-import ArtistHome from "./pages/ArtistHome";
+import ArtistHome from './pages/ArtistHome';
 import SignUp from "./pages/SignUp";
 
 //STYLING
@@ -32,7 +32,6 @@ const theme = createMuiTheme({
     },
   },
 });
-
 
 const App = () => (
   <Router>
