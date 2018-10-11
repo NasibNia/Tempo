@@ -21,11 +21,17 @@
     display: flex;
 }
 
-.header-contents h1 {
+.header-contents h1 a{
     color: white;
     font-size: 20px;
     padding: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: .2s ease-in;
+}
 
+.header-contents h1 a:hover {
+    
 }
 
 .header-items {
@@ -54,11 +60,11 @@
 
 .log-out-button h2 {
     color: white;
-    padding: 7px 12px;
-    background-color: #C1321E;
+    padding: 8px 12px;
+    background-color: darkgray;
     cursor: pointer;
-    margin: 0 10px;
-    border-radius: 15px;
+    margin: 0 0 0 4px;
+    border-radius: 5px;
     transition: .2s ease-in;
     font-weight: normal;
     font-size: 9px;
@@ -67,4 +73,16 @@
 
 .log-out-button h2:hover {
     background-color: #FF4025;
+}
+
+.logo h4 {
+    color: white;
+    font-weight: normal;
+    letter-spacing: 1px;
+    font-size: 10px;
+    text-transform: uppercase;
+    padding: 5px 8px;
+    background-color: #C1321E;
+    border-radius: 20px;
+    margin-left: 5px;
 }

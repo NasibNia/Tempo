@@ -20,7 +20,7 @@ class Body extends Component {
 
         return (
             <div>
-                <HeaderBar/>
+                <HeaderBar userType={this.state.userType} />
                 <div className="body-wrap">
                     <Navigate method={this.changeState} userType={this.state.userType} />
                     <Main userType={this.state.userType} />

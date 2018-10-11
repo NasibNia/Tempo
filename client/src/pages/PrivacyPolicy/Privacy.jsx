@@ -1,9 +1,13 @@
 import React from 'react';
+import "./privacy.css"
+import HeaderBar from "../../components/HeaderBar";
 
-const Terms = () => {
+const Privacy = () => {
 
     return (
         <div>
+        <HeaderBar/>
+        <div class="paper">
             <h1>Privacy Policy</h1>
 
 
@@ -118,7 +122,8 @@ const Terms = () => {
 
             </ul>
             </div>
+            </div>
             )
 }
 
-export default Terms
+export default Privacy
