@@ -31,6 +31,13 @@ const radarData = {
     ]
   };
   
+const handleClicked = () => {
+
+    console.log(API.getBands())
+
+}
+
+handleClicked()
 
 class WidgetItem extends Component {
 
@@ -66,6 +73,9 @@ class WidgetItem extends Component {
             case "gig board":
                 return (
                     <div>
+
+
+
                         <Panel />
                     </div>
                 );

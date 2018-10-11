@@ -46,3 +46,16 @@
 .navigate-chunk h4 {
     font-weight: normal;  
 }
+
+.navigate-footer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.navigate-footer h3 {
+    text-decoration: underline;
+    margin: 3px;
+    font-size: 13px;
+    color: #676767;
+    cursor: pointer;
+}

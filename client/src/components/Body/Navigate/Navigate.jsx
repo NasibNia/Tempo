@@ -27,6 +27,10 @@ const Navigate = props => {
                     <NavigateItem icon="imgURL" text="Local Events" type={"profile"} click={props.method} />
                     <NavigateItem icon="imgURL" text={props.userType === "artist" ? "Venue Directory" : "Artist Directory"} type={"profile"} click={props.method} />
                 </div>
+                <div className="navigate-footer">
+                    <h3>Fundraising</h3>
+                    <h3>Philanthropy</h3><h3>What is SutroLabs?</h3>
+                </div>
             </div>
         </div>
     )

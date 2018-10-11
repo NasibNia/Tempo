@@ -20,9 +20,6 @@ const SideSection = props => {
         <div className="side-chunk">
             <h2>{props.header}</h2>
             <SideItem text={props.title} type={props.userType} />
-
-
-
        </div>
 
     )
