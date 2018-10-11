@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Header from "../../components/Header"
+// import Header from "../../x/Header";
+import HeaderBar from "../../components/HeaderBar"
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { createMuiTheme, MuiThemeProvider, withStyles } from '@material-ui/core/styles';
@@ -10,7 +11,7 @@ import Avatar from '@material-ui/core/Avatar';
 import LockIcon from '@material-ui/icons/LockOutlined';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Icon from '@material-ui/core/Icon';
+import CheckIcon from '@material-ui/icons/Check';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import API from "../../utils/API.js";
@@ -57,6 +58,8 @@ class SignUp extends Component {
     state = {
         email: "",
         password: "",
+        category : "",
+        loggedIn: false
 
     }
 
@@ -65,7 +68,6 @@ class SignUp extends Component {
     handleClick = event => {
         event.preventDefault();
         console.log("click")
-
         // const newBand = bands;
         this.postTheBand();
         
@@ -73,9 +75,13 @@ class SignUp extends Component {
 
     postTheBand = () => {
         const newUser = {email : this.state.email, password : this.state.password}
-        axios.post("/band/signup" , newUser)
-        .then(results => 
-            console.log(results)
+        axios.post("/band/login" , newUser)
+        .then(results => {
+            this.state.loggedIn = true;
+            console.log(results);
+            window.location.href = "/artist";
+        }
+            
         );
     };
 
@@ -102,6 +108,9 @@ class SignUp extends Component {
                 this.addUser(thisUser);
             }
         }
+    }
+
+    handleCheckboxClick = event => {
 
     }
 
@@ -131,7 +140,7 @@ class SignUp extends Component {
 
         return (
             <div>
-                <Header />
+                <HeaderBar />
                 <Paper className={classes.paper}>
                     <form className="container" noValidate autoComplete="off" style={{ marginTop: "5%" }}>
                         <Avatar className={classes.avatar} color = "secondary">
@@ -166,12 +175,24 @@ class SignUp extends Component {
                             control={<Checkbox value="remember" color="secondary" />}
                             label="Remember me"
                         />
+                        <FormControlLabel
+                            control={<Checkbox  
+                                                value="band" 
+                                               color="secondary"
+                                               onClick =  {this.handleCheckboxClick}
+                                               />}
+                            label="I'm a Band"
+                        />
+                        <FormControlLabel
+                            control={<Checkbox value="venue" color="secondary" />}
+                            label="I'm a Venue"
+                        />
                         <Button variant="contained" 
                                 color="secondary"
                                 onClick = {this.handleClick}
 
                         >
-                         Login
+                         {!this.state.loggedIn ? "Login" : <CheckIcon />}
                         {/* <Icon className="">+</Icon> */}
                         </Button>
                     </form>

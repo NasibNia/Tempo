@@ -1,0 +1,57 @@
+.widget-item {
+    width: 100%;
+}
+
+#calendar {
+    width: 100%;
+}
+
+#calendar > div {
+    width: 100%;
+    border: none;
+}
+
+#calendar > .react-calendar__tile {
+    height: 150px;
+}
+
+.react-calendar__month-view__days__day--weekend {
+    color: #FF4025!important;   
+}
+
+.react-calendar__tile {
+    height: 60px !important;
+    transition: 0.1s ease-in-out;
+}
+
+button.react-calendar__tile--active:enabled:hover, button.react-calendar__tile--active:enabled:focus {
+    background-color: #741D2B !important;
+    color: white !important;
+}
+
+button.react-calendar__tile--active, button.react-calendar__tile--active {
+    background-color: #741D2B !important;
+    color: white !important;
+}
+
+#your-profile {
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+}
+
+.profile-picture-large {
+    height: 150px;
+    max-width: 150px;
+    width: 100%;
+    background-color: lightgray;
+    border-radius: 150px;
+}
+.profile-text {
+    width: 100%;
+}
+
+.profile-text p {
+    line-height: 18px;
+    margin: 0 20px;;
+}

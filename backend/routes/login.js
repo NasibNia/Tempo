@@ -14,17 +14,17 @@ router.post('/venue/signup', passport.authenticate('venue-local-signup', {
   }));
   
   router.post('/venue/login', passport.authenticate('venue-local-login', {
-      successRedirect : '/start/InfoForm',
+      successRedirect : '/success',
       failureRedirect : '/venue/login'
   }));
 
     router.post('/band/signup', passport.authenticate('band-local-signup', {
-        successRedirect : '/',
+        successRedirect : '/success',
         failureRedirect : '/signup'
     }));
 
     router.post('/band/login', passport.authenticate('band-local-login', {
-        successRedirect : '/',
+        successRedirect : '/success',
         failureRedirect : '/band/login'
     }));
 
@@ -42,6 +42,12 @@ router.post('/venue/signup', passport.authenticate('venue-local-signup', {
 router.get('/signup', function (req, res) {
     console.log("get /signup");
     res.json("User not found");
+});
+
+router.get ('/success', function(req, res){
+    res.status(200).json({
+        'message': 'successfully passed this fucking gate'
+    });
 });
 
 
@@ -70,11 +76,12 @@ router.get('/signup', function (req, res) {
 function isLoggedIn(req, res, next) {
 
     // if user is authenticated in the session, carry on 
-    if (req.isAuthenticated())
+    if (req.isAuthenticated()){
+    console.log("inside login function");
         return next();
-
+    }
     // if they aren't redirect them to the home page
-    res.redirect('/');
+    res.redirect('/success');
 }
 
 

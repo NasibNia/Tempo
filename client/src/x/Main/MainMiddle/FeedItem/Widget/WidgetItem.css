@@ -1,0 +1,15 @@
+.widget-item {
+    width: 100%;
+}
+
+#calendar {
+    width: 100%;
+}
+
+#calendar > div {
+    width: 100%;
+}
+
+#calendar > .react-calendar__tile {
+    height: 150px;
+}

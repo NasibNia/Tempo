@@ -1,0 +1,9 @@
+.body-wrap {
+    display: flex;
+    background-color: #E9EBEE;
+    padding: 10px;
+    justify-content: center;
+    height: 100vh;
+}
+
+/* @media screen and (min-width : ) */
