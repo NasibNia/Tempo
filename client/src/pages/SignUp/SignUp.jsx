@@ -13,6 +13,9 @@ import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
+import API from "../../utils/API.js";
+import axios from "axios";
+
 
 
 import "./signup.css"
@@ -52,26 +55,28 @@ const styles = theme => ({
 class SignUp extends Component {
 
     state = {
-        username: "",
+        email: "",
         password: "",
 
     }
 
     //   componentDidMount() {}
 
-    handleClick = () => {
+    handleClick = event => {
+        event.preventDefault();
         console.log("click")
 
         // const newBand = bands;
         this.postTheBand();
+        
     }
 
     postTheBand = () => {
-        console.log("inside postTheBand")
-        // axios.post("/api/bands" , bands)
-        // .then(results => 
-        //     console.log(results)
-        // );
+        const newUser = {email : this.state.email, password : this.state.password}
+        axios.post("/band/signup" , newUser)
+        .then(results => 
+            console.log(results)
+        );
     };
 
     handleInputChange = event => {
@@ -150,6 +155,7 @@ class SignUp extends Component {
                             label="Password"
                             className={classes.textField}
                             type="password"
+                            name="password"
                             autoComplete="current-password"
                             margin="normal"
                             variant="filled"
@@ -160,8 +166,12 @@ class SignUp extends Component {
                             control={<Checkbox value="remember" color="secondary" />}
                             label="Remember me"
                         />
-                        <Button variant="contained" color="secondary">
-                            Sign Up for Tempo
+                        <Button variant="contained" 
+                                color="secondary"
+                                onClick = {this.handleClick}
+
+                        >
+                         Login
                         {/* <Icon className="">+</Icon> */}
                         </Button>
                     </form>

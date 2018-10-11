@@ -1,5 +1,16 @@
 {
+  "main": "./backend/server",
+  "scripts": {
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node ./backend/server",
+    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "client": "cd client && npm run start",
+    "install": "cd client && yarn install",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "npm run build"
+  },
   "dependencies": {
+    "concurrently": "^4.0.1",
     "react-router-dom": "^4.3.1"
   }
 }
