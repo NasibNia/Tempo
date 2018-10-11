@@ -29,6 +29,11 @@
     margin-bottom: 20px;
 }
 
+#addressInputs{
+    display: flex;
+    justify-content: space-evenly;
+}
+
 @media only screen and (max-width: 426px) {
     .container{
         width: 80%;
