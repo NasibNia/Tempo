@@ -119,7 +119,7 @@ class Header extends React.Component {
       >
         <MenuItem>
           <IconButton color="inherit">
-            <Badge className={classes.margin} badgeContent={4} color="secondary.light">
+            <Badge className={classes.margin} badgeContent={4} color="secondary">
               <MailIcon />
             </Badge>
           </IconButton>
@@ -127,7 +127,7 @@ class Header extends React.Component {
         </MenuItem>
         <MenuItem>
           <IconButton color="inherit">
-            <Badge className={classes.margin} badgeContent={11} color="secondary.light">
+            <Badge className={classes.margin} badgeContent={11} color="secondary">
               <NotificationsIcon />
             </Badge>
           </IconButton>
@@ -156,12 +156,12 @@ class Header extends React.Component {
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
               <IconButton color="inherit">
-                <Badge className={classes.margin} badgeContent={4} color="secondary.light">
+                <Badge className={classes.margin} badgeContent={4} color="secondary">
                   <MailIcon />
                 </Badge>
               </IconButton>
               <IconButton color="inherit">
-                <Badge className={classes.margin} badgeContent={17} color="secondary.light">
+                <Badge className={classes.margin} badgeContent={17} color="secondary">
                   <NotificationsIcon />
                 </Badge>
               </IconButton>

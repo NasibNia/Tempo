@@ -1,7 +1,7 @@
 .header {
     background-color: #741D2B;
     display: flex;
-    height: 42px;
+    height: 46px;
     justify-content: center;
     position: fixed;
     top: 0;
@@ -48,8 +48,14 @@
 
 .log-out-button {
     display: flex;
+    margin-left: 10px;
     height: 100%;
     align-items: center;
+}
+
+.log-out-button > :first-child{
+    border-radius: 15px;
+    padding: 7px 12px;
 }
 
 .log-out-button h2 {

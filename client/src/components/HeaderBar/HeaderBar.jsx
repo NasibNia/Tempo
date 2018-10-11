@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Button from '@material-ui/core/Button';
 import "./HeaderBar.css";
 
 class HeaderBar extends Component {
@@ -7,7 +8,7 @@ class HeaderBar extends Component {
     return (
       <div className="header">
         <div className="header-contents">
-          <div className="logo">          
+          <div className="logo">
             <h1>Tempo</h1>
           </div>
           <div className="header-items">
@@ -27,8 +28,11 @@ class HeaderBar extends Component {
               <div className="header-icon"></div>
             </div>
             <div className="log-out-button">
-              <h2>LOG OUT</h2>
+              <Button variant="contained" color="secondary">
+                LOG OUT
+            </Button>
             </div>
+
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Header from "../../components/Header"
+// import Header from "../../x/Header";
+import HeaderBar from "../../components/HeaderBar"
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { createMuiTheme, MuiThemeProvider, withStyles } from '@material-ui/core/styles';
@@ -138,7 +139,7 @@ class SignUp extends Component {
 
         return (
             <div>
-                <Header />
+                <HeaderBar />
                 <Paper className={classes.paper}>
                     <form className="container" noValidate autoComplete="off" style={{ marginTop: "5%" }}>
                         <Avatar className={classes.avatar} color = "secondary">
