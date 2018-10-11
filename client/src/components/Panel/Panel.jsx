@@ -45,6 +45,7 @@ const test = [
 class ControlledExpansionPanels extends React.Component {
     state = {
         expanded: null,
+        data: this.props.data
     };
 
     handleChange = panel => (event, expanded) => {
@@ -56,9 +57,9 @@ class ControlledExpansionPanels extends React.Component {
     // function to dynamically generate panel elements based on specific database information passed    
     panelGenerator = (elem, classes, expanded) => {
         return(
-        <ExpansionPanel expanded={expanded === `panel + ${elem.num}`} onChange={this.handleChange(`panel + ${elem.num}`)}>
+        <ExpansionPanel expanded={expanded === `panel + ${elem.id}`} onChange={this.handleChange(`panel + ${elem.id}`)}>
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography className={classes.heading}>{elem.title}</Typography>
+                        <Typography className={classes.heading}>{elem.name}</Typography>
                         <Typography className={classes.secondaryHeading}>{elem.subtitle}</Typography>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
@@ -76,8 +77,8 @@ class ControlledExpansionPanels extends React.Component {
 
         return (
             <div className={classes.root}>
-                {test.map(elem => 
-                    this.panelGenerator(elem, classes, expanded) )                 
+                {(this.state.data) ? this.state.data.map(elem => 
+                    this.panelGenerator(elem, classes, expanded) ) : <h1>HI</h1>             
                 }
                 {/* <ExpansionPanel expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>                   
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>

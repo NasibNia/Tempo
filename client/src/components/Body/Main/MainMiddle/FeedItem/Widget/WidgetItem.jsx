@@ -43,24 +43,40 @@ class WidgetItem extends Component {
 
     state = {
         shows: [],
-        name: "",
-        description: "",
-        statistics: ""
+        bands: [],
+        venues: []
     };
 
-    // componentDidMount() {
-    //     this.loadShows();
-    // }
+    componentDidMount() {
+        this.loadShows();
+        this.loadBands();
+        this.loadVenues();
 
-    // loadShows = () => {
-    //     API.getShows()
-    //         .then(res =>
-    //             this.setState({ shows: res.data, name: "", description: "", statistics: "" })
-    //         )
-    //         .catch(err => console.log(err));
-    // };
+    }
 
+    loadShows = () => {
+        API.getShows()
+            .then(res =>
+                this.setState({ shows: res.data})
+            )
+            .catch(err => console.log(err));
+    };
 
+    loadBands = () => {
+        API.getBands()
+            .then(res =>
+                this.setState({ bands: res.data})
+            )
+            .catch(err => console.log(err));
+    };
+
+    loadVenues = () => {
+        API.getVenues()
+            .then(res =>
+                this.setState({ venues: res.data})
+            )
+            .catch(err => console.log(err));
+    };
 
     checkType = (props) => {
         switch (props.type) {
@@ -73,10 +89,7 @@ class WidgetItem extends Component {
             case "gig board":
                 return (
                     <div>
-
-
-
-                        <Panel />
+                        <Panel data={this.state.shows}/>
                     </div>
                 );
             case "post gig":
@@ -93,13 +106,13 @@ class WidgetItem extends Component {
             case "venue directory":
                 return (
                     <div>
-                        <Panel />
+                        <Panel data={this.state.venues}/>
                     </div>
                 );
             case "artist directory":
                 return (
                     <div id="artist-directory">
-                        <Panel />
+                        <Panel data={this.state.bands}/>
                     </div>
                 );
             case "community events":
