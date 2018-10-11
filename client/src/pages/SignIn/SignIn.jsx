@@ -7,8 +7,6 @@ import { createMuiTheme, MuiThemeProvider, withStyles } from '@material-ui/core/
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
 import Avatar from '@material-ui/core/Avatar';
 import LockIcon from '@material-ui/icons/LockOutlined';
 import TextField from '@material-ui/core/TextField';
@@ -21,7 +19,7 @@ import axios from "axios";
 
 
 
-import "./signup.css"
+import "./signin.css"
 
 const styles = theme => ({
     container: {
@@ -36,8 +34,7 @@ const styles = theme => ({
         flexDirection: 'column',
         alignItems: 'center',
         padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
-        width: "400px",
-        height: "auto"
+        width: "400px"
     },
     avatar: {
         margin: "auto",
@@ -61,11 +58,8 @@ class SignUp extends Component {
     state = {
         email: "",
         password: "",
-        category: "",
-        userType: "",
-        loggedIn: false,
-        open: false,
-
+        category : "",
+        loggedIn: false
 
     }
 
@@ -76,19 +70,19 @@ class SignUp extends Component {
         console.log("click")
         // const newBand = bands;
         this.postTheBand();
-
+        
     }
 
     postTheBand = () => {
-        const newUser = { email: this.state.email, password: this.state.password }
-        axios.post("/band/login", newUser)
-            .then(results => {
-                this.state.loggedIn = true;
-                console.log(results);
-                window.location.href = "/artist";
-            }
-
-            );
+        const newUser = {email : this.state.email, password : this.state.password}
+        axios.post("/band/login" , newUser)
+        .then(results => {
+            this.state.loggedIn = true;
+            console.log(results);
+            window.location.href = "/artist";
+        }
+            
+        );
     };
 
     handleInputChange = event => {
@@ -116,15 +110,7 @@ class SignUp extends Component {
         }
     }
 
-    handleClose = () => {
-        this.setState({ open: false });
-    };
-
-    handleOpen = () => {
-        this.setState({ open: true });
-    };
-
-    handleUserClick = event => {
+    handleCheckboxClick = event => {
 
     }
 
@@ -157,10 +143,10 @@ class SignUp extends Component {
                 <HeaderBar />
                 <Paper className={classes.paper}>
                     <form className="container" noValidate autoComplete="off" style={{ marginTop: "5%" }}>
-                        <Avatar className={classes.avatar} color="secondary">
+                        <Avatar className={classes.avatar} color = "secondary">
                             <LockIcon />
                         </Avatar>
-                        <h1 className="signup">Sign Up as a Tempo Affiliate!</h1>
+                        <h1 className = "signup">Tempo Affiliates Sign-In Here!</h1>
                         <TextField
                             id="filled-email-input"
                             label="Email"
@@ -189,38 +175,13 @@ class SignUp extends Component {
                             control={<Checkbox value="remember" color="secondary" />}
                             label="Remember me"
                         />
-                        <form autoComplete="off" id="userTypeForm">
-                            <Button className={classes.button} onClick={this.handleOpen}>
-                                Are you a band/artist or a venue?
-                            </Button>
-                            <FormControl className={classes.formControl}>
-                                <InputLabel htmlFor="demo-controlled-open-select">Venue or Band?</InputLabel>
-                                <Select
-                                    open={this.state.open}
-                                    onClose={this.handleClose}
-                                    onOpen={this.handleOpen}
-                                    value={this.state.userType}
-                                    onChange={this.handleInputChange}
-                                    inputProps={{
-                                        name: 'userType',
-                                        id: 'demo-controlled-open-select',
-                                    }}
-                                >
-                                    <MenuItem value="">
-                                        <em>None</em>
-                                    </MenuItem>
-                                    <MenuItem value={"artist"}>Artist or Band</MenuItem>
-                                    <MenuItem value={"band"}>Venue</MenuItem>
-                                </Select>
-                            </FormControl>
-                        </form>
-                        <Button variant="contained"
-                            color="secondary"
-                            onClick={this.handleClick}
+                        <Button variant="contained" 
+                                color="secondary"
+                                onClick = {this.handleClick}
 
                         >
-                            {!this.state.loggedIn ? "Login" : <CheckIcon />}
-                            {/* <Icon className="">+</Icon> */}
+                         {!this.state.loggedIn ? "Login" : <CheckIcon />}
+                        {/* <Icon className="">+</Icon> */}
                         </Button>
                     </form>
                 </Paper>

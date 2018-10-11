@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 //PAGES
 import VenueHome from './pages/VenueHome';
 import ArtistHome from './pages/ArtistHome';
+import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Terms from "./pages/TermsAndConditions";
 // import Threejs from "./pages/Threejs";
@@ -44,6 +45,7 @@ const App = () => (
           <Route exact path="/venue" component={VenueHome} />
           <Route exact path="/artist" component={ArtistHome} />
           {/* <Route exact path="/testing" component={Testing} /> */}
+          <Route exact path="/signin" component={SignIn} />         
           <Route exact path="/signup" component={SignUp} />         
           {/* <Route exact path="/threejs" component={Threejs} /> */}
           <Route exact path="/terms" component={Terms}/>
