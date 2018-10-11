@@ -11,7 +11,7 @@ import Avatar from '@material-ui/core/Avatar';
 import LockIcon from '@material-ui/icons/LockOutlined';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Icon from '@material-ui/core/Icon';
+import CheckIcon from '@material-ui/icons/Check';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import API from "../../utils/API.js";
@@ -59,6 +59,7 @@ class SignUp extends Component {
         email: "",
         password: "",
         category : "",
+        loggedIn: false
 
     }
 
@@ -67,7 +68,6 @@ class SignUp extends Component {
     handleClick = event => {
         event.preventDefault();
         console.log("click")
-
         // const newBand = bands;
         this.postTheBand();
         
@@ -77,6 +77,7 @@ class SignUp extends Component {
         const newUser = {email : this.state.email, password : this.state.password}
         axios.post("/band/login" , newUser)
         .then(results => {
+            this.state.loggedIn = true;
             console.log(results);
             window.location.href = "/artist";
         }
@@ -191,7 +192,7 @@ class SignUp extends Component {
                                 onClick = {this.handleClick}
 
                         >
-                         Login
+                         {!this.state.loggedIn ? "Login" : <CheckIcon />}
                         {/* <Icon className="">+</Icon> */}
                         </Button>
                     </form>
