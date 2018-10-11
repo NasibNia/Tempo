@@ -21,7 +21,7 @@ const MainSide = props => {
                 <SideSection header={props.userType === "artist" ? "Tracked Venues" : "Tracked Artists"} title="" subtext="" userType={props.userType} />
                 <div className="side-footer">
                     <h3><Link to={"/Terms"}>Terms &amp; Conditions</Link></h3><h3><Link to={"/Privacy"}>Privacy Policy</Link></h3><h3><Link to={"/Contact"}>Contact</Link></h3>
-                    <h3><Link to={"/Contact"}>Issues</Link></h3>                    {/* <DocumentLink title="Terms and Conditions" method="terms"/>
+                    {/* <DocumentLink title="Terms and Conditions" method="terms"/>
                     <DocumentLink title="Terms and Conditions" method="terms"/> */}
                 </div>
             </div>

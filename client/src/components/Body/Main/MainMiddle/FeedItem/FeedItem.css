@@ -9,3 +9,6 @@
 .feed-item h2 {
     margin-bottom: 10px;
 }
+.MuiPaper-elevation1-47 {
+    box-shadow: 0 0 0 !important;
+}

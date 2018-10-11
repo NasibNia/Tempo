@@ -1,20 +1,12 @@
 .header {
     background-color: #741D2B;
     display: flex;
-<<<<<<< HEAD
     height: 42px;
-=======
-    height: 46px;
->>>>>>> 91eda2f9160c826154e6a5fdfc8aed09dba7ac38
     justify-content: center;
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 10;
-<<<<<<< HEAD
-=======
-    box-shadow: 0px 2px 3px rgba(85, 0, 14, 0.5);
->>>>>>> 91eda2f9160c826154e6a5fdfc8aed09dba7ac38
 }
 
 .header-contents {
@@ -62,45 +54,43 @@
 
 .log-out-button {
     display: flex;
-<<<<<<< HEAD
-=======
-    margin-left: 10px;
->>>>>>> 91eda2f9160c826154e6a5fdfc8aed09dba7ac38
     height: 100%;
     align-items: center;
 }
 
-<<<<<<< HEAD
 .log-out-button h2 {
     color: white;
     padding: 8px 12px;
-    background-color: darkgray;
+
     cursor: pointer;
     margin: 0 0 0 4px;
     border-radius: 5px;
-=======
-.log-out-button > :first-child{
-    border-radius: 15px;
-    padding: 7px 12px;
-}
-
-.log-out-button h2 {
-    color: white;
-    padding: 7px 12px;
-    background-color: #C1321E;
-    cursor: pointer;
-    margin: 0 10px;
-    border-radius: 15px;
->>>>>>> 91eda2f9160c826154e6a5fdfc8aed09dba7ac38
     transition: .2s ease-in;
     font-weight: normal;
-    font-size: 9px;
+    font-size: 5px !important;
     letter-spacing: 1px;
+}
+
+.MuiButton-containedSecondary-14 {
+    background-color: #53141E !important;
+}
+
+.MuiButton-containedSecondary-14:hover {
+    background-color: #FF4025 !important;
+}
+
+.MuiButton-label-2 {
+    font-size: 9px !important;
 }
 
 .log-out-button h2:hover {
     background-color: #FF4025;
-<<<<<<< HEAD
+}
+
+.MuiButton-root-1 {
+    padding: 5px 4px 4px 4px !important;
+    min-height: 0px !important;
+    margin-left: 5px !important;
 }
 
 .logo h4 {
@@ -113,6 +103,4 @@
     background-color: #C1321E;
     border-radius: 20px;
     margin-left: 5px;
-=======
->>>>>>> 91eda2f9160c826154e6a5fdfc8aed09dba7ac38
 }
