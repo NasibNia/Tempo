@@ -44,8 +44,10 @@ router.get('/signup', function (req, res) {
     res.json("User not found");
 });
 
-router.get ('/success', function(req, res){
+router.get ('/success', isLoggedIn, function(req, res){
+    // res.redirect("/artist");
     res.status(200).json({
+        success: true,
         'message': 'successfully passed this fucking gate'
     });
 });
@@ -81,7 +83,7 @@ function isLoggedIn(req, res, next) {
         return next();
     }
     // if they aren't redirect them to the home page
-    res.redirect('/success');
+    res.redirect('/');
 }
 
 
