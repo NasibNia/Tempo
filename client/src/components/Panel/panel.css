@@ -1,0 +1,11 @@
+.MuiPaper-elevation1-11 {
+    box-shadow: none !important;
+}
+
+ControlledExpansionPanels-root-1 > div {
+    box-shadow: none;
+}
+
+.MuiPaper-elevation1-11 {
+    background-color: red ;
+}

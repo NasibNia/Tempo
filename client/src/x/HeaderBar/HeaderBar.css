@@ -2,11 +2,7 @@
     background-color: #741D2B;
     display: flex;
     height: 42px;
-    justify-content: center;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 10;
+    justify-content: center;;
 }
 
 .header-contents {
@@ -44,27 +40,4 @@
 .header-item {
     display: flex;
     align-items: center;
-}
-
-.log-out-button {
-    display: flex;
-    height: 100%;
-    align-items: center;
-}
-
-.log-out-button h2 {
-    color: white;
-    padding: 7px 12px;
-    background-color: #C1321E;
-    cursor: pointer;
-    margin: 0 10px;
-    border-radius: 15px;
-    transition: .2s ease-in;
-    font-weight: normal;
-    font-size: 9px;
-    letter-spacing: 1px;
-}
-
-.log-out-button h2:hover {
-    background-color: #FF4025;
 }
