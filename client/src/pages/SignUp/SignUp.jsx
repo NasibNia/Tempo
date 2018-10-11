@@ -57,6 +57,7 @@ class SignUp extends Component {
     state = {
         email: "",
         password: "",
+        category : "",
 
     }
 
@@ -73,9 +74,12 @@ class SignUp extends Component {
 
     postTheBand = () => {
         const newUser = {email : this.state.email, password : this.state.password}
-        axios.post("/band/signup" , newUser)
-        .then(results => 
-            console.log(results)
+        axios.post("/band/login" , newUser)
+        .then(results => {
+            console.log(results);
+            window.location.href = "/artist";
+        }
+            
         );
     };
 
@@ -102,6 +106,9 @@ class SignUp extends Component {
                 this.addUser(thisUser);
             }
         }
+    }
+
+    handleCheckboxClick = event => {
 
     }
 
@@ -165,6 +172,18 @@ class SignUp extends Component {
                         <FormControlLabel
                             control={<Checkbox value="remember" color="secondary" />}
                             label="Remember me"
+                        />
+                        <FormControlLabel
+                            control={<Checkbox  
+                                                value="band" 
+                                               color="secondary"
+                                               onClick =  {this.handleCheckboxClick}
+                                               />}
+                            label="I'm a Band"
+                        />
+                        <FormControlLabel
+                            control={<Checkbox value="venue" color="secondary" />}
+                            label="I'm a Venue"
                         />
                         <Button variant="contained" 
                                 color="secondary"
