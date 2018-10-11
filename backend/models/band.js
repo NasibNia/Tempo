@@ -2,7 +2,7 @@
 
 // const bcrypt   = require('bcrypt-nodejs');
 // // const Sequelize = require('sequelize');
-const bcrypt = require("bcrypt");
+// const bcrypt = require("bcrypt");
 
 
 
