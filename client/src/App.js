@@ -14,6 +14,7 @@ import Privacy from "./pages/PrivacyPolicy"
 import Philanthropy from "./pages/SFSkateClub"
 import Careers from "./pages/Careers"
 import Contact from "./pages/Contact"
+import SignIn from "./pages/SignIn";
 // import Threejs from "./pages/Threejs";
 
 //STYLING

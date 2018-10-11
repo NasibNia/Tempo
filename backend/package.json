@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "bcrypt": "^3.0.1",
     "bcrypt-nodejs": "0.0.3",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.3",
