@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Redirect} from 'react-router-dom';
 // import Header from "../../x/Header";
 import HeaderBar from "../../components/HeaderBar"
 import PropTypes from 'prop-types';
@@ -80,11 +81,12 @@ class SignUp extends Component {
         city: "",
         stateUS: "",
         loggedIn: false,
+        finishedSignup: false,
         open: false,
 
     }
 
-    //   componentDidMount() {}
+    // componentDidMount() {}
 
     handleClick = event => {
         event.preventDefault();
@@ -95,15 +97,20 @@ class SignUp extends Component {
     }
 
     postTheBand = () => {
-        const newUser = { email: this.state.email, password: this.state.password }
-        axios.post("/band/login", newUser)
-            .then(results => {
-                this.setState({ loggedIn: true });
-                console.log(results);
-                window.location.href = "/artist";
-            }
+        const newUser = {email : this.state.email, password : this.state.password}
+        axios.post("/band/signup" , newUser)
+        .then(results => {
+            console.log(results);
+            if (results.data.success)
+                this.setState({
+                    loggedIn: true,
+                    finishedSignup: true,
+                }, ()=>console.log(this.state))
+            // window.location.href = "/artist";
+        }
+            
+        );
 
-            );
     };
 
     handleInputChange = event => {
@@ -165,6 +172,9 @@ class SignUp extends Component {
 
     render() {
         const { classes } = this.props;
+        if (this.state.finishedSignup)
+            return <Redirect to='/artist'/>
+
         let formQuestions;
 
         if (this.state.userType === "artist") {
