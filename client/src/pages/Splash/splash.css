@@ -1,0 +1,248 @@
+.splash-section {
+    height: 100vh;
+    width: 100%;
+}
+
+.section-1 {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.section-1 .subtitle {
+    color: white;
+    background-color: #53141E;
+    padding: 10px;
+    max-width: 100px;
+    margin: 0 auto;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.section-1 h1 {
+    color: white;
+    font-size: 40px;
+    padding: 20px 25px;
+    margin: 15px 15px 5px;
+    font-style: italic;
+}
+
+.section-1 .emphasis {
+    font-size: 40px;
+    font-style: italic;
+    color: #555555;
+    animation: 5s shiny infinite;
+}
+
+.section-2 {
+    background-image: linear-gradient(to top, #333, #000);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    background-image: url("./records2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.section-2 h1 {
+    border-top: 15px solid #FF4025;
+    font-size: 30px;
+    text-align: center;
+    max-width: 400px;
+    font-weight: normal;
+    line-height: 40px;
+    background-color: rgba(255,255,255,.9);
+    padding: 50px;
+    border-radius: 5px;
+}
+
+.splash-nav {
+    position: fixed;
+    z-index: 15;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0,0,0,.2);
+}
+
+.splash-nav h4 {
+    padding: 10px 50px;
+    margin: 10px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: normal;
+    letter-spacing: 2px;
+    color: white;
+    transition: 1s ease;
+}
+
+.splash-nav h4:hover {
+    color: red;
+}
+
+.section-3 {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    background-image: url("./concert2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.section-3 .research {
+    background-color: rgba(255,255,255,.7);
+    height: 80vh;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 5px;
+}
+
+.section-3 .research h1{
+    font-size: 40px;
+}
+
+.section-4 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("./concert1.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.section-4 .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-4 .wrap .card {
+    margin: 10px;
+}
+
+.section-4 .wrap .card h3 {
+    font-size: 30px;
+    background-color: #FF4025;
+    padding: 25px 45px 20px 45px;
+    border-radius: 5px 5px 0 0;
+    color: white;
+    text-align: center;
+}
+
+.section-4 .wrap .card ul {
+    margin-bottom: 10px;
+    background-color: white;
+    padding: 20px 45px 25px 45px;
+    border-radius: 0 0 5px 5px;
+}
+
+.section-4 .wrap .card ul li {
+    line-height: 30px;
+    font-size: 20px;
+}
+
+.section-4 .wrap .lite {
+    width: 250px;
+}
+
+.section-4 .wrap .lite {
+
+}
+
+.section-4 .wrap .lite h3 {
+    background-color: #53141E;
+    color: white;
+}
+
+
+.section-4 .wrap .pro {
+
+    width: 340px;
+}
+
+@keyframes shiny {
+    0% {
+        color: black
+    }
+
+    40% {
+        color: black
+    }
+
+    50% {
+        color: yellow;
+    }
+
+    90% {
+        color: black
+    }
+}
+
+.section-1 .text {
+    z-index: 10;
+    position: absolute;
+}
+
+.concert {
+    height: 100vh;
+    width: 100%
+}
+
+#background-overlay {
+    overflow: hidden;
+    height: 100vh;
+    background: #edeae8;
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    min-width: 100%;
+
+}
+
+video {
+    object-fit: cover;
+    min-height: 100%;
+    min-width: 100%;
+}
+
+.section-5 {
+    min-height: 100vh;
+    min-width: 100%;
+}
+
+.check {
+    height: 15px;
+    width: 15px;
+    margin-right: 5px;
+}
+
+.icon1 {
+    text-transform: uppercase;
+    font-size: 15px;
+    letter-spacing: 1px;
+    background-color: white;
+    color: black;
+    padding: 3px 6px;
+    border-radius: 3px;
+}

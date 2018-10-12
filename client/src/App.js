@@ -15,6 +15,8 @@ import Philanthropy from "./pages/SFSkateClub"
 import Careers from "./pages/Careers"
 import Contact from "./pages/Contact"
 import SignIn from "./pages/SignIn";
+import Splash from "./pages/Splash"
+import SignUpComponent from "./components/SignUp"
 // import Threejs from "./pages/Threejs";
 
 //STYLING
@@ -45,7 +47,7 @@ const App = () => (
     <div>
       <MuiThemeProvider theme={theme}>
         <Switch>
-          {/* <Route exact path="/" component={Splash} /> */}
+          <Route exact path="/" component={Splash} />
           <Route exact path="/venue" component={VenueHome} />
           <Route exact path="/artist" component={ArtistHome} />
           {/* <Route exact path="/testing" component={Testing} /> */}
