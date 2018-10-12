@@ -15,6 +15,7 @@ import Philanthropy from "./pages/SFSkateClub"
 import Careers from "./pages/Careers"
 import Contact from "./pages/Contact"
 import SignIn from "./pages/SignIn";
+import Profile from "./pages/Profile";
 // import Threejs from "./pages/Threejs";
 
 //STYLING
@@ -49,7 +50,9 @@ const App = () => (
           <Route exact path="/venue" component={VenueHome} />
           <Route exact path="/artist" component={ArtistHome} />
           {/* <Route exact path="/testing" component={Testing} /> */}
-          <Route exact path="/signup" component={SignUp} />         
+          <Route exact path="/signup" component={SignUp} /> 
+          <Route exact path="/signin" component={SignIn} />       
+          <Route exact path="/profile" component={Profile}/>     
           <Route exact path="/contact" component={Contact} />         
           <Route exact path="/careers" component={Careers} />         
           <Route exact path="/sutromusic" component={Careers} />                   
