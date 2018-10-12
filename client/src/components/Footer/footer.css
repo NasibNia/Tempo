@@ -1,0 +1,17 @@
+.footer-wrap {
+    display: flex;
+    justify-content: center;
+    height: 300px;
+    background-color: #53141E;
+    margin-top: 100px;
+    color: white;
+}
+
+.footer-large {
+    width: 600px;
+    padding: 40px;
+}
+
+.footer {
+    
+}

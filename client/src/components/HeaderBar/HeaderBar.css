@@ -1,7 +1,7 @@
 .header {
     background-color: #741D2B;
     display: flex;
-    height: 46px;
+    height: 42px;
     justify-content: center;
     position: fixed;
     top: 0;
@@ -22,11 +22,13 @@
     display: flex;
 }
 
-.header-contents h1 {
+.header-contents h1 a{
     color: white;
     font-size: 20px;
     padding: 5px;
-
+    text-decoration: none;
+    cursor: pointer;
+    transition: .2s ease-in;
 }
 
 .header-items {
@@ -49,29 +51,51 @@
 
 .log-out-button {
     display: flex;
-    margin-left: 10px;
     height: 100%;
     align-items: center;
 }
 
-.log-out-button > :first-child{
-    border-radius: 15px;
-    padding: 7px 12px;
-}
-
 .log-out-button h2 {
     color: white;
-    padding: 7px 12px;
-    background-color: #C1321E;
+    padding: 8px 12px;
     cursor: pointer;
-    margin: 0 10px;
-    border-radius: 15px;
+    margin: 0 0 0 4px;
+    border-radius: 5px;
     transition: .2s ease-in;
     font-weight: normal;
-    font-size: 9px;
+    font-size: 5px !important;
     letter-spacing: 1px;
 }
 
-.log-out-button h2:hover {
-    background-color: #FF4025;
+.log-out-button > :first-child{
+    background-color: #53141E !important;
+    padding: 5px 4px 5px 4px !important;
+    min-height: 0px !important;
+    margin-left: 5px !important;
+}
+
+.log-out-button > :first-child:hover {
+    background-color: #FF4025 !important;
+}
+
+/* .log-out-button .MuiButton-label-2 {
+    font-size: 9px !important;
+}    */
+
+.log-out-button :first-child:first-child {
+    font-size: 9px !important;
+}   
+
+.logo h4 {
+    color: white;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.274);
+    font-weight: normal;
+    letter-spacing: 1px;
+    font-size: 10px;
+    text-transform: uppercase;
+    padding: 5px 8px;
+    /* background-color: #C1321E; */
+    background: radial-gradient(#e66465, rgb(216, 59, 39));
+    border-radius: 20px;
+    margin-left: 5px;
 }

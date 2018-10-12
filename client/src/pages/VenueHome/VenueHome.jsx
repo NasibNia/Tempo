@@ -27,17 +27,17 @@ class VenueHome extends Component {
         user: "venue"
       };
     
-      componentDidMount() {
-        this.loadBands();
-      }
+    //   componentDidMount() {
+    //     this.loadBands();
+    //   }
     
-      loadBands = () => {
-        API.getBands()
-          .then(res =>
-            this.setState({ bands: res.data, name: "", description: "", statistics: "" })
-          )
-          .catch(err => console.log(err));
-      };
+    //   loadBands = () => {
+    //     API.getBands()
+    //       .then(res =>
+    //         this.setState({ bands: res.data, name: "", description: "", statistics: "" })
+    //       )
+    //       .catch(err => console.log(err));
+    //   };
 
     render() {
 

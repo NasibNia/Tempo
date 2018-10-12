@@ -8,9 +8,16 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 //PAGES
 import VenueHome from './pages/VenueHome';
 import ArtistHome from './pages/ArtistHome';
-import SignIn from "./pages/SignIn";
-import SignUp from "./pages/SignUp";
+import SignUpPage from "./pages/SignUp";
 import Terms from "./pages/TermsAndConditions";
+import Privacy from "./pages/PrivacyPolicy"
+import Philanthropy from "./pages/SFSkateClub"
+import Careers from "./pages/Careers"
+import Contact from "./pages/Contact"
+import SignIn from "./pages/SignIn";
+import Splash from "./pages/Splash"
+import SignUpComponent from "./components/SignUp"
+import Profile from "./pages/Profile";
 // import Threejs from "./pages/Threejs";
 
 //STYLING
@@ -41,15 +48,21 @@ const App = () => (
     <div>
       <MuiThemeProvider theme={theme}>
         <Switch>
-          {/* <Route exact path="/" component={Splash} /> */}
+          <Route exact path="/" component={Splash} />
           <Route exact path="/venue" component={VenueHome} />
           <Route exact path="/artist" component={ArtistHome} />
           <Route exact path="/artist/:id" component={ArtistHome} />
           {/* <Route exact path="/testing" component={Testing} /> */}
-          <Route exact path="/signin" component={SignIn} />         
-          <Route exact path="/signup" component={SignUp} />         
+          <Route exact path="/signup" component={SignUpPage} /> 
+          <Route exact path="/signin" component={SignIn} />       
+          <Route exact path="/profile" component={Profile}/>     
+          <Route exact path="/contact" component={Contact} />         
+          <Route exact path="/careers" component={Careers} />         
+          <Route exact path="/sutromusic" component={Careers} />                   
           {/* <Route exact path="/threejs" component={Threejs} /> */}
           <Route exact path="/terms" component={Terms}/>
+          <Route exact path="/privacy" component={Privacy}/>
+          <Route exact path="/sfskateclub" component={Philanthropy}/>
           {/* <Route component={NoMatch} /> */}
         </Switch>
         {/* <Footer /> */}
