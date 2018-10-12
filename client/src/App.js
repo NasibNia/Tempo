@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 //PAGES
 import VenueHome from './pages/VenueHome';
 import ArtistHome from './pages/ArtistHome';
-import SignUp from "./pages/SignUp";
+import SignUpPage from "./pages/SignUp";
 import Terms from "./pages/TermsAndConditions";
 import Privacy from "./pages/PrivacyPolicy"
 import Philanthropy from "./pages/SFSkateClub"
@@ -52,7 +52,7 @@ const App = () => (
           <Route exact path="/venue" component={VenueHome} />
           <Route exact path="/artist" component={ArtistHome} />
           {/* <Route exact path="/testing" component={Testing} /> */}
-          <Route exact path="/signup" component={SignUp} /> 
+          <Route exact path="/signup" component={SignUpPage} /> 
           <Route exact path="/signin" component={SignIn} />       
           <Route exact path="/profile" component={Profile}/>     
           <Route exact path="/contact" component={Contact} />         

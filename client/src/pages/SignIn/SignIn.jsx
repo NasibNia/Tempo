@@ -28,6 +28,7 @@ const styles = theme => ({
         flexDirection: "column"
     },
     paper: {
+        borderTop: `7px solid ${theme.palette.secondary.main}`,
         marginTop: theme.spacing.unit * 10,
         margin: "auto",
         display: 'flex',
@@ -53,7 +54,7 @@ const styles = theme => ({
 });
 
 
-class SignUp extends Component {
+class SignIn extends Component {
 
     state = {
         email: "",
@@ -193,4 +194,4 @@ class SignUp extends Component {
 
 }
 
-export default withStyles(styles)(SignUp);
+export default withStyles(styles)(SignIn);

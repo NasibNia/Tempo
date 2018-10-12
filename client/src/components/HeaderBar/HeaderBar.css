@@ -7,6 +7,7 @@
     top: 0;
     width: 100%;
     z-index: 10;
+    box-shadow: 0px 2px 3px rgba(85, 0, 14, 0.5);
 }
 
 .header-contents {
@@ -66,36 +67,35 @@
     letter-spacing: 1px;
 }
 
-.MuiButton-containedSecondary-14 {
+.log-out-button > :first-child{
     background-color: #53141E !important;
-}
-
-.MuiButton-containedSecondary-14:hover {
-    background-color: #FF4025 !important;
-}
-
-.MuiButton-label-2 {
-    font-size: 9px !important;
-}
-
-.log-out-button h2:hover {
-    background-color: #FF4025;
-}
-
-.MuiButton-root-1 {
-    padding: 5px 4px 4px 4px !important;
+    padding: 5px 4px 5px 4px !important;
     min-height: 0px !important;
     margin-left: 5px !important;
 }
 
+.log-out-button > :first-child:hover {
+    background-color: #FF4025 !important;
+}
+
+/* .log-out-button .MuiButton-label-2 {
+    font-size: 9px !important;
+}    */
+
+.log-out-button :first-child:first-child {
+    font-size: 9px !important;
+}   
+
 .logo h4 {
     color: white;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.274);
     font-weight: normal;
     letter-spacing: 1px;
     font-size: 10px;
     text-transform: uppercase;
     padding: 5px 8px;
-    background-color: #C1321E;
+    /* background-color: #C1321E; */
+    background: radial-gradient(#e66465, rgb(216, 59, 39));
     border-radius: 20px;
     margin-left: 5px;
 }

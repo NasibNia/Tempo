@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import SignUp from "../../components/SignUp"
-import HeaderBar from "../../components/HeaderBar"
+import HeaderBar from "../../components/HeaderBar";
+import SignUp from "../../components/SignUp";
+
+import "./signup.css"
 
 class SignUpPage extends Component {
     state = {}
