@@ -1,10 +1,14 @@
 import React from 'react';
+import "./terms.css"
+import HeaderBar from "../../components/HeaderBar";
 
 const Terms = () => {
 
     return (
         <div>
-            <h2>Welcome to Tempo</h2>
+            <HeaderBar />
+        <div className="paper">
+            <h1>Welcome to Tempo</h1>
             <p>These terms and conditions outline the rules and regulations for the use of Tempo's Website.</p>
             <br />
             <p>By accessing this website we assume you accept these terms and conditions in full. Do not continue to use Tempo's website
@@ -130,6 +134,7 @@ const Terms = () => {
             <p>To the extent that the website and the information and services on the website are provided free of charge, we will not be
 	liable for any loss or damage of any nature.</p>
 
+        </div>
         </div>
     )
 
