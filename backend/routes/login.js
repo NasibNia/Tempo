@@ -25,63 +25,81 @@ router.post('/venue/signup', passport.authenticate('venue-local-signup', {
 
     router.post('/band/login', passport.authenticate('band-local-login', {
         successRedirect : '/success',
-        failureRedirect : '/band/login'
+        failureRedirect : '/login'
     }));
 
-  router.get('/InfoForm', isLoggedIn, (req, res) => {
-    res.json("band login success");
-  });
+    router.get('/api/user', function(req, res) {
+        console.log("req.user is ", req.user);
+        if (!req.user) {
+            console.log("no user");
+            // The user is not logged in
+            res.json({});
+        } else {
+            res.status(200).json({
+                user: req.user
+            });
+        }
+    });
+//   router.get('/InfoForm', isLoggedIn, (req, res) => {
+//     res.json("band login success");
+//   });
 
   router.get('/logout', isLoggedIn, (req, res) => {
+      console.log("logging out..", req.user);
       req.logout();
-      res.status(200).json({
-          'message': 'successfully logout'
+      console.log("current user: ", req.user);
+      if (!req.user) {
+        res.status(200).json({
+            //in the profile page we should add a redirect
+            logout : true,
+            'message': 'successfully logout'
+        });
+      } else {
+        res.status(200).json({
+            logout : false,
+            'message': 'failed logout'
       });
+    }
     });
     
 router.get('/signup', function (req, res) {
-    console.log("get /signup");
-    res.json("User not found");
+    console.log("wasn't able to login",req.user);
+    res.json({
+        success: false,
+        'message': 'wrong username or password'
+    });
 });
 
-router.get ('/success', function(req, res){
+router.get('/login', function (req, res) {
+    console.log("wasn't able to login",req.user);
+    res.json({
+        success: false,
+        'message': 'wrong username or password'
+    });
+});
+
+router.get ('/success', isLoggedIn, function(req, res){
+    console.log("\n**********this user has the following information \n************ ",req.user);
+
     res.status(200).json({
+        id : req.user.id,
+        success: true,
         'message': 'successfully passed this fucking gate'
     });
 });
 
 
-//============== new for test :Nasib
-// router.route('/signup')
-//       .post(loginController.signUp, loginController.login);
-
-// router.route("/band/signup")
-//       .get(loginController.bandSignup);
-
-// router.route("/venue/login")
-//       .get(loginController.login);
-      
-// router.route("/signup")
-//       .get(loginController.create);    
-
-// router.route('/logout')
-//         .get( function(req, res) {
-//         req.logout();
-//         res.redirect('/');
-//     });
-
-
 
     // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
+    console.log("inside login function");
 
     // if user is authenticated in the session, carry on 
     if (req.isAuthenticated()){
-    console.log("inside login function");
         return next();
     }
     // if they aren't redirect them to the home page
-    res.redirect('/success');
+    // res.redirect('/login');
 }
 
 

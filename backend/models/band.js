@@ -10,10 +10,10 @@ module.exports = function(sequelize , DataTypes){
 //     // console.log(DataTypes)
     const Band = sequelize.define("Band" , {
 
-        // name : {
-        //     type : DataTypes.STRING,
-        //     // allowNull: false
-        // },
+        name : {
+            type : DataTypes.STRING,
+            // allowNull: false
+        },
         email : {
             type: DataTypes.STRING,
             // allowNull: false,

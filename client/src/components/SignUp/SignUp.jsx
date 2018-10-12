@@ -80,42 +80,50 @@ const styles = theme => ({
         marginBottom: theme.spacing.unit,
         margin: "auto",
         width: "80%"
-      }
+    }
 });
 
 function getSteps() {
     return ['Sign up as a Tempo Affiliate', 'Set Up your Personal Profile', 'Get ready to book!'];
-  }
-  
-  function getStepContent(step) {
+}
+
+function getStepContent(step) {
     switch (step) {
-      case 0:
-        return 'Sign up as a Tempo Affiliate...';
-      case 1:
-        return 'What is an ad group anyways?';
-      case 2:
-        return 'This is the bit I really care about!';
-      default:
-        return 'Unknown step';
+        case 0:
+            return 'Sign up as a Tempo Affiliate...';
+        case 1:
+            return 'What is an ad group anyways?';
+        case 2:
+            return 'This is the bit I really care about!';
+        default:
+            return 'Unknown step';
     }
-  }
+}
 
 
 class SignUp extends Component {
 
     state = {
+        name: "",
         email: "",
         password: "",
+        genre: "",
         category: "",
         userType: "",
         address: "",
         zip: "",
         city: "",
         stateUS: "",
+        showsPlayed: 0,
+        showsCancelled: 0,
+        showsLate: 0,
+        venueRating: 0,
+        lookingForVenue: [],
         loggedIn: false,
         open: false,
+        finishedSignup: false,
         activeStep: 0,
-    skipped: new Set(),
+        skipped: new Set(),
 
     }
 
@@ -125,17 +133,29 @@ class SignUp extends Component {
         event.preventDefault();
         console.log("click")
         // const newBand = bands;
-        this.postTheBand();
+        this.signUpBand();
 
     }
 
-    postTheBand = () => {
-        const newUser = { email: this.state.email, password: this.state.password }
-        axios.post("/band/login", newUser)
+    signUpBand = () => {
+        const newUser = {
+            name: this.state.name,
+            email: this.state.email,
+            password: this.state.password,
+            genre: this.state.genre
+        }
+        axios.post("/band/signup", newUser)
             .then(results => {
-                this.setState({ loggedIn: true });
                 console.log(results);
-                window.location.href = "/artist";
+                if (results.data.success)
+                    this.setState({
+                        loggedIn: true,
+                        finishedSignup: true,
+                    }, () => console.log(this.state))
+                if (!results.data.success) {
+                    alert("incorrect username or password")
+                }
+                // window.location.href = "/artist";
             }
 
             );
@@ -153,7 +173,9 @@ class SignUp extends Component {
         if (this.state.name && this.state.password) {
             const thisUser = {
                 name: this.state.name,
-                password: this.state.password
+                email:this.state.email,
+                password: this.state.password,
+                genre: this.state.genre,
             };
             // check if user already exist in the database, 
             if (this.searchUser) {
@@ -199,59 +221,62 @@ class SignUp extends Component {
     }
 
 
-  isStepOptional = step => {
-    return step === 1;
-  };
+    isStepOptional = step => {
+        return step === 1;
+    };
 
-  handleNext = () => {
-    const { activeStep } = this.state;
-    let { skipped } = this.state;
-    if (this.isStepSkipped(activeStep)) {
-      skipped = new Set(skipped.values());
-      skipped.delete(activeStep);
+    handleNext = () => {
+        const { activeStep } = this.state;
+        let { skipped } = this.state;
+        if (this.isStepSkipped(activeStep)) {
+            skipped = new Set(skipped.values());
+            skipped.delete(activeStep);
+        }
+        this.setState({
+            activeStep: activeStep + 1,
+            skipped,
+        });
+    };
+
+    handleBack = () => {
+        this.setState(state => ({
+            activeStep: state.activeStep - 1,
+        }));
+    };
+
+    handleSkip = () => {
+        const { activeStep } = this.state;
+        if (!this.isStepOptional(activeStep)) {
+            // You probably want to guard against something like this,
+            // it should never occur unless someone's actively trying to break something.
+            throw new Error("You can't skip a step that isn't optional.");
+        }
+
+        this.setState(state => {
+            const skipped = new Set(state.skipped.values());
+            skipped.add(activeStep);
+            return {
+                activeStep: state.activeStep + 1,
+                skipped,
+            };
+        });
+    };
+
+    handleReset = () => {
+        this.setState({
+            activeStep: 0,
+        });
+    };
+
+    isStepSkipped(step) {
+        return this.state.skipped.has(step);
     }
-    this.setState({
-      activeStep: activeStep + 1,
-      skipped,
-    });
-  };
-
-  handleBack = () => {
-    this.setState(state => ({
-      activeStep: state.activeStep - 1,
-    }));
-  };
-
-  handleSkip = () => {
-    const { activeStep } = this.state;
-    if (!this.isStepOptional(activeStep)) {
-      // You probably want to guard against something like this,
-      // it should never occur unless someone's actively trying to break something.
-      throw new Error("You can't skip a step that isn't optional.");
-    }
-
-    this.setState(state => {
-      const skipped = new Set(state.skipped.values());
-      skipped.add(activeStep);
-      return {
-        activeStep: state.activeStep + 1,
-        skipped,
-      };
-    });
-  };
-
-  handleReset = () => {
-    this.setState({
-      activeStep: 0,
-    });
-  };
-
-  isStepSkipped(step) {
-    return this.state.skipped.has(step);
-  }
 
 
     render() {
+        if (this.state.finishedSignup)
+            return <Redirect to='/artist'/>
+
         const { classes } = this.props;
         const steps = getSteps();
         const { activeStep } = this.state;
