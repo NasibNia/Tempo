@@ -30,10 +30,6 @@
     transition: .2s ease-in;
 }
 
-.header-contents h1 a:hover {
-    
-}
-
 .header-items {
     display: flex;
     padding: 0 10px;
@@ -61,7 +57,6 @@
 .log-out-button h2 {
     color: white;
     padding: 8px 12px;
-
     cursor: pointer;
     margin: 0 0 0 4px;
     border-radius: 5px;
