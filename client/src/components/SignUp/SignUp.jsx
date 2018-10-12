@@ -18,6 +18,13 @@ import Button from '@material-ui/core/Button';
 import CheckIcon from '@material-ui/icons/Check';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
+import Grow from '@material-ui/core/Grow';
+import Stepper from '@material-ui/core/Stepper';
+import Step from '@material-ui/core/Step';
+import StepLabel from '@material-ui/core/StepLabel';
+import Typography from '@material-ui/core/Typography';
+
+
 import API from "../../utils/API.js";
 import axios from "axios";
 
@@ -32,7 +39,9 @@ const styles = theme => ({
         flexDirection: "column"
     },
     paper: {
+        borderTop: `7px solid ${theme.palette.secondary.main}`,
         marginTop: theme.spacing.unit * 10,
+        marginBottom: theme.spacing.unit * 6,
         margin: "auto",
         display: 'flex',
         flexDirection: 'column',
@@ -43,7 +52,8 @@ const styles = theme => ({
     },
     avatar: {
         margin: "auto",
-        backgroundColor: theme.palette.secondary.dark,
+        backgroundColor: theme.palette.secondary.dark
+        // border: `2px inset ${theme.palette.secondary.dark}`
     },
     textField: {
         marginLeft: theme.spacing.unit,
@@ -57,15 +67,38 @@ const styles = theme => ({
     },
     button: {
         display: 'block',
-        marginTop: theme.spacing.unit * 2,
+        marginTop: theme.spacing.unit * 2
     },
     formControl: {
         marginTop: theme.spacing.unit * 2,
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
         minWidth: 120
-    }
+    },
+    stepper: {
+        marginTop: theme.spacing.unit * 10,
+        marginBottom: theme.spacing.unit,
+        margin: "auto",
+        width: "80%"
+      }
 });
+
+function getSteps() {
+    return ['Sign up as a Tempo Affiliate', 'Set Up your Personal Profile', 'Get ready to book!'];
+  }
+  
+  function getStepContent(step) {
+    switch (step) {
+      case 0:
+        return 'Sign up as a Tempo Affiliate...';
+      case 1:
+        return 'What is an ad group anyways?';
+      case 2:
+        return 'This is the bit I really care about!';
+      default:
+        return 'Unknown step';
+    }
+  }
 
 
 class SignUp extends Component {
@@ -81,6 +114,8 @@ class SignUp extends Component {
         stateUS: "",
         loggedIn: false,
         open: false,
+        activeStep: 0,
+    skipped: new Set(),
 
     }
 
@@ -164,195 +199,253 @@ class SignUp extends Component {
     }
 
 
+  isStepOptional = step => {
+    return step === 1;
+  };
+
+  handleNext = () => {
+    const { activeStep } = this.state;
+    let { skipped } = this.state;
+    if (this.isStepSkipped(activeStep)) {
+      skipped = new Set(skipped.values());
+      skipped.delete(activeStep);
+    }
+    this.setState({
+      activeStep: activeStep + 1,
+      skipped,
+    });
+  };
+
+  handleBack = () => {
+    this.setState(state => ({
+      activeStep: state.activeStep - 1,
+    }));
+  };
+
+  handleSkip = () => {
+    const { activeStep } = this.state;
+    if (!this.isStepOptional(activeStep)) {
+      // You probably want to guard against something like this,
+      // it should never occur unless someone's actively trying to break something.
+      throw new Error("You can't skip a step that isn't optional.");
+    }
+
+    this.setState(state => {
+      const skipped = new Set(state.skipped.values());
+      skipped.add(activeStep);
+      return {
+        activeStep: state.activeStep + 1,
+        skipped,
+      };
+    });
+  };
+
+  handleReset = () => {
+    this.setState({
+      activeStep: 0,
+    });
+  };
+
+  isStepSkipped(step) {
+    return this.state.skipped.has(step);
+  }
+
+
     render() {
         const { classes } = this.props;
+        const steps = getSteps();
+        const { activeStep } = this.state;
         let formQuestions;
 
         if (this.state.userType === "artist") {
             formQuestions = (
-                <div id="userTypeForm">
-                    <TextField
-                        id="filled-Name-input"
-                        label="Name"
-                        className={classes.textField}
-                        type="name"
-                        name="name"
-                        autoComplete="name"
-                        margin="normal"
-                        variant="filled"
-                        onChange={this.handleInputChange}
-                        value={this.state.username}
-                    />
-                    <TextField
-                        id="filled-email-input"
-                        label="Email"
-                        className={classes.textField}
-                        type="email"
-                        name="email"
-                        autoComplete="email"
-                        margin="normal"
-                        variant="filled"
-                        onChange={this.handleInputChange}
-                        value={this.state.email}
-                    />
-                    <TextField
-                        id="filled-password-input"
-                        label="Password"
-                        className={classes.textField}
-                        type="password"
-                        name="password"
-                        autoComplete="current-password"
-                        margin="normal"
-                        variant="filled"
-                        onChange={this.handleInputChange}
-                        value={this.state.password}
-                    />
-                </div>
+                <Grow in={true} mountOnEnter unmountOnExit>
+                    <div id="userTypeForm">
+                        <TextField
+                            id="filled-Name-input"
+                            label="Name"
+                            className={classes.textField}
+                            type="name"
+                            name="name"
+                            autoComplete="name"
+                            margin="normal"
+                            variant="filled"
+                            onChange={this.handleInputChange}
+                            value={this.state.username}
+                        />
+                        <TextField
+                            id="filled-email-input"
+                            label="Email"
+                            className={classes.textField}
+                            type="email"
+                            name="email"
+                            autoComplete="email"
+                            margin="normal"
+                            variant="filled"
+                            onChange={this.handleInputChange}
+                            value={this.state.email}
+                        />
+                        <TextField
+                            id="filled-password-input"
+                            label="Password"
+                            className={classes.textField}
+                            type="password"
+                            name="password"
+                            autoComplete="current-password"
+                            margin="normal"
+                            variant="filled"
+                            onChange={this.handleInputChange}
+                            value={this.state.password}
+                        />
+                    </div>
+                </Grow>
             )
 
         }
         else if (this.state.userType === "venue") {
             formQuestions = (
-                <div id="userTypeForm">
-                    <TextField
-                        id="filled-name-input"
-                        label="Venue Name"
-                        className={classes.textField}
-                        type="name"
-                        name="name"
-                        autoComplete="name"
-                        margin="normal"
-                        variant="filled"
-                        onChange={this.handleInputChange}
-                        value={this.state.username}
-                    />
-                    <TextField
-                        id="filled-email-input"
-                        label="Email"
-                        className={classes.textField}
-                        type="email"
-                        name="email"
-                        autoComplete="email"
-                        margin="normal"
-                        variant="filled"
-                        onChange={this.handleInputChange}
-                        value={this.state.email}
-                    />
-                    <TextField
-                        id="filled-password-input"
-                        label="Password"
-                        className={classes.textField}
-                        type="password"
-                        name="password"
-                        autoComplete="current-password"
-                        margin="normal"
-                        variant="filled"
-                        onChange={this.handleInputChange}
-                        value={this.state.password}
-                    />
-                    <TextField
-                        id="filled-address-input"
-                        label="Street Address"
-                        className={classes.textField}
-                        type="address"
-                        name="address"
-                        autoComplete="current-address"
-                        margin="normal"
-                        variant="filled"
-                        onChange={this.handleInputChange}
-                        value={this.state.address}
-                    />
-                    <div id="addressInputs">
+                <Grow in={true} mountOnEnter unmountOnExit>
+                    <div id="userTypeForm">
                         <TextField
-                            id="filled-zip-input"
-                            label="Zip Code"
+                            id="filled-name-input"
+                            label="Venue Name"
                             className={classes.textField}
-                            type="zip"
-                            name="zip"
-                            autoComplete="current-zip"
+                            type="name"
+                            name="name"
+                            autoComplete="name"
                             margin="normal"
                             variant="filled"
                             onChange={this.handleInputChange}
-                            value={this.state.zip}
+                            value={this.state.username}
                         />
                         <TextField
-                            id="filled-city-input"
-                            label="City"
+                            id="filled-email-input"
+                            label="Email"
                             className={classes.textField}
-                            type="city"
-                            name="city"
-                            autoComplete="current-city"
+                            type="email"
+                            name="email"
+                            autoComplete="email"
                             margin="normal"
                             variant="filled"
                             onChange={this.handleInputChange}
-                            value={this.state.city}
+                            value={this.state.email}
                         />
-                        <FormControl variant="filled" className={classes.formControl}>
-                            <InputLabel htmlFor="filled-state-simple">State</InputLabel>
-                            <Select
-                                value={this.state.stateUS}
-                                onChange={this.handleChange}
-                                input={<FilledInput name="stateUS" id="filled-state-simple" />}
-                            >
-                                <MenuItem value="">
-                                    <em>None</em>
-                                </MenuItem>
+                        <TextField
+                            id="filled-password-input"
+                            label="Password"
+                            className={classes.textField}
+                            type="password"
+                            name="password"
+                            autoComplete="current-password"
+                            margin="normal"
+                            variant="filled"
+                            onChange={this.handleInputChange}
+                            value={this.state.password}
+                        />
+                        <TextField
+                            id="filled-address-input"
+                            label="Street Address"
+                            className={classes.textField}
+                            type="address"
+                            name="address"
+                            autoComplete="current-address"
+                            margin="normal"
+                            variant="filled"
+                            onChange={this.handleInputChange}
+                            value={this.state.address}
+                        />
+                        <div id="addressInputs">
+                            <TextField
+                                id="filled-zip-input"
+                                label="Zip Code"
+                                className={classes.textField}
+                                type="zip"
+                                name="zip"
+                                autoComplete="current-zip"
+                                margin="normal"
+                                variant="filled"
+                                onChange={this.handleInputChange}
+                                value={this.state.zip}
+                            />
+                            <TextField
+                                id="filled-city-input"
+                                label="City"
+                                className={classes.textField}
+                                type="city"
+                                name="city"
+                                autoComplete="current-city"
+                                margin="normal"
+                                variant="filled"
+                                onChange={this.handleInputChange}
+                                value={this.state.city}
+                            />
+                            <FormControl variant="filled" className={classes.formControl}>
+                                <InputLabel htmlFor="filled-state-simple">State</InputLabel>
+                                <Select
+                                    value={this.state.stateUS}
+                                    onChange={this.handleChange}
+                                    input={<FilledInput name="stateUS" id="filled-state-simple" />}
+                                >
+                                    <MenuItem value="">
+                                        <em>None</em>
+                                    </MenuItem>
 
-                                <MenuItem value={30}>Alabama</MenuItem>
-                                <MenuItem value={30}>Alaska</MenuItem>
-                                <MenuItem value={30}>Arizona </MenuItem>
-                                <MenuItem value={30}>Arkansas </MenuItem>
-                                <MenuItem value={30}>California </MenuItem>
-                                <MenuItem value={30}>Colorado </MenuItem>
-                                <MenuItem value={30}>Connecticut </MenuItem>
-                                <MenuItem value={30}>Delaware </MenuItem>
-                                <MenuItem value={30}>Florida </MenuItem>
-                                <MenuItem value={30}>Georgia </MenuItem>
-                                <MenuItem value={30}>Hawaii </MenuItem>
-                                <MenuItem value={30}>Idaho </MenuItem>
-                                <MenuItem value={30}>Illinois Indiana </MenuItem>
-                                <MenuItem value={30}>Iowa </MenuItem>
-                                <MenuItem value={30}>Kansas </MenuItem>
-                                <MenuItem value={30}>Kentucky </MenuItem>
-                                <MenuItem value={30}>Louisiana </MenuItem>
-                                <MenuItem value={30}>Maine </MenuItem>
-                                <MenuItem value={30}>Maryland</MenuItem>
-                                <MenuItem value={30}>Massachusetts </MenuItem>
-                                <MenuItem value={30}>Michigan </MenuItem>
-                                <MenuItem value={30}>Minnesota </MenuItem>
-                                <MenuItem value={30}>Mississippi </MenuItem>
-                                <MenuItem value={30}>Missouri </MenuItem>
-                                <MenuItem value={30}>Montana Nebraska </MenuItem>
-                                <MenuItem value={30}>Nevada </MenuItem>
-                                <MenuItem value={30}>New Hampshire </MenuItem>
-                                <MenuItem value={30}>New Jersey </MenuItem>
-                                <MenuItem value={30}>New Mexico </MenuItem>
-                                <MenuItem value={30}>New York </MenuItem>
-                                <MenuItem value={30}>North Carolina </MenuItem>
-                                <MenuItem value={30}>North Dakota </MenuItem>
-                                <MenuItem value={30}>Ohio </MenuItem>
-                                <MenuItem value={30}>Oklahoma </MenuItem>
-                                <MenuItem value={30}>Oregon </MenuItem>
-                                <MenuItem value={30}>Pennsylvania Rhode Island</MenuItem>
-                                <MenuItem value={30}>South Carolina </MenuItem>
-                                <MenuItem value={30}>South Dakota </MenuItem>
-                                <MenuItem value={30}>Tennessee </MenuItem>
-                                <MenuItem value={30}>Texas </MenuItem>
-                                <MenuItem value={30}>Utah </MenuItem>
-                                <MenuItem value={30}>Vermont </MenuItem>
-                                <MenuItem value={30}>Virginia </MenuItem>
-                                <MenuItem value={30}>Washington </MenuItem>
-                                <MenuItem value={30}>West Virginia </MenuItem>
-                                <MenuItem value={30}>Wisconsin </MenuItem>
-                                <MenuItem value={30}>Wyoming</MenuItem>
-                            </Select>
-                        </FormControl>
+                                    <MenuItem value={"AL"}>Alabama</MenuItem>
+                                    <MenuItem value={30}>Alaska</MenuItem>
+                                    <MenuItem value={30}>Arizona </MenuItem>
+                                    <MenuItem value={30}>Arkansas </MenuItem>
+                                    <MenuItem value={30}>California </MenuItem>
+                                    <MenuItem value={30}>Colorado </MenuItem>
+                                    <MenuItem value={30}>Connecticut </MenuItem>
+                                    <MenuItem value={30}>Delaware </MenuItem>
+                                    <MenuItem value={30}>Florida </MenuItem>
+                                    <MenuItem value={30}>Georgia </MenuItem>
+                                    <MenuItem value={30}>Hawaii </MenuItem>
+                                    <MenuItem value={30}>Idaho </MenuItem>
+                                    <MenuItem value={30}>Illinois Indiana </MenuItem>
+                                    <MenuItem value={30}>Iowa </MenuItem>
+                                    <MenuItem value={30}>Kansas </MenuItem>
+                                    <MenuItem value={30}>Kentucky </MenuItem>
+                                    <MenuItem value={30}>Louisiana </MenuItem>
+                                    <MenuItem value={30}>Maine </MenuItem>
+                                    <MenuItem value={30}>Maryland</MenuItem>
+                                    <MenuItem value={30}>Massachusetts </MenuItem>
+                                    <MenuItem value={30}>Michigan </MenuItem>
+                                    <MenuItem value={30}>Minnesota </MenuItem>
+                                    <MenuItem value={30}>Mississippi </MenuItem>
+                                    <MenuItem value={30}>Missouri </MenuItem>
+                                    <MenuItem value={30}>Montana Nebraska </MenuItem>
+                                    <MenuItem value={30}>Nevada </MenuItem>
+                                    <MenuItem value={30}>New Hampshire </MenuItem>
+                                    <MenuItem value={30}>New Jersey </MenuItem>
+                                    <MenuItem value={30}>New Mexico </MenuItem>
+                                    <MenuItem value={30}>New York </MenuItem>
+                                    <MenuItem value={30}>North Carolina </MenuItem>
+                                    <MenuItem value={30}>North Dakota </MenuItem>
+                                    <MenuItem value={30}>Ohio </MenuItem>
+                                    <MenuItem value={30}>Oklahoma </MenuItem>
+                                    <MenuItem value={30}>Oregon </MenuItem>
+                                    <MenuItem value={30}>Pennsylvania Rhode Island</MenuItem>
+                                    <MenuItem value={30}>South Carolina </MenuItem>
+                                    <MenuItem value={30}>South Dakota </MenuItem>
+                                    <MenuItem value={30}>Tennessee </MenuItem>
+                                    <MenuItem value={30}>Texas </MenuItem>
+                                    <MenuItem value={30}>Utah </MenuItem>
+                                    <MenuItem value={30}>Vermont </MenuItem>
+                                    <MenuItem value={30}>Virginia </MenuItem>
+                                    <MenuItem value={30}>Washington </MenuItem>
+                                    <MenuItem value={30}>West Virginia </MenuItem>
+                                    <MenuItem value={30}>Wisconsin </MenuItem>
+                                    <MenuItem value={30}>Wyoming</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </div>
                     </div>
-                </div>
+                </Grow>
             )
         }
         else {
-            formQuestions = (<h2>Choose an option!</h2>)
+            formQuestions = (<h2 className={classes.button} style={{ textAlign: "center" }} >Choose an option!</h2>)
         }
 
         return (
@@ -396,6 +489,7 @@ class SignUp extends Component {
                         />
                         <Button variant="contained"
                             color="secondary"
+                            className={classes.button}
                             onClick={this.handleClick}
 
                         >
@@ -404,6 +498,23 @@ class SignUp extends Component {
                         </Button>
                     </form>
                 </Paper>
+                <Stepper activeStep={activeStep} className={classes.stepper}>
+                    {steps.map((label, index) => {
+                        const props = {};
+                        const labelProps = {};
+                        if (this.isStepOptional(index)) {
+                            labelProps.optional = <Typography variant="caption">Show us what you got!</Typography>;
+                        }
+                        if (this.isStepSkipped(index)) {
+                            props.completed = false;
+                        }
+                        return (
+                            <Step key={label} {...props}>
+                                <StepLabel {...labelProps}>{label}</StepLabel>
+                            </Step>
+                        );
+                    })}
+                </Stepper>
             </div>
 
 
