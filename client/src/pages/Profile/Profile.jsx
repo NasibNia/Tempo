@@ -11,12 +11,20 @@ import FormLabel from '@material-ui/core/FormLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Avatar from '@material-ui/core/Avatar';
+import Icon from '@material-ui/core/Icon';
 import LockIcon from '@material-ui/icons/LockOutlined';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import CheckIcon from '@material-ui/icons/Check';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
+
+// Stepper
+import Stepper from '@material-ui/core/Stepper';
+import Step from '@material-ui/core/Step';
+import StepLabel from '@material-ui/core/StepLabel';
+import Typography from '@material-ui/core/Typography';
+
 import API from "../../utils/API.js";
 import axios from "axios";
 
@@ -30,6 +38,7 @@ const styles = theme => ({
         flexDirection: "column"
     },
     paper: {
+        borderTop: `7px solid ${theme.palette.secondary.main}`,
         marginTop: theme.spacing.unit * 10,
         margin: "auto",
         display: 'flex',
@@ -42,14 +51,24 @@ const styles = theme => ({
         // margin: "auto",
         marginTop: "10px",
         marginBottom: "10px",
-        backgroundColor: theme.palette.secondary.main,
+        backgroundColor: "transparent",
+        border: `4px groove ${theme.palette.secondary.main}`,
         width: 80,
         height: 80,
         transition: "0.3s ease",
         '&:hover': {
-            backgroundColor: theme.palette.secondary.light
+            border: `4px groove ${theme.palette.secondary.light}`,
         }
 
+    },
+    icon: {
+        fontSize: "2em",
+        color: theme.palette.secondary.main,
+        transition: "0.3s ease",
+        '&:hover': {
+            color: theme.palette.secondary.light
+            // color: `linear-gradient(to bottom, ${theme.palette.secondary.light}, ${theme.palette.secondary.main})`
+        }
     },
     textField: {
         marginLeft: theme.spacing.unit,
@@ -66,7 +85,31 @@ const styles = theme => ({
     menu: {
         width: 200,
     },
+    stepper: {
+        marginTop: theme.spacing.unit * 10,
+        marginBottom: theme.spacing.unit,
+        margin: "auto",
+        width: "80%"
+      }
 });
+
+function getSteps() {
+    return ['Sign up as a Tempo Affiliate', 'Set Up your Personal Profile', 'Get ready to book!'];
+  }
+  
+  function getStepContent(step) {
+    switch (step) {
+      case 0:
+        return 'Sign up as a Tempo Affiliate...';
+      case 1:
+        return 'What is an ad group anyways?';
+      case 2:
+        return 'This is the bit I really care about!';
+      default:
+        return 'Unknown step';
+    }
+  }
+
 
 
 class profile extends Component {
@@ -77,12 +120,16 @@ class profile extends Component {
             pop: false,
             jazz: true
         },
+        name: "",
+        rating: 0.0,
         description: "",
         category: "",
         spotify: "",
         soundcloud: "",
         profilePic: "",
-        loggedIn: false
+        loggedIn: false,
+        activeStep: 1,
+        skipped: new Set()
 
     }
 
@@ -164,23 +211,81 @@ class profile extends Component {
 
     }
 
+    isStepOptional = step => {
+        return step === 1;
+      };
+    
+      handleNext = () => {
+        const { activeStep } = this.state;
+        let { skipped } = this.state;
+        if (this.isStepSkipped(activeStep)) {
+          skipped = new Set(skipped.values());
+          skipped.delete(activeStep);
+        }
+        this.setState({
+          activeStep: activeStep + 1,
+          skipped,
+        });
+      };
+    
+      handleBack = () => {
+        this.setState(state => ({
+          activeStep: state.activeStep - 1,
+        }));
+      };
+    
+      handleSkip = () => {
+        const { activeStep } = this.state;
+        if (!this.isStepOptional(activeStep)) {
+          // You probably want to guard against something like this,
+          // it should never occur unless someone's actively trying to break something.
+          throw new Error("You can't skip a step that isn't optional.");
+        }
+    
+        this.setState(state => {
+          const skipped = new Set(state.skipped.values());
+          skipped.add(activeStep);
+          return {
+            activeStep: state.activeStep + 1,
+            skipped,
+          };
+        });
+      };
+    
+      handleReset = () => {
+        this.setState({
+          activeStep: 0,
+        });
+      };
+    
+      isStepSkipped(step) {
+        return this.state.skipped.has(step);
+      }
+    
 
 
     render() {
         const { classes } = this.props;
+        const steps = getSteps();
+        const { activeStep } = this.state;
 
         return (
             <div>
                 <HeaderBar />
                 <Paper className={classes.paper}>
                     <form className="container" noValidate autoComplete="off">
-                        <div id = "profileHeader">
-                            <Avatar className={classes.avatar} color="secondary" alt="Profile Picture" src={this.state.profilePic}>
+                        <div id="profileHeader">
+                            <Avatar className={classes.avatar} alt="Profile Picture" src={this.state.profilePic}>
+                                <i className={classNames(classes.icon, "fas fa-user")}></i> 
                             </Avatar>
-                            <div id = "profileInfo">
-                                <h1 className="profile">Name: </h1>
-                                <h1 className="profile">Rating: </h1>
+                            <div class="profileInfo">
+                                <h1 className="profile">{(this.state.name) ? this.state.name : "Name"}</h1>
+                                <h1 className="profile">Rating: {this.state.rating} </h1>
                             </div>
+                            {/* <div class="profileInfo">
+                                <iframe allowtransparency="true" scrolling="no" frameborder="no" src="https://w.soundcloud.com/icon/?url=http%3A%2F%2Fsoundcloud.com%2Fundefined&color=orange_white&size=32" style="width: 32px; height: 32px;"></iframe>
+                                <iframe src="https://open.spotify.com/embed/album/1DFixLWuPkv3KT3TnV35m3" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                            </div> */}
                         </div>
                         <FormControl component="fieldset" className={classes.formControl}>
                             <FormLabel component="legend">What Genres of Music Do You Perform? Select All that Apply!</FormLabel>
@@ -260,6 +365,23 @@ class profile extends Component {
                         </Button>
                     </form>
                 </Paper>
+                <Stepper activeStep={activeStep} className={classes.stepper}>
+                    {steps.map((label, index) => {
+                        const props = {};
+                        const labelProps = {};
+                        if (this.isStepOptional(index)) {
+                            labelProps.optional = <Typography variant="caption">Show us what you got!</Typography>;
+                        }
+                        if (this.isStepSkipped(index)) {
+                            props.completed = false;
+                        }
+                        return (
+                            <Step key={label} {...props}>
+                                <StepLabel {...labelProps}>{label}</StepLabel>
+                            </Step>
+                        );
+                    })}
+                </Stepper>
             </div>
 
 

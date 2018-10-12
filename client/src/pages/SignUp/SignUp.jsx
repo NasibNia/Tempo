@@ -389,7 +389,7 @@ class SignUp extends Component {
                                         <em>None</em>
                                     </MenuItem>
 
-                                    <MenuItem value={30}>Alabama</MenuItem>
+                                    <MenuItem value={"AL"}>Alabama</MenuItem>
                                     <MenuItem value={30}>Alaska</MenuItem>
                                     <MenuItem value={30}>Arizona </MenuItem>
                                     <MenuItem value={30}>Arkansas </MenuItem>
