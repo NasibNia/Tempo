@@ -19,6 +19,11 @@ import CheckIcon from '@material-ui/icons/Check';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import Grow from '@material-ui/core/Grow';
+import Stepper from '@material-ui/core/Stepper';
+import Step from '@material-ui/core/Step';
+import StepLabel from '@material-ui/core/StepLabel';
+import Typography from '@material-ui/core/Typography';
+
 
 import API from "../../utils/API.js";
 import axios from "axios";
@@ -34,6 +39,7 @@ const styles = theme => ({
         flexDirection: "column"
     },
     paper: {
+        borderTop: `7px solid ${theme.palette.secondary.main}`,
         marginTop: theme.spacing.unit * 10,
         marginBottom: theme.spacing.unit * 6,
         margin: "auto",
@@ -46,7 +52,8 @@ const styles = theme => ({
     },
     avatar: {
         margin: "auto",
-        backgroundColor: theme.palette.secondary.dark,
+        backgroundColor: theme.palette.secondary.dark
+        // border: `2px inset ${theme.palette.secondary.dark}`
     },
     textField: {
         marginLeft: theme.spacing.unit,
@@ -60,15 +67,38 @@ const styles = theme => ({
     },
     button: {
         display: 'block',
-        marginTop: theme.spacing.unit * 2,
+        marginTop: theme.spacing.unit * 2
     },
     formControl: {
         marginTop: theme.spacing.unit * 2,
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
         minWidth: 120
-    }
+    },
+    stepper: {
+        marginTop: theme.spacing.unit * 10,
+        marginBottom: theme.spacing.unit,
+        margin: "auto",
+        width: "80%"
+      }
 });
+
+function getSteps() {
+    return ['Sign up as a Tempo Affiliate', 'Set Up your Personal Profile', 'Get ready to book!'];
+  }
+  
+  function getStepContent(step) {
+    switch (step) {
+      case 0:
+        return 'Sign up as a Tempo Affiliate...';
+      case 1:
+        return 'What is an ad group anyways?';
+      case 2:
+        return 'This is the bit I really care about!';
+      default:
+        return 'Unknown step';
+    }
+  }
 
 
 class SignUp extends Component {
@@ -83,7 +113,9 @@ class SignUp extends Component {
         city: "",
         stateUS: "",
         loggedIn: false,
-        open: false
+        open: false,
+        activeStep: 0,
+    skipped: new Set(),
 
     }
 
@@ -166,8 +198,62 @@ class SignUp extends Component {
     }
 
 
+  isStepOptional = step => {
+    return step === 1;
+  };
+
+  handleNext = () => {
+    const { activeStep } = this.state;
+    let { skipped } = this.state;
+    if (this.isStepSkipped(activeStep)) {
+      skipped = new Set(skipped.values());
+      skipped.delete(activeStep);
+    }
+    this.setState({
+      activeStep: activeStep + 1,
+      skipped,
+    });
+  };
+
+  handleBack = () => {
+    this.setState(state => ({
+      activeStep: state.activeStep - 1,
+    }));
+  };
+
+  handleSkip = () => {
+    const { activeStep } = this.state;
+    if (!this.isStepOptional(activeStep)) {
+      // You probably want to guard against something like this,
+      // it should never occur unless someone's actively trying to break something.
+      throw new Error("You can't skip a step that isn't optional.");
+    }
+
+    this.setState(state => {
+      const skipped = new Set(state.skipped.values());
+      skipped.add(activeStep);
+      return {
+        activeStep: state.activeStep + 1,
+        skipped,
+      };
+    });
+  };
+
+  handleReset = () => {
+    this.setState({
+      activeStep: 0,
+    });
+  };
+
+  isStepSkipped(step) {
+    return this.state.skipped.has(step);
+  }
+
+
     render() {
         const { classes } = this.props;
+        const steps = getSteps();
+        const { activeStep } = this.state;
         let formQuestions;
 
         if (this.state.userType === "artist") {
@@ -403,6 +489,7 @@ class SignUp extends Component {
                         />
                         <Button variant="contained"
                             color="secondary"
+                            className={classes.button}
                             onClick={this.handleClick}
 
                         >
@@ -411,6 +498,23 @@ class SignUp extends Component {
                         </Button>
                     </form>
                 </Paper>
+                <Stepper activeStep={activeStep} className={classes.stepper}>
+                    {steps.map((label, index) => {
+                        const props = {};
+                        const labelProps = {};
+                        if (this.isStepOptional(index)) {
+                            labelProps.optional = <Typography variant="caption">Show us what you got!</Typography>;
+                        }
+                        if (this.isStepSkipped(index)) {
+                            props.completed = false;
+                        }
+                        return (
+                            <Step key={label} {...props}>
+                                <StepLabel {...labelProps}>{label}</StepLabel>
+                            </Step>
+                        );
+                    })}
+                </Stepper>
             </div>
 
 

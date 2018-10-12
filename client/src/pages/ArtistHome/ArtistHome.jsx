@@ -16,17 +16,17 @@ class ArtistHome extends Component {
         user: "artist"
       };
     
-      componentDidMount() {
-        this.loadShows();
-      }
+      // componentDidMount() {
+      //   this.loadShows();
+      // }
     
-      loadShows = () => {
-        API.getShows()
-          .then(res =>
-            this.setState({ shows: res.data, name: "", description: "", statistics: "" })
-          )
-          .catch(err => console.log(err));
-      };
+      // loadShows = () => {
+      //   API.getShows()
+      //     .then(res =>
+      //       this.setState({ shows: res.data, name: "", description: "", statistics: "" })
+      //     )
+      //     .catch(err => console.log(err));
+      // };
 
    render() {
 
