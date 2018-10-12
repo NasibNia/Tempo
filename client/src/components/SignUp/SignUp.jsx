@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {Redirect} from 'react-router-dom';
+
 // import Header from "../../x/Header";
 import HeaderBar from "../../components/HeaderBar"
 import PropTypes from 'prop-types';
@@ -24,11 +26,8 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Typography from '@material-ui/core/Typography';
 
-
 import API from "../../utils/API.js";
 import axios from "axios";
-
-
 
 import "./signup.css"
 
@@ -147,11 +146,13 @@ class SignUp extends Component {
         axios.post("/band/signup", newUser)
             .then(results => {
                 console.log(results);
-                if (results.data.success)
+                if (results.data.success){
                     this.setState({
                         loggedIn: true,
                         finishedSignup: true,
                     }, () => console.log(this.state))
+                    return <Redirect to='/profile'/>
+                }
                 if (!results.data.success) {
                     alert("incorrect username or password")
                 }

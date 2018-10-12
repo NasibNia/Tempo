@@ -16,12 +16,7 @@ class ArtistHome extends Component {
         statistics: "",
         user: "artist"
       };
-    
-<<<<<<< HEAD
-      // componentDidMount() {
-      //   this.loadShows();
-      // }
-=======
+      
       componentDidMount() {
         this.loadShows();
         console.log("test")
@@ -32,7 +27,6 @@ class ArtistHome extends Component {
 
 
       }
->>>>>>> master
     
       // loadShows = () => {
       //   API.getShows()
