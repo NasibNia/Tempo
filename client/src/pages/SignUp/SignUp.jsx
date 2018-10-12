@@ -72,8 +72,15 @@ const styles = theme => ({
 class SignUp extends Component {
 
     state = {
+        name:"",
         email: "",
         password: "",
+        genre:"",
+        showsPlayed: 0,
+        showsCancelled: 0,
+        showsLate:0,
+        venueRating:0,
+        lookingForVenue : [],
         category: "",
         userType: "",
         address: "",
@@ -92,13 +99,16 @@ class SignUp extends Component {
         event.preventDefault();
         console.log("click")
         // const newBand = bands;
-        this.postTheBand();
+        this.loginTheBand();
 
     }
 
-    postTheBand = () => {
-        const newUser = {email : this.state.email, password : this.state.password}
-        axios.post("/band/signup" , newUser)
+    loginTheBand = () => {
+        const newUser = {name: this.state.name,
+                        email:this.state.email,
+                        password: this.state.password,
+                        genre: this.state.genre}
+        axios.post("/band/login" , newUser)
         .then(results => {
             console.log(results);
             if (results.data.success)
@@ -106,6 +116,9 @@ class SignUp extends Component {
                     loggedIn: true,
                     finishedSignup: true,
                 }, ()=>console.log(this.state))
+            if(!results.data.success){
+                alert("incorrect username or password")
+            }
             // window.location.href = "/artist";
         }
             
@@ -125,7 +138,9 @@ class SignUp extends Component {
         if (this.state.name && this.state.password) {
             const thisUser = {
                 name: this.state.name,
-                password: this.state.password
+                email:this.state.email,
+                password: this.state.password,
+                genre: this.state.genre,
             };
             // check if user already exist in the database, 
             if (this.searchUser) {
@@ -215,6 +230,18 @@ class SignUp extends Component {
                         variant="filled"
                         onChange={this.handleInputChange}
                         value={this.state.password}
+                    />
+                    <TextField
+                        id="filled-genre-input"
+                        label="genre"
+                        className={classes.textField}
+                        type="genre"
+                        name="genre"
+                        autoComplete="current-genre"
+                        margin="normal"
+                        variant="filled"
+                        onChange={this.handleInputChange}
+                        value={this.state.genre}
                     />
                 </div>
             )

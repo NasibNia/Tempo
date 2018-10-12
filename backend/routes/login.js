@@ -25,52 +25,38 @@ router.post('/venue/signup', passport.authenticate('venue-local-signup', {
 
     router.post('/band/login', passport.authenticate('band-local-login', {
         successRedirect : '/success',
-        failureRedirect : '/band/login'
+        failureRedirect : '/signup'
     }));
 
-  router.get('/InfoForm', isLoggedIn, (req, res) => {
-    res.json("band login success");
-  });
+//   router.get('/InfoForm', isLoggedIn, (req, res) => {
+//     res.json("band login success");
+//   });
 
   router.get('/logout', isLoggedIn, (req, res) => {
       req.logout();
+      
       res.status(200).json({
+          //in the profile page we should add a redirect
+          logout : true,
           'message': 'successfully logout'
       });
     });
     
 router.get('/signup', function (req, res) {
-    console.log("get /signup");
-    res.json("User not found");
+    console.log("wasn't able to login",req.user);
+    res.json({
+        success: false,
+        'message': 'wrong username or password'
+    });
 });
 
 router.get ('/success', isLoggedIn, function(req, res){
-    // res.redirect("/artist");
+    console.log("\n**********this user has the following information \n************ ",req.user);
     res.status(200).json({
         success: true,
         'message': 'successfully passed this fucking gate'
     });
 });
-
-
-//============== new for test :Nasib
-// router.route('/signup')
-//       .post(loginController.signUp, loginController.login);
-
-// router.route("/band/signup")
-//       .get(loginController.bandSignup);
-
-// router.route("/venue/login")
-//       .get(loginController.login);
-      
-// router.route("/signup")
-//       .get(loginController.create);    
-
-// router.route('/logout')
-//         .get( function(req, res) {
-//         req.logout();
-//         res.redirect('/');
-//     });
 
 
 
