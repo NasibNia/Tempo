@@ -1,5 +1,6 @@
 import React from 'react';
 import "./Navigate.css"
+import { Link } from 'react-router-dom'
 
 const NavigateItem = props => {
     return (
@@ -28,8 +29,7 @@ const Navigate = props => {
                     <NavigateItem icon="imgURL" text={props.userType === "artist" ? "Venue Directory" : "Artist Directory"} type={"profile"} click={props.method} />
                 </div>
                 <div className="navigate-footer">
-                    <h3>Fundraising</h3>
-                    <h3>Philanthropy</h3><h3>What is SutroLabs?</h3>
+                    <h3><Link to={"/careers"}>What is SutroLabs?</Link></h3><h3><Link to={"/sfskateclub"}>Philanthropy</Link></h3><h3><Link to={"/careers"}>Careers</Link></h3>
                 </div>
             </div>
         </div>

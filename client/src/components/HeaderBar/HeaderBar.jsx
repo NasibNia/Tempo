@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import "./HeaderBar.css";
+import { Link } from 'react-router-dom'
 
 class HeaderBar extends Component {
   render(props) {
@@ -8,8 +9,9 @@ class HeaderBar extends Component {
     return (
       <div className="header">
         <div className="header-contents">
-          <div className="logo">
-            <h1>Tempo</h1>
+          <div className="logo">          
+            <h1><Link to="/artist">Tempo</Link></h1>
+            <h4>{this.props.userType} suite</h4>
           </div>
           <div className="header-items">
             <div className="header-item">
