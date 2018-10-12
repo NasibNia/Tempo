@@ -53,6 +53,23 @@ export default {
     // Saves a show to the database
     saveShow: function (showData) {
         return axios.post("/api/shows", showData);
-    }
+    },
 
+    // Check if user is logged-in 
+    getUser: () => {
+        return axios.get("/api/user", function(data){
+          console.log(data)
+          // Make sure the data contains the username as expected before using it
+          console.log('user: ' + data.data.user);
+
+      });
+
+    //   cb(
+    },
+
+    logout: () => {
+        return axios.get("/logout", function(res){
+        // return res;
+    })
+    }
 };

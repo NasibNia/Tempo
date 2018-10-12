@@ -8,9 +8,6 @@ const passport = require('passport');
 
 require('./config/passport')(passport); // pass passport for configuration
 
-
-
-
 /// ====
 var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');

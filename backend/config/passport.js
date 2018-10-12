@@ -244,7 +244,7 @@ module.exports = function (passport) {
         if(db.Band.findById(id)){
             db.Band.findById(id).then(function (user) {
 
-                console.log("\n==========inside deserialize, user is a Band"+ user);
+                console.log("\n***********==========inside deserialize, user is a Band"+ user);
     
                 if (user) {
 
