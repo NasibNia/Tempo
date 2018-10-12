@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Redirect} from 'react-router-dom';
 // import Header from "../../x/Header";
 import HeaderBar from "../../components/HeaderBar"
 import PropTypes from 'prop-types';
@@ -59,27 +60,43 @@ class SignUp extends Component {
         email: "",
         password: "",
         category : "",
-        loggedIn: false
+        id : "",
+        loggedIn: false,
+        finishedSignup: false
 
     }
 
-    //   componentDidMount() {}
+      componentDidMount() {
+        //   API.logout();
+      }
 
     handleClick = event => {
         event.preventDefault();
         console.log("click")
         // const newBand = bands;
-        this.postTheBand();
+        this.loginTheBand();
         
     }
 
-    postTheBand = () => {
-        const newUser = {email : this.state.email, password : this.state.password}
+    loginTheBand = () => {
+        const newUser = {
+                         email : this.state.email, 
+                         password : this.state.password
+                         }
         axios.post("/band/login" , newUser)
         .then(results => {
-            this.state.loggedIn = true;
             console.log(results);
-            window.location.href = "/artist";
+            if (results.data.success)
+                this.setState({
+                    loggedIn: true,
+                    id : results.data.id
+                    // finishedSignup: true,
+                }, ()=>console.log(this.state))
+            if(!results.data.success){
+                alert("incorrect username or password")
+            }
+
+            // window.location.href = "/artist";
         }
             
         );
@@ -137,6 +154,8 @@ class SignUp extends Component {
 
     render() {
         const { classes } = this.props;
+        if (this.state.loggedIn)
+            return <Redirect to={'/artist/' + this.state.id}/>
 
         return (
             <div>

@@ -99,16 +99,16 @@ class SignUp extends Component {
         event.preventDefault();
         console.log("click")
         // const newBand = bands;
-        this.loginTheBand();
+        this.signupTheBand();
 
     }
 
-    loginTheBand = () => {
+    signupTheBand = () => {
         const newUser = {name: this.state.name,
                         email:this.state.email,
                         password: this.state.password,
                         genre: this.state.genre}
-        axios.post("/band/login" , newUser)
+        axios.post("/band/signup" , newUser)
         .then(results => {
             console.log(results);
             if (results.data.success)

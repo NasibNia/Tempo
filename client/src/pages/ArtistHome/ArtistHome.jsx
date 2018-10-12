@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Body from "../../components/Body";
 import API from "../../utils/API";
+import axios from "axios";
 
 import "./ArtistHome.css";
 
@@ -18,6 +19,13 @@ class ArtistHome extends Component {
     
       componentDidMount() {
         this.loadShows();
+        console.log("test")
+    
+
+        // console.log(API.getUser());
+
+
+
       }
     
       loadShows = () => {
@@ -28,10 +36,12 @@ class ArtistHome extends Component {
           .catch(err => console.log(err));
       };
 
+
    render() {
 
        return (
            <div>
+              {console.log(this.props.match.params.id) }
                <Body userType = {this.state.user}/>
            </div>
            )
