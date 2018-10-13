@@ -52,7 +52,9 @@ export default {
     },
     // Saves a show to the database
     saveShow: function (showData, userRoute) {
-        return axios.post(`/api/shows/${userRoute}`, showData);
+        let user = userRoute.replace(/[0-9]/g, '');
+        let id = userRoute.match(/\d+/)[0];
+        return axios.post(`/api/shows/${user}` + id, showData);
     },
 
     // Check if user is logged-in 

@@ -63,11 +63,15 @@ class ControlledExpansionPanels extends React.Component {
             <ExpansionPanel key = {this.keyCount} expanded={expanded === `panel + ${elem.id}`} onChange={this.handleChange(`panel + ${elem.id}`)}>
                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                     <Typography className={classes.heading}>{elem.name}</Typography>
-                    <Typography className={classes.secondaryHeading}>{elem.rating}</Typography>
+                    <Typography className={classes.secondaryHeading}>{elem.date ? elem.date : elem.rating}</Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <Typography>
-                        {elem.description}
+                        {elem.time_start 
+                            ? <div>
+                                <p>Start Time: {elem.time_start}</p> 
+                                <p>End Time: {elem.time_start}</p>
+                            </div> : elem.description}
                     </Typography>
                 </ExpansionPanelDetails>
             </ExpansionPanel>
