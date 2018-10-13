@@ -130,6 +130,7 @@ module.exports = function (passport) {
         },
 
         function (req, email, password, done) {
+            console.log("@@@@@@@\nhitting venue local signup")
             console.log("I'm the req/body    " ,req.body);
             var passwordHash = bCrypt.hashSync(password, bCrypt.genSaltSync(8));
             
@@ -154,6 +155,7 @@ module.exports = function (passport) {
                     console.log("user doesnt exist");
                     var data =
                         {
+                            name : req.body.name,
                             email: email,
                             password: passwordHash,
                             // userName: req.body.name,
@@ -241,6 +243,7 @@ module.exports = function (passport) {
     // deserialize user 
 
     passport.deserializeUser(function(id, done) {
+
         if(db.Band.findById(id)){
             db.Band.findById(id).then(function (user) {
 
@@ -252,23 +255,23 @@ module.exports = function (passport) {
 
                 } else {
 
-                    done(user.errors, null);
+                   if(db.Band.findById(id)) {
+                    db.Venue.findById(id).then(function (user) {
 
-                }
-            });
-        } else {
-            db.Venue.findById(id).then(function (user) {
-
-                console.log("\n==========inside deserialize, user is aVenue "+ user);
-    
-                if (user) {
-    
-                    done(null, user.get());
-    
-                } else {
-    
-                    done(user.errors, null);
-    
+                        console.log("\n==========inside deserialize, user is aVenue "+ user);
+            
+                        if (user) {
+            
+                            done(null, user.get());
+            
+                        } else {
+            
+                            done(user.errors, null);
+            
+                        }
+                   });
+               
+                    }
                 }
     
             });
