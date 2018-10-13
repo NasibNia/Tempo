@@ -27,6 +27,9 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Typography from '@material-ui/core/Typography';
 
+// Transitions
+import Grow from '@material-ui/core/Grow';
+
 import API from "../../utils/API.js";
 import axios from "axios";
 
@@ -305,6 +308,8 @@ class profile extends Component {
         return (
             <div>
                 <HeaderBar />
+                <Grow in={true}>
+
                 <Paper className={classes.paper}>
                     <form className="container" noValidate autoComplete="off">
                         <div id="profileHeader">
@@ -427,6 +432,7 @@ class profile extends Component {
                         </Button>
                     </form>
                 </Paper>
+                </Grow>
                 <Stepper activeStep={activeStep} className={classes.stepper}>
                     {steps.map((label, index) => {
                         const props = {};

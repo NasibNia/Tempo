@@ -29,9 +29,12 @@ const styles = theme => ({
     },
     button: {
         margin: "10px auto",
+        width: "100%",
+        transition: "0.3s ease-in-out",
         textAlign: "center",
         '&:hover': {
-            backgroundColor: theme.palette.secondary.light
+            backgroundColor: theme.palette.secondary.light,
+            color: "white"
         }
     },
     successMessage: {

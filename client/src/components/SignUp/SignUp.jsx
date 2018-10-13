@@ -96,6 +96,17 @@ const styles = theme => ({
         marginTop: -12,
         marginLeft: -12,
     },
+    link: {
+        textAlign: "center",
+        transition: "0.2s ease-in-out",
+        '&:hover': {
+            textDecoration: "underline",
+            letterSpacing: "1px",
+            color: theme.palette.secondary.dark
+
+        }
+
+    }
 });
 
 function getSteps() {
@@ -628,6 +639,9 @@ class SignUp extends Component {
                         {this.state.loading && <CircularProgress size={30} className={classes.buttonProgress} />}
                     </form>
                 </Paper>
+                <Typography style = {{textAlign:"center"}}>
+                    <a className={classes.link} href="/signin">Already a user? Sign in</a>
+                </Typography>
                 <Stepper activeStep={activeStep} className={classes.stepper}>
                     {steps.map((label, index) => {
                         const props = {};

@@ -54,13 +54,16 @@ class ControlledExpansionPanels extends React.Component {
         });
     };
 
+    //create an individual key for each panel
+    keyCount = 0;
     // function to dynamically generate panel elements based on specific database information passed    
     panelGenerator = (elem, classes, expanded) => {
+        this.keyCount++;
         return (
-            <ExpansionPanel expanded={expanded === `panel + ${elem.id}`} onChange={this.handleChange(`panel + ${elem.id}`)}>
+            <ExpansionPanel key = {this.keyCount} expanded={expanded === `panel + ${elem.id}`} onChange={this.handleChange(`panel + ${elem.id}`)}>
                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                     <Typography className={classes.heading}>{elem.name}</Typography>
-                    <Typography className={classes.secondaryHeading}>{elem.subtitle}</Typography>
+                    <Typography className={classes.secondaryHeading}>{elem.rating}</Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <Typography>

@@ -146,6 +146,7 @@ class WidgetItem extends Component {
                             ref='chart'
                             width={100}
                             height={100}
+                            maxHeight={100}
                             options={{
                                 maintainAspectRatio: false
                             }}

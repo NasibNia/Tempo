@@ -61,9 +61,12 @@ let venueNewsFeed = [
     }
 ]
 
+let keyCount = 0;
+
 let renderFeed = (propTitle, propType, propUrl) => {
     // console.log("feed", propUrl)
-    return <FeedItem title={propTitle} type={propType} url={propUrl}/>
+    keyCount++;
+    return <FeedItem key={keyCount} title={propTitle} type={propType} url={propUrl}/>
 }
 
 const MainMiddle = props => {
