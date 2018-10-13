@@ -13,7 +13,6 @@ class HeaderBar extends Component {
   };
 
 
-
   componentDidMount() {
 
     console.log("state ", this.state.loggedIn)    
@@ -26,15 +25,13 @@ class HeaderBar extends Component {
   //     }
   // });
 
-      API.getUser(
-        // function(err,data){
-        //   console.log(data)
-        // }
-        )
+      API.getUser()
         .then(res => {
-          console.log("component mounting check", res.data.user);
-          if (!res.data.user) {
+          console.log("component mounting check", res.data);
+          if (!res.data.id) {
                 this.setState({loggedIn : false});
+              } else {
+                this.setState({loggedIn : true});
               }
         });
       }
@@ -71,8 +68,9 @@ class HeaderBar extends Component {
 
 
   render(props) {
-    if (!this.state.loggedIn)
+    if (!this.state.loggedIn && window.location.href !== "http://localhost:3000/signin"){
       return <Redirect to='/signin'/>
+  }
       
     
   

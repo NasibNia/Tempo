@@ -155,7 +155,7 @@ class SignUp extends Component {
     render() {
         const { classes } = this.props;
         if (this.state.loggedIn)
-            return <Redirect to={'/artist/' + this.state.id}/>
+            return <Redirect to={'/artist/'}/>
 
         return (
             <div>

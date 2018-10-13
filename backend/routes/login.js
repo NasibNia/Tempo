@@ -36,7 +36,7 @@ router.post('/venue/signup', passport.authenticate('venue-local-signup', {
             res.json({});
         } else {
             res.status(200).json({
-                user: req.user
+                id: req.user.id
             });
         }
     });

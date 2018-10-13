@@ -14,11 +14,21 @@ class ArtistHome extends Component {
         name: "",
         description: "",
         statistics: "",
-        user: "artist"
+        user: "artist",
+        band: ""
       };
     
       componentDidMount() {
-        this.loadShows();
+        API.getUser().then(res => {
+          console.log("component mounting check", res.data);
+          if (!res.data.id) {
+                this.setState({loggedIn : false});
+              } else {
+                this.setState({loggedIn : true});
+                this.loadShows(res.data.id);
+              }
+        });
+        // this.loadShows();
         console.log("test")
     
 
@@ -28,11 +38,12 @@ class ArtistHome extends Component {
 
       }
     
-      loadShows = () => {
-        API.getShows()
-          .then(res =>
-            this.setState({ shows: res.data, name: "", description: "", statistics: "" })
-          )
+      loadShows = (id) => {
+        API.getBand(id)
+          .then(res => {
+            console.log("this is the res:",res.data)
+            this.setState({band: res.data})
+          })
           .catch(err => console.log(err));
       };
 
@@ -41,8 +52,12 @@ class ArtistHome extends Component {
 
        return (
            <div>
-              {console.log(this.props.match.params.id) }
+             {console.log(this.state.band)}
+            <h1 style={{height: "200px", marginTop: }}>{this.state.band.name}</h1>
+              {/* {console.log(this.props.match.params.id) } */}
                <Body userType = {this.state.user}/>
+               {/* <h1>{this.state.band.name}</h1> */}
+
            </div>
            )
    }
