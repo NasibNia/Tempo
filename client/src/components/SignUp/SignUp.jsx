@@ -29,6 +29,7 @@ import Typography from '@material-ui/core/Typography';
 import API from "../../utils/API.js";
 import axios from "axios";
 
+import { validations } from './validations';
 import "./signup.css"
 
 const styles = theme => ({
@@ -106,6 +107,7 @@ class SignUp extends Component {
         name: "",
         email: "",
         password: "",
+        passwordRepeat: "",
         genre: "",
         category: "",
         userType: "",
@@ -123,6 +125,12 @@ class SignUp extends Component {
         finishedSignup: false,
         activeStep: 0,
         skipped: new Set(),
+        errors: {
+            name: "",
+            email: "",
+            password: "",
+            passwordRepeat: ""
+        }
 
     }
 
@@ -132,7 +140,19 @@ class SignUp extends Component {
         event.preventDefault();
         console.log("click")
         // const newBand = bands;
-        this.signUpBand();
+        // this.state.errors = validations(
+        //     {
+        //         name: this.state.name,
+        //         email: this.state.email,
+        //         password: this.state.password
+        //     })
+
+        console.log("client errors", this.state.errors)
+        console.log("should we pass?", !(this.state.errors.name || this.state.errors.email && this.state.errors.password))
+        if (!(this.state.errors.name && this.state.errors.email && this.state.errors.password)) {
+            this.signUpBand();
+        }
+
 
     }
 
@@ -165,6 +185,18 @@ class SignUp extends Component {
 
         const { name, value } = event.target;
         this.setState({ [name]: value });
+
+        let errors = validations(
+            {
+                name: this.state.name,
+                email: this.state.email,
+                password: this.state.password,
+                passwordRepeat: this.state.passwordRepeat
+            }
+        );
+
+        this.setState({errors});
+        
     };
 
     handleSubmitForm = event => {
@@ -276,7 +308,7 @@ class SignUp extends Component {
     render() {
         if (this.state.finishedSignup)
             return <Redirect to='/profile' />
-            // return <Redirect to='/artist' />
+        // return <Redirect to='/artist' />
 
         const { classes } = this.props;
         const steps = getSteps();
@@ -297,7 +329,9 @@ class SignUp extends Component {
                             margin="normal"
                             variant="filled"
                             onChange={this.handleInputChange}
-                            value={this.state.username}
+                            value={this.state.name}
+                            helperText={this.state.errors.name}
+                            error={this.state.errors.name ? true : false}
                         />
                         <TextField
                             id="filled-email-input"
@@ -310,6 +344,8 @@ class SignUp extends Component {
                             variant="filled"
                             onChange={this.handleInputChange}
                             value={this.state.email}
+                            helperText={this.state.errors.email}
+                            error={this.state.errors.email ? true : false}
                         />
                         <TextField
                             id="filled-password-input"
@@ -322,6 +358,22 @@ class SignUp extends Component {
                             variant="filled"
                             onChange={this.handleInputChange}
                             value={this.state.password}
+                            helperText={this.state.errors.password}
+                            error={this.state.errors.password ? true : false}
+                        />
+                        <TextField
+                            id="filled-passwordRepeat-input"
+                            label="Enter your password again"
+                            className={classes.textField}
+                            type="password"
+                            name="passwordRepeat"
+                            autoComplete="current-passwordRepeat"
+                            margin="normal"
+                            variant="filled"
+                            onChange={this.handleInputChange}
+                            value={this.state.passwordRepeat}
+                            helperText={this.state.errors.passwordRepeat}
+                            error={this.state.errors.passwordRepeat ? true : false}
                         />
                     </div>
                 </Grow>
@@ -342,7 +394,9 @@ class SignUp extends Component {
                             margin="normal"
                             variant="filled"
                             onChange={this.handleInputChange}
-                            value={this.state.username}
+                            value={this.state.name}
+                            helperText={this.state.errors.name}
+                            error={this.state.errors.name ? true : ""}
                         />
                         <TextField
                             id="filled-email-input"
@@ -355,6 +409,9 @@ class SignUp extends Component {
                             variant="filled"
                             onChange={this.handleInputChange}
                             value={this.state.email}
+                            helperText={this.state.errors.email}
+                            error={this.state.errors.email ? true : ""}
+
                         />
                         <TextField
                             id="filled-password-input"
@@ -367,6 +424,22 @@ class SignUp extends Component {
                             variant="filled"
                             onChange={this.handleInputChange}
                             value={this.state.password}
+                            helperText={this.state.errors.password}
+                            error={this.state.errors.password ? true : ""}
+                        />
+                        <TextField
+                            id="filled-passwordRepeat-input"
+                            label="Enter your password again"
+                            className={classes.textField}
+                            type="passwordRepeat"
+                            name="passwordRepeat"
+                            autoComplete="current-passwordRepeat"
+                            margin="normal"
+                            variant="filled"
+                            onChange={this.handleInputChange}
+                            value={this.state.passwordRepeat}
+                            helperText={this.state.errors.passwordRepeat}
+                            error={this.state.errors.passwordRepeat ? true : ""}
                         />
                         <TextField
                             id="filled-address-input"
