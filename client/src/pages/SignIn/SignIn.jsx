@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 // import Header from "../../x/Header";
 import HeaderBar from "../../components/HeaderBar"
 import PropTypes from 'prop-types';
@@ -15,6 +15,10 @@ import Button from '@material-ui/core/Button';
 import CheckIcon from '@material-ui/icons/Check';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+
+import { validations } from './validations';
 import API from "../../utils/API.js";
 import axios from "axios";
 
@@ -52,6 +56,20 @@ const styles = theme => ({
     menu: {
         width: 200,
     },
+    buttonSuccess: {
+        backgroundColor: "#4CAF50",
+        '&:hover': {
+            backgroundColor: "rgb(58, 129, 61)",
+        },
+    },
+    buttonProgress: {
+        color: "#4CAF50",
+        position: 'relative',
+        bottom: '20px',
+        left: '50%',
+        marginTop: -12,
+        marginLeft: -12,
+    },
 });
 
 
@@ -60,8 +78,8 @@ class SignIn extends Component {
     state = {
         email: "",
         password: "",
-        category : "",
-        id : "",
+        category: "",
+        id: "",
         errors: {
             name: "",
             email: "",
@@ -70,44 +88,60 @@ class SignIn extends Component {
         },
         loggedIn: false,
         finishedSignup: false,
-        
+        loading: false,
+        redirect: false
+
 
     }
 
-      componentDidMount() {
+    componentDidMount() {
         //   API.logout();
-      }
+    }
 
     handleClick = event => {
         event.preventDefault();
         console.log("click")
         // const newBand = bands;
-        this.loginTheBand();
-        
+
+        this.setState(
+            {
+                loading: true
+            },
+            () => {
+                this.timer = setTimeout(() => {
+                    this.setState({
+                        loading: false,
+                    });
+                    //logs in the user after a successful load
+                    this.loginTheBand();
+                }, 2000);
+            },
+        )
+
     }
 
     loginTheBand = () => {
         const newUser = {
-                         email : this.state.email, 
-                         password : this.state.password
-                         }
-        axios.post("/band/login" , newUser)
-        .then(results => {
-            console.log(results);
-            if (results.data.success)
-                this.setState({
-                    loggedIn: true,
-                    id : results.data.id
-                    // finishedSignup: true,
-                }, ()=>console.log(this.state))
-            if(!results.data.success){
-                alert("incorrect username or password")
+            email: this.state.email,
+            password: this.state.password
+        }
+        axios.post("/band/login", newUser)
+            .then(results => {
+                console.log(results);
+                if (results.data.success)
+                    this.setState({
+                        loggedIn: true,
+                        id: results.data.id
+                        // finishedSignup: true,
+                    }, () => console.log(this.state))
+                if (!results.data.success) {
+                    alert("incorrect username or password")
+                }
+
+                // window.location.href = "/artist";
             }
 
-            // window.location.href = "/artist";
-        }
-            
-        );
+            );
     };
 
     handleInputChange = event => {
@@ -122,7 +156,7 @@ class SignIn extends Component {
             }
         );
 
-        this.setState({errors});
+        this.setState({ errors });
     };
 
     handleSubmitForm = event => {
@@ -171,18 +205,25 @@ class SignIn extends Component {
 
     render() {
         const { classes } = this.props;
-        if (this.state.loggedIn)
-            return <Redirect to={'/artist/' + this.state.id}/>
+        let id = this.state.id;
+
+        if (this.state.loggedIn) {
+            setTimeout(() => {this.setState({redirect: true}) }, 1000)
+        }
+
+        if (this.state.redirect)
+            return <Redirect to={'/artist/' + id} />
+
 
         return (
             <div>
                 <HeaderBar />
                 <Paper className={classes.paper}>
                     <form className="container" noValidate autoComplete="off" style={{ marginTop: "5%" }}>
-                        <Avatar className={classes.avatar} color = "secondary">
+                        <Avatar className={classes.avatar} color="secondary">
                             <LockIcon />
                         </Avatar>
-                        <h1 className = "signup">Tempo Affiliates Sign-In Here!</h1>
+                        <h1 className="signup">Tempo Affiliates Sign-In Here!</h1>
                         <TextField
                             id="filled-email-input"
                             label="Email"
@@ -215,14 +256,16 @@ class SignIn extends Component {
                             control={<Checkbox value="remember" color="secondary" />}
                             label="Remember me"
                         />
-                        <Button variant="contained" 
-                                color="secondary"
-                                onClick = {this.handleClick}
+                        <Button variant="contained"
+                            color="secondary"
+                            className={this.state.loggedIn ? classes.buttonSuccess : ""}
+                            onClick={this.handleClick}
 
                         >
-                         {!this.state.loggedIn ? "Login" : <CheckIcon />}
-                        {/* <Icon className="">+</Icon> */}
+                            {!this.state.loggedIn ? "Login" : <CheckIcon />}
+                            {/* <Icon className="">+</Icon> */}
                         </Button>
+                        {this.state.loading && <CircularProgress size={30} className={classes.buttonProgress} />}
                     </form>
                 </Paper>
             </div>

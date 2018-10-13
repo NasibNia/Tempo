@@ -76,6 +76,10 @@ const styles = theme => ({
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
     },
+    formControl: {
+        margin: "10px auto",
+        textAlign: "center"
+    },
     checks: {
         display: "flex",
         flexDirection: 'row',
@@ -118,9 +122,14 @@ class profile extends Component {
 
     state = {
         genres: {
-            rap: true,
+            rock: false,
+            club: false,
+            electronic: false,
+            hiphop: false,
             pop: false,
-            jazz: true
+            jazz: false,
+            acoustics: false
+
         },
         name: "",
         rating: 0.0,
@@ -314,17 +323,35 @@ class profile extends Component {
                         <FormControl component="fieldset" className={classes.formControl}>
                             <FormLabel component="legend">What Genres of Music Do You Perform? Select All that Apply!</FormLabel>
                             <FormGroup className={classes.checks}>
+                            <FormControlLabel
+                                    control={
+                                        <Checkbox checked={this.state.genres.rock} onChange={this.handleGenreChange('rock')} value="rock" />
+                                    }
+                                    label="Rock"
+                                />
                                 <FormControlLabel
                                     control={
-                                        <Checkbox checked={this.state.genres.rap} onChange={this.handleGenreChange('rap')} value="rap" />
+                                        <Checkbox checked={this.state.genres.hiphop} onChange={this.handleGenreChange('hiphop')} value="hiphop" />
                                     }
-                                    label="Rap"
+                                    label="Hip-Hop"
                                 />
                                 <FormControlLabel
                                     control={
                                         <Checkbox checked={this.state.genres.pop} onChange={this.handleGenreChange('pop')} value="pop" />
                                     }
                                     label="Pop"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox checked={this.state.genres.electronic} onChange={this.handleGenreChange('electronic')} value="electronic" />
+                                    }
+                                    label="Electronic"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox checked={this.state.genres.club} onChange={this.handleGenreChange('club')} value="club" />
+                                    }
+                                    label="Club"
                                 />
                                 <FormControlLabel
                                     control={
@@ -336,8 +363,18 @@ class profile extends Component {
                                     }
                                     label="Jazz"
                                 />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={this.state.genres.acoustics}
+                                            onChange={this.handleGenreChange('acoustics')}
+                                            value="acoustics"
+                                        />
+                                    }
+                                    label="Acoustics"
+                                />
                             </FormGroup>
-                            <FormHelperText>Help us find the best gigs for you!</FormHelperText>
+                            <FormHelperText style={{textAlign: "center"}}>Help us find the best gigs for you!</FormHelperText>
                         </FormControl>
                         <TextField
                             id="filled-description-input"
@@ -347,6 +384,7 @@ class profile extends Component {
                             name="description"
                             autoComplete="current-description"
                             margin="normal"
+                            multiline={true}
                             // variant="filled"
                             onChange={this.handleInputChange}
                             value={this.state.description}

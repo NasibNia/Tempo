@@ -10,7 +10,7 @@ export const validations = values => {
     }
     if (!values.password) {
       errors.password = 'A password is required'
-    } else if (values.password.length < 6) {
+    } else if (values.password.length < 5) {
       errors.password = 'Your password must be at least 6 characters long'
     }
     if (values.password !== values.passwordRepeat){

@@ -25,6 +25,7 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Typography from '@material-ui/core/Typography';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import API from "../../utils/API.js";
 import axios from "axios";
@@ -80,7 +81,21 @@ const styles = theme => ({
         marginBottom: theme.spacing.unit,
         margin: "auto",
         width: "80%"
-    }
+    },
+    buttonSuccess: {
+        backgroundColor: "#4CAF50",
+        '&:hover': {
+            backgroundColor: "rgb(58, 129, 61)",
+        },
+    },
+    buttonProgress: {
+        color: "#4CAF50",
+        position: 'relative',
+        bottom: '20px',
+        left: '50%',
+        marginTop: -12,
+        marginLeft: -12,
+    },
 });
 
 function getSteps() {
@@ -123,6 +138,8 @@ class SignUp extends Component {
         loggedIn: false,
         open: false,
         finishedSignup: false,
+        loading: false,
+        redirect: false,
         activeStep: 0,
         skipped: new Set(),
         errors: {
@@ -139,18 +156,24 @@ class SignUp extends Component {
     handleClick = event => {
         event.preventDefault();
         console.log("click")
-        // const newBand = bands;
-        // this.state.errors = validations(
-        //     {
-        //         name: this.state.name,
-        //         email: this.state.email,
-        //         password: this.state.password
-        //     })
 
         console.log("client errors", this.state.errors)
         console.log("should we pass?", !(this.state.errors.name || this.state.errors.email && this.state.errors.password))
         if (!(this.state.errors.name && this.state.errors.email && this.state.errors.password)) {
-            this.signUpBand();
+            this.setState(
+                {
+                    loading: true
+                },
+                () => {
+                    this.timer = setTimeout(() => {
+                        this.setState({
+                            loading: false,
+                        });
+                        //logs in the user after a successful load
+                        this.signUpBand();
+                    }, 2000);
+                },
+            )
         }
 
 
@@ -195,8 +218,8 @@ class SignUp extends Component {
             }
         );
 
-        this.setState({errors});
-        
+        this.setState({ errors });
+
     };
 
     handleSubmitForm = event => {
@@ -306,8 +329,15 @@ class SignUp extends Component {
 
 
     render() {
-        if (this.state.finishedSignup)
-            return <Redirect to='/profile' />
+
+        if (this.state.finishedSignup) {
+            setTimeout(() => { this.setState({ redirect: true }) }, 1000)
+        }
+
+        if (this.state.redirect)
+            return <Redirect to={'/profile/' + this.state.id} />
+
+
         // return <Redirect to='/artist' />
 
         const { classes } = this.props;
@@ -588,13 +618,14 @@ class SignUp extends Component {
                         />
                         <Button variant="contained"
                             color="secondary"
-                            className={classes.button}
+                            className={this.state.loggedIn ? classes.buttonSuccess : ""}
                             onClick={this.handleClick}
 
                         >
                             {!this.state.loggedIn ? "Sign Up" : <CheckIcon />}
                             {/* <Icon className="">+</Icon> */}
                         </Button>
+                        {this.state.loading && <CircularProgress size={30} className={classes.buttonProgress} />}
                     </form>
                 </Paper>
                 <Stepper activeStep={activeStep} className={classes.stepper}>
