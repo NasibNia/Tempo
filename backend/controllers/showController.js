@@ -72,6 +72,7 @@ module.exports = {
     create: function(req,res){
         console.log("controller.create ", req.body)
         let user = req.params.user;
+        console.log(user)
         db.Show.create(req.body)
                 .then(dbShow => {
                     // if user is "band" :

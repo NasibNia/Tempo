@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+
 // import Header from "../../x/Header";
 import HeaderBar from "../../components/HeaderBar"
 import PropTypes from 'prop-types';
@@ -24,6 +26,9 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Typography from '@material-ui/core/Typography';
+
+// Transitions
+import Grow from '@material-ui/core/Grow';
 
 import API from "../../utils/API.js";
 import axios from "axios";
@@ -74,6 +79,10 @@ const styles = theme => ({
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
     },
+    formControl: {
+        margin: "10px auto",
+        textAlign: "center"
+    },
     checks: {
         display: "flex",
         flexDirection: 'row',
@@ -116,9 +125,14 @@ class profile extends Component {
 
     state = {
         genres: {
-            rap: true,
+            rock: false,
+            club: false,
+            electronic: false,
+            hiphop: false,
             pop: false,
-            jazz: true
+            jazz: false,
+            acoustics: false
+
         },
         name: "",
         rating: 0.0,
@@ -128,6 +142,7 @@ class profile extends Component {
         soundcloud: "",
         profilePic: "",
         loggedIn: false,
+        finishedSignup: false,
         activeStep: 1,
         skipped: new Set()
 
@@ -137,23 +152,41 @@ class profile extends Component {
 
     handleClick = event => {
         event.preventDefault();
-        console.log("click")
+        console.log("click");
+        this.setState({
+            loggedIn: true,
+            finishedSignup: true,
+        }, () => console.log(this.state))
         // const newBand = bands;
-        this.postTheBand();
+        // this.updateProfile();
 
     }
 
-    // postTheBand = () => {
-    //     const newUser = {genre : this.state.genre, password : this.state.password}
-    //     axios.post("/band/login" , newUser)
-    //     .then(results => {
-    //         this.state.loggedIn = true;
-    //         console.log(results);
-    //         window.location.href = "/artist";
-    //     }
+    updateProfile = () => {
+        const newUser = {
+            description: this.state.desription,
+            soundcloud: this.state.soundcloud,
+            spotify: this.state.spotify,
+            profilePic: this.state.profilePic,
+            genre: this.state.genres
+        }
+        axios.post("/band/signup", newUser)
+            .then(results => {
+                console.log(results);
+                if (results.data.success) {
+                    this.setState({
+                        loggedIn: true,
+                        finishedSignup: true,
+                    }, () => console.log(this.state))
+                }
+                if (!results.data.success) {
+                    alert("incorrect username or password")
+                }
+                // window.location.href = "/artist";
+            }
 
-    //     );
-    // };
+            );
+    };
 
     handleInputChange = event => {
 
@@ -269,9 +302,14 @@ class profile extends Component {
         const steps = getSteps();
         const { activeStep } = this.state;
 
+        if (this.state.finishedSignup)
+            return <Redirect to='/artist' />
+
         return (
             <div>
                 <HeaderBar />
+                <Grow in={true}>
+
                 <Paper className={classes.paper}>
                     <form className="container" noValidate autoComplete="off">
                         <div id="profileHeader">
@@ -290,17 +328,35 @@ class profile extends Component {
                         <FormControl component="fieldset" className={classes.formControl}>
                             <FormLabel component="legend">What Genres of Music Do You Perform? Select All that Apply!</FormLabel>
                             <FormGroup className={classes.checks}>
+                            <FormControlLabel
+                                    control={
+                                        <Checkbox checked={this.state.genres.rock} onChange={this.handleGenreChange('rock')} value="rock" />
+                                    }
+                                    label="Rock"
+                                />
                                 <FormControlLabel
                                     control={
-                                        <Checkbox checked={this.state.genres.rap} onChange={this.handleGenreChange('rap')} value="rap" />
+                                        <Checkbox checked={this.state.genres.hiphop} onChange={this.handleGenreChange('hiphop')} value="hiphop" />
                                     }
-                                    label="Rap"
+                                    label="Hip-Hop"
                                 />
                                 <FormControlLabel
                                     control={
                                         <Checkbox checked={this.state.genres.pop} onChange={this.handleGenreChange('pop')} value="pop" />
                                     }
                                     label="Pop"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox checked={this.state.genres.electronic} onChange={this.handleGenreChange('electronic')} value="electronic" />
+                                    }
+                                    label="Electronic"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox checked={this.state.genres.club} onChange={this.handleGenreChange('club')} value="club" />
+                                    }
+                                    label="Club"
                                 />
                                 <FormControlLabel
                                     control={
@@ -312,8 +368,18 @@ class profile extends Component {
                                     }
                                     label="Jazz"
                                 />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={this.state.genres.acoustics}
+                                            onChange={this.handleGenreChange('acoustics')}
+                                            value="acoustics"
+                                        />
+                                    }
+                                    label="Acoustics"
+                                />
                             </FormGroup>
-                            <FormHelperText>Help us find the best gigs for you!</FormHelperText>
+                            <FormHelperText style={{textAlign: "center"}}>Help us find the best gigs for you!</FormHelperText>
                         </FormControl>
                         <TextField
                             id="filled-description-input"
@@ -323,6 +389,7 @@ class profile extends Component {
                             name="description"
                             autoComplete="current-description"
                             margin="normal"
+                            multiline={true}
                             // variant="filled"
                             onChange={this.handleInputChange}
                             value={this.state.description}
@@ -360,11 +427,12 @@ class profile extends Component {
                             onClick={this.handleClick}
 
                         >
-                            {!this.state.loggedIn ? "Login" : <CheckIcon />}
+                            {!this.state.loggedIn ? "Submit and Update" : <CheckIcon />}
                             {/* <Icon className="">+</Icon> */}
                         </Button>
                     </form>
                 </Paper>
+                </Grow>
                 <Stepper activeStep={activeStep} className={classes.stepper}>
                     {steps.map((label, index) => {
                         const props = {};

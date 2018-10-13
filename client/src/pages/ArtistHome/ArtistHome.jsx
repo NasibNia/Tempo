@@ -16,31 +16,25 @@ class ArtistHome extends Component {
         statistics: "",
         user: "artist"
       };
-    
-<<<<<<< HEAD
-      // componentDidMount() {
-      //   this.loadShows();
-      // }
-=======
+      
       componentDidMount() {
         this.loadShows();
         console.log("test")
-    
+        console.log("params", this.props.match.params)
 
         // console.log(API.getUser());
 
 
 
       }
->>>>>>> master
     
-      // loadShows = () => {
-      //   API.getShows()
-      //     .then(res =>
-      //       this.setState({ shows: res.data, name: "", description: "", statistics: "" })
-      //     )
-      //     .catch(err => console.log(err));
-      // };
+      loadShows = () => {
+        API.getShows()
+          .then(res =>
+            this.setState({ shows: res.data, name: "", description: "", statistics: "" })
+          )
+          .catch(err => console.log(err));
+      };
 
 
    render() {

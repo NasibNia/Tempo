@@ -2,13 +2,10 @@ import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import {Redirect} from 'react-router-dom';
 import "./HeaderBar.css";
-<<<<<<< HEAD
 import { Link } from 'react-router-dom'
-=======
 import API from "../../utils/API.js";
 import axios from 'axios'
 
->>>>>>> master
 
 class HeaderBar extends Component {
 

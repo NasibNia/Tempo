@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+
 // import Header from "../../x/Header";
 import HeaderBar from "../../components/HeaderBar"
 import PropTypes from 'prop-types';
@@ -23,13 +25,12 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Typography from '@material-ui/core/Typography';
-
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import API from "../../utils/API.js";
 import axios from "axios";
 
-
-
+import { validations } from './validations';
 import "./signup.css"
 
 const styles = theme => ({
@@ -80,6 +81,31 @@ const styles = theme => ({
         marginBottom: theme.spacing.unit,
         margin: "auto",
         width: "80%"
+    },
+    buttonSuccess: {
+        backgroundColor: "#4CAF50",
+        '&:hover': {
+            backgroundColor: "rgb(58, 129, 61)",
+        },
+    },
+    buttonProgress: {
+        color: "#4CAF50",
+        position: 'relative',
+        bottom: '20px',
+        left: '50%',
+        marginTop: -12,
+        marginLeft: -12,
+    },
+    link: {
+        textAlign: "center",
+        transition: "0.2s ease-in-out",
+        '&:hover': {
+            textDecoration: "underline",
+            letterSpacing: "1px",
+            color: theme.palette.secondary.dark
+
+        }
+
     }
 });
 
@@ -107,6 +133,7 @@ class SignUp extends Component {
         name: "",
         email: "",
         password: "",
+        passwordRepeat: "",
         genre: "",
         category: "",
         userType: "",
@@ -122,8 +149,16 @@ class SignUp extends Component {
         loggedIn: false,
         open: false,
         finishedSignup: false,
+        loading: false,
+        redirect: false,
         activeStep: 0,
         skipped: new Set(),
+        errors: {
+            name: "",
+            email: "",
+            password: "",
+            passwordRepeat: ""
+        }
 
     }
 
@@ -132,8 +167,26 @@ class SignUp extends Component {
     handleClick = event => {
         event.preventDefault();
         console.log("click")
-        // const newBand = bands;
-        this.signUpBand();
+
+        console.log("client errors", this.state.errors)
+        console.log("should we pass?", !(this.state.errors.name || this.state.errors.email && this.state.errors.password))
+        if (!(this.state.errors.name && this.state.errors.email && this.state.errors.password)) {
+            this.setState(
+                {
+                    loading: true
+                },
+                () => {
+                    this.timer = setTimeout(() => {
+                        this.setState({
+                            loading: false,
+                        });
+                        //logs in the user after a successful load
+                        this.signUpBand();
+                    }, 2000);
+                },
+            )
+        }
+
 
     }
 
@@ -147,11 +200,12 @@ class SignUp extends Component {
         axios.post("/band/signup", newUser)
             .then(results => {
                 console.log(results);
-                if (results.data.success)
+                if (results.data.success) {
                     this.setState({
                         loggedIn: true,
                         finishedSignup: true,
                     }, () => console.log(this.state))
+                }
                 if (!results.data.success) {
                     alert("incorrect username or password")
                 }
@@ -165,6 +219,18 @@ class SignUp extends Component {
 
         const { name, value } = event.target;
         this.setState({ [name]: value });
+
+        let errors = validations(
+            {
+                name: this.state.name,
+                email: this.state.email,
+                password: this.state.password,
+                passwordRepeat: this.state.passwordRepeat
+            }
+        );
+
+        this.setState({ errors });
+
     };
 
     handleSubmitForm = event => {
@@ -173,7 +239,7 @@ class SignUp extends Component {
         if (this.state.name && this.state.password) {
             const thisUser = {
                 name: this.state.name,
-                email:this.state.email,
+                email: this.state.email,
                 password: this.state.password,
                 genre: this.state.genre,
             };
@@ -274,8 +340,16 @@ class SignUp extends Component {
 
 
     render() {
-        if (this.state.finishedSignup)
-            return <Redirect to='/artist'/>
+
+        if (this.state.finishedSignup) {
+            setTimeout(() => { this.setState({ redirect: true }) }, 1000)
+        }
+
+        if (this.state.redirect)
+            return <Redirect to={'/profile/' + this.state.id} />
+
+
+        // return <Redirect to='/artist' />
 
         const { classes } = this.props;
         const steps = getSteps();
@@ -296,7 +370,9 @@ class SignUp extends Component {
                             margin="normal"
                             variant="filled"
                             onChange={this.handleInputChange}
-                            value={this.state.username}
+                            value={this.state.name}
+                            helperText={this.state.errors.name}
+                            error={this.state.errors.name ? true : false}
                         />
                         <TextField
                             id="filled-email-input"
@@ -309,6 +385,8 @@ class SignUp extends Component {
                             variant="filled"
                             onChange={this.handleInputChange}
                             value={this.state.email}
+                            helperText={this.state.errors.email}
+                            error={this.state.errors.email ? true : false}
                         />
                         <TextField
                             id="filled-password-input"
@@ -321,6 +399,22 @@ class SignUp extends Component {
                             variant="filled"
                             onChange={this.handleInputChange}
                             value={this.state.password}
+                            helperText={this.state.errors.password}
+                            error={this.state.errors.password ? true : false}
+                        />
+                        <TextField
+                            id="filled-passwordRepeat-input"
+                            label="Enter your password again"
+                            className={classes.textField}
+                            type="password"
+                            name="passwordRepeat"
+                            autoComplete="current-passwordRepeat"
+                            margin="normal"
+                            variant="filled"
+                            onChange={this.handleInputChange}
+                            value={this.state.passwordRepeat}
+                            helperText={this.state.errors.passwordRepeat}
+                            error={this.state.errors.passwordRepeat ? true : false}
                         />
                     </div>
                 </Grow>
@@ -341,7 +435,9 @@ class SignUp extends Component {
                             margin="normal"
                             variant="filled"
                             onChange={this.handleInputChange}
-                            value={this.state.username}
+                            value={this.state.name}
+                            helperText={this.state.errors.name}
+                            error={this.state.errors.name ? true : ""}
                         />
                         <TextField
                             id="filled-email-input"
@@ -354,6 +450,9 @@ class SignUp extends Component {
                             variant="filled"
                             onChange={this.handleInputChange}
                             value={this.state.email}
+                            helperText={this.state.errors.email}
+                            error={this.state.errors.email ? true : ""}
+
                         />
                         <TextField
                             id="filled-password-input"
@@ -366,6 +465,22 @@ class SignUp extends Component {
                             variant="filled"
                             onChange={this.handleInputChange}
                             value={this.state.password}
+                            helperText={this.state.errors.password}
+                            error={this.state.errors.password ? true : ""}
+                        />
+                        <TextField
+                            id="filled-passwordRepeat-input"
+                            label="Enter your password again"
+                            className={classes.textField}
+                            type="passwordRepeat"
+                            name="passwordRepeat"
+                            autoComplete="current-passwordRepeat"
+                            margin="normal"
+                            variant="filled"
+                            onChange={this.handleInputChange}
+                            value={this.state.passwordRepeat}
+                            helperText={this.state.errors.passwordRepeat}
+                            error={this.state.errors.passwordRepeat ? true : ""}
                         />
                         <TextField
                             id="filled-address-input"
@@ -514,15 +629,19 @@ class SignUp extends Component {
                         />
                         <Button variant="contained"
                             color="secondary"
-                            className={classes.button}
+                            className={this.state.loggedIn ? classes.buttonSuccess : ""}
                             onClick={this.handleClick}
 
                         >
                             {!this.state.loggedIn ? "Sign Up" : <CheckIcon />}
                             {/* <Icon className="">+</Icon> */}
                         </Button>
+                        {this.state.loading && <CircularProgress size={30} className={classes.buttonProgress} />}
                     </form>
                 </Paper>
+                <Typography style = {{textAlign:"center"}}>
+                    <a className={classes.link} href="/signin">Already a user? Sign in</a>
+                </Typography>
                 <Stepper activeStep={activeStep} className={classes.stepper}>
                     {steps.map((label, index) => {
                         const props = {};

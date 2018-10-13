@@ -61,31 +61,24 @@ let venueNewsFeed = [
     }
 ]
 
-let renderFeed = (propTitle, propType) => {
+let keyCount = 0;
 
-    return <FeedItem title={propTitle} type={propType} />
+let renderFeed = (propTitle, propType, propUrl) => {
+    // console.log("feed", propUrl)
+    keyCount++;
+    return <FeedItem key={keyCount} title={propTitle} type={propType} url={propUrl}/>
 }
 
 const MainMiddle = props => {
 
     return (
 
-        <div className="middle-feed" uk-scrollspy="target: > div; cls:uk-animation-fade; delay: 500">
+        <div className="middle-feed" >
             {(props.userType === "artist") ? (
                 artistNewsFeed.map(elem =>
-                    renderFeed(elem.title, elem.type))) : (venueNewsFeed.map(elem =>
-                        renderFeed(elem.title, elem.type))
+                    renderFeed(elem.title, elem.type, props.url))) : (venueNewsFeed.map(elem =>
+                        renderFeed(elem.title, elem.type, props.url))
                 )}
-
-            {/* 
-           <FeedItem title="Community Events" type="community events" />
-           <FeedItem title="Calendar" type="calendar" />
-           <FeedItem title="Gig Board" type="gig board" />
-           <FeedItem title="Post a Gig" type="post gig" />
-           <FeedItem title="Past Gigs" type="past gigs" />
-           <FeedItem title="Venue Directory" type="venue directory" />
-           <FeedItem title="Artist Directory" type="artist directory" />           
-           <FeedItem title="Your Profile" type="your profile" /> */}
 
         </div>
 
