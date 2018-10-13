@@ -16,6 +16,8 @@ import CheckIcon from '@material-ui/icons/Check';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Slide from '@material-ui/core/Slide';
+
 
 
 import { validations } from './validations';
@@ -34,7 +36,7 @@ const styles = theme => ({
     },
     paper: {
         borderTop: `7px solid ${theme.palette.secondary.main}`,
-        marginTop: theme.spacing.unit * 10,
+        marginTop: theme.spacing.unit * 5,
         margin: "auto",
         display: 'flex',
         flexDirection: 'column',
@@ -217,12 +219,15 @@ class SignIn extends Component {
         return (
             <div>
                 <HeaderBar />
+                <Slide direction="down" in={true} mountOnEnter unmountOnExit>
+                <h1 className = "signinTitle"><span id="bold">Welcome Back</span> to Tempo</h1>
+                </Slide>
                 <Paper className={classes.paper}>
                     <form className="container" noValidate autoComplete="off" style={{ marginTop: "5%" }}>
                         <Avatar className={classes.avatar} color="secondary">
                             <LockIcon />
                         </Avatar>
-                        <h1 className="signup">Tempo Affiliates Sign-In Here!</h1>
+                        <h1 className="signin">Tempo Affiliates Sign-In Here!</h1>
                         <TextField
                             id="filled-email-input"
                             label="Email"

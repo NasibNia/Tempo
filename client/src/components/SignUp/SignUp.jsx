@@ -345,9 +345,11 @@ class SignUp extends Component {
             setTimeout(() => { this.setState({ redirect: true }) }, 1000)
         }
 
-        if (this.state.redirect)
+        if (this.state.redirect) {
+            // let profileRoute = '/profile/' + this.state.id;
             return <Redirect to={'/profile/' + this.state.id} />
-
+            // return <Redirect to={{profileRoute, state: {userType: this.state.userType}}} />
+        }
 
         // return <Redirect to='/artist' />
 
@@ -472,7 +474,7 @@ class SignUp extends Component {
                             id="filled-passwordRepeat-input"
                             label="Enter your password again"
                             className={classes.textField}
-                            type="passwordRepeat"
+                            type="password"
                             name="passwordRepeat"
                             autoComplete="current-passwordRepeat"
                             margin="normal"
@@ -496,18 +498,6 @@ class SignUp extends Component {
                         />
                         <div id="addressInputs">
                             <TextField
-                                id="filled-zip-input"
-                                label="Zip Code"
-                                className={classes.textField}
-                                type="zip"
-                                name="zip"
-                                autoComplete="current-zip"
-                                margin="normal"
-                                variant="filled"
-                                onChange={this.handleInputChange}
-                                value={this.state.zip}
-                            />
-                            <TextField
                                 id="filled-city-input"
                                 label="City"
                                 className={classes.textField}
@@ -523,7 +513,7 @@ class SignUp extends Component {
                                 <InputLabel htmlFor="filled-state-simple">State</InputLabel>
                                 <Select
                                     value={this.state.stateUS}
-                                    onChange={this.handleChange}
+                                    onChange={this.handleInputChange}
                                     input={<FilledInput name="stateUS" id="filled-state-simple" />}
                                 >
                                     <MenuItem value="">
@@ -531,54 +521,67 @@ class SignUp extends Component {
                                     </MenuItem>
 
                                     <MenuItem value={"AL"}>Alabama</MenuItem>
-                                    <MenuItem value={30}>Alaska</MenuItem>
-                                    <MenuItem value={30}>Arizona </MenuItem>
-                                    <MenuItem value={30}>Arkansas </MenuItem>
-                                    <MenuItem value={30}>California </MenuItem>
-                                    <MenuItem value={30}>Colorado </MenuItem>
-                                    <MenuItem value={30}>Connecticut </MenuItem>
-                                    <MenuItem value={30}>Delaware </MenuItem>
-                                    <MenuItem value={30}>Florida </MenuItem>
-                                    <MenuItem value={30}>Georgia </MenuItem>
-                                    <MenuItem value={30}>Hawaii </MenuItem>
-                                    <MenuItem value={30}>Idaho </MenuItem>
-                                    <MenuItem value={30}>Illinois Indiana </MenuItem>
-                                    <MenuItem value={30}>Iowa </MenuItem>
-                                    <MenuItem value={30}>Kansas </MenuItem>
-                                    <MenuItem value={30}>Kentucky </MenuItem>
-                                    <MenuItem value={30}>Louisiana </MenuItem>
-                                    <MenuItem value={30}>Maine </MenuItem>
-                                    <MenuItem value={30}>Maryland</MenuItem>
-                                    <MenuItem value={30}>Massachusetts </MenuItem>
-                                    <MenuItem value={30}>Michigan </MenuItem>
-                                    <MenuItem value={30}>Minnesota </MenuItem>
-                                    <MenuItem value={30}>Mississippi </MenuItem>
-                                    <MenuItem value={30}>Missouri </MenuItem>
-                                    <MenuItem value={30}>Montana Nebraska </MenuItem>
-                                    <MenuItem value={30}>Nevada </MenuItem>
-                                    <MenuItem value={30}>New Hampshire </MenuItem>
-                                    <MenuItem value={30}>New Jersey </MenuItem>
-                                    <MenuItem value={30}>New Mexico </MenuItem>
-                                    <MenuItem value={30}>New York </MenuItem>
-                                    <MenuItem value={30}>North Carolina </MenuItem>
-                                    <MenuItem value={30}>North Dakota </MenuItem>
-                                    <MenuItem value={30}>Ohio </MenuItem>
-                                    <MenuItem value={30}>Oklahoma </MenuItem>
-                                    <MenuItem value={30}>Oregon </MenuItem>
-                                    <MenuItem value={30}>Pennsylvania Rhode Island</MenuItem>
-                                    <MenuItem value={30}>South Carolina </MenuItem>
-                                    <MenuItem value={30}>South Dakota </MenuItem>
-                                    <MenuItem value={30}>Tennessee </MenuItem>
-                                    <MenuItem value={30}>Texas </MenuItem>
-                                    <MenuItem value={30}>Utah </MenuItem>
-                                    <MenuItem value={30}>Vermont </MenuItem>
-                                    <MenuItem value={30}>Virginia </MenuItem>
-                                    <MenuItem value={30}>Washington </MenuItem>
-                                    <MenuItem value={30}>West Virginia </MenuItem>
-                                    <MenuItem value={30}>Wisconsin </MenuItem>
-                                    <MenuItem value={30}>Wyoming</MenuItem>
+                                    <MenuItem value={"AK"}>Alaska</MenuItem>
+                                    <MenuItem value={"AZ"}>Arizona </MenuItem>
+                                    <MenuItem value={"AR"}>Arkansas </MenuItem>
+                                    <MenuItem value={"CA"}>California </MenuItem>
+                                    <MenuItem value={"Co"}>Colorado </MenuItem>
+                                    <MenuItem value={"CT"}>Connecticut </MenuItem>
+                                    <MenuItem value={"DE"}>Delaware </MenuItem>
+                                    <MenuItem value={"FL"}>Florida </MenuItem>
+                                    <MenuItem value={"GA"}>Georgia </MenuItem>
+                                    <MenuItem value={"HI"}>Hawaii </MenuItem>
+                                    <MenuItem value={"ID"}>Idaho </MenuItem>
+                                    <MenuItem value={"IL"}>Illinois Indiana </MenuItem>
+                                    <MenuItem value={"IN"}>Iowa </MenuItem>
+                                    <MenuItem value={"IA"}>Kansas </MenuItem>
+                                    <MenuItem value={"KS"}>Kentucky </MenuItem>
+                                    <MenuItem value={"LA"}>Louisiana </MenuItem>
+                                    <MenuItem value={"ME"}>Maine </MenuItem>
+                                    <MenuItem value={"MD"}>Maryland</MenuItem>
+                                    <MenuItem value={"MA"}>Massachusetts </MenuItem>
+                                    <MenuItem value={"MI"}>Michigan </MenuItem>
+                                    <MenuItem value={"MN"}>Minnesota </MenuItem>
+                                    <MenuItem value={"MS"}>Mississippi </MenuItem>
+                                    <MenuItem value={"MO"}>Missouri </MenuItem>
+                                    <MenuItem value={"MT"}>Montana </MenuItem>
+                                    <MenuItem value = {"NE"}>Nebraska </MenuItem>
+                                    <MenuItem value={"NV"}>Nevada </MenuItem>
+                                    <MenuItem value={"NH"}>New Hampshire </MenuItem>
+                                    <MenuItem value={"NJ"}>New Jersey </MenuItem>
+                                    <MenuItem value={"NM"}>New Mexico </MenuItem>
+                                    <MenuItem value={"NY"}>New York </MenuItem>
+                                    <MenuItem value={"NC"}>North Carolina </MenuItem>
+                                    <MenuItem value={"ND"}>North Dakota </MenuItem>
+                                    <MenuItem value={"OH"}>Ohio </MenuItem>
+                                    <MenuItem value={"OK"}>Oklahoma </MenuItem>
+                                    <MenuItem value={"OR"}>Oregon </MenuItem>
+                                    <MenuItem value={"PA"}>Pennsylvania Rhode Island</MenuItem>
+                                    <MenuItem value={"SC"}>South Carolina </MenuItem>
+                                    <MenuItem value={"SD"}>South Dakota </MenuItem>
+                                    <MenuItem value={"TN"}>Tennessee </MenuItem>
+                                    <MenuItem value={"TX"}>Texas </MenuItem>
+                                    <MenuItem value={'UT'}>Utah </MenuItem>
+                                    <MenuItem value={"VT"}>Vermont </MenuItem>
+                                    <MenuItem value={"VA"}>Virginia </MenuItem>
+                                    <MenuItem value={"WA"}>Washington </MenuItem>
+                                    <MenuItem value={"WV"}>West Virginia </MenuItem>
+                                    <MenuItem value={"WI"}>Wisconsin </MenuItem>
+                                    <MenuItem value={"WY"}>Wyoming</MenuItem>
                                 </Select>
                             </FormControl>
+                            <TextField
+                                id="filled-zip-input"
+                                label="Zip Code"
+                                className={classes.textField}
+                                type="zip"
+                                name="zip"
+                                autoComplete="current-zip"
+                                margin="normal"
+                                variant="filled"
+                                onChange={this.handleInputChange}
+                                value={this.state.zip}
+                            />
                         </div>
                     </div>
                 </Grow>
@@ -639,7 +642,7 @@ class SignUp extends Component {
                         {this.state.loading && <CircularProgress size={30} className={classes.buttonProgress} />}
                     </form>
                 </Paper>
-                <Typography style = {{textAlign:"center"}}>
+                <Typography style={{ textAlign: "center" }}>
                     <a className={classes.link} href="/signin">Already a user? Sign in</a>
                 </Typography>
                 <Stepper activeStep={activeStep} className={classes.stepper}>
