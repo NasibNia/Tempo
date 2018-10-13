@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+
 // import Header from "../../x/Header";
 import HeaderBar from "../../components/HeaderBar"
 import PropTypes from 'prop-types';
@@ -128,6 +130,7 @@ class profile extends Component {
         soundcloud: "",
         profilePic: "",
         loggedIn: false,
+        finishedSignup: false,
         activeStep: 1,
         skipped: new Set()
 
@@ -137,23 +140,41 @@ class profile extends Component {
 
     handleClick = event => {
         event.preventDefault();
-        console.log("click")
+        console.log("click");
+        this.setState({
+            loggedIn: true,
+            finishedSignup: true,
+        }, () => console.log(this.state))
         // const newBand = bands;
-        this.postTheBand();
+        // this.updateProfile();
 
     }
 
-    // postTheBand = () => {
-    //     const newUser = {genre : this.state.genre, password : this.state.password}
-    //     axios.post("/band/login" , newUser)
-    //     .then(results => {
-    //         this.state.loggedIn = true;
-    //         console.log(results);
-    //         window.location.href = "/artist";
-    //     }
+    updateProfile = () => {
+        const newUser = {
+            description: this.state.desription,
+            soundcloud: this.state.soundcloud,
+            spotify: this.state.spotify,
+            profilePic: this.state.profilePic,
+            genre: this.state.genres
+        }
+        axios.post("/band/signup", newUser)
+            .then(results => {
+                console.log(results);
+                if (results.data.success) {
+                    this.setState({
+                        loggedIn: true,
+                        finishedSignup: true,
+                    }, () => console.log(this.state))
+                }
+                if (!results.data.success) {
+                    alert("incorrect username or password")
+                }
+                // window.location.href = "/artist";
+            }
 
-    //     );
-    // };
+            );
+    };
 
     handleInputChange = event => {
 
@@ -269,6 +290,9 @@ class profile extends Component {
         const steps = getSteps();
         const { activeStep } = this.state;
 
+        if (this.state.finishedSignup)
+            return <Redirect to='/artist' />
+
         return (
             <div>
                 <HeaderBar />
@@ -360,7 +384,7 @@ class profile extends Component {
                             onClick={this.handleClick}
 
                         >
-                            {!this.state.loggedIn ? "Login" : <CheckIcon />}
+                            {!this.state.loggedIn ? "Submit and Update" : <CheckIcon />}
                             {/* <Icon className="">+</Icon> */}
                         </Button>
                     </form>

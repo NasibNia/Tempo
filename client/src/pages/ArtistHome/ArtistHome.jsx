@@ -28,13 +28,13 @@ class ArtistHome extends Component {
 
       }
     
-      // loadShows = () => {
-      //   API.getShows()
-      //     .then(res =>
-      //       this.setState({ shows: res.data, name: "", description: "", statistics: "" })
-      //     )
-      //     .catch(err => console.log(err));
-      // };
+      loadShows = () => {
+        API.getShows()
+          .then(res =>
+            this.setState({ shows: res.data, name: "", description: "", statistics: "" })
+          )
+          .catch(err => console.log(err));
+      };
 
 
    render() {

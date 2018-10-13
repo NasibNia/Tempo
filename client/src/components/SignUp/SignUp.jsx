@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 // import Header from "../../x/Header";
 import HeaderBar from "../../components/HeaderBar"
@@ -146,12 +146,11 @@ class SignUp extends Component {
         axios.post("/band/signup", newUser)
             .then(results => {
                 console.log(results);
-                if (results.data.success){
+                if (results.data.success) {
                     this.setState({
                         loggedIn: true,
                         finishedSignup: true,
                     }, () => console.log(this.state))
-                    return <Redirect to='/profile'/>
                 }
                 if (!results.data.success) {
                     alert("incorrect username or password")
@@ -174,7 +173,7 @@ class SignUp extends Component {
         if (this.state.name && this.state.password) {
             const thisUser = {
                 name: this.state.name,
-                email:this.state.email,
+                email: this.state.email,
                 password: this.state.password,
                 genre: this.state.genre,
             };
@@ -276,7 +275,8 @@ class SignUp extends Component {
 
     render() {
         if (this.state.finishedSignup)
-            return <Redirect to='/artist'/>
+            return <Redirect to='/profile' />
+            // return <Redirect to='/artist' />
 
         const { classes } = this.props;
         const steps = getSteps();
