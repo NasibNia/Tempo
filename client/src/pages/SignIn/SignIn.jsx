@@ -62,8 +62,15 @@ class SignIn extends Component {
         password: "",
         category : "",
         id : "",
+        errors: {
+            name: "",
+            email: "",
+            password: "",
+            passwordRepeat: ""
+        },
         loggedIn: false,
-        finishedSignup: false
+        finishedSignup: false,
+        
 
     }
 
@@ -107,6 +114,15 @@ class SignIn extends Component {
 
         const { name, value } = event.target;
         this.setState({ [name]: value });
+
+        let errors = validations(
+            {
+                email: this.state.email,
+                password: this.state.password,
+            }
+        );
+
+        this.setState({errors});
     };
 
     handleSubmitForm = event => {
@@ -177,7 +193,9 @@ class SignIn extends Component {
                             margin="normal"
                             variant="filled"
                             onChange={this.handleInputChange}
-                            value={this.state.username}
+                            value={this.state.email}
+                            helperText={this.state.errors.email}
+                            error={this.state.errors.email ? true : false}
                         />
                         <TextField
                             id="filled-password-input"
@@ -190,6 +208,8 @@ class SignIn extends Component {
                             variant="filled"
                             onChange={this.handleInputChange}
                             value={this.state.password}
+                            helperText={this.state.errors.password}
+                            error={this.state.errors.password ? true : false}
                         />
                         <FormControlLabel
                             control={<Checkbox value="remember" color="secondary" />}
