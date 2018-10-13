@@ -224,7 +224,7 @@ class SignIn extends Component {
             <div>
                 <HeaderBar />
                 <Slide direction="down" in={true} mountOnEnter unmountOnExit>
-                <h1 className = "signinTitle"><span id="bold">Welcome Back</span> to Tempo</h1>
+                    <h1 className = "signinTitle"><span id="bold">Welcome Back</span> to Tempo</h1>
                 </Slide>
                 <Paper className={classes.paper}>
                     <form className="container" noValidate autoComplete="off" style={{ marginTop: "5%" }}>
