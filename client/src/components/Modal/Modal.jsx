@@ -61,7 +61,11 @@ class Modal extends React.Component {
     };
 
     componentDidMount() {
-        // console.log("modal url", this.props.url)
+        // returns an object of all the params, sent down from VenueHome
+        console.log("modal url", this.props.url)
+        // parses just the number, or just the /:user/ from the url path
+        // console.log("parse test", this.props.url.url.match(/\d+/)[0])
+        // console.log("url test", this.props.url.url.replace(/[0-9]/g, ''))
 
     }
 
@@ -91,7 +95,7 @@ class Modal extends React.Component {
 
     handlePost = () => {
         console.log(this.state.data)
-        API.saveShow(this.state.data, this.props.url)
+        API.saveShow(this.state.data, this.props.url.url)
             .then(res => {
                 console.log(res);
                 this.setState({ open: false, openSuccessMessage: true });

@@ -72,21 +72,21 @@ module.exports = {
     create: function(req,res){
         console.log("controller.create ", req.body)
         let user = req.params.user;
-        console.log(user)
+        // console.log(user)
         db.Show.create(req.body)
                 .then(dbShow => {
                     // if user is "band" :
                     // create relationship btwn band and show in BandShow
                     if (user === "band"){
                         db.BandShow.create({
-                            BandId : req.params.id,
+                            BandId : parseInt(req.params.id),
                             ShowId : dbShow.dataValues.id
                         })
                     } // if user is "venue" :
                       // create relationship btwn band and show in BandShow
                     else if(user === "venue") {
                         db.VenueShow.create({
-                            VenueId : req.params.id,
+                            VenueId : parseInt(req.params.id),
                             ShowId : dbShow.dataValues.id
                         })
                     } // if not

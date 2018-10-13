@@ -29,7 +29,7 @@ class VenueHome extends Component {
     
       componentDidMount() {
         // this.loadBands();
-        console.log("params", this.props.match.url)
+        // console.log("params", this.props.match)
       }
     
     //   loadBands = () => {
@@ -50,7 +50,7 @@ class VenueHome extends Component {
                     <Main />
                     <Shows className = {styles.column}/>
                 </Grid> */}
-                <Body userType={this.state.user} url={this.props.match.url} />
+                <Body userType={this.state.user} url={this.props.match} />
             </div>
         )
     }
