@@ -1,8 +1,12 @@
 import React from 'react';
 import "./splash.css"
 import HeaderBar from "../../components/HeaderBar";
-import SignUp from "../../components/SignUp"
-import Footer from "../../components/Footer"
+import SignUp from "../../components/SignUp";
+import Footer from "../../components/Footer";
+
+// Animations
+import Fade from 'react-reveal/Fade';
+import Slide from 'react-reveal/Slide';
 
 const Splash = () => {
 
@@ -14,7 +18,9 @@ const Splash = () => {
             <div className="splash-section section-1">
                 <div className="text">
                     <h1>Play more music, earn more money</h1>
-                    <p className="subtitle">Tempo</p>
+                    <Slide bottom>
+                        <p className="subtitle">Tempo</p>
+                    </Slide>
                 </div>
                 <div id="background-overlay">
                     <video autoPlay muted loop>
@@ -22,8 +28,11 @@ const Splash = () => {
                     </video>
                 </div>
             </div>
+
             <div className="splash-section section-2">
-                <h1>Tempo is a virtual booking agent that allows musicians to stay independent by mitigating the friction in the booking and gigging industry.</h1>
+                <Fade bottom>
+                    <h1>Tempo is a virtual booking agent that allows musicians to stay independent by mitigating the friction in the booking and gigging industry.</h1>
+                </Fade>
             </div>
             <div className="splash-section section-3">
                 <div className="research">
@@ -33,29 +42,36 @@ const Splash = () => {
             </div>
             <div className="splash-section section-4">
                 <div className="wrap">
-                    <div className="card lite">
-                        <h3>Tempo <span className="icon1">Lite</span></h3>
-                        <ul>
-                            <li><img class="check" src={ require('./iconography-05.png') }></img>Find Gigs</li>
-                            <li><img class="check" src={ require('./iconography-05.png') }></img>Lite News Feed</li>
-                            <li><img class="check" src={ require('./iconography-05.png') }></img>Career Roadmap</li>
-                            <li><img class="check" src={ require('./iconography-05.png') }></img>Calendar App</li>
-                        </ul>
-                    </div>
-                    <div className="card pro">
-                        <h3>Tempo <span className="icon1">Pro</span></h3>
-                        <ul>
-                            <li><img class="check" src={ require('./iconography-05.png') }></img>Priority Applications</li>
-                            <li><img class="check" src={ require('./iconography-05.png') }></img>Pro News Feed</li>
-                            <li><img class="check" src={ require('./iconography-05.png') }></img>Real-time stats</li>
-                            <li><img class="check" src={ require('./iconography-05.png') }></img>All Local Events Listings</li>
-                            <li><img class="check" src={ require('./iconography-05.png') }></img>Venue Directory</li>
-                            <li><img class="check" src={ require('./iconography-05.png') }></img>All Lite Features</li>
-                            <li><img class="check" src={ require('./iconography-05.png') }></img>Weekly Updates</li>                   </ul>
-                    </div>
+                    <Fade bottom >
+                        <div className="card lite">
+                            <h3>Tempo <span className="icon1">Lite</span></h3>
+                            <ul>
+                                <li><img class="check" src={require('./iconography-05.png')}></img>Find Gigs</li>
+                                <li><img class="check" src={require('./iconography-05.png')}></img>Lite News Feed</li>
+                                <li><img class="check" src={require('./iconography-05.png')}></img>Career Roadmap</li>
+                                <li><img class="check" src={require('./iconography-05.png')}></img>Calendar App</li>
+                            </ul>
+                        </div>
+                    </Fade >
+                    <Fade bottom>
+                        <div className="card pro">
+                            <h3>Tempo <span className="icon1">Pro</span></h3>
+                            <ul>
+                                <li><img class="check" src={require('./iconography-05.png')}></img>Priority Applications</li>
+                                <li><img class="check" src={require('./iconography-05.png')}></img>Pro News Feed</li>
+                                <li><img class="check" src={require('./iconography-05.png')}></img>Real-time stats</li>
+                                <li><img class="check" src={require('./iconography-05.png')}></img>All Local Events Listings</li>
+                                <li><img class="check" src={require('./iconography-05.png')}></img>Venue Directory</li>
+                                <li><img class="check" src={require('./iconography-05.png')}></img>All Lite Features</li>
+                                <li><img class="check" src={require('./iconography-05.png')}></img>Weekly Updates</li>
+                            </ul>
+                        </div>
+                    </Fade >
                 </div>
             </div>
-            <SignUp />
+            <Fade bottom>
+                <SignUp />
+            </Fade>
             <Footer />
 
         </div>
