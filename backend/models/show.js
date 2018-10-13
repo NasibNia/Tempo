@@ -3,11 +3,14 @@ module.exports = function(sequelize , DataTypes){
         name : {
             type: DataTypes.STRING
         },
-        time_start : {
+        date : {
             type : DataTypes.DATE,
         },
+        time_start : {
+            type : DataTypes.TIME,
+        },
         time_end : {
-            type: DataTypes.DATE,
+            type: DataTypes.TIME,
         },       
 
     });

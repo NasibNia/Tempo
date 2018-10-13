@@ -87,7 +87,6 @@ class SignIn extends Component {
             passwordRepeat: ""
         },
         loggedIn: false,
-        finishedSignup: false,
         loading: false,
         redirect: false
 
@@ -132,7 +131,6 @@ class SignIn extends Component {
                     this.setState({
                         loggedIn: true,
                         id: results.data.id
-                        // finishedSignup: true,
                     }, () => console.log(this.state))
                 if (!results.data.success) {
                     alert("incorrect username or password")
@@ -207,8 +205,9 @@ class SignIn extends Component {
         const { classes } = this.props;
         let id = this.state.id;
 
+        //separated setTimout from the return Redirect since the render() method needs to directly return the Redirect route. It cannot be done within a function
         if (this.state.loggedIn) {
-            setTimeout(() => {this.setState({redirect: true}) }, 1000)
+            setTimeout(() => { this.setState({ redirect: true }) }, 1000)
         }
 
         if (this.state.redirect)

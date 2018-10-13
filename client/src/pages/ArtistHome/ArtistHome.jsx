@@ -20,7 +20,7 @@ class ArtistHome extends Component {
       componentDidMount() {
         this.loadShows();
         console.log("test")
-    
+        console.log("params", this.props.match.params)
 
         // console.log(API.getUser());
 

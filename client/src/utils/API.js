@@ -51,8 +51,8 @@ export default {
         return axios.delete("/api/shows/" + id);
     },
     // Saves a show to the database
-    saveShow: function (showData) {
-        return axios.post("/api/shows", showData);
+    saveShow: function (showData, userRoute) {
+        return axios.post(`/api/shows/${userRoute}`, showData);
     },
 
     // Check if user is logged-in 
