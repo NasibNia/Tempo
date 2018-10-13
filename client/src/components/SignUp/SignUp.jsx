@@ -168,6 +168,8 @@ class SignUp extends Component {
         event.preventDefault();
         console.log("click")
 
+        console.log ("user type is ", this.state.userType);
+
         console.log("client errors", this.state.errors)
         console.log("should we pass?", !(this.state.errors.name || this.state.errors.email && this.state.errors.password))
         if (!(this.state.errors.name && this.state.errors.email && this.state.errors.password)) {
@@ -181,7 +183,11 @@ class SignUp extends Component {
                             loading: false,
                         });
                         //logs in the user after a successful load
-                        this.signUpBand();
+                        if (this.state.userType === "artist"){
+                            this.signUpBand();
+                        } else if (this.state.userType === "venue"){
+                            this.signUpVenue();  
+                        }             
                     }, 2000);
                 },
             )
@@ -195,9 +201,34 @@ class SignUp extends Component {
             name: this.state.name,
             email: this.state.email,
             password: this.state.password,
-            genre: this.state.genre
+            // genre: this.state.genre
         }
         axios.post("/band/signup", newUser)
+            .then(results => {
+                console.log(results);
+                if (results.data.success) {
+                    this.setState({
+                        loggedIn: true,
+                        finishedSignup: true,
+                    }, () => console.log(this.state))
+                }
+                if (!results.data.success) {
+                    alert("incorrect username or password")
+                }
+                // window.location.href = "/artist";
+            }
+
+            );
+    };
+
+    signUpVenue = () => {
+        const newUser = {
+            name: this.state.name,
+            email: this.state.email,
+            password: this.state.password,
+            // genre: this.state.genre
+        }
+        axios.post("/venue/signup", newUser)
             .then(results => {
                 console.log(results);
                 if (results.data.success) {

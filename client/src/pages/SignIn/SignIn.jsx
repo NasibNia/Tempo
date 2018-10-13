@@ -213,7 +213,11 @@ class SignIn extends Component {
         }
 
         if (this.state.redirect)
-            return <Redirect to={'/artist/' + id} />
+        //``````````````````````````````commented out-Nasib
+        // return <Redirect to={'/artist/' + id} />
+        //``````````````````````````````replaced-Nasib
+        return <Redirect to={'/artist/'}/>
+        //``````````````````````````````end of change-Nasib
 
 
         return (

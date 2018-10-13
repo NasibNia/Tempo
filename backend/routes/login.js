@@ -9,13 +9,13 @@ const passport = require('passport');
 
 //============== new for test :Nasib
 router.post('/venue/signup', passport.authenticate('venue-local-signup', {
-      successRedirect : '/start/profile',
-      failureRedirect : '/venue/signup'
+      successRedirect : '/success',
+      failureRedirect : '/signup'
   }));
   
   router.post('/venue/login', passport.authenticate('venue-local-login', {
       successRedirect : '/success',
-      failureRedirect : '/venue/login'
+      failureRedirect : '/login'
   }));
 
     router.post('/band/signup', passport.authenticate('band-local-signup', {

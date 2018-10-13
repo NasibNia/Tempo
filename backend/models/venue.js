@@ -4,7 +4,7 @@ module.exports = function(sequelize , DataTypes){
     var Venue = sequelize.define("Venue" , {
         name : {
             type : DataTypes.STRING,
-            allowNull: false
+            // allowNull: false
         },
         address : {
             type : DataTypes.STRING,
@@ -20,6 +20,7 @@ module.exports = function(sequelize , DataTypes){
         },
         email : {
             type: DataTypes.STRING,
+            unique : true,
             allowNull: false
         },
         password : {

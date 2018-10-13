@@ -17,17 +17,30 @@ class ArtistHome extends Component {
         user: "artist"
       };
       
+      //``````````````````````````````commented out-Nasib
+      // componentDidMount() {
+      //   this.loadShows();
+      //   console.log("test")
+      //   console.log("params", this.props.match.params)
+
+      //   // console.log(API.getUser());
+
+
+      // }
+      //``````````````````````````````Replaced-Nasib
       componentDidMount() {
-        this.loadShows();
-        console.log("test")
-        console.log("params", this.props.match.params)
-
-        // console.log(API.getUser());
-
-
-
+        API.getUser().then(res => {
+          console.log("component mounting check", res.data);
+          if (!res.data.id) {
+                this.setState({loggedIn : false});
+              } else {
+                this.setState({loggedIn : true});
+                this.loadShows(res.data.id);
+              }
+        });
       }
-    
+      //``````````````````````````````endOfChange-Nasib
+
       loadShows = () => {
         API.getShows()
           .then(res =>
