@@ -48,9 +48,9 @@ const styles = theme => ({
         width: 200,
         height: 200,
         transition: "0.3s ease",
-        '&:hover': {
-            border: `2px groove ${theme.palette.secondary.light}`,
-        }
+        // '&:hover': {
+        //     textShadow: "1px 1px black",
+        // }
 
     },
     icon: {
@@ -64,13 +64,31 @@ const styles = theme => ({
     },
     button: {
         margin: theme.spacing.unit,
-      },
+    },
+    soundcloud: {
+        margin: theme.spacing.unit,
+        backgroundColor: "#F75D00",
+        // backgroundColor: "linear-gradient(to right, #F74102, #F75D00)",
+        color: "white",
+        // backgroundImage: `url(${spotifyImage})`,
+        // backgruondSize: "100px 100px",
+        transition: "0.3s ease",
+        '&:hover': {
+            backgroundColor: "rgb(252, 132, 58)"
+        }
+    },
+
     spotify: {
         margin: theme.spacing.unit,
-        // backgroundColor: "gray",
+        backgroundColor: "#131313",
+        color: "#1ED760",
         // backgroundImage: `url(${spotifyImage})`,
-        // backgruondSize: "100px 100px"
-      }
+        // backgruondSize: "100px 100px",
+        transition: "0.3s ease",
+        '&:hover': {
+            backgroundColor: "#212220e7"
+        }
+    }
 });
 
 class PublicProfile extends Component {
@@ -153,8 +171,7 @@ class PublicProfile extends Component {
                             <Button variant="extendedFab" aria-label="button" className={classes.spotify}>
                                 Spotify
                             </Button>
-                            <Button variant="extendedFab" aria-label="button" className={classes.button}>
-                                
+                            <Button variant="extendedFab" aria-label="button" className={classes.soundcloud}>
                                 Soundcloud
                             </Button>
                         </div>
@@ -162,7 +179,7 @@ class PublicProfile extends Component {
                     </div>
                     <h1 className="profileName">{(this.state.name) ? this.state.name : "Name"}</h1>
                     <h1 className="profile">Rating: {this.state.rating} </h1>
-                    <p className="profileContent"> Description: <span className = "info">{this.state.description}</span></p>
+                    <p className="profileContent">Description: <span className="info">{this.state.description}</span></p>
                     <p className="profileContent"></p>
                     <p className="profileContent"></p>
                 </Paper>
