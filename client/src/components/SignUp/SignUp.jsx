@@ -201,6 +201,11 @@ class SignUp extends Component {
             name: this.state.name,
             email: this.state.email,
             password: this.state.password,
+            address: this.state.address,
+            zip: this.state.zip,
+            city: this.state.city,
+            state: this.state.stateUS
+
             // genre: this.state.genre
         }
         axios.post("/band/signup", newUser)

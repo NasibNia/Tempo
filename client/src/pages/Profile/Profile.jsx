@@ -197,7 +197,7 @@ class profile extends Component {
             soundcloud: this.state.soundcloud,
             spotify: this.state.spotify,
             profilePic: this.state.profilePic,
-            genre: this.state.genres
+            genres: JSON.stringify(this.state.genres)
         }
         //change this to API.updateBand
         axios.post("/band/signup", newUser)
