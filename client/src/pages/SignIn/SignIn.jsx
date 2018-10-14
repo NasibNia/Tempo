@@ -16,6 +16,7 @@ import CheckIcon from '@material-ui/icons/Check';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Typography from '@material-ui/core/Typography';
 import Slide from '@material-ui/core/Slide';
 
 
@@ -72,6 +73,17 @@ const styles = theme => ({
         marginTop: -12,
         marginLeft: -12,
     },
+    link: {
+        textAlign: "center",
+        transition: "0.2s ease-in-out",
+        '&:hover': {
+            textDecoration: "underline",
+            letterSpacing: "1px",
+            color: theme.palette.secondary.dark
+
+        }
+
+    }
 });
 
 
@@ -276,6 +288,9 @@ class SignIn extends Component {
                         {this.state.loading && <CircularProgress size={30} className={classes.buttonProgress} />}
                     </form>
                 </Paper>
+                <Typography style={{ textAlign: "center" }}>
+                    <a className={classes.link} href="/signup">Or Sign-Up as a Tempo Affiliate!</a>
+                </Typography>
             </div>
 
 

@@ -19,7 +19,7 @@ export default {
         return axios.post("/api/bands", bandData);
     },
     updateBand: function (id, bandData) {
-        return axios.put("/api/bands" + id, bandData);
+        return axios.put("/api/bands/" + id, bandData);
     },
 
     //==================VENUES==================
@@ -40,7 +40,7 @@ export default {
         return axios.post("/api/venues", venueData);
     },
     updateVenue: function (id, venueData) {
-        return axios.put("/api/venues" + id, venueData);
+        return axios.put("/api/venues/" + id, venueData);
     },
 
     //==================SHOWS==================
@@ -63,7 +63,7 @@ export default {
         return axios.post(`/api/shows/${user}` + id, showData);
     },
     updateShow: function (id, showData) {
-        return axios.put("/api/shows" + id, showData);
+        return axios.put("/api/shows/" + id, showData);
     },
 
     //==================PASSPORT==================

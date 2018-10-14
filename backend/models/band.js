@@ -24,8 +24,26 @@ module.exports = function(sequelize , DataTypes){
             // allowNull: false
         },
         genres : {
-            type: DataTypes.JSON,
-            // allowNull: false
+            //when getting this info, must JSON.parse
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        description : {
+            //when getting this info, must JSON.parse
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        soundcloud : {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        spotify : {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        profilePic : {
+            type: DataTypes.STRING,
+            allowNull: true
         },
         // showsPlayed :{
         //     type: DataTypes.INTEGER

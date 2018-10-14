@@ -46,10 +46,10 @@ const Splash = () => {
                         <div className="card lite">
                             <h3>Tempo <span className="icon1">Lite</span></h3>
                             <ul>
-                                <li><img class="check" src={require('./iconography-05.png')}></img>Find Gigs</li>
-                                <li><img class="check" src={require('./iconography-05.png')}></img>Lite News Feed</li>
-                                <li><img class="check" src={require('./iconography-05.png')}></img>Career Roadmap</li>
-                                <li><img class="check" src={require('./iconography-05.png')}></img>Calendar App</li>
+                                <li><img className="check" src={require('./iconography-05.png')}></img>Find Gigs</li>
+                                <li><img className="check" src={require('./iconography-05.png')}></img>Lite News Feed</li>
+                                <li><img className="check" src={require('./iconography-05.png')}></img>Career Roadmap</li>
+                                <li><img className="check" src={require('./iconography-05.png')}></img>Calendar App</li>
                             </ul>
                         </div>
                     </Fade >
@@ -57,19 +57,19 @@ const Splash = () => {
                         <div className="card pro">
                             <h3>Tempo <span className="icon1">Pro</span></h3>
                             <ul>
-                                <li><img class="check" src={require('./iconography-05.png')}></img>Priority Applications</li>
-                                <li><img class="check" src={require('./iconography-05.png')}></img>Pro News Feed</li>
-                                <li><img class="check" src={require('./iconography-05.png')}></img>Real-time stats</li>
-                                <li><img class="check" src={require('./iconography-05.png')}></img>All Local Events Listings</li>
-                                <li><img class="check" src={require('./iconography-05.png')}></img>Venue Directory</li>
-                                <li><img class="check" src={require('./iconography-05.png')}></img>All Lite Features</li>
-                                <li><img class="check" src={require('./iconography-05.png')}></img>Weekly Updates</li>
+                                <li><img className="check" src={require('./iconography-05.png')}></img>Priority Applications</li>
+                                <li><img className="check" src={require('./iconography-05.png')}></img>Pro News Feed</li>
+                                <li><img className="check" src={require('./iconography-05.png')}></img>Real-time stats</li>
+                                <li><img className="check" src={require('./iconography-05.png')}></img>All Local Events Listings</li>
+                                <li><img className="check" src={require('./iconography-05.png')}></img>Venue Directory</li>
+                                <li><img className="check" src={require('./iconography-05.png')}></img>All Lite Features</li>
+                                <li><img className="check" src={require('./iconography-05.png')}></img>Weekly Updates</li>
                             </ul>
                         </div>
                     </Fade >
                 </div>
             </div>
-            <Fade bottom>
+            <Fade>
                 <SignUp />
             </Fade>
             <Footer />

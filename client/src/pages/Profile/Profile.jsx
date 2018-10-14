@@ -60,8 +60,8 @@ const styles = theme => ({
         marginBottom: "10px",
         backgroundColor: "transparent",
         border: `4px groove ${theme.palette.secondary.main}`,
-        width: 80,
-        height: 80,
+        width: 100,
+        height: 100,
         transition: "0.3s ease",
         '&:hover': {
             border: `4px groove ${theme.palette.secondary.light}`,
@@ -150,6 +150,7 @@ class profile extends Component {
             acoustics: false
 
         },
+        userId: 0,
         name: "",
         rating: 0.0,
         description: "",
@@ -166,7 +167,17 @@ class profile extends Component {
 
     }
 
-    //   componentDidMount() {}
+    componentDidMount() {
+        API.getUser().then(res => {
+          console.log("Profile Editor Mounting Check", res.data, res.data.user.id);
+          if (!res.data.user.id) {
+                this.setState({loggedIn : false});
+              } else {
+                this.setState({loggedIn : true, userId: res.data.user.id, name: res.data.user.name});
+              }
+        });
+
+    }
 
     handleClick = event => {
         event.preventDefault();
@@ -179,11 +190,11 @@ class profile extends Component {
                 this.setState({
                     loading: false,
                     // temporary testing for progress bar
-                    loggedIn: true,
-                    finishedUpdate: true,
+                    // loggedIn: true,
+                    // finishedUpdate: true,
                 });
                 //updates the user information
-                // this.updateProfile();
+                this.updateProfile();
             }, 2000);
         })
         // const newBand = bands;
@@ -192,30 +203,47 @@ class profile extends Component {
     }
 
     updateProfile = () => {
-        const newUser = {
-            description: this.state.desription,
+        console.log(this.state.userId, "State user id")
+        const profileInfo = {
+            description: this.state.description,
             soundcloud: this.state.soundcloud,
             spotify: this.state.spotify,
             profilePic: this.state.profilePic,
             genres: JSON.stringify(this.state.genres)
         }
         //change this to API.updateBand
-        axios.post("/band/signup", newUser)
-            .then(results => {
-                console.log(results);
-                if (results.data.success) {
-                    this.setState({
-                        loggedIn: true,
-                        finishedUpdate: true,
-                    }, () => console.log(this.state))
-                }
-                if (!results.data.success) {
-                    alert("incorrect username or password")
-                }
-                // window.location.href = "/artist";
-            }
+        // axios.post("/band/signup", profileInfo)
+        //     .then(results => {
+        //         console.log(results);
+        //         if (results.data.success) {
+        //             this.setState({
+        //                 loggedIn: true,
+        //                 finishedUpdate: true,
+        //             }, () => console.log(this.state))
+        //         }
+        //         if (!results.data.success) {
+        //             alert("incorrect username or password")
+        //         }
+        //         // window.location.href = "/artist";
+        //     }
 
-            );
+        //     );
+
+        API.updateBand(this.state.userId, profileInfo)
+            .then(results => {
+                        console.log(results);
+                        if (results.status === 200) {
+                            this.setState({
+                                finishedUpdate: true
+                            }, () => console.log(this.state))
+                        }
+                        else {
+                            alert("Error in updating your information!")
+                        }
+                        // window.location.href = "/artist";
+                    }
+        
+                    );
     };
 
     handleInputChange = event => {
@@ -352,8 +380,8 @@ class profile extends Component {
                                 <Avatar className={classes.avatar} alt="Profile Picture" src={this.state.profilePic}>
                                     <i className={classNames(classes.icon, "fas fa-user")}></i>
                                 </Avatar>
-                                <div class="profileInfo">
-                                    <h1 className="profile">{(this.state.name) ? this.state.name : "Name"}</h1>
+                                <div className="profileInfo">
+                                    <h1 className="profileName">{(this.state.name) ? this.state.name : "Name"}</h1>
                                     <h1 className="profile">Rating: {this.state.rating} </h1>
                                 </div>
                                 {/* <div class="profileInfo">
@@ -431,10 +459,22 @@ class profile extends Component {
                                 value={this.state.description}
                             />
                             <TextField
+                                id="filled-profilePic-input"
+                                label="Enter a link to a picture of you!"
+                                className={classes.textField}
+                                type="url"
+                                name="profilePic"
+                                autoComplete="current-profilePic"
+                                margin="normal"
+                                // variant="filled"
+                                onChange={this.handleInputChange}
+                                value={this.state.profilePic}
+                            />
+                            <TextField
                                 id="filled-spotify-input"
                                 label="Enter your Spotify Link"
                                 className={classes.textField}
-                                type="spotify"
+                                type="url"
                                 name="spotify"
                                 autoComplete="current-spotify"
                                 margin="normal"
@@ -446,7 +486,7 @@ class profile extends Component {
                                 id="filled-soundcloud-input"
                                 label="Enter your Soundcloud Link"
                                 className={classes.textField}
-                                type="soundcloud"
+                                type="url"
                                 name="soundcloud"
                                 autoComplete="current-soundcloud"
                                 margin="normal"
