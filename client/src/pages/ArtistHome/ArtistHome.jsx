@@ -31,11 +31,12 @@ class ArtistHome extends Component {
       componentDidMount() {
         API.getUser().then(res => {
           console.log("component mounting check", res.data);
-          if (!res.data.id) {
+          if (!res.data.user.id) {
                 this.setState({loggedIn : false});
+                window.location.href = "/signin";
               } else {
                 this.setState({loggedIn : true});
-                this.loadShows(res.data.id);
+                // this.loadShows(res.data.user.id);
               }
         });
       }

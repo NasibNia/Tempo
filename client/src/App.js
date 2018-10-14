@@ -18,6 +18,7 @@ import SignIn from "./pages/SignIn";
 import Splash from "./pages/Splash"
 import SignUpComponent from "./components/SignUp"
 import Profile from "./pages/Profile";
+import PublicProfile from "./pages/PublicProfile";
 // import Threejs from "./pages/Threejs";
 
 //STYLING
@@ -38,6 +39,19 @@ const theme = createMuiTheme({
       light: '#FF7460',
       main: '#FF4025',
       dark: '#E83B22',
+      alt: '#F64740',
+      contrastText: '#fff',
+    },
+    tertiary: {
+      light: '#477998',
+      main: '#0D3B66',
+      dark: '#092641',
+      contrastText: '#fff',
+    },
+    quaternary: {
+      light: '#B6465F',
+      main: '#540230',
+      dark: '#240115',
       contrastText: '#fff',
     },
   },
@@ -57,7 +71,9 @@ const App = () => (
           <Route exact path="/signup" component={SignUpPage} /> 
           <Route exact path="/signin" component={SignIn} />       
           <Route exact path="/profile" component={Profile}/> 
-          <Route exact path="/profile/:id" component={Profile}/>         
+          <Route exact path="/profile/:id" component={Profile}/>
+          {/* currently testing for logged in users  */}
+          <Route exact path="/profileOf/" component={PublicProfile}/>                
           <Route exact path="/contact" component={Contact} />         
           <Route exact path="/careers" component={Careers} />         
           <Route exact path="/sutromusic" component={Careers} />                   

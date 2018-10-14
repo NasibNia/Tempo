@@ -18,6 +18,9 @@ export default {
     saveBand: function (bandData) {
         return axios.post("/api/bands", bandData);
     },
+    updateBand: function (id, bandData) {
+        return axios.put("/api/bands/" + id, bandData);
+    },
 
     //==================VENUES==================
     // Gets all venues 
@@ -35,6 +38,9 @@ export default {
     // Saves a venue to the database
     saveVenue: function (venueData) {
         return axios.post("/api/venues", venueData);
+    },
+    updateVenue: function (id, venueData) {
+        return axios.put("/api/venues/" + id, venueData);
     },
 
     //==================SHOWS==================
@@ -56,6 +62,11 @@ export default {
         let id = userRoute.match(/\d+/)[0];
         return axios.post(`/api/shows/${user}` + id, showData);
     },
+    updateShow: function (id, showData) {
+        return axios.put("/api/shows/" + id, showData);
+    },
+
+    //==================PASSPORT==================
 
     // Check if user is logged-in 
     getUser: () => {
@@ -66,7 +77,7 @@ export default {
 
       });
 
-    //   cb(
+    //   cb() - considering callbacks
     },
 
     logout: () => {

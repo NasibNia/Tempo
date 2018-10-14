@@ -60,16 +60,28 @@ class ControlledExpansionPanels extends React.Component {
     panelGenerator = (elem, classes, expanded) => {
         this.keyCount++;
         return (
-            <ExpansionPanel key = {this.keyCount} expanded={expanded === `panel + ${elem.id}`} onChange={this.handleChange(`panel + ${elem.id}`)}>
+            <ExpansionPanel key={this.keyCount} expanded={expanded === `panel + ${elem.id}`} onChange={this.handleChange(`panel + ${elem.id}`)}>
                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                     <Typography className={classes.heading}>{elem.name}</Typography>
-                    <Typography className={classes.secondaryHeading}>{elem.date ? elem.date : elem.rating}</Typography>
+                    <Typography className={classes.secondaryHeading}>{
+                        (() => {
+                            if (elem.date) {
+                                return elem.date
+                            }
+                            else if (elem.address) {
+                                return (elem.address + " " + elem.city + " " + elem.state + " " + elem.zip)
+                            }
+                            else {
+                                return elem.rating
+                            }
+                        })
+                    }</Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <Typography>
-                        {elem.time_start 
+                        {elem.time_start
                             ? <div>
-                                <p>Start Time: {elem.time_start}</p> 
+                                <p>Start Time: {elem.time_start}</p>
                                 <p>End Time: {elem.time_start}</p>
                             </div> : elem.description}
                     </Typography>
@@ -82,6 +94,7 @@ class ControlledExpansionPanels extends React.Component {
         const { classes } = this.props;
         const { expanded } = this.state;
         let model = this.props.data;
+        console.log("model", model)
 
         return (
             <div className={classes.root}>

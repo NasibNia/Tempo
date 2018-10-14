@@ -47,6 +47,19 @@ button.react-calendar__tile--active, button.react-calendar__tile--active {
     background-color: lightgray;
     border-radius: 150px;
 }
+
+.avatar:first-child {
+    margin: auto;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    transition: 0.3s ease;
+
+}
+/* .avatar:hover{
+    border: 2px solid #FF4025;
+} */
+
 .profile-text {
     width: 100%;
 }
