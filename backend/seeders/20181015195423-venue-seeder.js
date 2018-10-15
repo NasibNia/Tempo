@@ -203,7 +203,8 @@ module.exports = {
       "average_ticket_price": 38,
       "venue_picture_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRdJpS7c0KEuGUoZIlJexMG5gfVUufjYmFmmzlkDl0RXg5rj29WQ",
       createdAt : new Date(),
-      updatedAt : new Date()
+      updatedAt : new Date(),
+      readyToBook : true
     },
     {
       "name": "tupelo",
@@ -215,7 +216,8 @@ module.exports = {
       "average_ticket_price": 20,
       "venue_picture_url": "https://i.ytimg.com/vi/Tqdrx-z0Igo/hqdefault.jpg",
       createdAt : new Date(),
-      updatedAt : new Date()
+      updatedAt : new Date(),
+      readyToBook : true
     },
     {
       "name": "doc's lab",
@@ -227,7 +229,8 @@ module.exports = {
       "average_ticket_price": 25,
       "venue_picture_url": "https://i.gse.io/gse_media/118/5/1528737425-Venue-Davies-Symphony-Hall-tickets.jpg?c=1&h=322&p=1&q=30&w=564",
       createdAt : new Date(),
-      updatedAt : new Date()
+      updatedAt : new Date(),
+      readyToBook : true
     },
     {
       "name": "the starry plough",
@@ -239,7 +242,8 @@ module.exports = {
       "average_ticket_price": "$11-30",
       "venue_picture_url": "https://s3-media3.fl.yelpcdn.com/bphoto/ByiG1X_W20fcRYKTpay4uQ/ls.jpg",
       createdAt : new Date(),
-      updatedAt : new Date()
+      updatedAt : new Date(),
+      readyToBook : true
     },
     {
       "name": "frieght & salvage coffee house",
@@ -251,7 +255,8 @@ module.exports = {
       "average_ticket_price": 20,
       "venue_picture_url": "https://cdn.sfstation.com/wp-content/uploads/2018/09/freightsalvage.jpg",
       createdAt : new Date(),
-      updatedAt : new Date()
+      updatedAt : new Date(),
+      readyToBook : true
     },
     {
       "name": "the back room",
@@ -335,7 +340,8 @@ module.exports = {
       "average_ticket_price": 100,
       "venue_picture_url": "https://cdn.funcheap.com/wp-content/uploads/2014/06/12080202_10153288260883031_1179198208054133463_o-550x280.jpg",
       createdAt : new Date(),
-      updatedAt : new Date()
+      updatedAt : new Date(),
+      readyToBook : true
     },
     {
       "name": "davies symphony hall",
