@@ -63,6 +63,8 @@ class HeaderBar extends Component {
     
   handleLogin  = event =>{
     console.log("login clicked")
+    window.location.href = "/signin";
+
   }
 
 
