@@ -46,7 +46,7 @@ module.exports = {
 
     // tested and works
     deleteBand : function(req,res){
-        console.log("delete band")
+        console.log("delete band");
         db.Band.destroy({
             where : {
                 id : req.params.id

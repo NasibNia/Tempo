@@ -10,9 +10,9 @@ import axios from 'axios'
 class HeaderBar extends Component {
 
   state ={
-    loggedIn : true
+    loggedIn : false
   };
-
+ 
 
 
   componentDidMount() {
@@ -72,12 +72,9 @@ class HeaderBar extends Component {
 
 
   render(props) {
-    if (!this.state.loggedIn)
-      return <Redirect to='/signin'/>
+    // if (!this.state.loggedIn)
+    //   return <Redirect to='/signin'/>
       
-    
-  
-
     let button;
     if (this.state.loggedIn) {
       button = <div className="log-out-button">

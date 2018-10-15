@@ -158,6 +158,7 @@ class profile extends Component {
         spotify: "",
         soundcloud: "",
         profilePic: "",
+        readyToGig: false,
         loggedIn: false,
         finishedUpdate: false,
         activeStep: 1,
@@ -256,6 +257,10 @@ class profile extends Component {
         let genres = Object.assign({}, this.state.genres);    //creating copy of object
         genres[name] = event.target.checked;                        //updating value
         this.setState({ genres });
+    };
+
+    handleReadyChange = name => event => {                        
+        this.setState({ [name]: event.target.checked });
     };
 
 
@@ -495,8 +500,8 @@ class profile extends Component {
                                 value={this.state.soundcloud}
                             />
                             <FormControlLabel
-                                control={<Checkbox value="remember" color="secondary" />}
-                                label="Remember me"
+                                control={<Checkbox value={this.state.readyToGig} onChange= {this.handleReadyChange} color="secondary" />}
+                                label="Are you ready to book performances?"
                             />
                             <Button variant="contained"
                                 color="secondary"
