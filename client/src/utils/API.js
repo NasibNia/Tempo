@@ -6,6 +6,10 @@ export default {
     getBands: function () {
         return axios.get("/api/bands");
     },
+    // Gets all bands that are readu to book
+    getReadyBands: function () {
+        return axios.get("/api/bands/ready");
+    },
     // Gets the band with the given id
     getBand: function (id) {
         return axios.get("/api/bands/" + id);
@@ -26,6 +30,10 @@ export default {
     // Gets all venues 
     getVenues: function () {
         return axios.get("/api/venues");
+    },
+    // Gets all venues that are readu to book
+    getReadyVenues: function () {
+        return axios.get("/api/venues/ready");
     },
     // Gets the venue with the given id
     getVenue: function (id) {
@@ -70,19 +78,19 @@ export default {
 
     // Check if user is logged-in 
     getUser: () => {
-        return axios.get("/api/user", function(data){
-          console.log(data)
-          // Make sure the data contains the username as expected before using it
-          console.log('user: ' + data.data.user);
+        return axios.get("/api/user", function (data) {
+            console.log(data)
+            // Make sure the data contains the username as expected before using it
+            console.log('user: ' + data.data.user);
 
-      });
+        });
 
-    //   cb() - considering callbacks
+        //   cb() - considering callbacks
     },
 
     logout: () => {
-        return axios.get("/logout", function(res){
-        // return res;
-    })
+        return axios.get("/logout", function (res) {
+            // return res;
+        })
     }
 };

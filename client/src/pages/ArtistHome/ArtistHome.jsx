@@ -56,7 +56,7 @@ class ArtistHome extends Component {
 
     return (
       <div>
-        {console.log(this.props.match.params.id)}
+        {/* {console.log(this.props.match.params.id)} */}
         <Body userType={this.state.user} />
       </div>
     )
