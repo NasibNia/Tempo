@@ -34,12 +34,15 @@ class ArtistHome extends Component {
     API.getUser().then(res => {
       console.log("component mounting check", res.data);
       if (!res.data.user) {
-        this.setState({ loggedIn: false });
-        // window.location.href = "/signin";
+          window.location.href = "/signin";
+      } else if (res.data.user.usertype === "venue") {
+          window.location.href = "/venue";
+
       } else {
         this.setState({ loggedIn: true,
                         name:res.data.user.name, 
                       pic:res.data.user.profilePic});
+
         // this.loadShows(res.data.user.id);
       }
     });

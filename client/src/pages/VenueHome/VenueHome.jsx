@@ -33,9 +33,11 @@ class VenueHome extends Component {
         API.getUser().then(res => {
             console.log("component mounting check", res.data);
             if (!res.data.user) {
-              this.setState({ loggedIn: false });
-            //   window.location.href = "/signin";
+                window.location.href = "/signin";
+            } else if (res.data.user.userType === "artist") {
+                window.location.href = "/artist";
             } else {
+                console.log("user is venue")
               this.setState({ loggedIn: true,
                               name : res.data.user.name });
               // this.loadShows(res.data.user.id);
