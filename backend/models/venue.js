@@ -56,6 +56,10 @@ module.exports = function(sequelize , DataTypes){
         rating  : {
             type : DataTypes.DOUBLE
         },
+        readyToBook : {
+            type: DataTypes.BOOLEAN,
+            allowNull: true
+        },
         // reserved : [
         //     {
         //         from : DataTypes.Date,

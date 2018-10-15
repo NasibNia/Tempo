@@ -53,7 +53,7 @@ class Modal extends React.Component {
         openSuccessMessage: false,
         title: "",
         data: {
-            title: "",
+            name: "",
             date: "",
             time_start: "",
             time_end: ""
@@ -120,10 +120,10 @@ class Modal extends React.Component {
                         id="name"
                         label="Name"
                         type="text"
-                        name="title"
+                        name="name"
                         fullWidth
                         onChange={this.handleInputChange}
-                        value={this.state.data.title}
+                        value={this.state.data.name}
                     />
                     <TextField
                         id="date"
