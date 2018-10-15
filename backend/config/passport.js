@@ -176,7 +176,9 @@ module.exports = function (passport) {
         }
     ));
 
-    //Venue LOCAL SIGNIN
+
+
+    //VENUE LOCAL SIGNIN
     passport.use('venue-local-login', new LocalStrategy(
         {
             // by default, local strategy uses username and password, we will override with email
@@ -191,7 +193,7 @@ module.exports = function (passport) {
             // var User = user;
             var isValidPassword = function (userpass, password) {
                 return bCrypt.compareSync(password, userpass);
-            }
+            };
 
             console.log("before db.venue.findOnee");
             console.log("password is   " ,password);
@@ -232,6 +234,100 @@ module.exports = function (passport) {
             });
         }
     ));
+
+    /*
+    //Venue or BAND LOCAL SIGNIN
+    passport.use('local-login', new LocalStrategy(
+        {
+            // by default, local strategy uses username and password, we will override with email
+            usernameField: 'email',
+            passwordField: 'password',
+            passReqToCallback: true // allows us to pass back the entire request to the callback
+        },
+
+        function (req, email, password, done) {
+            console.log("I'm the req/body    " ,req.body);
+
+            // var User = user;
+            var isValidPassword = function (userpass, password) {
+                return bCrypt.compareSync(password, userpass);
+            }
+
+            console.log("before db.venue.findOnee");
+            console.log("password is   " ,password);
+
+            db.Band.findOne({
+                where: {
+                    email: email
+                }
+            }).then(function (bandUser) {
+
+                console.log("~~~~~~~~~~~~\nnew bandUser is   : " ,bandUser);
+
+                if (!bandUser) {
+                    console.log("~~~~~~~~~~`\nnot a bandUser in Band database\n~~~~~~~~~~~ checking Venue database");
+
+                    //``````` Check to see if it is in Venue
+                    db.Venue.findOne({
+                        where: {
+                            email: email
+                        }
+                    }).then(function (venueUser) {
+        
+                        // console.log("~~~~~~~~~~~~\nnew user is   : " ,user);
+        
+                        if (!venueUser) {
+                            console.log("~~~~~~~~~~`\nnot a user in Band nor Venue");
+                            return done(null, false, {
+                                message: 'Email does not exist'
+                            });
+                        }
+                        console.log("~~~~~~~/beforevalidPassword");
+                        console.log("~~~~~~~/venueUser.password" , venueUser.password);
+                        console.log("~~~~~~~/password" , password);
+                        if (!isValidPassword(venueUser.password, password)) {
+                            console.log("~~~~~~~~~~`\nvenueUserPassword" , venueUser.password);
+                            console.log("~~~~~~~~~~`\n[password]" , password);
+        
+                            console.log("Incorrect Password");
+                            return done(null, false, {
+                                message: 'Incorrect password.'
+                            });
+                        }
+        
+
+                        var userinfo = venueUser.get();
+                        console.log("~~~~~~\n venue userinfo is  ",userinfo);
+                        return done(null, userinfo);
+                    }).catch(function (err) {
+                        console.log("Error:", err);
+                        return done(null, false, {
+                            message: 'Something went wrong with your Signin'
+                        });
+                    });
+                    //`````````````````
+
+
+                    return done(null, false, {
+                        message: 'Email does not exist'
+                    });
+                }
+
+
+                var userinfo = bandUser.get();
+                console.log("~~~~~~\nBand userinfo is  ",userinfo);
+
+                return done(null, userinfo);
+                }).catch(function (err) {
+                    console.log("Error:", err);
+                    return done(null, false, {
+                        message: 'Something went wrong with your Signin'
+                });
+
+            });
+        }
+    ));
+    */
 
     //serialize
     passport.serializeUser(function (user, done) {
