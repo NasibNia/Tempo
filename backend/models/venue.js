@@ -39,6 +39,11 @@ module.exports = function(sequelize , DataTypes){
         genres: {
             type : DataTypes.TEXT
         },
+        description : {
+            //when getting this info, must JSON.parse
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
         ticket_price:{
             type : DataTypes.INTEGER
         },
