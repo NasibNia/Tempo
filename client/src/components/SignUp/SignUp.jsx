@@ -198,14 +198,10 @@ class SignUp extends Component {
 
     signUpBand = () => {
         const newUser = {
+            userType: this.state.userType,
             name: this.state.name,
             email: this.state.email,
             password: this.state.password,
-            address: this.state.address,
-            zip: this.state.zip,
-            city: this.state.city,
-            state: this.state.stateUS
-
             // genre: this.state.genre
         }
         axios.post("/band/signup", newUser)
@@ -228,9 +224,14 @@ class SignUp extends Component {
 
     signUpVenue = () => {
         const newUser = {
+            userType: this.state.userType,
             name: this.state.name,
             email: this.state.email,
             password: this.state.password,
+            address: this.state.address,
+            zip: this.state.zip,
+            city: this.state.city,
+            state: this.state.stateUS
             // genre: this.state.genre
         }
         axios.post("/venue/signup", newUser)
@@ -475,7 +476,7 @@ class SignUp extends Component {
                             onChange={this.handleInputChange}
                             value={this.state.name}
                             helperText={this.state.errors.name}
-                            error={this.state.errors.name ? true : ""}
+                            error={this.state.errors.name ? true : false}
                         />
                         <TextField
                             id="filled-email-input"
@@ -489,7 +490,7 @@ class SignUp extends Component {
                             onChange={this.handleInputChange}
                             value={this.state.email}
                             helperText={this.state.errors.email}
-                            error={this.state.errors.email ? true : ""}
+                            error={this.state.errors.email ? true : false}
 
                         />
                         <TextField
@@ -504,7 +505,7 @@ class SignUp extends Component {
                             onChange={this.handleInputChange}
                             value={this.state.password}
                             helperText={this.state.errors.password}
-                            error={this.state.errors.password ? true : ""}
+                            error={this.state.errors.password ? true : false}
                         />
                         <TextField
                             id="filled-passwordRepeat-input"
@@ -518,7 +519,7 @@ class SignUp extends Component {
                             onChange={this.handleInputChange}
                             value={this.state.passwordRepeat}
                             helperText={this.state.errors.passwordRepeat}
-                            error={this.state.errors.passwordRepeat ? true : ""}
+                            error={this.state.errors.passwordRepeat ? true : false}
                         />
                         <TextField
                             id="filled-address-input"

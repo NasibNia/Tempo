@@ -65,6 +65,12 @@ const styles = theme => ({
     menu: {
         width: 200,
     },
+    formControl: {
+        marginTop: theme.spacing.unit * 2,
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        minWidth: 120
+    },
     buttonSuccess: {
         backgroundColor: "#4CAF50",
         '&:hover': {
@@ -109,7 +115,7 @@ class SignIn extends Component {
         loggedIn: false,
         loading: false,
         redirect: false,
-        userType : ""
+        userType: ""
 
 
     }
@@ -145,44 +151,44 @@ class SignIn extends Component {
             email: this.state.email,
             password: this.state.password
         }
-        if(this.state.userType === "band"){
+        if (this.state.userType === "artist") {
             axios.post("/band/login", newUser)
-            .then(results => {
-                console.log(results);
-                if (results.data.success)
-                    this.setState({
-                        loggedIn: true,
-                        id: results.data.id
-                    }, () => console.log(this.state))
-                if (!results.data.success) {
-                    alert("incorrect username or password")
+                .then(results => {
+                    console.log(results);
+                    if (results.data.success)
+                        this.setState({
+                            loggedIn: true,
+                            id: results.data.id
+                        }, () => console.log(this.state))
+                    if (!results.data.success) {
+                        alert("incorrect username or password")
+                    }
+                    // window.location.href = "/artist";
                 }
-                // window.location.href = "/artist";
-            }
-            );
-        } else if (this.state.userType === "venue"){
+                );
+        } else if (this.state.userType === "venue") {
 
             axios.post("/venue/login", newUser)
-            .then(results => {
-                console.log(results);
-                if (results.data.success)
-                    this.setState({
-                        loggedIn: true,
-                        id: results.data.id
-                    }, () => console.log(this.state))
-                if (!results.data.success) {
-                    alert("incorrect username or password")
+                .then(results => {
+                    console.log(results);
+                    if (results.data.success)
+                        this.setState({
+                            loggedIn: true,
+                            id: results.data.id
+                        }, () => console.log(this.state))
+                    if (!results.data.success) {
+                        alert("incorrect username or password")
+                    }
+                    // window.location.href = "/artist";
                 }
-                // window.location.href = "/artist";
-            }
-            );
+                );
 
         } else {
             alert("you need to choose either band or venue");
             console.log("you need to choose either band or venue");
 
         }
-       
+
     };
 
     handleInputChange = event => {
@@ -257,14 +263,14 @@ class SignIn extends Component {
         //``````````````````````````````commented out-Nasib
         // return <Redirect to={'/artist/' + id} />
         //``````````````````````````````replaced-Nasib
-        { 
-            if (this.state.userType === "band"){
-                return <Redirect to={'/artist/'}/>
-            } else if (this.state.userType === "venue"){
-                return <Redirect to={'/venue/'}/>
+        {
+            if (this.state.userType === "artist") {
+                return <Redirect to={'/artist/'} />
+            } else if (this.state.userType === "venue") {
+                return <Redirect to={'/venue/'} />
             }
 
-        }       
+        }
         //``````````````````````````````end of change-Nasib
 
 
@@ -272,7 +278,7 @@ class SignIn extends Component {
             <div>
                 <HeaderBar />
                 <Slide direction="down" in={true} mountOnEnter unmountOnExit>
-                    <h1 className = "signinTitle"><span id="bold">Welcome Back</span> to Tempo</h1>
+                    <h1 className="signinTitle"><span id="bold">Welcome Back</span> to Tempo</h1>
                 </Slide>
                 <Paper className={classes.paper}>
                     <form className="container" noValidate autoComplete="off" style={{ marginTop: "5%" }}>
@@ -308,14 +314,8 @@ class SignIn extends Component {
                             helperText={this.state.errors.password}
                             error={this.state.errors.password ? true : false}
                         />
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="secondary" />}
-                            label="Remember me"
-                        />
-
-
                         <FormControl className={classes.formControl}>
-                            <InputLabel htmlFor="demo-controlled-open-select">Band or Venue?</InputLabel>
+                            <InputLabel htmlFor="demo-controlled-open-select">Are you a Band or Venue?</InputLabel>
                             <Select
                                 open={this.state.open}
                                 onClose={this.handleClose}
@@ -335,7 +335,10 @@ class SignIn extends Component {
                             </Select>
                         </FormControl>
 
-
+                        <FormControlLabel
+                            control={<Checkbox value="remember" color="secondary" />}
+                            label="Remember me"
+                        />
 
                         <Button variant="contained"
                             color="secondary"
