@@ -63,10 +63,10 @@ let venueNewsFeed = [
 
 let keyCount = 0;
 
-let renderFeed = (propTitle, propType, propUrl) => {
+let renderFeed = (propTitle, propType, propUrl, propName) => {
     // console.log("feed", propUrl)
     keyCount++;
-    return <FeedItem key={keyCount} title={propTitle} type={propType} url={propUrl}/>
+    return <FeedItem key={keyCount} title={propTitle} type={propType} url={propUrl} name={propName}/>
 }
 
 const MainMiddle = props => {
@@ -76,8 +76,8 @@ const MainMiddle = props => {
         <div className="middle-feed" >
             {(props.userType === "artist") ? (
                 artistNewsFeed.map(elem =>
-                    renderFeed(elem.title, elem.type, props.url))) : (venueNewsFeed.map(elem =>
-                        renderFeed(elem.title, elem.type, props.url))
+                    renderFeed(elem.title, elem.type, props.url, props.name))) : (venueNewsFeed.map(elem =>
+                        renderFeed(elem.title, elem.type, props.url, props.name))
                 )}
 
         </div>
