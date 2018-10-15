@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+
 // import Header from "../../x/Header";
 import HeaderBar from "../../components/HeaderBar"
 import PropTypes from 'prop-types';
@@ -18,12 +20,17 @@ import Button from '@material-ui/core/Button';
 import CheckIcon from '@material-ui/icons/Check';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 // Stepper
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Typography from '@material-ui/core/Typography';
+
+// Transitions
+import Grow from '@material-ui/core/Grow';
 
 import API from "../../utils/API.js";
 import axios from "axios";
@@ -53,8 +60,8 @@ const styles = theme => ({
         marginBottom: "10px",
         backgroundColor: "transparent",
         border: `4px groove ${theme.palette.secondary.main}`,
-        width: 80,
-        height: 80,
+        width: 100,
+        height: 100,
         transition: "0.3s ease",
         '&:hover': {
             border: `4px groove ${theme.palette.secondary.light}`,
@@ -74,6 +81,10 @@ const styles = theme => ({
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
     },
+    formControl: {
+        margin: "10px auto",
+        textAlign: "center"
+    },
     checks: {
         display: "flex",
         flexDirection: 'row',
@@ -90,25 +101,39 @@ const styles = theme => ({
         marginBottom: theme.spacing.unit,
         margin: "auto",
         width: "80%"
-      }
+    },
+    buttonSuccess: {
+        backgroundColor: "#4CAF50",
+        '&:hover': {
+            backgroundColor: "rgb(58, 129, 61)",
+        },
+    },
+    buttonProgress: {
+        color: "#4CAF50",
+        position: 'relative',
+        bottom: '20px',
+        left: '50%',
+        marginTop: -12,
+        marginLeft: -12,
+    },
 });
 
 function getSteps() {
     return ['Sign up as a Tempo Affiliate', 'Set Up your Personal Profile', 'Get ready to book!'];
-  }
-  
-  function getStepContent(step) {
+}
+
+function getStepContent(step) {
     switch (step) {
-      case 0:
-        return 'Sign up as a Tempo Affiliate...';
-      case 1:
-        return 'What is an ad group anyways?';
-      case 2:
-        return 'This is the bit I really care about!';
-      default:
-        return 'Unknown step';
+        case 0:
+            return 'Sign up as a Tempo Affiliate...';
+        case 1:
+            return 'What is an ad group anyways?';
+        case 2:
+            return 'This is the bit I really care about!';
+        default:
+            return 'Unknown step';
     }
-  }
+}
 
 
 
@@ -116,10 +141,16 @@ class profile extends Component {
 
     state = {
         genres: {
-            rap: true,
+            rock: false,
+            club: false,
+            electronic: false,
+            hiphop: false,
             pop: false,
-            jazz: true
+            jazz: false,
+            acoustics: false
+
         },
+        userId: 0,
         name: "",
         rating: 0.0,
         description: "",
@@ -127,33 +158,94 @@ class profile extends Component {
         spotify: "",
         soundcloud: "",
         profilePic: "",
+        readyToGig: false,
         loggedIn: false,
+        finishedUpdate: false,
         activeStep: 1,
+        loading: false,
+        redirect: false,
         skipped: new Set()
 
     }
 
-    //   componentDidMount() {}
-
-    handleClick = event => {
-        event.preventDefault();
-        console.log("click")
-        // const newBand = bands;
-        this.postTheBand();
+    componentDidMount() {
+        API.getUser().then(res => {
+          console.log("Profile Editor Mounting Check", res.data, res.data.user.id);
+          if (!res.data.user.id) {
+                this.setState({loggedIn : false});
+              } else {
+                this.setState({loggedIn : true, userId: res.data.user.id, name: res.data.user.name});
+              }
+        });
 
     }
 
-    // postTheBand = () => {
-    //     const newUser = {genre : this.state.genre, password : this.state.password}
-    //     axios.post("/band/login" , newUser)
-    //     .then(results => {
-    //         this.state.loggedIn = true;
-    //         console.log(results);
-    //         window.location.href = "/artist";
-    //     }
+    handleClick = event => {
+        event.preventDefault();
+        console.log("click");
+        this.setState({
+            loading: true,
 
-    //     );
-    // };
+        }, () => {
+            this.timer = setTimeout(() => {
+                this.setState({
+                    loading: false,
+                    // temporary testing for progress bar
+                    // loggedIn: true,
+                    // finishedUpdate: true,
+                });
+                //updates the user information
+                this.updateProfile();
+            }, 2000);
+        })
+        // const newBand = bands;
+        // this.updateProfile();
+
+    }
+
+    updateProfile = () => {
+        console.log(this.state.userId, "State user id")
+        const profileInfo = {
+            description: this.state.description,
+            soundcloud: this.state.soundcloud,
+            spotify: this.state.spotify,
+            profilePic: this.state.profilePic,
+            genres: JSON.stringify(this.state.genres)
+        }
+        //change this to API.updateBand
+        // axios.post("/band/signup", profileInfo)
+        //     .then(results => {
+        //         console.log(results);
+        //         if (results.data.success) {
+        //             this.setState({
+        //                 loggedIn: true,
+        //                 finishedUpdate: true,
+        //             }, () => console.log(this.state))
+        //         }
+        //         if (!results.data.success) {
+        //             alert("incorrect username or password")
+        //         }
+        //         // window.location.href = "/artist";
+        //     }
+
+        //     );
+
+        API.updateBand(this.state.userId, profileInfo)
+            .then(results => {
+                        console.log(results);
+                        if (results.status === 200) {
+                            this.setState({
+                                finishedUpdate: true
+                            }, () => console.log(this.state))
+                        }
+                        else {
+                            alert("Error in updating your information!")
+                        }
+                        // window.location.href = "/artist";
+                    }
+        
+                    );
+    };
 
     handleInputChange = event => {
 
@@ -165,6 +257,10 @@ class profile extends Component {
         let genres = Object.assign({}, this.state.genres);    //creating copy of object
         genres[name] = event.target.checked;                        //updating value
         this.setState({ genres });
+    };
+
+    handleReadyChange = name => event => {                        
+        this.setState({ [name]: event.target.checked });
     };
 
 
@@ -213,55 +309,55 @@ class profile extends Component {
 
     isStepOptional = step => {
         return step === 1;
-      };
-    
-      handleNext = () => {
+    };
+
+    handleNext = () => {
         const { activeStep } = this.state;
         let { skipped } = this.state;
         if (this.isStepSkipped(activeStep)) {
-          skipped = new Set(skipped.values());
-          skipped.delete(activeStep);
+            skipped = new Set(skipped.values());
+            skipped.delete(activeStep);
         }
         this.setState({
-          activeStep: activeStep + 1,
-          skipped,
+            activeStep: activeStep + 1,
+            skipped,
         });
-      };
-    
-      handleBack = () => {
+    };
+
+    handleBack = () => {
         this.setState(state => ({
-          activeStep: state.activeStep - 1,
+            activeStep: state.activeStep - 1,
         }));
-      };
-    
-      handleSkip = () => {
+    };
+
+    handleSkip = () => {
         const { activeStep } = this.state;
         if (!this.isStepOptional(activeStep)) {
-          // You probably want to guard against something like this,
-          // it should never occur unless someone's actively trying to break something.
-          throw new Error("You can't skip a step that isn't optional.");
+            // You probably want to guard against something like this,
+            // it should never occur unless someone's actively trying to break something.
+            throw new Error("You can't skip a step that isn't optional.");
         }
-    
+
         this.setState(state => {
-          const skipped = new Set(state.skipped.values());
-          skipped.add(activeStep);
-          return {
-            activeStep: state.activeStep + 1,
-            skipped,
-          };
+            const skipped = new Set(state.skipped.values());
+            skipped.add(activeStep);
+            return {
+                activeStep: state.activeStep + 1,
+                skipped,
+            };
         });
-      };
-    
-      handleReset = () => {
+    };
+
+    handleReset = () => {
         this.setState({
-          activeStep: 0,
+            activeStep: 0,
         });
-      };
-    
-      isStepSkipped(step) {
+    };
+
+    isStepSkipped(step) {
         return this.state.skipped.has(step);
-      }
-    
+    }
+
 
 
     render() {
@@ -269,102 +365,157 @@ class profile extends Component {
         const steps = getSteps();
         const { activeStep } = this.state;
 
+        //separated setTimout from the return Redirect since the render() method needs to directly return the Redirect route. It cannot be done within a function - Sajeel
+        if (this.state.finishedUpdate) {
+            setTimeout(() => { this.setState({ redirect: true }) }, 1000)
+        }
+
+        if (this.state.redirect)
+            return <Redirect to={'/artist/'}/>
+       
+
         return (
             <div>
                 <HeaderBar />
-                <Paper className={classes.paper}>
-                    <form className="container" noValidate autoComplete="off">
-                        <div id="profileHeader">
-                            <Avatar className={classes.avatar} alt="Profile Picture" src={this.state.profilePic}>
-                                <i className={classNames(classes.icon, "fas fa-user")}></i> 
-                            </Avatar>
-                            <div class="profileInfo">
-                                <h1 className="profile">{(this.state.name) ? this.state.name : "Name"}</h1>
-                                <h1 className="profile">Rating: {this.state.rating} </h1>
-                            </div>
-                            {/* <div class="profileInfo">
+                <Grow in={true}>
+
+                    <Paper className={classes.paper}>
+                        <form className="container" noValidate autoComplete="off">
+                            <div id="profileHeader">
+                                <Avatar className={classes.avatar} alt="Profile Picture" src={this.state.profilePic}>
+                                    <i className={classNames(classes.icon, "fas fa-user")}></i>
+                                </Avatar>
+                                <div className="profileInfo">
+                                    <h1 className="profileName">{(this.state.name) ? this.state.name : "Name"}</h1>
+                                    <h1 className="profile">Rating: {this.state.rating} </h1>
+                                </div>
+                                {/* <div class="profileInfo">
                                 <iframe allowtransparency="true" scrolling="no" frameborder="no" src="https://w.soundcloud.com/icon/?url=http%3A%2F%2Fsoundcloud.com%2Fundefined&color=orange_white&size=32" style="width: 32px; height: 32px;"></iframe>
                                 <iframe src="https://open.spotify.com/embed/album/1DFixLWuPkv3KT3TnV35m3" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                             </div> */}
-                        </div>
-                        <FormControl component="fieldset" className={classes.formControl}>
-                            <FormLabel component="legend">What Genres of Music Do You Perform? Select All that Apply!</FormLabel>
-                            <FormGroup className={classes.checks}>
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox checked={this.state.genres.rap} onChange={this.handleGenreChange('rap')} value="rap" />
-                                    }
-                                    label="Rap"
-                                />
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox checked={this.state.genres.pop} onChange={this.handleGenreChange('pop')} value="pop" />
-                                    }
-                                    label="Pop"
-                                />
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            checked={this.state.genres.jazz}
-                                            onChange={this.handleGenreChange('jazz')}
-                                            value="jazz"
-                                        />
-                                    }
-                                    label="Jazz"
-                                />
-                            </FormGroup>
-                            <FormHelperText>Help us find the best gigs for you!</FormHelperText>
-                        </FormControl>
-                        <TextField
-                            id="filled-description-input"
-                            label="Write a description about yourself or your band!"
-                            className={classes.textField}
-                            type="description"
-                            name="description"
-                            autoComplete="current-description"
-                            margin="normal"
-                            // variant="filled"
-                            onChange={this.handleInputChange}
-                            value={this.state.description}
-                        />
-                        <TextField
-                            id="filled-spotify-input"
-                            label="Enter your Spotify Link"
-                            className={classes.textField}
-                            type="spotify"
-                            name="spotify"
-                            autoComplete="current-spotify"
-                            margin="normal"
-                            // variant="filled"
-                            onChange={this.handleInputChange}
-                            value={this.state.spotify}
-                        />
-                        <TextField
-                            id="filled-soundcloud-input"
-                            label="Enter your Soundcloud Link"
-                            className={classes.textField}
-                            type="soundcloud"
-                            name="soundcloud"
-                            autoComplete="current-soundcloud"
-                            margin="normal"
-                            // variant="filled"
-                            onChange={this.handleInputChange}
-                            value={this.state.soundcloud}
-                        />
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="secondary" />}
-                            label="Remember me"
-                        />
-                        <Button variant="contained"
-                            color="secondary"
-                            onClick={this.handleClick}
+                            </div>
+                            <FormControl component="fieldset" className={classes.formControl}>
+                                <FormLabel component="legend">What Genres of Music Do You Perform? Select All that Apply!</FormLabel>
+                                <FormGroup className={classes.checks}>
+                                    <FormControlLabel
+                                        control={
+                                            <Checkbox checked={this.state.genres.rock} onChange={this.handleGenreChange('rock')} value="rock" />
+                                        }
+                                        label="Rock"
+                                    />
+                                    <FormControlLabel
+                                        control={
+                                            <Checkbox checked={this.state.genres.hiphop} onChange={this.handleGenreChange('hiphop')} value="hiphop" />
+                                        }
+                                        label="Hip-Hop"
+                                    />
+                                    <FormControlLabel
+                                        control={
+                                            <Checkbox checked={this.state.genres.pop} onChange={this.handleGenreChange('pop')} value="pop" />
+                                        }
+                                        label="Pop"
+                                    />
+                                    <FormControlLabel
+                                        control={
+                                            <Checkbox checked={this.state.genres.electronic} onChange={this.handleGenreChange('electronic')} value="electronic" />
+                                        }
+                                        label="Electronic"
+                                    />
+                                    <FormControlLabel
+                                        control={
+                                            <Checkbox checked={this.state.genres.club} onChange={this.handleGenreChange('club')} value="club" />
+                                        }
+                                        label="Club"
+                                    />
+                                    <FormControlLabel
+                                        control={
+                                            <Checkbox
+                                                checked={this.state.genres.jazz}
+                                                onChange={this.handleGenreChange('jazz')}
+                                                value="jazz"
+                                            />
+                                        }
+                                        label="Jazz"
+                                    />
+                                    <FormControlLabel
+                                        control={
+                                            <Checkbox
+                                                checked={this.state.genres.acoustics}
+                                                onChange={this.handleGenreChange('acoustics')}
+                                                value="acoustics"
+                                            />
+                                        }
+                                        label="Acoustics"
+                                    />
+                                </FormGroup>
+                                <FormHelperText style={{ textAlign: "center" }}>Help us find the best gigs for you!</FormHelperText>
+                            </FormControl>
+                            <TextField
+                                id="filled-description-input"
+                                label="Write a description about yourself or your band!"
+                                className={classes.textField}
+                                type="description"
+                                name="description"
+                                autoComplete="current-description"
+                                margin="normal"
+                                multiline={true}
+                                // variant="filled"
+                                onChange={this.handleInputChange}
+                                value={this.state.description}
+                            />
+                            <TextField
+                                id="filled-profilePic-input"
+                                label="Enter a link to a picture of you!"
+                                className={classes.textField}
+                                type="url"
+                                name="profilePic"
+                                autoComplete="current-profilePic"
+                                margin="normal"
+                                // variant="filled"
+                                onChange={this.handleInputChange}
+                                value={this.state.profilePic}
+                            />
+                            <TextField
+                                id="filled-spotify-input"
+                                label="Enter your Spotify Link"
+                                className={classes.textField}
+                                type="url"
+                                name="spotify"
+                                autoComplete="current-spotify"
+                                margin="normal"
+                                // variant="filled"
+                                onChange={this.handleInputChange}
+                                value={this.state.spotify}
+                            />
+                            <TextField
+                                id="filled-soundcloud-input"
+                                label="Enter your Soundcloud Link"
+                                className={classes.textField}
+                                type="url"
+                                name="soundcloud"
+                                autoComplete="current-soundcloud"
+                                margin="normal"
+                                // variant="filled"
+                                onChange={this.handleInputChange}
+                                value={this.state.soundcloud}
+                            />
+                            <FormControlLabel
+                                control={<Checkbox value={this.state.readyToGig} onChange= {this.handleReadyChange} color="secondary" />}
+                                label="Are you ready to book performances?"
+                            />
+                            <Button variant="contained"
+                                color="secondary"
+                                className={this.state.finishedUpdate ? classes.buttonSuccess : ""}
+                                onClick={this.handleClick}
 
-                        >
-                            {!this.state.loggedIn ? "Login" : <CheckIcon />}
-                            {/* <Icon className="">+</Icon> */}
-                        </Button>
-                    </form>
-                </Paper>
+                            >
+                                {!this.state.finishedUpdate ? "Submit and Update" : <CheckIcon />}
+                                {/* <Icon className="">+</Icon> */}
+                            </Button>
+                            {this.state.loading && <CircularProgress size={30} className={classes.buttonProgress} />}
+                        </form>
+                    </Paper>
+                </Grow>
                 <Stepper activeStep={activeStep} className={classes.stepper}>
                     {steps.map((label, index) => {
                         const props = {};

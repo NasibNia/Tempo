@@ -2,6 +2,9 @@
 <html lang="en">
 
 <head>
+  <!-- This line is crucial to avoid styling mishaps on certain routes: https://stackoverflow.com/questions/40426011/react-router-not-loading-css-for-nested-pages-on-refresh-->
+  <base href="/" />
+
   <meta charset="utf-8">
   <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,7 +18,7 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
     crossorigin="anonymous">
-
+    
 
   <title>React App</title>
 </head>

@@ -6,7 +6,7 @@ import "./Main.css";
 const Main = props => {
     return (
         <div className="main">
-            <MainMiddle userType={props.userType}/>
+            <MainMiddle userType={props.userType} url={props.url}/>
             <MainSide userType={props.userType} />
         </div>
     )

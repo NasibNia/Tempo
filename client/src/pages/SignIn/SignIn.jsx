@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 // import Header from "../../x/Header";
 import HeaderBar from "../../components/HeaderBar"
 import PropTypes from 'prop-types';
@@ -15,6 +15,18 @@ import Button from '@material-ui/core/Button';
 import CheckIcon from '@material-ui/icons/Check';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Typography from '@material-ui/core/Typography';
+import Slide from '@material-ui/core/Slide';
+
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+
+
+
+
+
+import { validations } from './validations';
 import API from "../../utils/API.js";
 import axios from "axios";
 
@@ -30,7 +42,8 @@ const styles = theme => ({
     },
     paper: {
         borderTop: `7px solid ${theme.palette.secondary.main}`,
-        marginTop: theme.spacing.unit * 10,
+        marginTop: theme.spacing.unit * 5,
+        marginBottom: theme.spacing.unit * 6,
         margin: "auto",
         display: 'flex',
         flexDirection: 'column',
@@ -52,6 +65,31 @@ const styles = theme => ({
     menu: {
         width: 200,
     },
+    buttonSuccess: {
+        backgroundColor: "#4CAF50",
+        '&:hover': {
+            backgroundColor: "rgb(58, 129, 61)",
+        },
+    },
+    buttonProgress: {
+        color: "#4CAF50",
+        position: 'relative',
+        bottom: '20px',
+        left: '50%',
+        marginTop: -12,
+        marginLeft: -12,
+    },
+    link: {
+        textAlign: "center",
+        transition: "0.2s ease-in-out",
+        '&:hover': {
+            textDecoration: "underline",
+            letterSpacing: "1px",
+            color: theme.palette.secondary.dark
+
+        }
+
+    }
 });
 
 
@@ -60,53 +98,106 @@ class SignIn extends Component {
     state = {
         email: "",
         password: "",
-        category : "",
-        id : "",
+        category: "",
+        id: "",
+        errors: {
+            name: "",
+            email: "",
+            password: "",
+            passwordRepeat: ""
+        },
         loggedIn: false,
-        finishedSignup: false
+        loading: false,
+        redirect: false,
+        userType : ""
+
 
     }
 
-      componentDidMount() {
+    componentDidMount() {
         //   API.logout();
-      }
+    }
 
     handleClick = event => {
         event.preventDefault();
         console.log("click")
         // const newBand = bands;
-        this.loginTheBand();
-        
+
+        this.setState(
+            {
+                loading: true
+            },
+            () => {
+                this.timer = setTimeout(() => {
+                    this.setState({
+                        loading: false,
+                    });
+                    //logs in the user after a successful load
+                    this.login();
+                }, 2000);
+            },
+        )
+
     }
 
-    loginTheBand = () => {
+    login = () => {
         const newUser = {
-                         email : this.state.email, 
-                         password : this.state.password
-                         }
-        axios.post("/band/login" , newUser)
-        .then(results => {
-            console.log(results);
-            if (results.data.success)
-                this.setState({
-                    loggedIn: true,
-                    id : results.data.id
-                    // finishedSignup: true,
-                }, ()=>console.log(this.state))
-            if(!results.data.success){
-                alert("incorrect username or password")
-            }
-
-            // window.location.href = "/artist";
+            email: this.state.email,
+            password: this.state.password
         }
-            
-        );
+        if(this.state.userType === "band"){
+            axios.post("/band/login", newUser)
+            .then(results => {
+                console.log(results);
+                if (results.data.success)
+                    this.setState({
+                        loggedIn: true,
+                        id: results.data.id
+                    }, () => console.log(this.state))
+                if (!results.data.success) {
+                    alert("incorrect username or password")
+                }
+                // window.location.href = "/artist";
+            }
+            );
+        } else if (this.state.userType === "venue"){
+
+            axios.post("/venue/login", newUser)
+            .then(results => {
+                console.log(results);
+                if (results.data.success)
+                    this.setState({
+                        loggedIn: true,
+                        id: results.data.id
+                    }, () => console.log(this.state))
+                if (!results.data.success) {
+                    alert("incorrect username or password")
+                }
+                // window.location.href = "/artist";
+            }
+            );
+
+        } else {
+            alert("you need to choose either band or venue");
+            console.log("you need to choose either band or venue");
+
+        }
+       
     };
 
     handleInputChange = event => {
 
         const { name, value } = event.target;
         this.setState({ [name]: value });
+
+        let errors = validations(
+            {
+                email: this.state.email,
+                password: this.state.password,
+            }
+        );
+
+        this.setState({ errors });
     };
 
     handleSubmitForm = event => {
@@ -155,18 +246,40 @@ class SignIn extends Component {
 
     render() {
         const { classes } = this.props;
-        if (this.state.loggedIn)
-            return <Redirect to={'/artist/' + this.state.id}/>
+        let id = this.state.id;
+
+        //separated setTimout from the return Redirect since the render() method needs to directly return the Redirect route. It cannot be done within a function
+        if (this.state.loggedIn) {
+            setTimeout(() => { this.setState({ redirect: true }) }, 1000)
+        }
+
+        if (this.state.redirect)
+        //``````````````````````````````commented out-Nasib
+        // return <Redirect to={'/artist/' + id} />
+        //``````````````````````````````replaced-Nasib
+        { 
+            if (this.state.userType === "band"){
+                return <Redirect to={'/artist/'}/>
+            } else if (this.state.userType === "venue"){
+                return <Redirect to={'/venue/'}/>
+            }
+
+        }       
+        //``````````````````````````````end of change-Nasib
+
 
         return (
             <div>
                 <HeaderBar />
+                <Slide direction="down" in={true} mountOnEnter unmountOnExit>
+                    <h1 className = "signinTitle"><span id="bold">Welcome Back</span> to Tempo</h1>
+                </Slide>
                 <Paper className={classes.paper}>
                     <form className="container" noValidate autoComplete="off" style={{ marginTop: "5%" }}>
-                        <Avatar className={classes.avatar} color = "secondary">
+                        <Avatar className={classes.avatar} color="secondary">
                             <LockIcon />
                         </Avatar>
-                        <h1 className = "signup">Tempo Affiliates Sign-In Here!</h1>
+                        <h1 className="signin">Tempo Affiliates Sign-In Here!</h1>
                         <TextField
                             id="filled-email-input"
                             label="Email"
@@ -177,7 +290,9 @@ class SignIn extends Component {
                             margin="normal"
                             variant="filled"
                             onChange={this.handleInputChange}
-                            value={this.state.username}
+                            value={this.state.email}
+                            helperText={this.state.errors.email}
+                            error={this.state.errors.email ? true : false}
                         />
                         <TextField
                             id="filled-password-input"
@@ -190,21 +305,53 @@ class SignIn extends Component {
                             variant="filled"
                             onChange={this.handleInputChange}
                             value={this.state.password}
+                            helperText={this.state.errors.password}
+                            error={this.state.errors.password ? true : false}
                         />
                         <FormControlLabel
                             control={<Checkbox value="remember" color="secondary" />}
                             label="Remember me"
                         />
-                        <Button variant="contained" 
-                                color="secondary"
-                                onClick = {this.handleClick}
+
+
+                        <FormControl className={classes.formControl}>
+                            <InputLabel htmlFor="demo-controlled-open-select">Band or Venue?</InputLabel>
+                            <Select
+                                open={this.state.open}
+                                onClose={this.handleClose}
+                                onOpen={this.handleOpen}
+                                value={this.state.userType}
+                                onChange={this.handleInputChange}
+                                inputProps={{
+                                    name: 'userType',
+                                    id: 'demo-controlled-open-select',
+                                }}
+                            >
+                                <MenuItem value="">
+                                    <em>None</em>
+                                </MenuItem>
+                                <MenuItem value={"artist"} >Artist or Band</MenuItem>
+                                <MenuItem value={"venue"} >Venue</MenuItem>
+                            </Select>
+                        </FormControl>
+
+
+
+                        <Button variant="contained"
+                            color="secondary"
+                            className={this.state.loggedIn ? classes.buttonSuccess : ""}
+                            onClick={this.handleClick}
 
                         >
-                         {!this.state.loggedIn ? "Login" : <CheckIcon />}
-                        {/* <Icon className="">+</Icon> */}
+                            {!this.state.loggedIn ? "Login" : <CheckIcon />}
+                            {/* <Icon className="">+</Icon> */}
                         </Button>
+                        {this.state.loading && <CircularProgress size={30} className={classes.buttonProgress} />}
                     </form>
                 </Paper>
+                <Typography style={{ textAlign: "center" }}>
+                    <a className={classes.link} href="/signup">Or Sign-Up as a Tempo Affiliate!</a>
+                </Typography>
             </div>
 
 

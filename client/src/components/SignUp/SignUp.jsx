@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+
 // import Header from "../../x/Header";
 import HeaderBar from "../../components/HeaderBar"
 import PropTypes from 'prop-types';
@@ -23,13 +25,12 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Typography from '@material-ui/core/Typography';
-
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import API from "../../utils/API.js";
 import axios from "axios";
 
-
-
+import { validations } from './validations';
 import "./signup.css"
 
 const styles = theme => ({
@@ -80,6 +81,31 @@ const styles = theme => ({
         marginBottom: theme.spacing.unit,
         margin: "auto",
         width: "80%"
+    },
+    buttonSuccess: {
+        backgroundColor: "#4CAF50",
+        '&:hover': {
+            backgroundColor: "rgb(58, 129, 61)",
+        },
+    },
+    buttonProgress: {
+        color: "#4CAF50",
+        position: 'relative',
+        bottom: '20px',
+        left: '50%',
+        marginTop: -12,
+        marginLeft: -12,
+    },
+    link: {
+        textAlign: "center",
+        transition: "0.2s ease-in-out",
+        '&:hover': {
+            textDecoration: "underline",
+            letterSpacing: "1px",
+            color: theme.palette.secondary.dark
+
+        }
+
     }
 });
 
@@ -107,6 +133,7 @@ class SignUp extends Component {
         name: "",
         email: "",
         password: "",
+        passwordRepeat: "",
         genre: "",
         category: "",
         userType: "",
@@ -122,8 +149,16 @@ class SignUp extends Component {
         loggedIn: false,
         open: false,
         finishedSignup: false,
+        loading: false,
+        redirect: false,
         activeStep: 0,
         skipped: new Set(),
+        errors: {
+            name: "",
+            email: "",
+            password: "",
+            passwordRepeat: ""
+        }
 
     }
 
@@ -132,8 +167,32 @@ class SignUp extends Component {
     handleClick = event => {
         event.preventDefault();
         console.log("click")
-        // const newBand = bands;
-        this.signUpBand();
+
+        console.log ("user type is ", this.state.userType);
+
+        console.log("client errors", this.state.errors)
+        console.log("should we pass?", !(this.state.errors.name || this.state.errors.email && this.state.errors.password))
+        if (!(this.state.errors.name && this.state.errors.email && this.state.errors.password)) {
+            this.setState(
+                {
+                    loading: true
+                },
+                () => {
+                    this.timer = setTimeout(() => {
+                        this.setState({
+                            loading: false,
+                        });
+                        //logs in the user after a successful load
+                        if (this.state.userType === "artist"){
+                            this.signUpBand();
+                        } else if (this.state.userType === "venue"){
+                            this.signUpVenue();  
+                        }             
+                    }, 2000);
+                },
+            )
+        }
+
 
     }
 
@@ -142,16 +201,47 @@ class SignUp extends Component {
             name: this.state.name,
             email: this.state.email,
             password: this.state.password,
-            genre: this.state.genre
+            address: this.state.address,
+            zip: this.state.zip,
+            city: this.state.city,
+            state: this.state.stateUS
+
+            // genre: this.state.genre
         }
         axios.post("/band/signup", newUser)
             .then(results => {
                 console.log(results);
-                if (results.data.success)
+                if (results.data.success) {
                     this.setState({
                         loggedIn: true,
                         finishedSignup: true,
                     }, () => console.log(this.state))
+                }
+                if (!results.data.success) {
+                    alert("incorrect username or password")
+                }
+                // window.location.href = "/artist";
+            }
+
+            );
+    };
+
+    signUpVenue = () => {
+        const newUser = {
+            name: this.state.name,
+            email: this.state.email,
+            password: this.state.password,
+            // genre: this.state.genre
+        }
+        axios.post("/venue/signup", newUser)
+            .then(results => {
+                console.log(results);
+                if (results.data.success) {
+                    this.setState({
+                        loggedIn: true,
+                        finishedSignup: true,
+                    }, () => console.log(this.state))
+                }
                 if (!results.data.success) {
                     alert("incorrect username or password")
                 }
@@ -165,6 +255,18 @@ class SignUp extends Component {
 
         const { name, value } = event.target;
         this.setState({ [name]: value });
+
+        let errors = validations(
+            {
+                name: this.state.name,
+                email: this.state.email,
+                password: this.state.password,
+                passwordRepeat: this.state.passwordRepeat
+            }
+        );
+
+        this.setState({ errors });
+
     };
 
     handleSubmitForm = event => {
@@ -173,7 +275,7 @@ class SignUp extends Component {
         if (this.state.name && this.state.password) {
             const thisUser = {
                 name: this.state.name,
-                email:this.state.email,
+                email: this.state.email,
                 password: this.state.password,
                 genre: this.state.genre,
             };
@@ -274,8 +376,18 @@ class SignUp extends Component {
 
 
     render() {
-        if (this.state.finishedSignup)
-            return <Redirect to='/artist'/>
+
+        if (this.state.finishedSignup) {
+            setTimeout(() => { this.setState({ redirect: true }) }, 1000)
+        }
+
+        if (this.state.redirect) {
+            // let profileRoute = '/profile/' + this.state.id;
+            return <Redirect to={'/profile/' + this.state.id} />
+            // return <Redirect to={{profileRoute, state: {userType: this.state.userType}}} />
+        }
+
+        // return <Redirect to='/artist' />
 
         const { classes } = this.props;
         const steps = getSteps();
@@ -296,7 +408,9 @@ class SignUp extends Component {
                             margin="normal"
                             variant="filled"
                             onChange={this.handleInputChange}
-                            value={this.state.username}
+                            value={this.state.name}
+                            helperText={this.state.errors.name}
+                            error={this.state.errors.name ? true : false}
                         />
                         <TextField
                             id="filled-email-input"
@@ -309,6 +423,8 @@ class SignUp extends Component {
                             variant="filled"
                             onChange={this.handleInputChange}
                             value={this.state.email}
+                            helperText={this.state.errors.email}
+                            error={this.state.errors.email ? true : false}
                         />
                         <TextField
                             id="filled-password-input"
@@ -321,6 +437,22 @@ class SignUp extends Component {
                             variant="filled"
                             onChange={this.handleInputChange}
                             value={this.state.password}
+                            helperText={this.state.errors.password}
+                            error={this.state.errors.password ? true : false}
+                        />
+                        <TextField
+                            id="filled-passwordRepeat-input"
+                            label="Enter your password again"
+                            className={classes.textField}
+                            type="password"
+                            name="passwordRepeat"
+                            autoComplete="current-passwordRepeat"
+                            margin="normal"
+                            variant="filled"
+                            onChange={this.handleInputChange}
+                            value={this.state.passwordRepeat}
+                            helperText={this.state.errors.passwordRepeat}
+                            error={this.state.errors.passwordRepeat ? true : false}
                         />
                     </div>
                 </Grow>
@@ -341,7 +473,9 @@ class SignUp extends Component {
                             margin="normal"
                             variant="filled"
                             onChange={this.handleInputChange}
-                            value={this.state.username}
+                            value={this.state.name}
+                            helperText={this.state.errors.name}
+                            error={this.state.errors.name ? true : ""}
                         />
                         <TextField
                             id="filled-email-input"
@@ -354,6 +488,9 @@ class SignUp extends Component {
                             variant="filled"
                             onChange={this.handleInputChange}
                             value={this.state.email}
+                            helperText={this.state.errors.email}
+                            error={this.state.errors.email ? true : ""}
+
                         />
                         <TextField
                             id="filled-password-input"
@@ -366,6 +503,22 @@ class SignUp extends Component {
                             variant="filled"
                             onChange={this.handleInputChange}
                             value={this.state.password}
+                            helperText={this.state.errors.password}
+                            error={this.state.errors.password ? true : ""}
+                        />
+                        <TextField
+                            id="filled-passwordRepeat-input"
+                            label="Enter your password again"
+                            className={classes.textField}
+                            type="password"
+                            name="passwordRepeat"
+                            autoComplete="current-passwordRepeat"
+                            margin="normal"
+                            variant="filled"
+                            onChange={this.handleInputChange}
+                            value={this.state.passwordRepeat}
+                            helperText={this.state.errors.passwordRepeat}
+                            error={this.state.errors.passwordRepeat ? true : ""}
                         />
                         <TextField
                             id="filled-address-input"
@@ -380,18 +533,6 @@ class SignUp extends Component {
                             value={this.state.address}
                         />
                         <div id="addressInputs">
-                            <TextField
-                                id="filled-zip-input"
-                                label="Zip Code"
-                                className={classes.textField}
-                                type="zip"
-                                name="zip"
-                                autoComplete="current-zip"
-                                margin="normal"
-                                variant="filled"
-                                onChange={this.handleInputChange}
-                                value={this.state.zip}
-                            />
                             <TextField
                                 id="filled-city-input"
                                 label="City"
@@ -408,7 +549,7 @@ class SignUp extends Component {
                                 <InputLabel htmlFor="filled-state-simple">State</InputLabel>
                                 <Select
                                     value={this.state.stateUS}
-                                    onChange={this.handleChange}
+                                    onChange={this.handleInputChange}
                                     input={<FilledInput name="stateUS" id="filled-state-simple" />}
                                 >
                                     <MenuItem value="">
@@ -416,54 +557,67 @@ class SignUp extends Component {
                                     </MenuItem>
 
                                     <MenuItem value={"AL"}>Alabama</MenuItem>
-                                    <MenuItem value={30}>Alaska</MenuItem>
-                                    <MenuItem value={30}>Arizona </MenuItem>
-                                    <MenuItem value={30}>Arkansas </MenuItem>
-                                    <MenuItem value={30}>California </MenuItem>
-                                    <MenuItem value={30}>Colorado </MenuItem>
-                                    <MenuItem value={30}>Connecticut </MenuItem>
-                                    <MenuItem value={30}>Delaware </MenuItem>
-                                    <MenuItem value={30}>Florida </MenuItem>
-                                    <MenuItem value={30}>Georgia </MenuItem>
-                                    <MenuItem value={30}>Hawaii </MenuItem>
-                                    <MenuItem value={30}>Idaho </MenuItem>
-                                    <MenuItem value={30}>Illinois Indiana </MenuItem>
-                                    <MenuItem value={30}>Iowa </MenuItem>
-                                    <MenuItem value={30}>Kansas </MenuItem>
-                                    <MenuItem value={30}>Kentucky </MenuItem>
-                                    <MenuItem value={30}>Louisiana </MenuItem>
-                                    <MenuItem value={30}>Maine </MenuItem>
-                                    <MenuItem value={30}>Maryland</MenuItem>
-                                    <MenuItem value={30}>Massachusetts </MenuItem>
-                                    <MenuItem value={30}>Michigan </MenuItem>
-                                    <MenuItem value={30}>Minnesota </MenuItem>
-                                    <MenuItem value={30}>Mississippi </MenuItem>
-                                    <MenuItem value={30}>Missouri </MenuItem>
-                                    <MenuItem value={30}>Montana Nebraska </MenuItem>
-                                    <MenuItem value={30}>Nevada </MenuItem>
-                                    <MenuItem value={30}>New Hampshire </MenuItem>
-                                    <MenuItem value={30}>New Jersey </MenuItem>
-                                    <MenuItem value={30}>New Mexico </MenuItem>
-                                    <MenuItem value={30}>New York </MenuItem>
-                                    <MenuItem value={30}>North Carolina </MenuItem>
-                                    <MenuItem value={30}>North Dakota </MenuItem>
-                                    <MenuItem value={30}>Ohio </MenuItem>
-                                    <MenuItem value={30}>Oklahoma </MenuItem>
-                                    <MenuItem value={30}>Oregon </MenuItem>
-                                    <MenuItem value={30}>Pennsylvania Rhode Island</MenuItem>
-                                    <MenuItem value={30}>South Carolina </MenuItem>
-                                    <MenuItem value={30}>South Dakota </MenuItem>
-                                    <MenuItem value={30}>Tennessee </MenuItem>
-                                    <MenuItem value={30}>Texas </MenuItem>
-                                    <MenuItem value={30}>Utah </MenuItem>
-                                    <MenuItem value={30}>Vermont </MenuItem>
-                                    <MenuItem value={30}>Virginia </MenuItem>
-                                    <MenuItem value={30}>Washington </MenuItem>
-                                    <MenuItem value={30}>West Virginia </MenuItem>
-                                    <MenuItem value={30}>Wisconsin </MenuItem>
-                                    <MenuItem value={30}>Wyoming</MenuItem>
+                                    <MenuItem value={"AK"}>Alaska</MenuItem>
+                                    <MenuItem value={"AZ"}>Arizona </MenuItem>
+                                    <MenuItem value={"AR"}>Arkansas </MenuItem>
+                                    <MenuItem value={"CA"}>California </MenuItem>
+                                    <MenuItem value={"Co"}>Colorado </MenuItem>
+                                    <MenuItem value={"CT"}>Connecticut </MenuItem>
+                                    <MenuItem value={"DE"}>Delaware </MenuItem>
+                                    <MenuItem value={"FL"}>Florida </MenuItem>
+                                    <MenuItem value={"GA"}>Georgia </MenuItem>
+                                    <MenuItem value={"HI"}>Hawaii </MenuItem>
+                                    <MenuItem value={"ID"}>Idaho </MenuItem>
+                                    <MenuItem value={"IL"}>Illinois Indiana </MenuItem>
+                                    <MenuItem value={"IN"}>Iowa </MenuItem>
+                                    <MenuItem value={"IA"}>Kansas </MenuItem>
+                                    <MenuItem value={"KS"}>Kentucky </MenuItem>
+                                    <MenuItem value={"LA"}>Louisiana </MenuItem>
+                                    <MenuItem value={"ME"}>Maine </MenuItem>
+                                    <MenuItem value={"MD"}>Maryland</MenuItem>
+                                    <MenuItem value={"MA"}>Massachusetts </MenuItem>
+                                    <MenuItem value={"MI"}>Michigan </MenuItem>
+                                    <MenuItem value={"MN"}>Minnesota </MenuItem>
+                                    <MenuItem value={"MS"}>Mississippi </MenuItem>
+                                    <MenuItem value={"MO"}>Missouri </MenuItem>
+                                    <MenuItem value={"MT"}>Montana </MenuItem>
+                                    <MenuItem value = {"NE"}>Nebraska </MenuItem>
+                                    <MenuItem value={"NV"}>Nevada </MenuItem>
+                                    <MenuItem value={"NH"}>New Hampshire </MenuItem>
+                                    <MenuItem value={"NJ"}>New Jersey </MenuItem>
+                                    <MenuItem value={"NM"}>New Mexico </MenuItem>
+                                    <MenuItem value={"NY"}>New York </MenuItem>
+                                    <MenuItem value={"NC"}>North Carolina </MenuItem>
+                                    <MenuItem value={"ND"}>North Dakota </MenuItem>
+                                    <MenuItem value={"OH"}>Ohio </MenuItem>
+                                    <MenuItem value={"OK"}>Oklahoma </MenuItem>
+                                    <MenuItem value={"OR"}>Oregon </MenuItem>
+                                    <MenuItem value={"PA"}>Pennsylvania Rhode Island</MenuItem>
+                                    <MenuItem value={"SC"}>South Carolina </MenuItem>
+                                    <MenuItem value={"SD"}>South Dakota </MenuItem>
+                                    <MenuItem value={"TN"}>Tennessee </MenuItem>
+                                    <MenuItem value={"TX"}>Texas </MenuItem>
+                                    <MenuItem value={'UT'}>Utah </MenuItem>
+                                    <MenuItem value={"VT"}>Vermont </MenuItem>
+                                    <MenuItem value={"VA"}>Virginia </MenuItem>
+                                    <MenuItem value={"WA"}>Washington </MenuItem>
+                                    <MenuItem value={"WV"}>West Virginia </MenuItem>
+                                    <MenuItem value={"WI"}>Wisconsin </MenuItem>
+                                    <MenuItem value={"WY"}>Wyoming</MenuItem>
                                 </Select>
                             </FormControl>
+                            <TextField
+                                id="filled-zip-input"
+                                label="Zip Code"
+                                className={classes.textField}
+                                type="zip"
+                                name="zip"
+                                autoComplete="current-zip"
+                                margin="normal"
+                                variant="filled"
+                                onChange={this.handleInputChange}
+                                value={this.state.zip}
+                            />
                         </div>
                     </div>
                 </Grow>
@@ -514,15 +668,19 @@ class SignUp extends Component {
                         />
                         <Button variant="contained"
                             color="secondary"
-                            className={classes.button}
+                            className={this.state.loggedIn ? classes.buttonSuccess : ""}
                             onClick={this.handleClick}
 
                         >
                             {!this.state.loggedIn ? "Sign Up" : <CheckIcon />}
                             {/* <Icon className="">+</Icon> */}
                         </Button>
+                        {this.state.loading && <CircularProgress size={30} className={classes.buttonProgress} />}
                     </form>
                 </Paper>
+                <Typography style={{ textAlign: "center" }}>
+                    <a className={classes.link} href="/signin">Already a user? Sign in</a>
+                </Typography>
                 <Stepper activeStep={activeStep} className={classes.stepper}>
                     {steps.map((label, index) => {
                         const props = {};

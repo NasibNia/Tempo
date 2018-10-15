@@ -11,36 +11,41 @@ class ArtistHome extends Component {
 
     state = {
         shows: [],
-        name: "",
-        description: "",
-        statistics: "",
         user: "artist"
       };
-    
-<<<<<<< HEAD
+      
+      //``````````````````````````````commented out-Nasib
       // componentDidMount() {
       //   this.loadShows();
+      //   console.log("test")
+      //   console.log("params", this.props.match.params)
+
+      //   // console.log(API.getUser());
+
+
       // }
-=======
+      //``````````````````````````````Replaced-Nasib
       componentDidMount() {
-        this.loadShows();
-        console.log("test")
-    
-
-        // console.log(API.getUser());
-
-
-
+        API.getUser().then(res => {
+          console.log("component mounting check", res.data);
+          if (!res.data.user.id) {
+                this.setState({loggedIn : false});
+                window.location.href = "/signin";
+              } else {
+                this.setState({loggedIn : true});
+                // this.loadShows(res.data.user.id);
+              }
+        });
       }
->>>>>>> master
-    
-      // loadShows = () => {
-      //   API.getShows()
-      //     .then(res =>
-      //       this.setState({ shows: res.data, name: "", description: "", statistics: "" })
-      //     )
-      //     .catch(err => console.log(err));
-      // };
+      //``````````````````````````````endOfChange-Nasib
+
+      loadShows = () => {
+        API.getShows()
+          .then(res =>
+            this.setState({ shows: res.data, name: "", description: "", statistics: "" })
+          )
+          .catch(err => console.log(err));
+      };
 
 
    render() {
