@@ -36,9 +36,9 @@ module.exports = function(sequelize , DataTypes){
            type : DataTypes.INTEGER,
         //    allowNull: false
         },
-        // genre: {
-        //     type : DataTypes.STRING
-        // },
+        genres: {
+            type : DataTypes.TEXT
+        },
         ticket_price:{
             type : DataTypes.INTEGER
         },
