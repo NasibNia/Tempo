@@ -42,7 +42,7 @@ module.exports = function(sequelize , DataTypes){
             allowNull: true
         },
         profilePic : {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: true
         },
         readyToGig : {
