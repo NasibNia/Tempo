@@ -45,6 +45,10 @@ module.exports = function(sequelize , DataTypes){
             type: DataTypes.STRING,
             allowNull: true
         },
+        readyToGig : {
+            type: DataTypes.BOOLEAN,
+            allowNull: true
+        },
         // showsPlayed :{
         //     type: DataTypes.INTEGER
         // },
