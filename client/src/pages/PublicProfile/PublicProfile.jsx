@@ -14,6 +14,9 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Icon from '@material-ui/core/Icon';
 
+import Navigate from '../../components/Body/Navigate'
+import Main from '../../components/Body/Main'
+
 // Transitions
 
 import API from "../../utils/API.js";
@@ -162,7 +165,92 @@ class PublicProfile extends Component {
         return (
             <div>
                 <HeaderBar />
-                <Paper className={classes.paper}>
+                <HeaderBar userType={this.state.userType} />
+                <div className="body-wrap">
+                    <Navigate method={this.changeState} userType={this.state.userType} />
+                    <div className="profile-wrap">
+                        <div className="profile-main">
+                            <div className="profile-info">
+                                <div className="profile-photo"></div>
+                                <div className="profile-bio">
+                                    <h1 className="profile-name">Tame Impala</h1>
+                                    <h3 className="profile-hometown">Hometown: San Francisco</h3>
+                                    <h3 className="profile-date-formed">Date formed: 4/20/18</h3>
+                                    <h3 className="profile-genre">Genre: Rock</h3>
+                                    <h3 className="profile-member-count">Member Count: 4</h3>
+                                    <p className="profile-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eu erat a ipsum vehicula volutpat. Nullam at dui imperdiet, feugiat ex sed, pharetra elit. Maecenas vitae tristique dolor.</p>
+                                </div>
+                            </div>
+
+                            <div
+                                className="profile-activity">
+                                    <h3 className="profile-activity-header">Activity</h3>
+                                    <div className="activity-box">
+                                        <div className="activity-item">
+                                            <div className="activity-icon"></div>
+                                            <div className="activity-text">
+                                            <h3>Activity Headline</h3>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                            </div>
+                                        </div>
+                                        <div className="activity-item">
+                                            <div className="activity-icon"></div>
+                                            <div className="activity-text">
+                                            <h3>Activity Headline</h3>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                            </div>
+                                        </div>
+                                        <div className="activity-item">
+                                            <div className="activity-icon"></div>
+                                            <div className="activity-text">
+                                            <h3>Activity Headline</h3>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                            </div>
+                                        </div>
+                                        <div className="activity-item">
+                                            <div className="activity-icon"></div>
+                                            <div className="activity-text">
+                                            <h3>Activity Headline</h3>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <div className="profile-music"></div>
+                        </div>
+                        <div className="profile-stats">
+                            <div className="active-status">
+                                <h1 className="active">ACTIVE</h1>
+                            </div>
+                            <div className="tempo-rating">
+                                <div className="rating-box">
+                                    <h1 className="rating-number">4.3</h1>
+                                    <h3 className="rating-subtitle">Tempo Rating</h3>
+                                </div>
+                                <div className="rating-box">
+                                    <h1 className="rating-number">1400+</h1>
+                                    <h3 className="rating-subtitle">Facebook Likes</h3>
+                                </div>
+                                <div className="rating-box">
+                                    <h1 className="rating-number">$15</h1>
+                                    <h3 className="rating-subtitle">Average Ticket Price</h3>
+                                </div>
+                                <div className="rating-box">
+                                    <h1 className="rating-number">215</h1>
+                                    <h3 className="rating-subtitle">Average Draw</h3>
+                                </div>
+                                <div className="rating-box">
+                                    <h1 className="rating-number">222</h1>
+                                    <h3 className="rating-subtitle">Shows Played</h3>
+                                </div>
+                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                {/* <Paper className={classes.paper}>
                     <div id="profileHeader">
                         <Avatar className={classes.avatar} alt="Profile Picture" src={this.state.profilePic}>
                             <i className={classNames(classes.icon, "fas fa-user")}></i>
@@ -182,7 +270,7 @@ class PublicProfile extends Component {
                     <p className="profileContent">Description: <span className="info">{this.state.description}</span></p>
                     <p className="profileContent"></p>
                     <p className="profileContent"></p>
-                </Paper>
+                </Paper> */}
             </div >
 
 

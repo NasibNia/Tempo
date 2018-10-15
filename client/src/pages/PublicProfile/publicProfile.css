@@ -62,3 +62,114 @@
     }
   }
   
+
+.profile-wrap {
+    width: 750px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px 10px;
+    border: 1px solid lightgray;
+    margin: 5px;
+    display: flex;
+}
+
+.profile-info {
+    display: flex;
+}
+
+.profile-info .profile-photo {
+    height: 200px;
+    min-width: 200px;
+    background-color: lightblue;
+    margin: 10px;
+}
+
+.profile-info .profile-bio {
+    padding: 10px;
+}
+
+.profile-info .profile-name {
+    font-size: 25px;
+}
+
+.profile-info h1 {
+    margin-bottom: 5px;
+}
+
+.profile-info h3 {
+    margin-bottom: 5px;
+}
+
+.profile-info p {
+    padding: 0;
+    line-height: 16px;
+}
+
+.profile-activity {
+    padding: 5px;
+}
+
+.activity-box {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.activity-icon {
+    min-height: 70px;
+    min-width: 70px;
+    background-color: lightblue;
+    margin-right: 10px;
+}
+
+.profile-activity-header {
+    padding: 5px 5px 0;
+}
+
+.activity-item {
+    display: flex;
+    padding: 5px;
+    max-width: 48%;
+}
+
+.activity-text h3 {
+    margin-bottom: 4px;
+}
+
+.activity-text p {
+    line-height: 16px;
+}
+
+.profile-stats {
+    min-width: 200px;
+    background-color: #F5F5F5;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+.profile-music {
+    height: 200px;
+    background-color: darkgray;
+    margin: 10px;
+}
+
+.profile-stats {
+
+}
+
+.active {
+    font-size: 20px;
+    text-align: center;
+    background-color: green;
+    color: white;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+}
+
+.rating-box {
+    text-align: center;
+    padding: 20px;
+}
+
+.rating-number  {
+    font-size: 36px;
+}
