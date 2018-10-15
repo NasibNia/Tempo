@@ -10,4 +10,8 @@ router.route("/:id")
       .delete(venueController.deleteVenue)
       .put(venueController.updateVenue);
 
+// router.route("/ratings/:id")
+//       .get(venueController.getRating)
+//       .put(venueController.addRating);
+
 module.exports = router;
