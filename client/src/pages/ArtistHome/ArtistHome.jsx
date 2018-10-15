@@ -11,9 +11,6 @@ class ArtistHome extends Component {
 
     state = {
         shows: [],
-        name: "",
-        description: "",
-        statistics: "",
         user: "artist"
       };
       

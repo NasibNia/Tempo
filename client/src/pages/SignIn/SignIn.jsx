@@ -38,6 +38,7 @@ const styles = theme => ({
     paper: {
         borderTop: `7px solid ${theme.palette.secondary.main}`,
         marginTop: theme.spacing.unit * 5,
+        marginBottom: theme.spacing.unit * 6,
         margin: "auto",
         display: 'flex',
         flexDirection: 'column',
@@ -126,14 +127,14 @@ class SignIn extends Component {
                         loading: false,
                     });
                     //logs in the user after a successful load
-                    this.loginTheBand();
+                    this.login();
                 }, 2000);
             },
         )
 
     }
 
-    loginTheBand = () => {
+    login = () => {
         const newUser = {
             email: this.state.email,
             password: this.state.password
