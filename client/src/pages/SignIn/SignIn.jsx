@@ -19,6 +19,11 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 import Slide from '@material-ui/core/Slide';
 
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+
+
+
 
 
 import { validations } from './validations';
@@ -103,7 +108,8 @@ class SignIn extends Component {
         },
         loggedIn: false,
         loading: false,
-        redirect: false
+        redirect: false,
+        userType : ""
 
 
     }
@@ -139,7 +145,8 @@ class SignIn extends Component {
             email: this.state.email,
             password: this.state.password
         }
-        axios.post("/band/login", newUser)
+        if(this.state.userType === "band"){
+            axios.post("/band/login", newUser)
             .then(results => {
                 console.log(results);
                 if (results.data.success)
@@ -150,11 +157,32 @@ class SignIn extends Component {
                 if (!results.data.success) {
                     alert("incorrect username or password")
                 }
-
                 // window.location.href = "/artist";
             }
-
             );
+        } else if (this.state.userType === "venue"){
+
+            axios.post("/venue/login", newUser)
+            .then(results => {
+                console.log(results);
+                if (results.data.success)
+                    this.setState({
+                        loggedIn: true,
+                        id: results.data.id
+                    }, () => console.log(this.state))
+                if (!results.data.success) {
+                    alert("incorrect username or password")
+                }
+                // window.location.href = "/artist";
+            }
+            );
+
+        } else {
+            alert("you need to choose either band or venue");
+            console.log("you need to choose either band or venue");
+
+        }
+       
     };
 
     handleInputChange = event => {
@@ -229,7 +257,14 @@ class SignIn extends Component {
         //``````````````````````````````commented out-Nasib
         // return <Redirect to={'/artist/' + id} />
         //``````````````````````````````replaced-Nasib
-        return <Redirect to={'/artist/'}/>
+        { 
+            if (this.state.userType === "band"){
+                return <Redirect to={'/artist/'}/>
+            } else if (this.state.userType === "venue"){
+                return <Redirect to={'/venue/'}/>
+            }
+
+        }       
         //``````````````````````````````end of change-Nasib
 
 
@@ -277,6 +312,31 @@ class SignIn extends Component {
                             control={<Checkbox value="remember" color="secondary" />}
                             label="Remember me"
                         />
+
+
+                        <FormControl className={classes.formControl}>
+                            <InputLabel htmlFor="demo-controlled-open-select">Band or Venue?</InputLabel>
+                            <Select
+                                open={this.state.open}
+                                onClose={this.handleClose}
+                                onOpen={this.handleOpen}
+                                value={this.state.userType}
+                                onChange={this.handleInputChange}
+                                inputProps={{
+                                    name: 'userType',
+                                    id: 'demo-controlled-open-select',
+                                }}
+                            >
+                                <MenuItem value="">
+                                    <em>None</em>
+                                </MenuItem>
+                                <MenuItem value={"artist"} >Artist or Band</MenuItem>
+                                <MenuItem value={"venue"} >Venue</MenuItem>
+                            </Select>
+                        </FormControl>
+
+
+
                         <Button variant="contained"
                             color="secondary"
                             className={this.state.loggedIn ? classes.buttonSuccess : ""}
