@@ -51,7 +51,8 @@ class WidgetItem extends Component {
         id: "",
         name: "",
         description: "",
-        profilePic: ""
+        profilePic: "",
+        userType: ""
 
     };
 
@@ -66,11 +67,12 @@ class WidgetItem extends Component {
     loadUser() {
         API.getUser().then(res => {
             console.log("component mounting check", res.data);
-            if (!res.data.user.id) {
+            if (!res.data.user) {
                 this.setState({ loggedIn: false });
             } else {
                 this.setState({
                     loggedIn: true,
+                    userType: res.data.user.userType,
                     id: res.data.user.id,
                     name: res.data.user.name,
                     description: res.data.user.description,
@@ -129,7 +131,7 @@ class WidgetItem extends Component {
                 return (
                     <div id="post-gig">
                         <h1>Post a gig here</h1>
-                        <Modal postType="show" url={this.props.url} />
+                        <Modal postType="show" url={this.props.url} userID = {this.state.id} userType={this.props.userType} />
                     </div>
                 );
             case "past gigs":

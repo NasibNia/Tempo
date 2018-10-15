@@ -13,7 +13,7 @@ class Body extends Component {
     }
 
     changeState(val) {
-        this.state.mainComponent = val
+        this.setState({mainComponent: val})
     }
 
     render() {
@@ -23,7 +23,7 @@ class Body extends Component {
                 <HeaderBar userType={this.state.userType} />
                 <div className="body-wrap">
                     <Navigate method={this.changeState} userType={this.state.userType} />
-                    <Main userType={this.state.userType} url={this.props.url}/>
+                    <Main userType={this.state.userType} url={this.props.url} name={this.props.name}/>
                 </div>
             </div>
         )

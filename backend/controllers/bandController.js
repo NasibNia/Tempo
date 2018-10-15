@@ -44,6 +44,18 @@ module.exports = {
             });
     },
 
+    findReadyBands : function (req, res){
+        db.Band.findAll({
+            where : {
+                readyToGig : true
+            },
+            include : [db.Show]
+            })
+            .then(bandsRes => {
+                res.json(bandsRes);
+            });
+    },
+
     // tested and works
     deleteBand : function(req,res){
         console.log("delete band");
@@ -65,6 +77,40 @@ module.exports = {
             }
         })
         .then(dbBands => res.json(dbBands));
-    }
-    
+    },
+
+    // // Gets current rating and adds new rating to it, adds 1 to totalRated
+    // addRating : function(req, res) {
+    //     console.log("adding rating to band")
+    //     db.Band.findOne({
+    //         where : {
+    //             id : req.params.id
+    //         }})
+    //         .then(bandRes => {
+    //             db.Venue.update(
+    //                 {
+    //                     rating : bandRes + req.rating,
+    //                     totalRated : bandRes.totalRated + 1
+    //                 },
+    //                 {where : {
+    //                     id:req.params.id
+    //                 }
+    //             })
+    //             .then(updateRes => res.json(updateRes));   
+    //             res.json(updateRes);
+    //         });
+    // },
+
+
+    // // Gets user info, calculates rating, and responds with obj of rating
+    // getRating : function(req,res){
+    //     db.Band.findOne({
+    //         where : {
+    //             id : req.params.id
+    //         }})
+    //         .then(bandsRes => {
+    //             const rating = bandsRes.ratings / bandsRes.totalRated;
+    //             res.json({rating : rating});
+    //         });
+    // }
 };

@@ -2,6 +2,11 @@ const bcrypt   = require('bcrypt-nodejs');
 
 module.exports = function(sequelize , DataTypes){
     var Venue = sequelize.define("Venue" , {
+        
+        userType : {
+            type : DataTypes.STRING,
+            // allowNull: false
+        },
         name : {
             type : DataTypes.STRING,
             // allowNull: false
@@ -31,9 +36,9 @@ module.exports = function(sequelize , DataTypes){
            type : DataTypes.INTEGER,
         //    allowNull: false
         },
-        // genre: {
-        //     type : DataTypes.STRING
-        // },
+        genres: {
+            type : DataTypes.TEXT
+        },
         ticket_price:{
             type : DataTypes.INTEGER
         },
@@ -46,10 +51,6 @@ module.exports = function(sequelize , DataTypes){
             Max : 3
         },
         totalShows : {
-            type : DataTypes.INTEGER
-
-        },
-        showsRated : {
             type : DataTypes.INTEGER
 
         },

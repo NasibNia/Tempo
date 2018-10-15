@@ -10,6 +10,10 @@ module.exports = function(sequelize , DataTypes){
 //     // console.log(DataTypes)
     const Band = sequelize.define("Band" , {
 
+        userType : {
+            type : DataTypes.STRING,
+            // allowNull: false
+        },
         name : {
             type : DataTypes.STRING,
             // allowNull: false
@@ -57,9 +61,6 @@ module.exports = function(sequelize , DataTypes){
         // },
         // showsLate: {
         //     type : DataTypes.INTEGER
-        // },
-        // venueRating : {
-        //     type : DataTypes.INTEGER        
         // },
 
         // genre : [

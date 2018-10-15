@@ -15,7 +15,7 @@ router.post('/venue/signup', passport.authenticate('venue-local-signup', {
   
   router.post('/venue/login', passport.authenticate('venue-local-login', {
       successRedirect : '/success',
-      failureRedirect : 'login'
+      failureRedirect : '/login'
   }));
 
     router.post('/band/signup', passport.authenticate('band-local-signup', {
@@ -78,7 +78,7 @@ router.get('/login', function (req, res) {
     });
 });
 
-router.get ('/success', isLoggedIn, function(req, res){
+router.get('/success', isLoggedIn, function(req, res){
     console.log("\n**********this user has the following information \n************ ",req.user);
 
     res.status(200).json({

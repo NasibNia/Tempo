@@ -1,4 +1,4 @@
-var db   = require('../models');
+var db = require('../models');
 
 var bCrypt = require('bcrypt-nodejs');
 
@@ -16,9 +16,9 @@ module.exports = function (passport) {
         },
 
         function (req, email, password, done) {
-            console.log("=====================\nI'm the req/body    ",req.body);
+            console.log("=====================\nI'm the req/body    ", req.body);
             var passwordHash = bCrypt.hashSync(password, bCrypt.genSaltSync(8));
-            
+
             console.log(passwordHash);
             console.log("before db.band");
             // console.log("password is   " ,password);
@@ -32,24 +32,25 @@ module.exports = function (passport) {
                 if (user) {
                     console.log("user doesnt exist");
                     return done(null, false, {
-                        
+
                         message: 'That email is already taken'
                     });
 
                 } else {
                     console.log("\n\n=========user doesnt exist");
                     var data =
-                        {
-                            name : req.body.name,
-                            email: email,
-                            password: passwordHash,
-                            genre : req.body.genre
+                    {
+                        name: req.body.name,
+                        email: email,
+                        password: passwordHash,
+                        userType: req.body.userType,
 
-                            // userName: req.body.name,
-                        };
-                        console.log("\n==========data is ", data);
+
+                        // userName: req.body.name,
+                    };
+                    console.log("\n==========data is ", data);
                     db.Band.create(data).then(function (newUser) {
-                        console.log('inside db.band.create    '+ newUser);
+                        console.log('inside db.band.create    ' + newUser);
                         if (!newUser) {
                             console.log("\n==========not a newUser");
                             return done(null, false);
@@ -74,7 +75,7 @@ module.exports = function (passport) {
         },
 
         function (req, email, password, done) {
-            console.log("I'm the req/body    " ,req.body);
+            console.log("I'm the req/body    ", req.body);
 
             // var User = user;
             var isValidPassword = function (userpass, password) {
@@ -82,7 +83,7 @@ module.exports = function (passport) {
             }
 
             console.log("before db.band.findOnee");
-            console.log("password is   " ,password);
+            console.log("password is   ", password);
             db.Band.findOne({
                 where: {
                     email: email
@@ -98,11 +99,11 @@ module.exports = function (passport) {
                     });
                 }
                 console.log("~~~~~~~/beforevalidPassword");
-                console.log("~~~~~~~/user.password" , user.password);
-                console.log("~~~~~~~/password" , password);
+                console.log("~~~~~~~/user.password", user.password);
+                console.log("~~~~~~~/password", password);
                 if (!isValidPassword(user.password, password)) {
-                    console.log("~~~~~~~~~~`\nuserPassword" , user.password);
-                    console.log("~~~~~~~~~~`\n[password]" , password);
+                    console.log("~~~~~~~~~~`\nuserPassword", user.password);
+                    console.log("~~~~~~~~~~`\n[password]", password);
 
                     console.log("Incorrect Password");
                     return done(null, false, {
@@ -131,12 +132,12 @@ module.exports = function (passport) {
 
         function (req, email, password, done) {
             console.log("@@@@@@@\nhitting venue local signup")
-            console.log("I'm the req/body    " ,req.body);
+            console.log("I'm the req/body    ", req.body);
             var passwordHash = bCrypt.hashSync(password, bCrypt.genSaltSync(8));
-            
+
             console.log(passwordHash);
             console.log("before db.venue");
-            console.log("password is   " ,password);
+            console.log("password is   ", password);
             db.Venue.findOne({
                 where: {
                     email: email
@@ -147,19 +148,24 @@ module.exports = function (passport) {
                 if (user) {
                     console.log("user doesnt exist");
                     // return done(null, false, {
-                        
+
                     //     message: 'That email is already taken'
                     // });
 
                 } else {
                     console.log("user doesnt exist");
                     var data =
-                        {
-                            name : req.body.name,
-                            email: email,
-                            password: passwordHash,
-                            // userName: req.body.name,
-                        };
+                    {
+                        name: req.body.name,
+                        email: email,
+                        password: passwordHash,
+                        userType: req.body.userType,
+                        address: req.body.address,
+                        zip: req.body.zip,
+                        city: req.body.city,
+                        state: req.body.state
+                        // userName: req.body.name,
+                    };
                     db.Venue.create(data).then(function (newUser) {
                         console.log('inside db.Venue.create    ', newUser);
                         if (!newUser) {
@@ -188,7 +194,7 @@ module.exports = function (passport) {
         },
 
         function (req, email, password, done) {
-            console.log("I'm the req/body    " ,req.body);
+            console.log("I'm the req/body    ", req.body);
 
             // var User = user;
             var isValidPassword = function (userpass, password) {
@@ -196,7 +202,7 @@ module.exports = function (passport) {
             };
 
             console.log("before db.venue.findOnee");
-            console.log("password is   " ,password);
+            console.log("password is   ", password);
             db.Venue.findOne({
                 where: {
                     email: email
@@ -212,11 +218,11 @@ module.exports = function (passport) {
                     });
                 }
                 console.log("~~~~~~~/beforevalidPassword");
-                console.log("~~~~~~~/user.password" , user.password);
-                console.log("~~~~~~~/password" , password);
+                console.log("~~~~~~~/user.password", user.password);
+                console.log("~~~~~~~/password", password);
                 if (!isValidPassword(user.password, password)) {
-                    console.log("~~~~~~~~~~`\nuserPassword" , user.password);
-                    console.log("~~~~~~~~~~`\n[password]" , password);
+                    console.log("~~~~~~~~~~`\nuserPassword", user.password);
+                    console.log("~~~~~~~~~~`\n[password]", password);
 
                     console.log("Incorrect Password");
                     return done(null, false, {
@@ -235,176 +241,53 @@ module.exports = function (passport) {
         }
     ));
 
-    /*
-    //Venue or BAND LOCAL SIGNIN
-    passport.use('local-login', new LocalStrategy(
-        {
-            // by default, local strategy uses username and password, we will override with email
-            usernameField: 'email',
-            passwordField: 'password',
-            passReqToCallback: true // allows us to pass back the entire request to the callback
-        },
-
-        function (req, email, password, done) {
-            console.log("I'm the req/body    " ,req.body);
-
-            // var User = user;
-            var isValidPassword = function (userpass, password) {
-                return bCrypt.compareSync(password, userpass);
-            }
-
-            console.log("before db.venue.findOnee");
-            console.log("password is   " ,password);
-
-            db.Band.findOne({
-                where: {
-                    email: email
-                }
-            }).then(function (bandUser) {
-
-                console.log("~~~~~~~~~~~~\nnew bandUser is   : " ,bandUser);
-
-                if (!bandUser) {
-                    console.log("~~~~~~~~~~`\nnot a bandUser in Band database\n~~~~~~~~~~~ checking Venue database");
-
-                    //``````` Check to see if it is in Venue
-                    db.Venue.findOne({
-                        where: {
-                            email: email
-                        }
-                    }).then(function (venueUser) {
-        
-                        // console.log("~~~~~~~~~~~~\nnew user is   : " ,user);
-        
-                        if (!venueUser) {
-                            console.log("~~~~~~~~~~`\nnot a user in Band nor Venue");
-                            return done(null, false, {
-                                message: 'Email does not exist'
-                            });
-                        }
-                        console.log("~~~~~~~/beforevalidPassword");
-                        console.log("~~~~~~~/venueUser.password" , venueUser.password);
-                        console.log("~~~~~~~/password" , password);
-                        if (!isValidPassword(venueUser.password, password)) {
-                            console.log("~~~~~~~~~~`\nvenueUserPassword" , venueUser.password);
-                            console.log("~~~~~~~~~~`\n[password]" , password);
-        
-                            console.log("Incorrect Password");
-                            return done(null, false, {
-                                message: 'Incorrect password.'
-                            });
-                        }
-        
-
-                        var userinfo = venueUser.get();
-                        console.log("~~~~~~\n venue userinfo is  ",userinfo);
-                        return done(null, userinfo);
-                    }).catch(function (err) {
-                        console.log("Error:", err);
-                        return done(null, false, {
-                            message: 'Something went wrong with your Signin'
-                        });
-                    });
-                    //`````````````````
-
-
-                    return done(null, false, {
-                        message: 'Email does not exist'
-                    });
-                }
-
-
-                var userinfo = bandUser.get();
-                console.log("~~~~~~\nBand userinfo is  ",userinfo);
-
-                return done(null, userinfo);
-                }).catch(function (err) {
-                    console.log("Error:", err);
-                    return done(null, false, {
-                        message: 'Something went wrong with your Signin'
-                });
-
-            });
-        }
-    ));
-    */
 
     //serialize
     passport.serializeUser(function (user, done) {
-        console.log("\n==========user inside seerialize  "+ user);
-        done(null, user.id);
+        console.log("\n==========user inside seerialize  " + user);
+        done(null, {id: user.id, type:user.userType });
 
     });
 
     // deserialize user 
 
-    passport.deserializeUser(function(id, done) {
+    passport.deserializeUser(function (obj, done) {
+        console.log("obj is   ", obj);
 
-        if(db.Band.findById(id)){
-            db.Band.findById(id).then(function (user) {
+        if(obj.type === "artist"){
+            db.Band.findById(obj.id).then(function (user) {
 
-                console.log("\n***********==========inside deserialize, user is a Band"+ user);
-    
+                console.log("\n***********==========inside deserialize, user is a Band" + user);
+                
+
                 if (user) {
 
                     done(null, user.get());
 
                 } else {
 
-                   if(db.Band.findById(id)) {
-                    db.Venue.findById(id).then(function (user) {
-
-                        console.log("\n==========inside deserialize, user is aVenue "+ user);
-            
-                        if (user) {
-            
-                            done(null, user.get());
-            
-                        } else {
-            
-                            done(user.errors, null);
-            
-                        }
-                   });
-               
-                    }
+                    done(user.errors, null);
                 }
-    
             });
+             
+        } else if (obj.type === "venue"){
+            db.Venue.findById(obj.id).then(function (user) {
+
+                console.log("\n***********==========inside deserialize, user is a Venue" + user);
+                
+
+                if (user) {
+
+                    done(null, user.get());
+
+                } else {
+
+                    done(user.errors, null);
+                }
+            });
+
         }
+
     });
-    // passport.deserializeUser(function (id, done) {
-
-    //     db.Band.findById(id).then(function (user) {
-
-    //         console.log("user inside deserialize  "+ user);
-    //         if (user) {
-
-    //             done(null, user.get());
-
-    //         } else {
-
-    //             done(user.errors, null);
-
-    //         }
-
-    //     });
-
-    //     db.Venue.findById(id).then(function (user) {
-
-    //         console.log("\n==========user inside deserialize  "+ user);
-
-    //         if (user) {
-
-    //             done(null, user.get());
-
-    //         } else {
-
-    //             done(user.errors, null);
-
-    //         }
-
-    //     });
-
-    // });
+    
 };

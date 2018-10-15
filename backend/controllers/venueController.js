@@ -42,6 +42,18 @@ module.exports = {
             });
     },
 
+    findReadyVenues : function (req, res){
+        db.Venue.findAll({
+            where : {
+                readyToBook : true
+            },
+            include : [db.Show]
+            })
+            .then(venuesRes => {
+                res.json(venuesRes);
+            });
+    },
+
     // tested and working
     deleteVenue : function(req,res){
         db.Venue.destroy({
@@ -62,5 +74,39 @@ module.exports = {
             }
         })
         .then(dbVenues => res.json(dbVenues));
-    }
+    },
+
+    // Gets current rating and adds new rating to it, adds 1 to totalRated
+    // addRating : function(req, res) {
+    //     console.log("adding rating to venue")
+    //     db.Venue.findOne({
+    //         where : {
+    //             id : req.params.id
+    //         }})
+    //         .then(venueRes => {
+    //             db.Venue.update(
+    //                 {
+    //                     rating : venueRes + req.rating,
+    //                     totalRated : venueRes.totalRated + 1
+    //                 },
+    //                 {where : {
+    //                     id:req.params.id
+    //                 }
+    //             })
+    //             .then(updateRes => res.json(updateRes));   
+    //             res.json(updateRes);
+    //         });
+    // },
+
+    // // Gets user info, calculates rating, and responds with obj of rating
+    // getRating : function(req,res){
+    //     db.Venue.findOne({
+    //         where : {
+    //             id : req.params.id
+    //         }})
+    //         .then(venueRes => {
+    //             const rating = venueRes.ratings / venueRes.totalRated;
+    //             res.json({rating : rating});
+    //         });
+    // }
 };
