@@ -15,7 +15,7 @@ router.post('/venue/signup', passport.authenticate('venue-local-signup', {
   
   router.post('/venue/login', passport.authenticate('venue-local-login', {
       successRedirect : '/success',
-      failureRedirect : 'login'
+      failureRedirect : '/login'
   }));
 
     router.post('/band/signup', passport.authenticate('band-local-signup', {

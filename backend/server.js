@@ -2,6 +2,7 @@
 const express = require ("express");
 // const mongoose = require("mongoose");
 const app = express();
+var db = require("./models");
 
 const passport = require('passport');
 
@@ -35,7 +36,7 @@ app.use(passport.session()); // persistent login sessions
 
 const PORT = process.env.PORT || 3001;
 
-var db = require("./models");
+
 
 
 
