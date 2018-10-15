@@ -62,9 +62,6 @@ module.exports = function(sequelize , DataTypes){
         // showsLate: {
         //     type : DataTypes.INTEGER
         // },
-        // venueRating : {
-        //     type : DataTypes.INTEGER        
-        // },
 
         // genre : [
         //         type: DataTypes.STRING

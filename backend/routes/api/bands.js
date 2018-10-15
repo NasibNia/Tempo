@@ -13,7 +13,9 @@ router.route("/:id")
       .delete(bandController.deleteBand)
       .put(bandController.updateBand);
 
-
+// router.route("/ratings/:id")
+//       .get(bandController.getRating)
+//       .put(bandController.addRating);
 
 module.exports = router;
 

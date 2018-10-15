@@ -14,7 +14,8 @@ class ArtistHome extends Component {
   state = {
     shows: [],
     user: "artist",
-    loggedIn: true
+    loggedIn: true,
+    name: ""
   };
 
   //``````````````````````````````commented out-Nasib
@@ -35,7 +36,8 @@ class ArtistHome extends Component {
         this.setState({ loggedIn: false });
         // window.location.href = "/signin";
       } else {
-        this.setState({ loggedIn: true });
+        this.setState({ loggedIn: true,
+                        name:res.data.user.name });
         // this.loadShows(res.data.user.id);
       }
     });
@@ -56,8 +58,8 @@ class ArtistHome extends Component {
 
     return (
       <div>
-        {/* {console.log(this.props.match.params.id)} */}
-        <Body userType={this.state.user} />
+        {console.log(this.props.match.params.id)}
+        <Body userType={this.state.user} name={this.state.name}/>
       </div>
     )
   }

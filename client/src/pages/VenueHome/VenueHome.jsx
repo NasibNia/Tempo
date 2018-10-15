@@ -25,7 +25,8 @@ class VenueHome extends Component {
         description: "",
         statistics: "",
         user: "venue",
-        loggedIn: true
+        loggedIn: true,
+        name: ""
     };
 
     componentDidMount() {
@@ -35,7 +36,8 @@ class VenueHome extends Component {
               this.setState({ loggedIn: false });
             //   window.location.href = "/signin";
             } else {
-              this.setState({ loggedIn: true });
+              this.setState({ loggedIn: true,
+                              name : res.data.user.name });
               // this.loadShows(res.data.user.id);
             }
           });
@@ -46,7 +48,7 @@ class VenueHome extends Component {
 
         return (
             <div>
-                <Body userType={this.state.user} url={this.props.match} />
+                <Body userType={this.state.user} url={this.props.match} name={this.state.name}/>
             </div>
         )
     }
