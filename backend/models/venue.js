@@ -30,7 +30,7 @@ module.exports = function(sequelize , DataTypes){
         },
         password : {
             type: DataTypes.STRING,
-            allowNull: false
+            // allowNull: false
         },
         capacity : {
            type : DataTypes.INTEGER,
@@ -66,6 +66,27 @@ module.exports = function(sequelize , DataTypes){
             type: DataTypes.BOOLEAN,
             allowNull: true
         },
+        website :  {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        phone_number :  {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        website_description:  {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        average_ticket_price: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        venue_picture_url: {
+            type: DataTypes.STRING,
+            allowNull: true
+        }
+
         // reserved : [
         //     {
         //         from : DataTypes.Date,
