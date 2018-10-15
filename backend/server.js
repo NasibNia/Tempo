@@ -53,14 +53,6 @@ const routes = require ("./routes");
 app.use('/', routes);
 
 
-// mongoose.connect(
-//     process.env.MONGODB_URI || "mongodb://localhost/tempoDB"
-// );
-
-// app.listen(PORT, function (){
-//     console.log(`listening on port ${PORT}`);
-// });
-
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
