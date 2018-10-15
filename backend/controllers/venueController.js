@@ -42,6 +42,18 @@ module.exports = {
             });
     },
 
+    findReadyVenues : function (req, res){
+        db.Venue.findAll({
+            where : {
+                readyToBook : true
+            },
+            include : [db.Show]
+            })
+            .then(venuesRes => {
+                res.json(venuesRes);
+            });
+    },
+
     // tested and working
     deleteVenue : function(req,res){
         db.Venue.destroy({
