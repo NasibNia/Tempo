@@ -13,7 +13,7 @@ class Body extends Component {
     }
 
     changeState(val) {
-        this.state.mainComponent = val
+        this.setState({mainComponent: val})
     }
 
     render() {

@@ -44,6 +44,18 @@ module.exports = {
             });
     },
 
+    findReadyBands : function (req, res){
+        db.Band.findAll({
+            where : {
+                readyToGig : true
+            },
+            include : [db.Show]
+            })
+            .then(bandsRes => {
+                res.json(bandsRes);
+            });
+    },
+
     // tested and works
     deleteBand : function(req,res){
         console.log("delete band");

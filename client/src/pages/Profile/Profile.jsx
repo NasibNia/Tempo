@@ -218,7 +218,8 @@ class profile extends Component {
                 soundcloud: this.state.soundcloud,
                 spotify: this.state.spotify,
                 profilePic: this.state.profilePic,
-                genres: JSON.stringify(this.state.genres)
+                genres: JSON.stringify(this.state.genres),
+                readyToGig: this.state.readyToGig
             }
 
             API.updateBand(this.state.userId, profileInfo)
@@ -243,7 +244,8 @@ class profile extends Component {
                 capacity: this.state.capacity,
                 ticket_price: this.state.ticket_price,
                 Year_est: this.state.Year_est,
-                genres: JSON.stringify(this.state.genres)
+                genres: JSON.stringify(this.state.genres),
+                readyToBook: this.state.readyToGig
             }
 
             API.updateVenue(this.state.userId, profileInfo)
