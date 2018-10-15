@@ -57,10 +57,10 @@ export default {
         return axios.delete("/api/shows/" + id);
     },
     // Saves a show to the database
-    saveShow: function (showData, userRoute) {
-        let user = userRoute.replace(/[0-9]/g, '');
-        let id = userRoute.match(/\d+/)[0];
-        return axios.post(`/api/shows/${user}` + id, showData);
+    saveShow: function (showData, userType, id) {
+        // let user = userRoute.replace(/[0-9]/g, '');
+        // let id = userRoute.match(/\d+/)[0];
+        return axios.post("/api/shows/" + userType + "/" + id, showData);
     },
     updateShow: function (id, showData) {
         return axios.put("/api/shows/" + id, showData);

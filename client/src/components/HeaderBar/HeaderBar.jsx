@@ -10,22 +10,12 @@ import axios from 'axios'
 class HeaderBar extends Component {
 
   state ={
-    loggedIn : false
+    loggedIn : true
   };
  
 
 
   componentDidMount() {
-
-    console.log("state ", this.state.loggedIn)    
-  //   axios.get("/api/user").then(function(data){
-  //     console.log("getUser ",data.data)
-  //     // Make sure the data contains the username as expected before using it
-  //     if (data.hasOwnProperty('user')) {
-  //         console.log('user: ' + data.data.user);
-  //         return data.data.user;
-  //     }
-  // });
 
       API.getUser(
         // function(err,data){
@@ -37,6 +27,8 @@ class HeaderBar extends Component {
           if (!res.data.user) {
                 this.setState({loggedIn : false});
               }
+              console.log("state ", this.state.loggedIn)    
+
         });
       }
     // const user = API.getUser(
@@ -54,11 +46,14 @@ class HeaderBar extends Component {
   
 
   handleLogout  = event =>{
+    event.preventDefault();
       API.logout()
       .then(res=>{
         console.log("res   from logout route   ", res);
         if (res.data.logout){
           this.setState({loggedIn : false});
+          window.location.href = "/signin";
+          // return <Redirect to='/signin'/>
         } else {
           console.log("logout failed");
         }
