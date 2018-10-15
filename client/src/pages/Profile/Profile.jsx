@@ -701,9 +701,7 @@ class profile extends Component {
         return (
             <div>
                 <HeaderBar />
-                <Grow in={true}>
                     {profilePrompts}
-                </Grow>
                 <Stepper activeStep={activeStep} className={classes.stepper}>
                     {steps.map((label, index) => {
                         const props = {};

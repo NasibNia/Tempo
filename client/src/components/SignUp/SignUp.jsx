@@ -197,13 +197,14 @@ class SignUp extends Component {
     }
 
     signUpBand = () => {
-        const newUser = {
+        let newUser = {
             userType: this.state.userType,
             name: this.state.name,
             email: this.state.email,
             password: this.state.password,
             // genre: this.state.genre
         }
+        console.log(newUser);
         axios.post("/band/signup", newUser)
             .then(results => {
                 console.log(results);
@@ -223,7 +224,7 @@ class SignUp extends Component {
     };
 
     signUpVenue = () => {
-        const newUser = {
+        let newUser = {
             userType: this.state.userType,
             name: this.state.name,
             email: this.state.email,
@@ -234,6 +235,7 @@ class SignUp extends Component {
             state: this.state.stateUS
             // genre: this.state.genre
         }
+        console.log(newUser);
         axios.post("/venue/signup", newUser)
             .then(results => {
                 console.log(results);
@@ -525,7 +527,7 @@ class SignUp extends Component {
                             id="filled-address-input"
                             label="Street Address"
                             className={classes.textField}
-                            type="address"
+                            type="text"
                             name="address"
                             autoComplete="current-address"
                             margin="normal"
@@ -538,7 +540,7 @@ class SignUp extends Component {
                                 id="filled-city-input"
                                 label="City"
                                 className={classes.textField}
-                                type="city"
+                                type="text"
                                 name="city"
                                 autoComplete="current-city"
                                 margin="normal"
@@ -611,7 +613,7 @@ class SignUp extends Component {
                                 id="filled-zip-input"
                                 label="Zip Code"
                                 className={classes.textField}
-                                type="zip"
+                                type="text"
                                 name="zip"
                                 autoComplete="current-zip"
                                 margin="normal"
