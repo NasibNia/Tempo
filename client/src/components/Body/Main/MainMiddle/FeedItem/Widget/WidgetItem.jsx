@@ -66,7 +66,7 @@ class WidgetItem extends Component {
 
     loadUser() {
         API.getUser().then(res => {
-            console.log("component mounting check", res.data);
+            // console.log("component mounting check", res.data);
             if (!res.data.user) {
                 this.setState({ loggedIn: false });
             } else {
@@ -123,7 +123,7 @@ class WidgetItem extends Component {
             case "gig board":
                 return (
                     <div>
-                        {console.log(this.state.shows)}
+                        {/* {console.log(this.state.shows)} */}
                         <Panel data={this.state.shows} />
                     </div>
                 );

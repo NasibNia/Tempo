@@ -12,17 +12,40 @@ const styles = theme => ({
     root: {
         width: '100%',
     },
+    panel: {
+        boxShadow: "none"
+    },
     heading: {
         fontSize: theme.typography.pxToRem(15),
         flexBasis: '33.33%',
         flexShrink: 0,
+        color: theme.palette.primary.light,
+        textTransform: "capitalize"
     },
     secondaryHeading: {
         fontSize: theme.typography.pxToRem(15),
         color: theme.palette.text.secondary,
+        textTransform: "uppercase"
     },
-    borderBox: {
-
+    summary: {
+        transition: "0.3s ease-in-out",
+        '&:hover': {
+            backgroundColor: "rgba(255, 117, 96, 0.350)",
+            color: "white",
+            borderRadius: "5px"
+        }
+    },
+    information: {
+        display: "flex",
+        justifyContent: "space-evenly",
+        lineHeight: "1.5"
+    },
+    venueImage: {
+        maxHeight: "188px",
+        maxWidth: "250px",
+        borderRadius: "5px",
+        marginLeft: "5px",
+        marginRight: "10px"
     }
 });
 
@@ -59,31 +82,67 @@ class ControlledExpansionPanels extends React.Component {
     // function to dynamically generate panel elements based on specific database information passed    
     panelGenerator = (elem, classes, expanded) => {
         this.keyCount++;
+        let subtitle;
+        let information;
+        let image;
+
+        // Subtitle conditionals
+        if (elem.date) {
+            subtitle = elem.date;
+        }
+        else if (elem.address) {
+            // subtitle = (elem.address + " " + elem.city + " " + elem.state + " " + elem.zip)
+            //temporary line below for seeders
+            subtitle = (elem.address);
+        }
+        else {
+            subtitle = elem.rating;
+        }
+
+        // Image conditionals
+        if (elem.profilePic) {
+            image = elem.profilePic;
+        }
+        else if (elem.venue_picture_url) {
+            image = (elem.venue_picture_url);
+        }
+        else {
+            image = "";
+        }
+
+        // Image conditionals
+        if (elem.description) {
+            information = elem.description;
+        }
+        else if (elem.time_start) {
+            information =
+                <div>
+                    <p>Start Time: {elem.time_start}</p>
+                    <p>End Time: {elem.time_start}</p>
+                </div>;
+        }
+        else {
+            information =
+                <div>
+                    <p>Capacity: {elem.capacity}</p>
+                    <p>Ticket Price: {elem.average_ticket_price}</p>
+                    <a href={elem.website} className = "panelVenueLink">Learn More</a>
+                </div>;
+        }
+
+
+
         return (
-            <ExpansionPanel key={this.keyCount} expanded={expanded === `panel + ${elem.id}`} onChange={this.handleChange(`panel + ${elem.id}`)}>
-                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                    <Typography className={classes.heading}>{elem.name}</Typography>
-                    <Typography className={classes.secondaryHeading}>{
-                        (() => {
-                            if (elem.date) {
-                                return elem.date
-                            }
-                            else if (elem.address) {
-                                return (elem.address + " " + elem.city + " " + elem.state + " " + elem.zip)
-                            }
-                            else {
-                                return elem.rating
-                            }
-                        })
-                    }</Typography>
+            <ExpansionPanel key={this.keyCount} expanded={expanded === `panel + ${elem.id}`} onChange={this.handleChange(`panel + ${elem.id}`)} className={classes.panel}>
+                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} className={classes.summary} id="summary">
+                    <Typography className={classes.heading} id="heading">{elem.name}</Typography>
+                    <Typography className={classes.secondaryHeading}>{subtitle}
+                    </Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
-                    <Typography>
-                        {elem.time_start
-                            ? <div>
-                                <p>Start Time: {elem.time_start}</p>
-                                <p>End Time: {elem.time_start}</p>
-                            </div> : elem.description}
+                    <Typography className = {classes.information}>
+                        <img src = {image} className = {classes.venueImage} />
+                        {information}
                     </Typography>
                 </ExpansionPanelDetails>
             </ExpansionPanel>
@@ -94,15 +153,15 @@ class ControlledExpansionPanels extends React.Component {
         const { classes } = this.props;
         const { expanded } = this.state;
         let model = this.props.data;
-        console.log("model", model)
+        // console.log("model", model)
 
         return (
             <div className={classes.root}>
                 {/* {console.log("Panel Info"), this.state.info} */}
                 {(model
-                ) ? model
+                ) ? model.slice(0, 9)
                     .map(elem =>
-                        this.panelGenerator(elem, classes, expanded)) : <h1>Come back later for more data little BOYYY.</h1>
+                        this.panelGenerator(elem, classes, expanded)) : <h1>Stay tuned for exciting updates!</h1>
                 }
             </div>
         );

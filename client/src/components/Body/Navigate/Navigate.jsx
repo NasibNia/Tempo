@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 const NavigateItem = props => {
     return (
-        <div className="navigate-item" onClick={() => this.props.click(props.type)}>
+        <div className="navigate-item" onClick={() => props.click(props.type)}>
             <div className="navigate-icon" style={{ backgroundImage:'url(' + props.icon + ')', borderRadius: props.radius}}></div>
             <h4 className="navigate-text">{props.text}</h4>
         </div>

@@ -12,7 +12,8 @@ module.exports = {
       "average_ticket_price": 49,
       "venue_picture_url": "http://3.bp.blogspot.com/-zfNYPUZqDWk/VUal1gFWkQI/AAAAAAAAFAM/10UHsMC7sbw/s1600/Rickshaw%2BStop.JPG",
       createdAt : new Date(),
-      updatedAt : new Date()
+      updatedAt : new Date(),
+      readyToBook : true
     },
     {
       "name": "slim's",
@@ -25,6 +26,8 @@ module.exports = {
       "venue_picture_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPUqjaWbzR027x5f_PdPKTFAqgHoxGpm--Zsi836JiFPU_Mrg4Cg",
       createdAt : new Date(),
       updatedAt : new Date()
+      ,
+      readyToBook : true
     },
      {
       "name": "sfjazz center",
@@ -36,7 +39,8 @@ module.exports = {
       "average_ticket_price": 64,
       "venue_picture_url": "https://www.sftravel.com/sites/sftraveldev.prod.acquia-sites.com/files/styles/sft_550x300/public/parters/images/P0001446_1_20140711130243_14.JPG?itok=Hb-4g0ZJ&timestamp=1536807428",
       createdAt : new Date(),
-      updatedAt : new Date()
+      updatedAt : new Date(),
+      readyToBook : true
     },
     {
       "name": "the fillmore",
@@ -48,7 +52,8 @@ module.exports = {
       "average_ticket_price": 32,
       "venue_picture_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQaRSDIMqcTRRMSbK_D3esl6yL55R6nLoORKdiohSTzThQK1XPeA",
       createdAt : new Date(),
-      updatedAt : new Date()
+      updatedAt : new Date(),
+      readyToBook : true
     },
     {
       "name": "the chapel",
@@ -60,7 +65,8 @@ module.exports = {
       "average_ticket_price": 22,
       "venue_picture_url": "https://picture.liquidspace.com/Index/6ff1a226-262c-4b1a-a6d0-937bf86fc28c?emptyImageUrl=https:%2F%2Fliquidspace.com%2FContent%2FImages%2Fliquid-holder.jpg&etag=+VkOdxpOF3+h9nOqOl3tBA==&maxWidth=1100&maxHeight=820",
       createdAt : new Date(),
-      updatedAt : new Date()
+      updatedAt : new Date(),
+      readyToBook : true
     },
     {
       "name": "great american music hall",
@@ -72,7 +78,8 @@ module.exports = {
       "average_ticket_price": 25,
       "venue_picture_url": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Great_American_Music_Hall_%28April_1976%29.jpg",
       createdAt : new Date(),
-      updatedAt : new Date()
+      updatedAt : new Date(),
+      readyToBook : true
     },
     {
       "name": "the laundry",
@@ -84,7 +91,8 @@ module.exports = {
       "average_ticket_price": 62,
       "venue_picture_url": "https://picture.liquidspace.com/Index/9304975a-8757-4c2a-accf-32a58100d251?emptyImageUrl=https:%2F%2Fcontent.liquidspace.com%2FImages%2Fliquid-holder.jpg%3Fv%3D-73115844&etag=ki0J8DxHxGZWM6UNOfl8Dw==&maxWidth=1100&maxHeight=820&crop=true",
       createdAt : new Date(),
-      updatedAt : new Date()
+      updatedAt : new Date(),
+      readyToBook : true
     },
     {
       "name": "the warfield",
@@ -96,7 +104,8 @@ module.exports = {
       "average_ticket_price": 45,
       "venue_picture_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScA2OT_DMWKyjQbeWwL6p3s2JmXERKRE5gsfxdLe0hZSJBmLY7xw",
       createdAt : new Date(),
-      updatedAt : new Date()
+      updatedAt : new Date(),
+      readyToBook : true
     },
     {
       "name": "hemlock tavern",
@@ -108,7 +117,8 @@ module.exports = {
       "average_ticket_price": 15,
       "venue_picture_url": "https://images.complex.com/complex/image/upload/c_limit,w_680/fl_lossy,pg_1,q_auto/olmzo0tiz4fxnzikx6wa.jpg",
       createdAt : new Date(),
-      updatedAt : new Date()
+      updatedAt : new Date(),
+      readyToBook : true
     },
     {
       "name": "the riptide",
@@ -120,7 +130,8 @@ module.exports = {
       "average_ticket_price": "N/A",
       "venue_picture_url": "https://c1.staticflickr.com/7/6004/5886394540_971eca7219_b.jpg",
       createdAt : new Date(),
-      updatedAt : new Date()
+      updatedAt : new Date(),
+      readyToBook : true
     },{
       "name": "brick & mortar music hall",
       "address": "1710 mission st,san francisco, ca 94103",
