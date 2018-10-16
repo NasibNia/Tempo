@@ -3,9 +3,25 @@
 }
 
 ControlledExpansionPanels-root-1 > div {
-    box-shadow: none;
+    box-shadow: none !important;
 }
 
 .MuiPaper-elevation1-11 {
-    background-color: red ;
+    background-color: red;
 }
+
+#summary:hover #heading{
+    color: #551620;
+    font-weight: 450;
+  }
+
+.panelVenueLink{
+    transition: 0.1s ease-in-out;
+}
+
+.panelVenueLink:hover{
+    color: #FF7460;
+    letter-spacing: 1px;
+}
+
+

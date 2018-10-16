@@ -42,13 +42,15 @@
 }
 
 .side-chunk h4 {
-    font-weight: normal;  
+    font-weight: normal; 
 }
 
 .side-text h4 {
     font-weight: bold;
     color: #741D2B;
     margin-bottom: 3px;
+    text-decoration: none;
+    text-transform: capitalize;
 }
 
 .react-calendar {
