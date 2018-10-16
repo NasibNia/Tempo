@@ -57,6 +57,7 @@ class WidgetItem extends Component {
     };
 
     componentDidMount() {
+        console.log("widget mount")
         this.loadUser();
         this.loadShows();
         this.loadBands();
@@ -66,10 +67,9 @@ class WidgetItem extends Component {
 
     loadUser() {
         API.getUser().then(res => {
-            // console.log("component mounting check", res.data);
-            if (!res.data.user) {
-                this.setState({ loggedIn: false });
-            } else {
+            console.log(" widget item component mounting check", res.data);
+
+
                 this.setState({
                     loggedIn: true,
                     userType: res.data.user.userType,
@@ -79,7 +79,8 @@ class WidgetItem extends Component {
                     profilePic: res.data.user.profilePic
                 });
                 // this.loadShows(res.data.user.id);
-            }
+            // }        this.setState({ shows: res.data, name: "", description: "", statistics: "" })
+
         });
     }
 

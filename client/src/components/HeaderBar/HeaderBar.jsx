@@ -23,7 +23,7 @@ class HeaderBar extends Component {
         // }
         )
         .then(res => {
-          console.log("component mounting check", res.data.user);
+          console.log("header bar component mounting check", res.data.user);
           if (res.data.user) {
                 this.setState({loggedIn : true});
               }

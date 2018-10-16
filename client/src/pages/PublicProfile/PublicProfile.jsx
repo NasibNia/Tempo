@@ -116,7 +116,11 @@ class PublicProfile extends Component {
                 window.location.href = "/signin";
             } else {
                 console.log("Public Profile Mounting Check", res.data, res.data.user.id);
+<<<<<<< HEAD
                 this.setState({
+=======
+                this.setState({ 
+>>>>>>> 4ed567fd4a16c4eb4dea08cf9ed18d52579c531f
                     loggedIn: true,
                     userId: res.data.user.id,
                     name: res.data.user.name,

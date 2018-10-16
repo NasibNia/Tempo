@@ -13,8 +13,6 @@ const styles = {
     column: {
         position: "fixed"
     }
-
-
 }
 
 class VenueHome extends Component {
@@ -38,8 +36,8 @@ class VenueHome extends Component {
                 window.location.href = "/artist";
             } else {
                 console.log("user is venue")
-              this.setState({ loggedIn: true,
-                              name : res.data.user.name });
+            //   this.setState({ loggedIn: true,
+            //                   name : res.data.user.name });
               // this.loadShows(res.data.user.id);
             }
           });
@@ -50,11 +48,12 @@ class VenueHome extends Component {
 
         return (
             <div>
+                {/* <Body /> */}
                 <Body userType={this.state.user} url={this.props.match} name={this.state.name}/>
+
             </div>
         )
     }
-
 }
 
 export default VenueHome;
