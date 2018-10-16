@@ -25,7 +25,7 @@ class ArtistHome extends Component {
       console.log("artistHome component mounting check", res.data);
       if (!res.data.user) {
           window.location.href = "/signin";
-      } else if (res.data.user.usertype === "venue") {
+      } else if (res.data.user.userType === "venue") {
           window.location.href = "/venue";
 
       } else {
@@ -55,7 +55,7 @@ class ArtistHome extends Component {
       <div>
         {/* {console.log("render item " + this.state.name)} */}
         {/* <Body pic={this.state.pic}/> */}
-        <Body />
+        <Body userType={this.state.user}  />
 
         
       </div>
