@@ -184,8 +184,8 @@ class SignIn extends Component {
                 );
 
         } else {
-            alert("you need to choose either band or venue");
-            console.log("you need to choose either band or venue");
+            alert("You need to indicated whether you're an artist/band or venue!");
+            console.log("You need to choose either band or venue");
 
         }
 

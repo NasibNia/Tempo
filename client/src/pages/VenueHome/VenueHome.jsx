@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
+import {Redirect} from 'react-router-dom';
+
 import Body from "../../components/Body";
 
 import API from "../../utils/API";
@@ -13,8 +13,6 @@ const styles = {
     column: {
         position: "fixed"
     }
-
-
 }
 
 class VenueHome extends Component {
@@ -24,37 +22,38 @@ class VenueHome extends Component {
         name: "",
         description: "",
         statistics: "",
-        user: "venue"
-      };
-    
-      componentDidMount() {
-        // this.loadBands();
-        // console.log("params", this.props.match)
-      }
-    
-    //   loadBands = () => {
-    //     API.getBands()
-    //       .then(res =>
-    //         this.setState({ bands: res.data, name: "", description: "", statistics: "" })
-    //       )
-    //       .catch(err => console.log(err));
-    //   };
+        user: "venue",
+        loggedIn: true,
+        name: ""
+    };
+
+    componentDidMount() {
+        API.getUser().then(res => {
+            console.log("component mounting check", res.data);
+            if (!res.data.user) {
+                window.location.href = "/signin";
+            } else if (res.data.user.userType === "artist") {
+                window.location.href = "/artist";
+            } else {
+                console.log("user is venue")
+            //   this.setState({ loggedIn: true,
+            //                   name : res.data.user.name });
+              // this.loadShows(res.data.user.id);
+            }
+          });
+    }
+
 
     render() {
 
         return (
             <div>
-                {/* <Header />
-                <Grid container direction="row" justify="center" alignItems="flex-start" spacing={24} style={{ marginTop: "5%" }}>
-                    <Nav className = {styles.column}/>
-                    <Main />
-                    <Shows className = {styles.column}/>
-                </Grid> */}
-                <Body userType={this.state.user} url={this.props.match} />
+                {/* <Body /> */}
+                <Body userType={this.state.user} url={this.props.match} name={this.state.name}/>
+
             </div>
         )
     }
-
 }
 
 export default VenueHome;

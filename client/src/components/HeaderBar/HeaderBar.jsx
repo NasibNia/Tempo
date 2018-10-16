@@ -9,56 +9,50 @@ import axios from 'axios'
 
 class HeaderBar extends Component {
 
-  state = {
-    loggedIn: false
+
+  state ={
+    loggedIn : false
   };
 
 
 
   componentDidMount() {
+      API.getUser(
+        // function(err,data){
+        //   console.log(data)
+        // }
+        )
+        .then(res => {
+          console.log("header bar component mounting check", res.data.user);
+          if (res.data.user) {
+                this.setState({loggedIn : true});
+              }
+              console.log("state ", this.state.loggedIn)    
 
-    console.log("state ", this.state.loggedIn)
-    //   axios.get("/api/user").then(function(data){
-    //     console.log("getUser ",data.data)
-    //     // Make sure the data contains the username as expected before using it
-    //     if (data.hasOwnProperty('user')) {
-    //         console.log('user: ' + data.data.user);
-    //         return data.data.user;
-    //     }
+        });
+      }
+    // const user = API.getUser(
+    //   function(err,data){
+    //   console.log(data)
     // });
+    
+    //   console.log("header getUser: ", user)
+    //   if (!user) {
+    //     this.setState({loggedIn : false});
+    //   }
+    
+    // }
+    
+  
 
-    API.getUser(
-      // function(err,data){
-      //   console.log(data)
-      // }
-    )
-      .then(res => {
-        console.log("component mounting check", res.data.user);
-        if (!res.data.user) {
-          this.setState({ loggedIn: false });
-        }
-      });
-  }
-  // const user = API.getUser(
-  //   function(err,data){
-  //   console.log(data)
-  // });
-
-  //   console.log("header getUser: ", user)
-  //   if (!user) {
-  //     this.setState({loggedIn : false});
-  //   }
-
-  // }
-
-
-
-  handleLogout = event => {
-    API.logout()
-      .then(res => {
+  handleLogout  = event =>{
+    event.preventDefault();
+      API.logout()
+      .then(res=>{
         console.log("res   from logout route   ", res);
-        if (res.data.logout) {
-          this.setState({ loggedIn: false });
+        if (res.data.logout){
+          window.location.href = "/signin";
+          // return <Redirect to='/signin'/>
         } else {
           console.log("logout failed");
         }
@@ -68,6 +62,8 @@ class HeaderBar extends Component {
 
   handleLogin = event => {
     console.log("login clicked")
+    window.location.href = "/signin";
+
   }
 
 
@@ -76,6 +72,8 @@ class HeaderBar extends Component {
     //   return <Redirect to='/signin'/>
 
     let button;
+    let headerIcon;
+
     if (this.state.loggedIn) {
       button = <div className="log-out-button">
         <Button variant="contained"
@@ -85,6 +83,9 @@ class HeaderBar extends Component {
           LOG OUT
     </Button>
       </div>
+      headerIcon =  <div className="header-item">
+                <div className="header-icon"></div>
+                </div>
     } else {
       button = <div className="log-out-button">
         <Button variant="contained"
@@ -106,6 +107,9 @@ class HeaderBar extends Component {
             <h4>{this.props.userType} suite</h4>
           </div>
           <div className="header-items">
+            {headerIcon}
+            {headerIcon}
+            {headerIcon}
             {button}
           </div>
         </div>

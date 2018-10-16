@@ -51,11 +51,13 @@ class WidgetItem extends Component {
         id: "",
         name: "",
         description: "",
-        profilePic: ""
+        profilePic: "",
+        userType: ""
 
     };
 
     componentDidMount() {
+        console.log("widget mount")
         this.loadUser();
         this.loadShows();
         this.loadBands();
@@ -65,19 +67,20 @@ class WidgetItem extends Component {
 
     loadUser() {
         API.getUser().then(res => {
-            console.log("component mounting check", res.data);
-            if (!res.data.user.id) {
-                this.setState({ loggedIn: false });
-            } else {
+            console.log(" widget item component mounting check", res.data);
+
+
                 this.setState({
                     loggedIn: true,
+                    userType: res.data.user.userType,
                     id: res.data.user.id,
                     name: res.data.user.name,
                     description: res.data.user.description,
                     profilePic: res.data.user.profilePic
                 });
                 // this.loadShows(res.data.user.id);
-            }
+            // }        this.setState({ shows: res.data, name: "", description: "", statistics: "" })
+
         });
     }
 
@@ -121,7 +124,7 @@ class WidgetItem extends Component {
             case "gig board":
                 return (
                     <div>
-                        {console.log(this.state.shows)}
+                        {/* {console.log(this.state.shows)} */}
                         <Panel data={this.state.shows} />
                     </div>
                 );
@@ -129,7 +132,7 @@ class WidgetItem extends Component {
                 return (
                     <div id="post-gig">
                         <h1>Post a gig here</h1>
-                        <Modal postType="show" url={this.props.url} />
+                        <Modal postType="show" url={this.props.url} userID={this.state.id} userType={this.props.userType} />
                     </div>
                 );
             case "past gigs":
@@ -167,6 +170,7 @@ class WidgetItem extends Component {
                                 }
                             </div>
                             <div className="profile-text">
+                                <h2 style={{color: "#741D2B"}}>{this.state.name}</h2>
                                 <p>{this.state.description ? this.state.description :
                                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam nisi ipsum, tempor ac lorem a, fringilla consequat lorem. Etiam congue enim arcu, at molestie dui porta et. Nullam in tristique mi. Maecenas ullamcorper, est sed aliquet placerat, arcu diam rutrum velit, sed gravida ante felis in lectus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam eu finibus lorem. Nulla mattis tellus eu mi tempor volutpat. Aliquam nec vestibulum augue. Morbi enim leo, vulputate a efficitur vel, molestie vitae nibh. Nullam porttitor scelerisque dapibus."
                                 }

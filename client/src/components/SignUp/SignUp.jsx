@@ -197,15 +197,15 @@ class SignUp extends Component {
     }
 
     signUpBand = () => {
-        let newUser = {
+        let newArtist = {
             userType: this.state.userType,
             name: this.state.name,
             email: this.state.email,
             password: this.state.password,
             // genre: this.state.genre
         }
-        console.log(newUser);
-        axios.post("/band/signup", newUser)
+        console.log("Artist Profile", newArtist);
+        axios.post("/band/signup", newArtist)
             .then(results => {
                 console.log(results);
                 if (results.data.success) {
@@ -224,7 +224,7 @@ class SignUp extends Component {
     };
 
     signUpVenue = () => {
-        let newUser = {
+        let newVenue = {
             userType: this.state.userType,
             name: this.state.name,
             email: this.state.email,
@@ -235,8 +235,8 @@ class SignUp extends Component {
             state: this.state.stateUS
             // genre: this.state.genre
         }
-        console.log(newUser);
-        axios.post("/venue/signup", newUser)
+        console.log("Venue Profile", newVenue);
+        axios.post("/venue/signup", newVenue)
             .then(results => {
                 console.log(results);
                 if (results.data.success) {

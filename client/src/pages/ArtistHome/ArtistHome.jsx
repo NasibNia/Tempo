@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {Redirect} from 'react-router-dom';
+
 import Body from "../../components/Body";
 import API from "../../utils/API";
 import axios from "axios";
@@ -9,54 +11,56 @@ const styles = {}
 
 class ArtistHome extends Component {
 
-    state = {
-        shows: [],
-        user: "artist"
-      };
-      
-      //``````````````````````````````commented out-Nasib
-      // componentDidMount() {
-      //   this.loadShows();
-      //   console.log("test")
-      //   console.log("params", this.props.match.params)
+  state = {
+    shows: [],
+    user: "artist",
+    loggedIn: true,
+    name: "",
+    pic: ""
+  };
+  
+  componentDidMount() {
 
-      //   // console.log(API.getUser());
+    API.getUser().then(res => {
+      console.log("artistHome component mounting check", res.data);
+      if (!res.data.user) {
+          window.location.href = "/signin";
+      } else if (res.data.user.usertype === "venue") {
+          window.location.href = "/venue";
 
+      } else {
 
-      // }
-      //``````````````````````````````Replaced-Nasib
-      componentDidMount() {
-        API.getUser().then(res => {
-          console.log("component mounting check", res.data);
-          if (!res.data.user.id) {
-                this.setState({loggedIn : false});
-                window.location.href = "/signin";
-              } else {
-                this.setState({loggedIn : true});
-                // this.loadShows(res.data.user.id);
-              }
-        });
+        // this.setState({ pic:res.data.user.profilePic});
+
       }
-      //``````````````````````````````endOfChange-Nasib
+    });
+  }
 
-      loadShows = () => {
-        API.getShows()
-          .then(res =>
-            this.setState({ shows: res.data, name: "", description: "", statistics: "" })
-          )
-          .catch(err => console.log(err));
-      };
+  //``````````````````````````````endOfChange-Nasib
+
+  loadShows = () => {
+    API.getShows()
+      .then(res =>
+        this.setState({ shows: res.data})
+
+        // this.setState({ shows: res.data, name: "", description: "", statistics: "" })
+      )
+      .catch(err => console.log(err));
+  };
 
 
-   render() {
+  render() {
 
-       return (
-           <div>
-              {console.log(this.props.match.params.id) }
-               <Body userType = {this.state.user}/>
-           </div>
-           )
-   }
+    return (
+      <div>
+        {/* {console.log("render item " + this.state.name)} */}
+        {/* <Body pic={this.state.pic}/> */}
+        <Body />
+
+        
+      </div>
+    )
+  }
 
 }
 

@@ -200,6 +200,7 @@ class profile extends Component {
                     // finishedUpdate: true,
                 });
                 //updates the user information
+                console.log("user type" , this.state.userType)
                 this.updateProfile();
             }, 2000);
         })
@@ -210,13 +211,15 @@ class profile extends Component {
 
     updateProfile = () => {
         console.log(this.state.userId, "State user id")
-        if (this.state.usertype === "artist") {
+        if (this.state.userType === "artist") {
+            console.log("artist is here")
             const profileInfo = {
                 description: this.state.description,
                 soundcloud: this.state.soundcloud,
                 spotify: this.state.spotify,
                 profilePic: this.state.profilePic,
-                genres: JSON.stringify(this.state.genres)
+                genres: JSON.stringify(this.state.genres),
+                readyToGig: this.state.readyToGig
             }
 
             API.updateBand(this.state.userId, profileInfo)
@@ -241,7 +244,8 @@ class profile extends Component {
                 capacity: this.state.capacity,
                 ticket_price: this.state.ticket_price,
                 Year_est: this.state.Year_est,
-                genres: JSON.stringify(this.state.genres)
+                genres: JSON.stringify(this.state.genres),
+                readyToBook: this.state.readyToGig
             }
 
             API.updateVenue(this.state.userId, profileInfo)
@@ -275,8 +279,8 @@ class profile extends Component {
         this.setState({ genres });
     };
 
-    handleReadyChange = name => event => {
-        this.setState({ [name]: event.target.checked });
+    handleReadyChange = event => {
+        this.setState({ [event.target.value]: event.target.checked });
     };
 
 

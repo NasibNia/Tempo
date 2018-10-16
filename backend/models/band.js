@@ -33,7 +33,6 @@ module.exports = function(sequelize , DataTypes){
             allowNull: true
         },
         description : {
-            //when getting this info, must JSON.parse
             type: DataTypes.TEXT,
             allowNull: true
         },
