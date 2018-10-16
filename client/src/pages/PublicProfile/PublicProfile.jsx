@@ -111,11 +111,12 @@ class PublicProfile extends Component {
 
     componentDidMount() {
         API.getUser().then(res => {
-            console.log("Public Profile Mounting Check", res.data, res.data.user.id);
             if (!res.data.user.id) {
                 this.setState({ loggedIn: false });
+                window.location.href = "/signin";
             } else {
-                this.setState({
+                console.log("Public Profile Mounting Check", res.data, res.data.user.id);
+                this.setState({ 
                     loggedIn: true,
                     userId: res.data.user.id,
                     name: res.data.user.name,
