@@ -130,28 +130,28 @@ class PublicProfile extends Component {
 
     }
 
-    handleClick = event => {
-        event.preventDefault();
-        console.log("click");
-        this.setState({
-            loading: true,
+    // handleClick = event => {
+    //     event.preventDefault();
+    //     console.log("click");
+    //     this.setState({
+    //         loading: true,
 
-        }, () => {
-            this.timer = setTimeout(() => {
-                this.setState({
-                    loading: false,
-                    // temporary testing for progress bar
-                    // loggedIn: true,
-                    // finishedUpdate: true,
-                });
-                //updates the user information
-                this.updateProfile();
-            }, 2000);
-        })
-        // const newBand = bands;
-        // this.updateProfile();
+    //     }, () => {
+    //         this.timer = setTimeout(() => {
+    //             this.setState({
+    //                 loading: false,
+    //                 // temporary testing for progress bar
+    //                 // loggedIn: true,
+    //                 // finishedUpdate: true,
+    //             });
+    //             //updates the user information
+    //             this.updateProfile();
+    //         }, 2000);
+    //     })
+    //     // const newBand = bands;
+    //     // this.updateProfile();
 
-    }
+    // }
 
 
     handleInputChange = event => {
