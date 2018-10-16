@@ -1,10 +1,13 @@
 import React from 'react';
 import "./SideSection.css";
 
+//create an individual key for each item
+let keyCount = 0;
 
 const generateItems = (name, image, rating, link) => {
+    keyCount++;
     return (
-        <a className="side-item" href={link} target="_blank">
+        <a key={keyCount} className="side-item" href={link} target="_blank">
             <div className="side-icon" style={{backgroundImage: `url(${image})`}}></div>
             <div className="side-text">
                 <h4>{name}</h4>

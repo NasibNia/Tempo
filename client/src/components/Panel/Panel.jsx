@@ -95,8 +95,17 @@ class ControlledExpansionPanels extends React.Component {
             //temporary line below for seeders
             subtitle = (elem.address);
         }
-        else {
+        else if(elem.rating) {
             subtitle = elem.rating;
+        }
+        else{
+            let genres = [];
+            for(var i = 0; i < Object.keys(JSON.parse(elem.genres)).length; i++){
+                if(JSON.parse(elem.genres)[Object.keys(JSON.parse(elem.genres))[i]] === true){
+                    genres.push(Object.keys(JSON.parse(elem.genres))[i]);
+                }
+            }
+            subtitle = genres.join(", ");
         }
 
         // Image conditionals
@@ -110,7 +119,7 @@ class ControlledExpansionPanels extends React.Component {
             image = "";
         }
 
-        // Image conditionals
+        // Information conditionals
         if (elem.description) {
             information = elem.description;
         }
