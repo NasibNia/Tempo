@@ -111,7 +111,7 @@ class PublicProfile extends Component {
 
     componentDidMount() {
         API.getUser().then(res => {
-            if (!res.data.user.id) {
+            if (!res.data.user) {
                 this.setState({ loggedIn: false });
                 window.location.href = "/signin";
             } else {
