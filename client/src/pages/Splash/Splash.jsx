@@ -25,9 +25,9 @@ class Splash extends Component {
                 </div>
                 <div className="splash-section section-1" ref={div => { this.top = div }}>
                     <div className="text">
-                        <h1>Play more music, earn more money</h1>
+                        <h1>Play More Music, Earn More Money</h1>
                         <Slide bottom>
-                            <p className="subtitle">Tempo</p>
+                            <img src="/assets/box-logo.png" alt="" style={{width: "130px"}}/>
                         </Slide>
                     </div>
                     <div id="background-overlay">
@@ -43,9 +43,16 @@ class Splash extends Component {
                     </Fade>
                 </div>
                 <div className="splash-section section-3" ref={div => { this.preview = div }}>
-                    <div className="research">
-                        <div className="testimony1"></div>
 
+                    <div className="testimony1">
+                    <Fade bottom>
+                        <h1>‘TODAY, INDEPENDENT ARTISTS CAN DO EVERYTHING THAT MAJOR LABELS CAN.’</h1>
+                        <p>'Back when I started in the ‘90s you didn’t have a choice, you were either signed or unsigned. Today independent artists can do everything that the major labels can, within reason, as long as they have the know-how and budget.'<br></br><br></br><span className="text-right">-Music Business Worldwide</span></p>
+                        <h4></h4>
+                        </Fade>
+                    </div>
+
+                    <div className="research">
                     </div>
                 </div>
                 <div className="splash-section section-4" ref={div => { this.pricing = div }}>
