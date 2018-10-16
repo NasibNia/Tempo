@@ -103,7 +103,7 @@ class HeaderBar extends Component {
       <div className="header">
         <div className="header-contents">
           <div className="logo">
-            <h1><Link to="/artist">Tempo</Link></h1>
+            <Link to="/artist"><img src="/assets/box-logo.png"></img></Link>
             <h4>{this.props.userType} suite</h4>
           </div>
           <div className="header-items">
@@ -111,8 +111,6 @@ class HeaderBar extends Component {
             {headerIcon}
             {headerIcon}
             {button}
-
-
           </div>
         </div>
       </div>

@@ -97,5 +97,12 @@
     background-color: #C1321E;
     /* background: radial-gradient(#e66465, rgb(216, 59, 39)); */
     border-radius: 20px;
-    margin-left: 5px;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+.logo img {
+    transform: translateY(9px);
+    width: 170px;
+    box-shadow: 0 5px 10px rgba(0,0,0, 0.3);
 }
