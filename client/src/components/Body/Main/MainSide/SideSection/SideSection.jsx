@@ -1,16 +1,19 @@
 import React from 'react';
 import "./SideSection.css";
 
+//create an individual key for each item
+let keyCount = 0;
 
-const generateItems = (name, image, rating) => {
+const generateItems = (name, image, rating, link) => {
+    keyCount++;
     return (
-        <div className="side-item">
+        <a key={keyCount} className="side-item" href={link} target="_blank">
             <div className="side-icon" style={{backgroundImage: `url(${image})`}}></div>
             <div className="side-text">
                 <h4>{name}</h4>
                 <p>{rating}</p>
             </div>
-        </div>
+        </a>
     )
 
 }
@@ -19,7 +22,7 @@ const SideItem = props => {
     if (props.data) {
         console.log("Side Data", props.data)
         return (
-            props.data.map(elem => generateItems(elem.name, elem.profilePic, elem.rating))
+            props.data.slice(0,5).map(elem => generateItems(elem.name, (elem.profilePic) ? elem.profilePic : elem.venue_picture_url, elem.rating, elem.website))
         )
     }
     else {

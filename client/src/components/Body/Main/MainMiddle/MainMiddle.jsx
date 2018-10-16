@@ -16,17 +16,17 @@ let artistNewsFeed = [
         type: "gig board"
     },
     {
+        title: "Venue Directory",
+        type: "venue directory"
+    },
+    {
         title: "Past Gigs",
         type: "past gigs"
     },
     {
         title: "Community",
         type: "community events"
-    },
-    {
-        title: "Venue Directory",
-        type: "venue directory"
-    },
+    }
 
 ]
 
@@ -47,6 +47,11 @@ let venueNewsFeed = [
         title: "Gig Board",
         type: "gig board"
     },
+    ,
+    {
+        title: "Artist Directory",
+        type: "artist directory"
+    },
     {
         title: "Post A Gig",
         type: "post gig"
@@ -54,10 +59,6 @@ let venueNewsFeed = [
     {
         title: "Past Gigs",
         type: "past gigs"
-    },
-    {
-        title: "Artist Directory",
-        type: "artist directory"
     }
 ]
 

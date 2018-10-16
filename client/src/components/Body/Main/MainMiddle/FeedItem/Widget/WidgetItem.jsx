@@ -68,9 +68,8 @@ class WidgetItem extends Component {
     loadUser() {
         API.getUser().then(res => {
             console.log(" widget item component mounting check", res.data);
-            // if (!res.data.user) {
-            //     this.setState({ loggedIn: false });
-            // } else {
+
+
                 this.setState({
                     loggedIn: true,
                     userType: res.data.user.userType,
@@ -80,7 +79,8 @@ class WidgetItem extends Component {
                     profilePic: res.data.user.profilePic
                 });
                 // this.loadShows(res.data.user.id);
-            // }
+            // }        this.setState({ shows: res.data, name: "", description: "", statistics: "" })
+
         });
     }
 
@@ -124,7 +124,7 @@ class WidgetItem extends Component {
             case "gig board":
                 return (
                     <div>
-                        {console.log(this.state.shows)}
+                        {/* {console.log(this.state.shows)} */}
                         <Panel data={this.state.shows} />
                     </div>
                 );

@@ -11,6 +11,7 @@
 }
 .side-item {
     transition: .2s ease;
+    text-decoration: none;
 }
 
 .side-item:hover {

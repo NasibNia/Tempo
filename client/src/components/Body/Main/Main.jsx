@@ -23,7 +23,7 @@ class Main extends Component {
                 )
                 .catch(err => console.log(err));
         }
-        else if (this.props.userType === "band") {
+        else if (this.props.userType === "artist") {
             API.getReadyVenues()
                 .then(res => {
                     this.setState({ data: res.data })
@@ -34,10 +34,10 @@ class Main extends Component {
     }
 
     render() {
-        // console.log("early data", this.state.data)
+        console.log("early data", this.state.data)
         return (
             <div className="main">
-                <MainMiddle userType={this.props.userType} url={this.props.url}/>
+                <MainMiddle userType={this.props.userType} url={this.props.url} name={this.props.name}/>
                 <MainSide userType={this.props.userType} data={this.state.data}/>
             </div>
         )
