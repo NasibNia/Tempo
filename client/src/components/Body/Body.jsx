@@ -8,7 +8,7 @@ import "./body.css";
 class Body extends Component {
 
     state = {
-        // userType: this.props.userType,
+        userType: this.props.userType,
         mainComponent: "newsFeed"
     }
 

@@ -38,20 +38,22 @@ class ArtistHome extends Component {
 
   //``````````````````````````````endOfChange-Nasib
 
-  // loadShows = () => {
-  //   API.getShows()
-  //     .then(res =>
-  //       this.setState({ shows: res.data, name: "", description: "", statistics: "" })
-  //     )
-  //     .catch(err => console.log(err));
-  // };
+  loadShows = () => {
+    API.getShows()
+      .then(res =>
+        this.setState({ shows: res.data})
+
+        // this.setState({ shows: res.data, name: "", description: "", statistics: "" })
+      )
+      .catch(err => console.log(err));
+  };
 
 
   render() {
 
     return (
       <div>
-        {console.log("render item " + this.state.name)}
+        {/* {console.log("render item " + this.state.name)} */}
         {/* <Body pic={this.state.pic}/> */}
         <Body />
 

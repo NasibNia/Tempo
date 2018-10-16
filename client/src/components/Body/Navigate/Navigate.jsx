@@ -22,7 +22,7 @@ const Navigate = props => {
                     <NavigateItem icon="/assets/iconography2-06.png" text={props.userType === "artist" ? "Find a Gig" : "Post a Gig"} type={"profile"} click={props.method} />
                     <NavigateItem icon="/assets/iconography2-03.png" text="Past Gigs" type={"profile"} click={props.method} />
                 </div>
-                <div className="`navigate`-chunk">
+                <div className="navigate-chunk">
                     <h2>Community</h2>
                     <NavigateItem icon="/assets/iconography2-04.png" text="News Feed" type={"profile"} click={props.method} />
                     <NavigateItem icon="/assets/iconography2-01.png" text="Calendar" type={"profile"} click={props.method} />
