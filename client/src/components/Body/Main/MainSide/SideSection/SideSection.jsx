@@ -20,7 +20,6 @@ const generateItems = (name, image, rating, link) => {
 
 const SideItem = props => {
     if (props.data) {
-        console.log("Side Data", props.data)
         return (
             props.data.slice(0,5).map(elem => generateItems(elem.name, (elem.profilePic) ? elem.profilePic : elem.venue_picture_url, elem.rating, elem.website))
         )
@@ -34,13 +33,10 @@ const SideItem = props => {
             </div>
         </div>) 
     }
-
-
 }
 
 const SideSection = props => {
     return (
-
         <div className="side-chunk">
             <h2>{props.header}</h2>
             <SideItem text={props.title} type={props.userType} data={props.data} />
