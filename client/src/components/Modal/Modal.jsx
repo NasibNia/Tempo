@@ -9,6 +9,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 
@@ -36,6 +37,11 @@ const styles = theme => ({
             backgroundColor: theme.palette.secondary.light,
             color: "white"
         }
+    },
+    message: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: "space-between"
     },
     successMessage: {
         backgroundColor: "#4CAF50",
@@ -211,7 +217,11 @@ class Modal extends React.Component {
                     <SnackbarContent
                         onClose={this.handleClose}
                         className={classes.successMessage}
-                        message="The show has been posted to the board!"
+                        message={
+                            <span className={classes.message}>
+                                <CheckCircleIcon style={{ marginRight: "5px" }} />
+                                {"The show has been posted to the board!"}
+                            </span>}
                         action={[
                             <IconButton
                                 key="close"

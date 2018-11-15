@@ -13,11 +13,18 @@ import LockIcon from '@material-ui/icons/LockOutlined';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import CheckIcon from '@material-ui/icons/Check';
+import CloseIcon from '@material-ui/icons/Close';
+import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 import Slide from '@material-ui/core/Slide';
+import Snackbar from '@material-ui/core/Snackbar';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
+import ErrorIcon from '@material-ui/icons/Error';
+import WarningIcon from '@material-ui/icons/Warning';
+import amber from '@material-ui/core/colors/amber';
 
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
@@ -94,7 +101,25 @@ const styles = theme => ({
             color: theme.palette.secondary.dark
 
         }
-
+    },
+    message: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: "space-between"
+    },
+    errorMessage: {
+        backgroundColor: "#DD270B",
+        transition: "0.3s ease-in-out",
+        '&:hover': {
+            backgroundColor: theme.palette.secondary.dark,
+        }
+    },
+    warningMessage: {
+        backgroundColor: amber[700],
+        transition: "0.3s ease-in-out",
+        '&:hover': {
+            backgroundColor: amber[600],
+        }
     }
 });
 
@@ -115,9 +140,11 @@ class SignIn extends Component {
         loggedIn: false,
         loading: false,
         redirect: false,
-        userType: ""
-
-
+        userType: "",
+        open: false,
+        openSnack: false,
+        openErrorMessage: false,
+        openWarningMessage: false
     }
 
     componentDidMount() {
@@ -160,8 +187,8 @@ class SignIn extends Component {
                             loggedIn: true,
                             id: results.data.id
                         }, () => console.log(this.state))
-                    if (!results.data.success) {
-                        alert("incorrect username or password")
+                    else if (!results.data.success) {
+                        this.setState({ openSnack: false, openErrorMessage: true });
                     }
                     // window.location.href = "/artist";
                 }
@@ -176,15 +203,15 @@ class SignIn extends Component {
                             loggedIn: true,
                             id: results.data.id
                         }, () => console.log(this.state))
-                    if (!results.data.success) {
-                        alert("incorrect username or password")
+                    else if (!results.data.success) {
+                        this.setState({ openSnack: false, openErrorMessage: true });
                     }
                     // window.location.href = "/artist";
                 }
                 );
 
         } else {
-            alert("You need to indicated whether you're an artist/band or venue!");
+            this.setState({ openSnack: false, openWarningMessage: true });
             console.log("You need to choose either band or venue");
 
         }
@@ -224,6 +251,22 @@ class SignIn extends Component {
             }
         }
     }
+
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+
+    handleOpen = () => {
+        this.setState({ open: true });
+    };
+
+    handleErrorClose = () => {
+        this.setState({ openSnack: false, openErrorMessage: false });
+    };
+
+    handleWarningClose = () => {
+        this.setState({ openSnack: false, openWarningMessage: false });
+    };
 
     handleCheckboxClick = event => {
 
@@ -355,6 +398,66 @@ class SignIn extends Component {
                 <Typography style={{ textAlign: "center" }}>
                     <a className={classes.link} href="/signup">Or Sign-Up as a Tempo Affiliate!</a>
                 </Typography>
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left',
+                    }}
+                    open={this.state.openErrorMessage}
+                    autoHideDuration={6000}
+                    onClose={this.handleErrorClose}
+                >
+                    <SnackbarContent
+                        onClose={this.handleErrorClose}
+                        className={classes.errorMessage}
+                        message={
+                            <span className={classes.message}>
+                                <ErrorIcon style={{ marginRight: "5px" }} />
+                                {"Incorrect username or password!"}
+                            </span>}
+                        action={[
+                            <IconButton
+                                key="close"
+                                aria-label="Close"
+                                color="inherit"
+                                className={classes.close}
+                                onClick={this.handleErrorClose}
+                            >
+                                <CloseIcon className={classes.icon} />
+                            </IconButton>
+                        ]}
+                    />
+                </Snackbar>
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left',
+                    }}
+                    open={this.state.openWarningMessage}
+                    autoHideDuration={6000}
+                    onClose={this.handleWarningClose}
+                >
+                    <SnackbarContent
+                        onClose={this.handleWarningClose}
+                        className={classes.warningMessage}
+                        message={
+                            <span className={classes.message}>
+                                <WarningIcon style={{ marginRight: "5px" }} />
+                                {"Please indicate whether you're an artist/band or venue!"}
+                            </span>}
+                        action={[
+                            <IconButton
+                                key="close"
+                                aria-label="Close"
+                                color="inherit"
+                                className={classes.close}
+                                onClick={this.handleWarningClose}
+                            >
+                                <CloseIcon className={classes.icon} />
+                            </IconButton>
+                        ]}
+                    />
+                </Snackbar>
             </div>
 
 
