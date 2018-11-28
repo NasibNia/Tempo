@@ -25,10 +25,11 @@ class Splash extends Component {
                 </div>
                 <div className="splash-section section-1" ref={div => { this.top = div }}>
                     <div className="text">
-                        <h1>Play More Music, Earn More Money</h1>
-                        <Slide bottom>
-                            <img src="/assets/box-logo.png" alt="" style={{width: "130px"}}/>
+                        <Slide top>
+                            <img src="/assets/box-logo.png" alt="" id = "tempo"/>
                         </Slide>
+                        <h1>Play More Music, Earn More Money</h1>
+                        
                     </div>
                     <div id="background-overlay">
                         <video autoPlay muted loop>

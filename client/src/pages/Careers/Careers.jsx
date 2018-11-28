@@ -7,7 +7,7 @@ const Careers = () => {
     return (
         <div>
             <HeaderBar />
-            <div class="paper">
+            <div className="paper">
                 <h1>We're Hiring!</h1>
             </div>
         </div>
