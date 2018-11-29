@@ -106,6 +106,7 @@ class PublicProfile extends Component {
         spotify: "",
         soundcloud: "",
         profilePic: "",
+        readyToGig: false,
         loggedIn: false
 
     }
@@ -148,7 +149,9 @@ class PublicProfile extends Component {
                     description: res.data.description,
                     profilePic: res.data.profilePic,
                     spotify: res.data.spotify,
-                    soundcloud: res.data.soundcloud
+                    soundcloud: res.data.soundcloud,
+                    readyToGig: res.data.readyToGig
+
                 });
             }
 
@@ -247,7 +250,7 @@ class PublicProfile extends Component {
                         </div>
                         <div className="profile-stats">
                             <div className="active-status">
-                                <h1 className="active">ACTIVE</h1>
+                                <h1 className="active" style={{backgroundColor: this.state.readyToGig ? "green" : "#FF7460"}}> {this.state.readyToGig ? "ACTIVE" : "INACTIVE"}</h1>
                             </div>
                             <div className="tempo-rating">
                                 <div className="rating-box">
