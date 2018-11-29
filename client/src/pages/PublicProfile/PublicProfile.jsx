@@ -98,6 +98,7 @@ class PublicProfile extends Component {
 
     state = {
         userId: 0,
+        profileId: 0,
         name: "",
         rating: 0.0,
         description: "",
@@ -110,22 +111,47 @@ class PublicProfile extends Component {
     }
 
     componentDidMount() {
+        const path = this.props.location.pathname;
+        const id = path.substring(9, path.length);
+
+        this.setState({ 
+            profileId: id
+         });
+
         API.getUser().then(res => {
             if (!res.data.user) {
                 this.setState({ loggedIn: false });
                 window.location.href = "/signin";
             } else {
-                console.log("Public Profile Mounting Check", res.data, res.data.user.id);
+                console.log("User Profile Mounting Check", res.data, res.data.user.id);
                 this.setState({ 
                     loggedIn: true,
                     userId: res.data.user.id,
-                    name: res.data.user.name,
-                    description: res.data.user.description,
-                    profilePic: res.data.user.profilePic,
-                    spotify: res.data.user.spotify,
-                    soundcloud: res.data.user.soundcloud
+                    // name: res.data.user.name,
+                    // description: res.data.user.description,
+                    // profilePic: res.data.user.profilePic,
+                    // spotify: res.data.user.spotify,
+                    // soundcloud: res.data.user.soundcloud
                 });
             }
+        });
+
+        //find whose page we are on
+        API.getBand(id).then(res => {
+            if (!res.data) {
+                console.log("No user!")
+            } else {
+                console.log("profileId", this.state.profileId);
+                console.log("Public Profile Mounting Check", res.data);
+                this.setState({ 
+                    name: res.data.name,
+                    description: res.data.description,
+                    profilePic: res.data.profilePic,
+                    spotify: res.data.spotify,
+                    soundcloud: res.data.soundcloud
+                });
+            }
+
         });
 
     }
@@ -172,14 +198,14 @@ class PublicProfile extends Component {
                     <div className="profile-wrap">
                         <div className="profile-main">
                             <div className="profile-info">
-                                <div className="profile-photo"></div>
+                                <div className="profile-photo" style={{backgroundImage: `url(${this.state.profilePic})`}}></div>
                                 <div className="profile-bio">
-                                    <h1 className="profile-name">Tame Impala</h1>
+                                    <h1 className="profile-name">{this.state.name ? this.state.name : "Tame Impala"}</h1>
                                     <h3 className="profile-hometown">Hometown: San Francisco</h3>
                                     <h3 className="profile-date-formed">Date formed: 4/20/18</h3>
                                     <h3 className="profile-genre">Genre: Rock</h3>
                                     <h3 className="profile-member-count">Member Count: 4</h3>
-                                    <p className="profile-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eu erat a ipsum vehicula volutpat. Nullam at dui imperdiet, feugiat ex sed, pharetra elit. Maecenas vitae tristique dolor.</p>
+                                    <p className="profile-description">{this.state.description ? this.state.description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eu erat a ipsum vehicula volutpat. Nullam at dui imperdiet, feugiat ex sed, pharetra elit. Maecenas vitae tristique dolor."}</p>
                                 </div>
                             </div>
 
