@@ -13,7 +13,11 @@ import "./HeaderBar.css";
 const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit
+    marginRight: theme.spacing.unit,
+    transition: "0.3s ease-in-out",
+    '&:focus': {
+      width: "200px"
+  }
   },
 })
 
@@ -94,16 +98,16 @@ class HeaderBar extends Component {
     let search =
       <TextField
         id="search-input"
-        label="Email"
+        label="Search Artists"
         className={classes.textField}
-        type="text"
+        type="search"
         name="search"
         autoComplete="search"
         margin="normal"
         variant="filled"
         onChange={this.handleInputChange}
         value={this.state.search}
-        // helperText={this.state.errors.email}
+      // helperText={this.state.errors.email}
       />
 
       ;
@@ -141,7 +145,7 @@ class HeaderBar extends Component {
             <h4>{this.props.userType} suite</h4>
           </div>
           <div className="header-items">
-          {search}
+            {search}
             {headerIcon}
             {headerIcon}
             {headerIcon}

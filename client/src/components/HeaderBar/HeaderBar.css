@@ -49,6 +49,21 @@
     align-items: center;
 }
 
+/* #search-input{
+    height: 100%;
+    color: white;
+    width: 120px;
+    transition: width 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    transition-property: width;
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: 0ms;
+}
+
+/* #search-input:focus{
+    width: 200px;
+} */ */
+
 .log-out-button {
     display: flex;
     height: 100%;
