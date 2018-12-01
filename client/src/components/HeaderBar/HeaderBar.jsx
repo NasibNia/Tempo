@@ -15,9 +15,7 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     transition: "0.3s ease-in-out",
-    '&:focus': {
-      width: "200px"
-  }
+
   },
 })
 
@@ -64,6 +62,13 @@ class HeaderBar extends Component {
     this.setState({ [name]: value });
 
   };
+  
+  handleKeyPress = event => {
+    if(event.key == 'Enter'){
+      
+      window.location.href = "/profile/1";
+    }
+  }
 
 
   handleLogout = event => {
@@ -95,10 +100,10 @@ class HeaderBar extends Component {
 
     let button;
     let headerIcon;
-    let search =
+    let search = <div id="search-input">
       <TextField
-        id="search-input"
-        label="Search Artists"
+        id="search-bar"
+        placeholder="Search Artists"
         className={classes.textField}
         type="search"
         name="search"
@@ -107,8 +112,10 @@ class HeaderBar extends Component {
         variant="filled"
         onChange={this.handleInputChange}
         value={this.state.search}
+        onKeyPress={this.handleKeyPress}
       // helperText={this.state.errors.email}
       />
+    </div>
 
       ;
 
@@ -141,7 +148,7 @@ class HeaderBar extends Component {
       <div className="header">
         <div className="header-contents">
           <div className="logo">
-            <Link to="/artist"><img src="/assets/box-logo.png"></img></Link>
+            <Link to={"/" + this.props.userType}><img src="/assets/box-logo.png"></img></Link>
             <h4>{this.props.userType} suite</h4>
           </div>
           <div className="header-items">

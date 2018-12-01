@@ -34,6 +34,7 @@
 .header-items {
     display: flex;
     padding: 0 10px;
+    /* width: 216px; */
 }
 
 .header-item .header-icon {
@@ -49,20 +50,29 @@
     align-items: center;
 }
 
-/* #search-input{
+#search-input{
+    display: flex;
+    height: 100%;
+    align-items: center;
+    margin-right: 40px;
+}
+
+#search-bar{
     height: 100%;
     color: white;
     width: 120px;
-    transition: width 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    transition-property: width;
-    transition-duration: 300ms;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-delay: 0ms;
+    transition: 0.2s ease-in-out;
+    padding: 10px 0 5px 5px ;
 }
 
-/* #search-input:focus{
+#search-bar:hover{
+    background-color: #8D4651;
+    border-radius: 2px;
+}  
+
+#search-bar:focus{
     width: 200px;
-} */ */
+}  
 
 .log-out-button {
     display: flex;
