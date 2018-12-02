@@ -53,8 +53,7 @@
 
 #search-input{
     display: flex;
-    /* height: 100%; */
-    align-items: center;
+    height: 100%;
     margin-right: 40px;
 }
 

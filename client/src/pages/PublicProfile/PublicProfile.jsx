@@ -106,6 +106,7 @@ class PublicProfile extends Component {
         spotify: "",
         soundcloud: "",
         profilePic: "",
+        genres: "",
         readyToGig: false,
         loggedIn: false
 
@@ -115,9 +116,9 @@ class PublicProfile extends Component {
         const path = this.props.location.pathname;
         const id = path.substring(9, path.length);
 
-        this.setState({ 
+        this.setState({
             profileId: id
-         });
+        });
 
         API.getUser().then(res => {
             if (!res.data.user) {
@@ -125,7 +126,7 @@ class PublicProfile extends Component {
                 window.location.href = "/signin";
             } else {
                 console.log("User Profile Mounting Check", res.data, res.data.user.id);
-                this.setState({ 
+                this.setState({
                     loggedIn: true,
                     userId: res.data.user.id,
                     // name: res.data.user.name,
@@ -144,13 +145,14 @@ class PublicProfile extends Component {
             } else {
                 console.log("profileId", this.state.profileId);
                 console.log("Public Profile Mounting Check", res.data);
-                this.setState({ 
+                this.setState({
                     name: res.data.name,
                     description: res.data.description,
                     profilePic: res.data.profilePic,
                     spotify: res.data.spotify,
                     soundcloud: res.data.soundcloud,
-                    readyToGig: res.data.readyToGig
+                    readyToGig: res.data.readyToGig,
+                    genres: res.data.genres
 
                 });
             }
@@ -191,6 +193,14 @@ class PublicProfile extends Component {
 
     render() {
         const { classes } = this.props;
+        let genres = [];
+        // for (var i = 0; i < Object.keys(JSON.parse(this.state.genres)).length; i++) {
+        //     if (JSON.parse(this.state.genres)[Object.keys(JSON.parse(this.state.genres))[i]] === true) {
+        //         genres.push(Object.keys(JSON.parse(this.state.genres))[i]);
+        //     }
+        // }
+        // console.log(JSON.parse(this.state.genres))
+        console.log(genres)
 
         return (
             <div>
@@ -201,12 +211,12 @@ class PublicProfile extends Component {
                     <div className="profile-wrap">
                         <div className="profile-main">
                             <div className="profile-info">
-                                <div className="profile-photo" style={{backgroundImage: `url(${this.state.profilePic})`}}></div>
+                                <div className="profile-photo" style={{ backgroundImage: `url(${this.state.profilePic})` }}></div>
                                 <div className="profile-bio">
                                     <h1 className="profile-name">{this.state.name ? this.state.name : "Tame Impala"}</h1>
                                     <h3 className="profile-hometown">Hometown: San Francisco</h3>
                                     <h3 className="profile-date-formed">Date formed: 4/20/18</h3>
-                                    <h3 className="profile-genre">Genre: Rock</h3>
+                                    <h3 className="profile-genre">Genres: {this.state.loggedIn ? genres.join(", ") : "Rock"}</h3>
                                     <h3 className="profile-member-count">Member Count: 4</h3>
                                     <p className="profile-description">{this.state.description ? this.state.description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eu erat a ipsum vehicula volutpat. Nullam at dui imperdiet, feugiat ex sed, pharetra elit. Maecenas vitae tristique dolor."}</p>
                                 </div>
@@ -214,47 +224,47 @@ class PublicProfile extends Component {
 
                             <div
                                 className="profile-activity">
-                                    <h3 className="profile-activity-header">Activity</h3>
-                                    <div className="activity-box">
-                                        <div className="activity-item">
-                                            <div className="activity-icon"></div>
-                                            <div className="activity-text">
+                                <h3 className="profile-activity-header">Activity</h3>
+                                <div className="activity-box">
+                                    <div className="activity-item">
+                                        <div className="activity-icon"></div>
+                                        <div className="activity-text">
                                             <h3>Activity Headline</h3>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                            </div>
                                         </div>
-                                        <div className="activity-item">
-                                            <div className="activity-icon"></div>
-                                            <div className="activity-text">
+                                    </div>
+                                    <div className="activity-item">
+                                        <div className="activity-icon"></div>
+                                        <div className="activity-text">
                                             <h3>Activity Headline</h3>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                            </div>
                                         </div>
-                                        <div className="activity-item">
-                                            <div className="activity-icon"></div>
-                                            <div className="activity-text">
+                                    </div>
+                                    <div className="activity-item">
+                                        <div className="activity-icon"></div>
+                                        <div className="activity-text">
                                             <h3>Activity Headline</h3>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                            </div>
                                         </div>
-                                        <div className="activity-item">
-                                            <div className="activity-icon"></div>
-                                            <div className="activity-text">
+                                    </div>
+                                    <div className="activity-item">
+                                        <div className="activity-icon"></div>
+                                        <div className="activity-text">
                                             <h3>Activity Headline</h3>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                             <div className="profile-music"></div>
                         </div>
                         <div className="profile-stats">
                             <div className="active-status">
-                                <h1 className="active" style={{backgroundColor: this.state.readyToGig ? "green" : "#FF7460"}}> {this.state.readyToGig ? "ACTIVE" : "INACTIVE"}</h1>
+                                <h1 className="active" style={{ backgroundColor: this.state.readyToGig ? "green" : "#FF7460" }}> {this.state.readyToGig ? "ACTIVE" : "INACTIVE"}</h1>
                             </div>
                             <div className="tempo-rating">
                                 <div className="rating-box">
-                                    <h1 className="rating-number">{ this.state.userId === 0 ? "4.3" : this.state.rating}</h1>
+                                    <h1 className="rating-number">{this.state.userId === 0 ? "4.3" : this.state.rating}</h1>
                                     <h3 className="rating-subtitle">Tempo Rating</h3>
                                 </div>
                                 <div className="rating-box">
@@ -273,7 +283,7 @@ class PublicProfile extends Component {
                                     <h1 className="rating-number">222</h1>
                                     <h3 className="rating-subtitle">Shows Played</h3>
                                 </div>
-                            
+
                             </div>
                         </div>
                     </div>

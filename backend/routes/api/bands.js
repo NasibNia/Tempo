@@ -8,7 +8,7 @@ router.route("/")
 router.route("/ready")
       .get(bandController.findReadyBands)
 
-router.route("/name=")
+router.route("/search/:name")
       .get(bandController.findBandByName)
 
 router.route("/:id")

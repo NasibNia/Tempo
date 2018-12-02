@@ -4,6 +4,10 @@ import { Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+// import SearchIcon from '@material-ui/core/SearchIcon';
+import InputAdornment from '@material-ui/core/InputAdornment';
+
+
 
 import API from "../../utils/API.js";
 import axios from 'axios'
@@ -120,6 +124,13 @@ class HeaderBar extends Component {
         autoComplete="search"
         margin="normal"
         variant="filled"
+        // InputProps={{
+        //   startAdornment: (
+        //     <InputAdornment position="start">
+        //       {/* <SearchIcon /> */}
+        //     </InputAdornment>
+        //   ),
+        // }}
         onChange={this.handleInputChange}
         value={this.state.search}
         onKeyPress={this.handleKeyPress}
@@ -162,7 +173,7 @@ class HeaderBar extends Component {
             <h4>{this.props.userType} suite</h4>
           </div>
           <div className="header-items">
-            {search}
+            {this.state.loggedIn ? search : ""}
             {headerIcon}
             {headerIcon}
             {headerIcon}

@@ -16,7 +16,7 @@ export default {
     },
     // Gets the band with the given id
     getBandName: function (name) {
-        return axios.get("/api/bands/name=" + name);
+        return axios.get("/api/bands/search/" + name);
     },
     // Deletes the band with the given id
     deleteBand: function (id) {
