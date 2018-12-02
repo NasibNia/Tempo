@@ -28,6 +28,7 @@ class HeaderBar extends Component {
 
   state = {
     loggedIn: false,
+    userType: "",
     search: ""
   };
 
@@ -42,7 +43,10 @@ class HeaderBar extends Component {
       .then(res => {
         console.log("header bar component mounting check", res.data.user);
         if (res.data.user) {
-          this.setState({ loggedIn: true });
+          this.setState({
+            loggedIn: true,
+            userType: res.data.user.userType
+          });
         }
         console.log("state ", this.state.loggedIn)
 
@@ -169,8 +173,8 @@ class HeaderBar extends Component {
       <div className="header">
         <div className="header-contents">
           <div className="logo">
-            <Link to={"/" + this.props.userType}><img src="/assets/box-logo.png"></img></Link>
-            <h4>{this.props.userType} suite</h4>
+            <Link to={"/" + this.state.userType}><img src="/assets/box-logo.png"></img></Link>
+            <h4>{this.state.userType} suite</h4>
           </div>
           <div className="header-items">
             {this.state.loggedIn ? search : ""}

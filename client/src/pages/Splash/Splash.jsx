@@ -29,7 +29,6 @@ class Splash extends Component {
                             <img src="/assets/box-logo.png" alt="" id = "tempo"/>
                         </Slide>
                         <h1>Play More Music, Earn More Money</h1>
-                        
                     </div>
                     <div id="background-overlay">
                         <video autoPlay muted loop>

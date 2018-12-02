@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 // import Header from "../../x/Header";
 import HeaderBar from "../../components/HeaderBar"
@@ -193,14 +194,29 @@ class PublicProfile extends Component {
 
     render() {
         const { classes } = this.props;
+
+        let db_genres = JSON.parse(JSON.stringify(this.state.genres));
         let genres = [];
-        // for (var i = 0; i < Object.keys(JSON.parse(this.state.genres)).length; i++) {
-        //     if (JSON.parse(this.state.genres)[Object.keys(JSON.parse(this.state.genres))[i]] === true) {
-        //         genres.push(Object.keys(JSON.parse(this.state.genres))[i]);
-        //     }
-        // }
-        // console.log(JSON.parse(this.state.genres))
+        let editProfile = "";
+
+        for (var i = 0; i < Object.keys(db_genres).length; i++) {
+            if (db_genres[Object.keys(db_genres)[i]] === true) {
+                genres.push(Object.keys(db_genres)[i]);
+            }
+        }
+        console.log("from db", db_genres)
         console.log(genres)
+
+        if (this.state.userId == this.state.profileId) {
+            editProfile =
+                <Button variant="contained"
+                    color="secondary"
+                    fullWidth = "true"
+                    onClick={() => { return <Link to="/profile" /> }}
+                >
+                    Edit Your Profile
+                </Button>
+        }
 
         return (
             <div>
@@ -210,6 +226,7 @@ class PublicProfile extends Component {
                     <Navigate method={this.changeState} userType={this.state.userType} />
                     <div className="profile-wrap">
                         <div className="profile-main">
+                            {editProfile}
                             <div className="profile-info">
                                 <div className="profile-photo" style={{ backgroundImage: `url(${this.state.profilePic})` }}></div>
                                 <div className="profile-bio">
