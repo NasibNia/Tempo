@@ -8,6 +8,9 @@ router.route("/")
 router.route("/ready")
       .get(bandController.findReadyBands)
 
+router.route("/name=")
+      .get(bandController.findBandByName)
+
 router.route("/:id")
       .get(bandController.findBand)
       .delete(bandController.deleteBand)

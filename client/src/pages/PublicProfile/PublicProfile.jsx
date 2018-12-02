@@ -254,7 +254,7 @@ class PublicProfile extends Component {
                             </div>
                             <div className="tempo-rating">
                                 <div className="rating-box">
-                                    <h1 className="rating-number">4.3</h1>
+                                    <h1 className="rating-number">{ this.state.userId === 0 ? "4.3" : this.state.rating}</h1>
                                     <h3 className="rating-subtitle">Tempo Rating</h3>
                                 </div>
                                 <div className="rating-box">

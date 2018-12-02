@@ -44,6 +44,18 @@ module.exports = {
             });
     },
 
+    findBandByName: function (req, res) {
+        db.Band.findOne({
+            where: {
+                name: req.params.name
+            },
+            include: { model: db.Show }
+        })
+            .then(bandsRes => {
+                res.json(bandsRes);
+            });
+    },
+
     findReadyBands: function (req, res) {
         db.Band.findAll({
             where: {

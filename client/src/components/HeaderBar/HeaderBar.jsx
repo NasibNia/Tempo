@@ -62,11 +62,21 @@ class HeaderBar extends Component {
     this.setState({ [name]: value });
 
   };
-  
+
   handleKeyPress = event => {
-    if(event.key == 'Enter'){
-      
-      window.location.href = "/profile/1";
+    let searchedName = this.state.search;
+
+    if (event.key == 'Enter') {
+      console.log(this.state.search)
+      API.getBandName(searchedName).then(res => {
+        if (!res.data) {
+          console.log("Artist profile does not exist!")
+        } else {
+          console.log(res.data)
+          window.location.href = "/profile/" + res.data.id;
+        }
+      });
+
     }
   }
 
