@@ -70,13 +70,13 @@ router.post('/venue/signup', passport.authenticate('venue-local-signup', {
 //     });
 // });
 
-// router.get('/login', function (req, res) {
-//     console.log("wasn't able to login",req.user);
-//     res.json({
-//         success: false,
-//         'message': 'wrong username or password'
-//     });
-// });
+router.get('/login', function (req, res) {
+    console.log("wasn't able to login",req.user);
+    res.json({
+        success: false,
+        'message': 'wrong username or password'
+    });
+});
 
 router.get('/success', isLoggedIn, function(req, res){
     console.log("\n**********this user has the following information \n************ ",req.user);
