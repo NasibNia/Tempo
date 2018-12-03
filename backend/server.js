@@ -67,11 +67,9 @@ const routes = require ("./routes");
 app.use("/",routes);
 // Send every other request to the React app
 // Define any API routes before this runs
-app.get("/*", (req, res) => {
+app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
-
-
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
