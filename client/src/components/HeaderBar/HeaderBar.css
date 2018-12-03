@@ -3,6 +3,7 @@
     display: flex;
     height: 42px;
     justify-content: center;
+    align-items: center;
     position: fixed;
     top: 0;
     width: 100%;
@@ -34,6 +35,7 @@
 .header-items {
     display: flex;
     padding: 0 10px;
+    /* width: 216px; */
 }
 
 .header-item .header-icon {
@@ -48,6 +50,29 @@
     display: flex;
     align-items: center;
 }
+
+#search-input{
+    display: flex;
+    height: 100%;
+    margin-right: 40px;
+}
+
+#search-bar{
+    height: 100%;
+    color: white;
+    width: 120px;
+    transition: 0.2s ease-in-out;
+    padding: 10px 0 5px 5px ;
+}
+
+#search-bar:hover{
+    background-color: #8D4651;
+    border-radius: 2px;
+}  
+
+#search-bar:focus{
+    width: 200px;
+}  
 
 .log-out-button {
     display: flex;

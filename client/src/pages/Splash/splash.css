@@ -3,6 +3,11 @@
     width: 100%;
 }
 
+#tempo{
+    width: 400px;
+    border-radius: 5px;
+}
+
 .section-1 {
     display: flex;
     align-items: center;
@@ -24,7 +29,7 @@
 
 .section-1 h1 {
     color: white;
-    font-size: 40px;
+    font-size: 36px;
     padding: 20px 25px;
     margin: 15px 15px 5px;
     font-style: italic;
