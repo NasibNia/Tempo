@@ -43,16 +43,16 @@ var db = require("./models");
 app.use(express.urlencoded({ extended : true }));
 app.use(express.json());
 
-// if(process.env.NODE_ENV === "production") {
-//     app.use(express.static("client/build"));
-// }
-const path = require ('path');
-if (process.env.NODE_ENV === "production") {
+if(process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
-    app.get("/", function(req, res) {
-      res.sendFile(path.join(__dirname, "../client/build/index.html"));
-    });
-  }
+}
+const path = require ('path');
+// if (process.env.NODE_ENV === "production") {
+//     app.use(express.static("client/build"));
+//     app.get("/", function(req, res) {
+//       res.sendFile(path.join(__dirname, "../client/build/index.html"));
+//     });
+//   }
   /*
   else {
     app.use(express.static(path.join(__dirname, '/client/public')));
@@ -64,7 +64,12 @@ if (process.env.NODE_ENV === "production") {
 app.use(passport.initialize()); // initialize passport
 app.use(passport.session()); // persistent login sessions
 const routes = require ("./routes");
-app.use('/', routes);
+app.use(routes);
+// Send every other request to the React app
+// Define any API routes before this runs
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../client/build/index.html"));
+});
 
 
 
