@@ -1,4 +1,3 @@
 module.exports = {
-    passport : "./passport",
-    requireRole : "./requireRole"
+    passport : "./passport.js",
 };
