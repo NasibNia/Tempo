@@ -33,7 +33,7 @@ router.post('/venue/signup', passport.authenticate('venue-local-signup', {
         if (!req.user) {
             console.log("no user");
             // The user is not logged in
-            res.json({});
+            res.json({'message': 'api user acting funcky'});
         } else {
             res.status(200).json({
                 user: req.user
