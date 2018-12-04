@@ -11,7 +11,7 @@ const generateItems = (name, image, rating, link) => {
             <div className="side-icon" style={{backgroundImage: `url(${image})`}}></div>
             <div className="side-text">
                 <h4>{name}</h4>
-                <p>Rating: {rating}</p>
+                <p>Rating:{rating}</p>
             </div>
         </a>
     )
@@ -20,16 +20,21 @@ const generateItems = (name, image, rating, link) => {
 
 // generates div for ratings
 const generateRatings = (name, venueID) => {
-    let stars = <div key={venueID} className="stars"><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
+    let stars = <div key={venueID} className="stars"><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i></div>;
     // for (let i = 1; i <= 5; i++) {
     //     stars += <i className="fas fa-star"></i>
 
     // }
     return (
-        <div className="side-text">
+        <div className="side-text stars">
                 <h4>{name}</h4>
-                {stars}
-
+                <ul class="list-inline rating-list">
+                    <li><i class="fas fa-star" title="Rate 5"></i></li>
+                    <li><i class="fas fa-star" title="Rate 4"></i></li>
+                    <li><i class="fas fa-star" title="Rate 3"></i></li>
+                    <li><i class="fas fa-star" title="Rate 2"></i></li>
+                    <li><i class="fas fa-star" title="Rate 1"></i></li>
+                </ul>
                 <hr></hr>
             </div>
     )
@@ -44,8 +49,7 @@ const SideItem = props => {
     else if (props.ratings) {
         return (
             props.ratings.slice(0,3).map(elem => generateRatings(elem.name, elem.id)
-            
-
+        
         ) 
         )
     }

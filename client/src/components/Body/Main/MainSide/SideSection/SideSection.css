@@ -36,7 +36,27 @@
     text-decoration: none;
 }
 
-.fa-star {
-    color:orange;
+/* .fa-star {
+    color:black;
     margin-right: 2px;
-}
+} */
+ 
+/* .fa-star:hover {
+    color: orange;
+} */
+
+.rating-list li {
+    float: right;
+    color: gray;
+    padding: 10px 3px;
+  }
+  
+  .rating-list li:hover,
+  .rating-list li:hover ~ li {
+    color: orange;
+  }
+  
+  .rating-list {
+    display: inline-block;
+    list-style: none;
+  }
