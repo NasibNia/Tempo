@@ -14,9 +14,17 @@ export default {
     getBand: function (id) {
         return axios.get("/api/bands/" + id);
     },
-    // Gets the band with the given id
+    // Gets the band with the given name
     getBandName: function (name) {
         return axios.get("/api/bands/search/" + name);
+    },
+    // Gets the top 10 bands by ticket price
+    getTopBandsByPrice: function () {
+        return axios.get("/api/bands/ticket_price/");
+    },
+    // Gets the top 10 bands by average draw
+    getTopBandsByDraw: function () {
+        return axios.get("/api/bands/average_draw/");
     },
     // Deletes the band with the given id
     deleteBand: function (id) {

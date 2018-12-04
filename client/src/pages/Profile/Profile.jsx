@@ -159,9 +159,11 @@ class profile extends Component {
         spotify: "",
         soundcloud: "",
         profilePic: "",
+        facebook: "",
         readyToGig: false,
         Year_est: 0,
-        ticket_price: 0,
+        ticket_price: 15,
+        average_draw: 0,
         capacity: 0,
         loggedIn: false,
         finishedUpdate: false,
@@ -217,6 +219,9 @@ class profile extends Component {
                 description: this.state.description,
                 soundcloud: this.state.soundcloud,
                 spotify: this.state.spotify,
+                facebook: this.state.facebook,
+                ticket_price: this.state.ticket_price,
+                average_draw: this.state.average_draw,
                 profilePic: this.state.profilePic,
                 genres: JSON.stringify(this.state.genres),
                 readyToGig: this.state.readyToGig
@@ -518,6 +523,42 @@ class profile extends Component {
                                 // variant="filled"
                                 onChange={this.handleInputChange}
                                 value={this.state.soundcloud}
+                            />
+                            <TextField
+                                id="filled-facebook-input"
+                                label="Enter the link to your Facebook page"
+                                className={classes.textField}
+                                type="url"
+                                name="facebook"
+                                autoComplete="current-facebook"
+                                margin="normal"
+                                // variant="filled"
+                                onChange={this.handleInputChange}
+                                value={this.state.facebook}
+                            />
+                            <FormControl className={classes.textField} style={{marginTop: "10px"}}>
+                                <InputLabel htmlFor="filled-ticket_price-input">Current Ticket Price to Your Average Show</InputLabel>
+                                <Input
+                                    id="filled-ticket_price-input"
+                                    name="ticket_price"
+                                    type="number"
+                                    value={this.state.ticket_price}
+                                    autoComplete="current-ticket_price"
+                                    onChange={this.handleInputChange}
+                                    startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                                />
+                            </FormControl>
+                            <TextField
+                                id="filled-average_draw-input"
+                                label="What is the Average Draw (# of attendees) of your shows?"
+                                className={classes.textField}
+                                type="url"
+                                name="average_draw"
+                                autoComplete="current-average_draw"
+                                margin="normal"
+                                // variant="filled"
+                                onChange={this.handleInputChange}
+                                value={this.state.average_draw}
                             />
                             <FormControlLabel
                                 control={<Checkbox value="readyToGig" onChange={this.handleReadyChange} checked={this.state.readyToGig} color="secondary" />}

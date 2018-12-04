@@ -68,6 +68,43 @@ module.exports = {
             });
     },
 
+    // These four need testing
+    findBandByTicketPrice: function (req, res) {
+        db.Band.findAll({
+            include: [{
+                model: db.Show
+                // ({
+                //     include : [{
+                //         model : db.Show
+                // }]
+                // })
+            }],
+            limit: 8,
+            order: [['ticket_price', 'DESC']]
+        })
+            .then(bandsRes => {
+                res.json(bandsRes);
+            });
+    },
+
+    findBandByDraw: function (req, res) {
+        db.Band.findAll({
+            include: [{
+                model: db.Show
+                // ({
+                //     include : [{
+                //         model : db.Show
+                // }]
+                // })
+            }],
+            limit: 8,
+            order: [['average_draw', 'DESC']]
+        })
+            .then(bandsRes => {
+                res.json(bandsRes);
+            });
+    },
+
     // tested and works
     deleteBand: function (req, res) {
         console.log("delete band");

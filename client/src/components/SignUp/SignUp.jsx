@@ -386,7 +386,7 @@ class SignUp extends Component {
 
         if (this.state.redirect) {
             // let profileRoute = '/profile/' + this.state.id;
-            return <Redirect to={'/profile/' + this.state.id} />
+            return <Redirect to={'/profile/'} />
             // return <Redirect to={{profileRoute, state: {userType: this.state.userType}}} />
         }
 

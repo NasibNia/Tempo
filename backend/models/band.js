@@ -43,9 +43,19 @@ module.exports = function(sequelize , DataTypes){
             type: DataTypes.STRING,
             allowNull: true
         },
+        facebook : {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
         profilePic : {
             type: DataTypes.TEXT,
             allowNull: true
+        },
+        ticket_price:{
+            type : DataTypes.INTEGER
+        },
+        average_draw:{
+            type : DataTypes.INTEGER
         },
         readyToGig : {
             type: DataTypes.BOOLEAN,
