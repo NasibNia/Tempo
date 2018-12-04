@@ -33,7 +33,7 @@ router.post('/venue/signup', passport.authenticate('venue-local-signup', {
         if (!req.user) {
             console.log("no user");
             // The user is not logged in
-            res.json({});
+            res.json({'message': 'api user acting funcky'});
         } else {
             res.status(200).json({
                 user: req.user
@@ -62,13 +62,13 @@ router.post('/venue/signup', passport.authenticate('venue-local-signup', {
     }
     });
     
-router.get('/signup', function (req, res) {
-    console.log("wasn't able to login",req.user);
-    res.json({
-        success: false,
-        'message': 'wrong username or password'
-    });
-});
+// router.get('/signup', function (req, res) {
+//     console.log("wasn't able to login",req.user);
+//     res.json({
+//         success: false,
+//         'message': 'wrong username or password'
+//     });
+// });
 
 router.get('/login', function (req, res) {
     console.log("wasn't able to login",req.user);

@@ -197,7 +197,7 @@ class SignIn extends Component {
 
             axios.post("/venue/login", newUser)
                 .then(results => {
-                    console.log(results);
+                    console.log("results is " , results);
                     if (results.data.success)
                         this.setState({
                             loggedIn: true,
@@ -310,6 +310,7 @@ class SignIn extends Component {
             if (this.state.userType === "artist") {
                 return <Redirect to={'/artist/'} />
             } else if (this.state.userType === "venue") {
+                console.log("I'm here")
                 return <Redirect to={'/venue/'} />
             }
 
