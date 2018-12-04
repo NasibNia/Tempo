@@ -53,7 +53,7 @@ const styles = theme => ({
         flexDirection: 'column',
         alignItems: 'center',
         padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
-        width: "1000px"
+        width: "600px"
     },
     avatar: {
         // margin: "auto",
@@ -181,37 +181,59 @@ class profile extends Component {
             if (!res.data.user.id) {
                 this.setState({ loggedIn: false });
             } else {
+
                 if (res.data.user.userType === "artist") {
-                    this.setState({
-                        loggedIn: true,
-                        userId: res.data.user.id,
-                        name: res.data.user.name,
-                        userType: res.data.user.userType,
-                        description: res.data.user.description,
-                        soundcloud: res.data.user.soundcloud,
-                        spotify: res.data.user.spotify,
-                        facebook: res.data.user.facebook,
-                        ticket_price: res.data.user.ticket_price,
-                        average_draw: res.data.user.average_draw,
-                        profilePic: res.data.user.profilePic,
-                        genres: JSON.parse(res.data.user.genres),
-                        readyToGig: res.data.user.readyToGig
-                    });
+                    if (res.data.user.description) {
+                        this.setState({
+                            loggedIn: true,
+                            userId: res.data.user.id,
+                            name: res.data.user.name,
+                            userType: res.data.user.userType,
+                            description: res.data.user.description,
+                            soundcloud: res.data.user.soundcloud,
+                            spotify: res.data.user.spotify,
+                            facebook: res.data.user.facebook,
+                            ticket_price: res.data.user.ticket_price,
+                            average_draw: res.data.user.average_draw,
+                            profilePic: res.data.user.profilePic,
+                            genres: JSON.parse(res.data.user.genres),
+                            readyToGig: res.data.user.readyToGig
+                        });
+                    }
+                    else {
+                        this.setState({
+                            loggedIn: true,
+                            userId: res.data.user.id,
+                            name: res.data.user.name,
+                            userType: res.data.user.userType,
+                        });
+                    }
+
                 }
                 else if (res.data.user.userType === "venue") {
+                    if (res.data.user.description) {
 
-                    this.setState({
-                        loggedIn: true,
-                        userId: res.data.user.id,
-                        name: res.data.user.name,
-                        userType: res.data.user.userType,
-                        description: res.data.user.description,
-                        capacity: res.data.user.capacity,
-                        ticket_price: res.data.user.ticket_price,
-                        Year_est: res.data.user.Year_est,
-                        genres: JSON.parse(res.data.user.genres),
-                        readyToBook: res.data.user.readyToGig
-                    });
+                        this.setState({
+                            loggedIn: true,
+                            userId: res.data.user.id,
+                            name: res.data.user.name,
+                            userType: res.data.user.userType,
+                            description: res.data.user.description,
+                            capacity: res.data.user.capacity,
+                            ticket_price: res.data.user.ticket_price,
+                            Year_est: res.data.user.Year_est,
+                            genres: JSON.parse(res.data.user.genres),
+                            readyToBook: res.data.user.readyToGig
+                        });
+                    }
+                    else{
+                        this.setState({
+                            loggedIn: true,
+                            userId: res.data.user.id,
+                            name: res.data.user.name,
+                            userType: res.data.user.userType,
+                        });
+                    }
                 }
             }
         });
