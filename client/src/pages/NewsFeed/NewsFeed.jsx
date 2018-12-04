@@ -124,25 +124,25 @@ class NewsFeed extends Component {
         };
     }
 
-    componentDidMount() {
+    // componentDidMount() {
 
-    API.getUser().then(res => {
-        console.log("artistHome component mounting check", res.data);
-        if (!res.data.user) {
-            window.location.href = "/signin";
-        } else if (res.data.user.userType === "venue") {
-            window.location.href = "/venue";
+    // API.getUser().then(res => {
+    //     console.log("artistHome component mounting check", res.data);
+    //     if (!res.data.user) {
+    //         window.location.href = "/signin";
+    //     } else if (res.data.user.userType === "venue") {
+    //         window.location.href = "/venue";
 
-        } else {
+    //     } else {
 
-        console.log("the user name is " , res.data);
-        this.setState({username : res.data.user.name});
+    //     console.log("the user name is " , res.data);
+    //     this.setState({username : res.data.name});
 
-        // this.setState({ pic:res.data.user.profilePic});
+    //     // this.setState({ pic:res.data.user.profilePic});
 
-        }
-        });
-    }
+    //     }
+    //     });
+    // }
 
     render () {
         const { classes } = this.props;
