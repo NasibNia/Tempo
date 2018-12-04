@@ -6,10 +6,13 @@ router.route("/")
       .post(bandController.create);
 
 router.route("/ready")
-      .get(bandController.findReadyBands)
+      .get(bandController.findReadyBands);
 
 router.route("/search/:name")
-      .get(bandController.findBandByName)
+      .get(bandController.findBandByName);
+
+router.route("search/:genre")
+      .get(bandController.findBandByGenre);
 
 router.route("/:id")
       .get(bandController.findBand)

@@ -56,6 +56,17 @@ module.exports = {
             });
     },
 
+    findBandByGenre : function(req,res){
+        db.Band.findAll({
+            where : {
+                genre : req.params.genre
+            }
+        })
+        .then(bandsRes => {
+            res.json(bandsRes);
+        });
+    },
+
     findReadyBands: function (req, res) {
         db.Band.findAll({
             where: {
