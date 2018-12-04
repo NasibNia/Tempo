@@ -209,13 +209,15 @@ class PublicProfile extends Component {
 
         if (this.state.userId == this.state.profileId) {
             editProfile =
-                <Button variant="contained"
-                    color="secondary"
-                    fullWidth = "true"
-                    onClick={() => { return <Link to="/profile" /> }}
-                >
-                    Edit Your Profile
+                <Link to="/profile/" style={{textDecoration: "none"}}>
+                    <Button variant="contained"
+                        color="secondary"
+                        fullWidth="true"
+                    // onClick={() => { return <Link to="/profile/" />}}
+                    >
+                        Edit Your Profile
                 </Button>
+                </Link>
         }
 
         return (

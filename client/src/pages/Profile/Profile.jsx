@@ -181,7 +181,38 @@ class profile extends Component {
             if (!res.data.user.id) {
                 this.setState({ loggedIn: false });
             } else {
-                this.setState({ loggedIn: true, userId: res.data.user.id, name: res.data.user.name, userType: res.data.user.userType });
+                if (res.data.user.userType === "artist") {
+                    this.setState({
+                        loggedIn: true,
+                        userId: res.data.user.id,
+                        name: res.data.user.name,
+                        userType: res.data.user.userType,
+                        description: res.data.user.description,
+                        soundcloud: res.data.user.soundcloud,
+                        spotify: res.data.user.spotify,
+                        facebook: res.data.user.facebook,
+                        ticket_price: res.data.user.ticket_price,
+                        average_draw: res.data.user.average_draw,
+                        profilePic: res.data.user.profilePic,
+                        genres: JSON.parse(res.data.user.genres),
+                        readyToGig: res.data.user.readyToGig
+                    });
+                }
+                else if (res.data.user.userType === "venue") {
+
+                    this.setState({
+                        loggedIn: true,
+                        userId: res.data.user.id,
+                        name: res.data.user.name,
+                        userType: res.data.user.userType,
+                        description: res.data.user.description,
+                        capacity: res.data.user.capacity,
+                        ticket_price: res.data.user.ticket_price,
+                        Year_est: res.data.user.Year_est,
+                        genres: JSON.parse(res.data.user.genres),
+                        readyToBook: res.data.user.readyToGig
+                    });
+                }
             }
         });
 
@@ -202,7 +233,7 @@ class profile extends Component {
                     // finishedUpdate: true,
                 });
                 //updates the user information
-                console.log("user type" , this.state.userType)
+                console.log("user type", this.state.userType)
                 this.updateProfile();
             }, 2000);
         })
@@ -536,7 +567,7 @@ class profile extends Component {
                                 onChange={this.handleInputChange}
                                 value={this.state.facebook}
                             />
-                            <FormControl className={classes.textField} style={{marginTop: "10px"}}>
+                            <FormControl className={classes.textField} style={{ marginTop: "10px" }}>
                                 <InputLabel htmlFor="filled-ticket_price-input">Current Ticket Price to Your Average Show</InputLabel>
                                 <Input
                                     id="filled-ticket_price-input"
@@ -686,7 +717,7 @@ class profile extends Component {
                             onChange={this.handleInputChange}
                             value={this.state.ticket_price}
                         /> */}
-                            <FormControl className={classes.textField} style={{marginTop: "10px"}}>
+                            <FormControl className={classes.textField} style={{ marginTop: "10px" }}>
                                 <InputLabel htmlFor="filled-ticket_price-input">Enter the typical price of entry to your venue</InputLabel>
                                 <Input
                                     id="filled-ticket_price-input"
