@@ -10,7 +10,8 @@ import "./Main.css";
 class Main extends Component {
 
     state = {
-        data: []
+        data: [],
+        ratings: []
     }
 
     componentDidMount() {
@@ -30,6 +31,10 @@ class Main extends Component {
                 }
                 )
                 .catch(err => console.log(err));
+            API.getVenues()
+                .then(res => {
+                    this.setState({ratings: res.data})
+                })
         }
     }
 
@@ -38,7 +43,8 @@ class Main extends Component {
         return (
             <div className="main">
                 <MainMiddle userType={this.props.userType} url={this.props.url} name={this.props.name}/>
-                <MainSide userType={this.props.userType} data={this.state.data}/>
+                {/* <MainSide userType={this.props.userType} data={this.state.data}/> */}
+                <MainSide userType={this.props.userType} data={this.state.data} ratings={this.state.ratings}/>
             </div>
         )
     }

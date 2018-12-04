@@ -24,6 +24,18 @@ const SideItem = props => {
             props.data.slice(0,5).map(elem => generateItems(elem.name, (elem.profilePic) ? elem.profilePic : elem.venue_picture_url, elem.rating, elem.website))
         )
     }
+    else if (props.ratings) {
+        return (
+            props.ratings.slice(0,3).map(elem => 
+            <div className="side-text">
+                <h4>{elem.name}</h4>
+                <i className="far fa-star"></i>
+                <hr></hr>
+            </div>
+
+        ) 
+        )
+    }
     else {
         return (<div className="side-item">
             <div className="side-icon"></div>
@@ -39,7 +51,7 @@ const SideSection = props => {
     return (
         <div className="side-chunk">
             <h2>{props.header}</h2>
-            <SideItem text={props.title} type={props.userType} data={props.data} />
+            <SideItem text={props.title} type={props.userType} data={props.data} ratings={props.ratings}/>
         </div>
 
     )
