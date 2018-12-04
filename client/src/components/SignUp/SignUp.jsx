@@ -386,7 +386,7 @@ class SignUp extends Component {
 
         if (this.state.redirect) {
             // let profileRoute = '/profile/' + this.state.id;
-            return <Redirect to={'/profile/' + this.state.id} />
+            return <Redirect to={'/profile/'} />
             // return <Redirect to={{profileRoute, state: {userType: this.state.userType}}} />
         }
 
@@ -537,7 +537,8 @@ class SignUp extends Component {
                         />
                         <div id="addressInputs">
                             <TextField
-                                id="filled-city-input"
+                                id="fi
+                                lled-city-input"
                                 label="City"
                                 className={classes.textField}
                                 type="text"

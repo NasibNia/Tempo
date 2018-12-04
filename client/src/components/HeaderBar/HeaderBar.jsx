@@ -174,7 +174,7 @@ class HeaderBar extends Component {
         <div className="header-contents">
           <div className="logo">
             <Link to={"/" + this.state.userType}><img src="/assets/box-logo.png"></img></Link>
-            <h4>{this.state.userType} suite</h4>
+            {this.state.loggedIn ? <h4>{this.state.userType + " suite" }</h4> : ""}
           </div>
           <div className="header-items">
             {this.state.loggedIn ? search : ""}

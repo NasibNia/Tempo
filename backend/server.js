@@ -54,12 +54,12 @@ if (process.env.NODE_ENV === "production") {
     });
   }
   
-  else {
-    app.use(express.static(path.join(__dirname, '/client/public')));
-    app.get("/*", function(req, res) {
-      res.sendFile(path.join(__dirname, "../client/public/index.html"));
-    });
-  }
+  // else {
+  //   app.use(express.static(path.join(__dirname, '/client/public')));
+  //   app.get("/*", function(req, res) {
+  //     res.sendFile(path.join(__dirname, "../client/public/index.html"));
+  //   });
+  // }
 
 app.use(passport.initialize()); // initialize passport
 app.use(passport.session()); // persistent login sessions
