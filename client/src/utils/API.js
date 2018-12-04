@@ -26,6 +26,9 @@ export default {
     getTopBandsByDraw: function () {
         return axios.get("/api/bands/average_draw/");
     },
+    getBandByGenre : function(genre){
+        return axios.get("/api/bands/" + genre);
+    },
     // Deletes the band with the given id
     deleteBand: function (id) {
         return axios.delete("/api/bands/" + id);
@@ -37,6 +40,8 @@ export default {
     updateBand: function (id, bandData) {
         return axios.put("/api/bands/" + id, bandData);
     },
+
+    
 
     //==================VENUES==================
     // Gets all venues 

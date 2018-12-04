@@ -17,6 +17,10 @@ router.route("/api/bands/average_draw/")
 router.route("/search/:name")
       .get(bandController.findBandByName)
 
+router.route("search/:genre")
+      .get(bandController.findBandByGenre);
+
+
 router.route("/:id")
       .get(bandController.findBand)
       .delete(bandController.deleteBand)

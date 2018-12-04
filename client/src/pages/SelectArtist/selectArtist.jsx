@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import {Redirect} from 'react-router-dom';
 
 import HeaderBar from "../../components/HeaderBar"
-// import Criterion from "../../components/SelectArtist/SelectArtistArray"
-// import Criterion from "../../components/SelectArtist/Criterion"
+import Array from "../../components/SelectArtist/Array/"
+import Criterion from "../../components/SelectArtist/Criterion"
 
 import API from "../../utils/API";
 import axios from "axios";
@@ -30,8 +30,8 @@ class SelectArtist extends Component {
     return (
       <div>
           <HeaderBar />
-          {/* <Criteron />
-          <SelectArtistArray />  */}
+          {/* <Criterion />
+          <Array />  */}
       </div>
     )
   }

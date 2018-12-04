@@ -9,7 +9,7 @@ const SelectArtistCard = props => {
 
             <div className="artist-card">
                 <div className="artist-card-left">
-                    <div className="artist-card-icon" style={{ backgroundImage= 'url(' + props.icon + ')' }}></div>
+                    {/* <div className="artist-card-icon" style={{ backgroundImage= 'url(' + props.icon + ')' }}></div> */}
                     <div className="artist-card-subtitle">{props.subtitle}</div>
                 </div>
                 <div className="artist-card-right">
@@ -30,11 +30,11 @@ const SelectArtistColumn = props => {
 
     return (
         <div className="select-artist-column">
-            {Artists.map((Artist, description) => {
+            {/* {Artists.map((Artist, description) => {
                 <SelectArtistCard tempoRating={props} ticketPrice={} averageDraw={}/>
             }
             )
-            }
+            } */}
         </div>
     )
 
@@ -61,4 +61,4 @@ class SelectArtistArray extends Component {
 
 }
 
-export default SelectArtistArray
+export default SelectArtistArray;

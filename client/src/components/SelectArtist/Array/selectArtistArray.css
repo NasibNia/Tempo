@@ -1,0 +1,33 @@
+.select-artist-container {
+    display: flex;
+    max-width: 1000px;
+}
+
+.select-artist-container .select-artist-column {
+    display: flex;
+    flex-direction: column;
+    max-width: 250px;
+}
+
+.select-artist-container .select-artist-column .select-artist-card {
+    margin: 10px;
+    background-color: white;
+    display: flex;
+}
+
+.select-artist-container .select-artist-column .select-artist-card .left {
+
+}
+
+.select-artist-container .select-artist-column .select-artist-card .left h2 {
+
+}
+
+
+.select-artist-container .select-artist-column .select-artist-card .left h3 {
+
+}
+
+.select-artist-container .select-artist-column .select-artist-card .right {
+
+}
