@@ -20,6 +20,8 @@ const MainSide = props => {
             <div className="main-side">
                 <SideSection header={props.userType === "artist" ? "Ready to Book" : "Ready to Gig"} title="" subtext="" userType={props.userType} data={props.data}/>
                 <SideSection header={props.userType === "artist" ? "Tracked Venues" : "Tracked Artists"} title="" subtext="" userType={props.userType}  />
+                <SideSection header={"Rate"} title="" subtext="tests" userType={props.userType}  />
+
                 <div className="side-footer">
                     <h3><Link to={"/Terms"}>Terms &amp; Conditions</Link></h3><h3><Link to={"/Privacy"}>Privacy Policy</Link></h3><h3><Link to={"/Contact"}>Contact</Link></h3>
                     {/* <DocumentLink title="Terms and Conditions" method="terms"/>
