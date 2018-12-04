@@ -138,7 +138,7 @@ class ControlledExpansionPanels extends React.Component {
                 <div>
                     <p>Capacity: {elem.capacity}</p>
                     <p>Ticket Price: {elem.average_ticket_price}</p>
-                    <p>Rating: {elem.rating}</p>
+                    <p>Rating: {elem.rating}</p> 
                     <a href={elem.website} className = "panelVenueLink">Learn More</a>
                 </div>;
         }
