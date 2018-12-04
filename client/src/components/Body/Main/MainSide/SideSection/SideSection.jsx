@@ -25,20 +25,19 @@ const generateRatings = (name, venueID) => {
                 <br></br>
                 <h4>{name}</h4>
                 <ul class="list-inline rating-list">
-                    <li onClick={handleRatingsClick}><i class="fas fa-star" title="Rate 5" ></i></li>
-                    <li onClick={handleRatingsClick}><i class="fas fa-star" title="Rate 4" ></i></li>
-                    <li onClick={handleRatingsClick}><i class="fas fa-star" title="Rate 3"></i></li>
-                    <li onClick={handleRatingsClick}><i class="fas fa-star" title="Rate 2"></i></li>
-                    <li onClick={handleRatingsClick}><i class="fas fa-star" title="Rate 1"></i></li>
+                    <li onClick={handleRatingsClick} value="5" data-key={venueID}><i class="fas fa-star" ></i></li>
+                    <li onClick={handleRatingsClick} value="4" data-key={venueID}><i class="fas fa-star" ></i></li>
+                    <li onClick={handleRatingsClick} value="3" data-key={venueID}><i class="fas fa-star" ></i></li>
+                    <li onClick={handleRatingsClick} value="2" data-key={venueID}><i class="fas fa-star" ></i></li>
+                    <li onClick={handleRatingsClick} value="1" data-key={venueID}><i class="fas fa-star" ></i></li>
                 </ul>
                 <hr></hr>
             </div>
     )
 }
 
-function handleRatingsClick(e) {
-    e.preventDefault();
-    console.log('The link was clicked.');
+const handleRatingsClick = event => {
+    console.log('The star was clicked.', event.currentTarget.value);
   }
 
 const SideItem = props => {
