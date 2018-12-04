@@ -54,6 +54,7 @@
   .rating-list li:hover,
   .rating-list li:hover ~ li {
     color: orange;
+    cursor: pointer
   }
   
   .rating-list {

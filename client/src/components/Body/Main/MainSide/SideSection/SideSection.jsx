@@ -20,26 +20,26 @@ const generateItems = (name, image, rating, link) => {
 
 // generates div for ratings
 const generateRatings = (name, venueID) => {
-    let stars = <div key={venueID} className="stars"><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i></div>;
-    // for (let i = 1; i <= 5; i++) {
-    //     stars += <i className="fas fa-star"></i>
-
-    // }
     return (
-        <div className="side-text stars">
+        <div key={venueID} className="side-text">
                 <br></br>
                 <h4>{name}</h4>
                 <ul class="list-inline rating-list">
-                    <li><i class="fas fa-star" title="Rate 5"></i></li>
-                    <li><i class="fas fa-star" title="Rate 4"></i></li>
-                    <li><i class="fas fa-star" title="Rate 3"></i></li>
-                    <li><i class="fas fa-star" title="Rate 2"></i></li>
-                    <li><i class="fas fa-star" title="Rate 1"></i></li>
+                    <li onClick={handleRatingsClick}><i class="fas fa-star" title="Rate 5" ></i></li>
+                    <li onClick={handleRatingsClick}><i class="fas fa-star" title="Rate 4" ></i></li>
+                    <li onClick={handleRatingsClick}><i class="fas fa-star" title="Rate 3"></i></li>
+                    <li onClick={handleRatingsClick}><i class="fas fa-star" title="Rate 2"></i></li>
+                    <li onClick={handleRatingsClick}><i class="fas fa-star" title="Rate 1"></i></li>
                 </ul>
                 <hr></hr>
             </div>
     )
 }
+
+function handleRatingsClick(e) {
+    e.preventDefault();
+    console.log('The link was clicked.');
+  }
 
 const SideItem = props => {
     if (props.data) {
