@@ -27,6 +27,7 @@ const generateRatings = (name, venueID) => {
     // }
     return (
         <div className="side-text stars">
+                <br></br>
                 <h4>{name}</h4>
                 <ul class="list-inline rating-list">
                     <li><i class="fas fa-star" title="Rate 5"></i></li>
