@@ -226,7 +226,7 @@ class profile extends Component {
                             readyToBook: res.data.user.readyToGig
                         });
                     }
-                    else{
+                    else {
                         this.setState({
                             loggedIn: true,
                             userId: res.data.user.id,
@@ -277,7 +277,15 @@ class profile extends Component {
                 average_draw: this.state.average_draw,
                 profilePic: this.state.profilePic,
                 genres: JSON.stringify(this.state.genres),
-                readyToGig: this.state.readyToGig
+                readyToGig: this.state.readyToGig,
+                rock: this.state.genres.rock,
+                club: this.state.genres.club,
+                electronic: this.state.genres.electronic,
+                hiphop: this.state.genres.hiphop,
+                pop: this.state.genres.pop,
+                jazz: this.state.genres.jazz,
+                acoustics: this.state.genres.acoustics
+
             }
 
             API.updateBand(this.state.userId, profileInfo)

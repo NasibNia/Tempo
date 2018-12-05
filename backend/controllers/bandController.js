@@ -66,7 +66,7 @@ module.exports = {
             res.json(bandsRes);
         });
     },
-    
+
     findReadyBands: function (req, res) {
         db.Band.findAll({
             where: {
