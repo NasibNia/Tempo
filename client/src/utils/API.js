@@ -26,9 +26,33 @@ export default {
     getTopBandsByDraw: function () {
         return axios.get("/api/bands/average_draw/");
     },
+
+    // Genre search API routes
     getBandsByGenre : function(genre){
-        return axios.get("/api/bands/" + genre);
+        return axios.get("/api/bands/search/" + genre);
     },
+    getRockBands: function(){
+        return axios.get("api/bands/jazz")
+    },
+    getJazzBands: function(){
+        return axios.get("api/bands/jazz")
+    },
+    getPopBands: function(){
+        return axios.get("api/bands/pop")
+    },
+    getClubBands: function(){
+        return axios.get("api/bands/club")
+    },
+    getElectronicBands: function(){
+        return axios.get("api/bands/electronic")
+    },
+    getAcousticsBands: function(){
+        return axios.get("api/bands/acoustics")
+    },
+    getHiphopBands: function(){
+        return axios.get("api/bands/hiphop")
+    },
+
     // Deletes the band with the given id
     deleteBand: function (id) {
         return axios.delete("/api/bands/" + id);

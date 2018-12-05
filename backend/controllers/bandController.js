@@ -57,12 +57,15 @@ module.exports = {
     },
 
     findBandByGenre : function(req,res){
-        
+
+       
         db.Band.findAll({
             where : {
-                genres = {
-                    $contains: [`${req.params.genres}: true`]
-                } 
+                // genres = {
+                //     $contains: [`${req.params.genres}: true`]
+                // } 
+                // [req.params.genre]: true
+                genres: req.params.genre
             }
         })
         .then(bandsRes => {
@@ -143,6 +146,91 @@ module.exports = {
             .then(dbBands => res.json(dbBands));
     },
 
+    // Find All of a Specific Genre
+
+    findRockBands : function(req,res){
+
+        db.Band.findAll({
+            where : {
+                rock: true
+            }
+        })
+        .then(bandsRes => {
+            res.json(bandsRes);
+        });
+    },
+
+    findJazzBands : function(req,res){
+
+        db.Band.findAll({
+            where : {
+                jazz: true
+            }
+        })
+        .then(bandsRes => {
+            res.json(bandsRes);
+        });
+    },
+
+    findPopBands : function(req,res){
+
+        db.Band.findAll({
+            where : {
+                pop: true
+            }
+        })
+        .then(bandsRes => {
+            res.json(bandsRes);
+        });
+    },
+
+    findClubBands : function(req,res){
+
+        db.Band.findAll({
+            where : {
+                club: true
+            }
+        })
+        .then(bandsRes => {
+            res.json(bandsRes);
+        });
+    },
+
+    findElectronicBands : function(req,res){
+
+        db.Band.findAll({
+            where : {
+                electronic: true
+            }
+        })
+        .then(bandsRes => {
+            res.json(bandsRes);
+        });
+    },
+
+    findHiphopBands : function(req,res){
+
+        db.Band.findAll({
+            where : {
+                hiphop: true
+            }
+        })
+        .then(bandsRes => {
+            res.json(bandsRes);
+        });
+    },
+
+    findAcousticsBands : function(req,res){
+
+        db.Band.findAll({
+            where : {
+                acoustics: true
+            }
+        })
+        .then(bandsRes => {
+            res.json(bandsRes);
+        });
+    },
     // // Gets current rating and adds new rating to it, adds 1 to totalRated
     // addRating : function(req, res) {
     //     console.log("adding rating to band")

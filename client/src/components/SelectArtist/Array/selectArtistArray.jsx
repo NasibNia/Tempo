@@ -3,6 +3,7 @@ import "./selectArtistArray.css";
 import Criterion from './../Criterion';
 
 import API from "../../../utils/API";
+import App from '../../../App';
 
 const SelectArtistCard = props => {
 
@@ -63,16 +64,49 @@ class SelectArtistArray extends Component {
     }
 
     searchBand = () => {
-        API.getBandsByGenre("rock").then(res => {
 
-            console.log(res);
+        switch (this.state.genres) {
+            case "rock":
+                API.getRockBands().then(res => {
+                    console.log("genre check", res);
+                });
+            case "jazz":
+                API.getJazzBands().then(res => {
+                    console.log("genre check", res);
+                });
+            case "hiphop":
+                API.getHiphopBands().then(res => {
+                    console.log("genre check", res);
+                });
+            case "pop":
+                API.getPopBands().then(res => {
+                    console.log("genre check", res);
+                });
+            case "acoustics":
+                API.getAcousticsBands().then(res => {
+                    console.log("genre check", res);
+                });
+            case "club":
+                API.getClubsBands().then(res => {
+                    console.log("genre check", res);
+                });
+            case "electronic":
+                API.getElectronicBands().then(res => {
+                    console.log("genre check", res);
+                });
+        }
+
+        API.getRockBands().then(res => {
+
+            console.log("genre check", res);
         });
+
     }
 
     render() {
 
         // test data
-            
+
         return (
             <div className="select-artist-column-box">
                 <SelectArtistColumn name="" data="" />

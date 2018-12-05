@@ -74,7 +74,7 @@ const App = () => (
           <Route exact path="/profile" component={Profile}/> 
           <Route exact path="/profile/:id" component={PublicProfile}/>
           {/* currently testing for logged in users  */}
-          
+
           <Route exact path="/profileOf/" component={PublicProfile}/>                
  
           <Route exact path="/postgig/selectartists" component={SelectArtists} />                
