@@ -72,7 +72,7 @@ module.exports = function(sequelize , DataTypes){
             allowNull: true
         },
         facebook : {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: true
         },
         profilePic : {

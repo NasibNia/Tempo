@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Body from "../../components/Body";
 import HeaderBar from "../../components/HeaderBar";
 import Paper from '@material-ui/core/Paper';
+import Navigate from "../../components/Body/Navigate";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import io from 'socket.io-client';
@@ -170,6 +171,9 @@ class NewsFeed extends Component {
         return (
             <div>
                 <HeaderBar />
+                <div > 
+                    {/* ADD A CLASS TO THIS DIV */}
+                <Navigate method={this.changeState} userType={this.state.userType} name={this.props.name} pic={this.props.pic}/>
                 <div class="paper">
                     <h1>General Forum disscusion</h1>
                 </div>
@@ -200,7 +204,7 @@ class NewsFeed extends Component {
                 </div>
 
                 
-
+                </div>
             </div>
             
         );
