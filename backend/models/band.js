@@ -31,6 +31,34 @@ module.exports = function(sequelize , DataTypes){
             type: DataTypes.TEXT,
             allowNull: true
         },
+        rock : {
+            type: DataTypes.BOOLEAN,
+            allowNull: true
+        },
+        hiphop : {
+            type: DataTypes.BOOLEAN,
+            allowNull: true
+        },
+        pop : {
+            type: DataTypes.BOOLEAN,
+            allowNull: true
+        },
+        electronic : {
+            type: DataTypes.BOOLEAN,
+            allowNull: true
+        },
+        club : {
+            type: DataTypes.BOOLEAN,
+            allowNull: true
+        },
+        jazz : {
+            type: DataTypes.BOOLEAN,
+            allowNull: true
+        },
+        acoustics : {
+            type: DataTypes.BOOLEAN,
+            allowNull: true
+        },
         description : {
             type: DataTypes.TEXT,
             allowNull: true
@@ -43,9 +71,19 @@ module.exports = function(sequelize , DataTypes){
             type: DataTypes.STRING,
             allowNull: true
         },
+        facebook : {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
         profilePic : {
             type: DataTypes.TEXT,
             allowNull: true
+        },
+        ticket_price:{
+            type : DataTypes.INTEGER
+        },
+        average_draw:{
+            type : DataTypes.INTEGER
         },
         readyToGig : {
             type: DataTypes.BOOLEAN,

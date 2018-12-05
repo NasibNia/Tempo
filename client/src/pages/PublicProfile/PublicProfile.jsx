@@ -199,23 +199,25 @@ class PublicProfile extends Component {
         let genres = [];
         let editProfile = "";
 
-        for (var i = 0; i < Object.keys(db_genres).length; i++) {
-            if (db_genres[Object.keys(db_genres)[i]] === true) {
-                genres.push(Object.keys(db_genres)[i]);
-            }
-        }
+        // for (var i = 0; i < Object.keys(db_genres).length; i++) {
+        //     if (db_genres[Object.keys(db_genres)[i]] === true) {
+        //         genres.push(Object.keys(db_genres)[i]);
+        //     }
+        // }
         console.log("from db", db_genres)
         console.log(genres)
 
         if (this.state.userId == this.state.profileId) {
             editProfile =
-                <Button variant="contained"
-                    color="secondary"
-                    fullWidth = "true"
-                    onClick={() => { return <Link to="/profile" /> }}
-                >
-                    Edit Your Profile
+                <Link to="/profile/" style={{textDecoration: "none"}}>
+                    <Button variant="contained"
+                        color="secondary"
+                        fullWidth="true"
+                    // onClick={() => { return <Link to="/profile/" />}}
+                    >
+                        Edit Your Profile
                 </Button>
+                </Link>
         }
 
         return (
