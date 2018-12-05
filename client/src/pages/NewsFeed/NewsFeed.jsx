@@ -131,6 +131,7 @@ class NewsFeed extends Component {
         // this.socket = io.connect('http://localhost:3001');
         this.socket = io.connect();
 
+
         this.socket.on('RECEIVE_MESSAGE', function(data){
             addMessage(data);
         });
