@@ -6,7 +6,7 @@ router.route("/")
       .post(venueController.create);
 
 router.route("/ready")
-      .get(venueController.findReadyVenues)
+      .get(venueController.findReadyVenues);
 
 router.route("/:id")
       .get(venueController.findVenue)

@@ -97,9 +97,36 @@ class NewsFeed extends Component {
 
             user: "artist",
             loggedIn: true,
+            newsFeed : []
         };
+   
+    }
 
+    componentDidMount() {
 
+        API.getUser().then(res => {
+            console.log("artistHome component mounting check", res.data);
+            if (!res.data.user) {
+                window.location.href = "/signin";
+            } else if (res.data.user.userType === "venue") {
+                window.location.href = "/venue";
+
+            } else {
+
+            console.log("the user name is " , res.data.user.name);
+            this.setState({username : res.data.user.name});
+
+            // this.setState({ pic:res.data.user.profilePic});
+
+            }
+        });
+
+        API.getNews()
+        .then(res => {
+            console.log("news is" ,res.data.data);
+            this.state.messages = res.data;
+        });
+        
         //Socket.io
         this.socket = io.connect('http://localhost:3001');
 
@@ -115,6 +142,14 @@ class NewsFeed extends Component {
 
         this.sendMessage = ev => {
             ev.preventDefault();
+            // first add it to the data base
+
+            API.saveNews({
+                author: this.state.username,
+                message: this.state.message
+            });
+
+            // then emit it to the world
             this.socket.emit('SEND_MESSAGE', {
                 author: this.state.username,
                 message: this.state.message
@@ -122,30 +157,14 @@ class NewsFeed extends Component {
             this.setState({message: ''});
 
         };
+
+        
     }
-
-    // componentDidMount() {
-
-    // API.getUser().then(res => {
-    //     console.log("artistHome component mounting check", res.data);
-    //     if (!res.data.user) {
-    //         window.location.href = "/signin";
-    //     } else if (res.data.user.userType === "venue") {
-    //         window.location.href = "/venue";
-
-    //     } else {
-
-    //     console.log("the user name is " , res.data);
-    //     this.setState({username : res.data.name});
-
-    //     // this.setState({ pic:res.data.user.profilePic});
-
-    //     }
-    //     });
-    // }
 
     render () {
         const { classes } = this.props;
+        console.log(this.state.messages);
+        
         return (
             <div>
                 <HeaderBar />

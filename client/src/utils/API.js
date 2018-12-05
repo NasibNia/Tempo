@@ -95,6 +95,16 @@ export default {
     logout: () => {
         return axios.get("/logout", function (res) {
             // return res;
-        })
+        });
+    },
+
+    //==================NEWS==================
+    getNews : function () {
+        console.log("api get news in util");
+        return axios.get("/api/news");
+    },
+    saveNews : (newsData) => {
+        return axios.post("/api/news", newsData);
     }
+ 
 };
