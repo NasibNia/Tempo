@@ -31,6 +31,41 @@ module.exports = function(sequelize , DataTypes){
             type: DataTypes.TEXT,
             allowNull: true
         },
+        rock : {
+            //when getting this info, must JSON.parse
+            type: DataTypes.BOOLEAN,
+            allowNull: true
+        },
+        hiphop : {
+            //when getting this info, must JSON.parse
+            type: DataTypes.BOOLEAN,
+            allowNull: true
+        },
+        pop : {
+            //when getting this info, must JSON.parse
+            type: DataTypes.BOOLEAN,
+            allowNull: true
+        },
+        electronic : {
+            //when getting this info, must JSON.parse
+            type: DataTypes.BOOLEAN,
+            allowNull: true
+        },
+        club : {
+            //when getting this info, must JSON.parse
+            type: DataTypes.BOOLEAN,
+            allowNull: true
+        },
+        jazz : {
+            //when getting this info, must JSON.parse
+            type: DataTypes.BOOLEAN,
+            allowNull: true
+        },
+        acoustics : {
+            //when getting this info, must JSON.parse
+            type: DataTypes.BOOLEAN,
+            allowNull: true
+        },
         description : {
             type: DataTypes.TEXT,
             allowNull: true

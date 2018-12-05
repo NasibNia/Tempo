@@ -51,22 +51,28 @@ class SelectArtistArray extends Component {
 
     state = {
         genres: this.props.genres,
+        data: ""
 
     }
 
+
     // 4 API CALLs
     componentDidMount() {
+        this.searchBand();
 
     }
 
     searchBand = () => {
-        API.getBandsByGenre(this.state.genre).then(res => {
+        API.getBandsByGenre("rock").then(res => {
 
-
+            console.log(res);
         });
     }
 
     render() {
+
+        // test data
+            
         return (
             <div className="select-artist-column-box">
                 <SelectArtistColumn name="" data="" />

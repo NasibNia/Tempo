@@ -57,9 +57,12 @@ module.exports = {
     },
 
     findBandByGenre : function(req,res){
+        
         db.Band.findAll({
             where : {
-                genre : req.params.genre
+                genres = {
+                    $contains: [`${req.params.genres}: true`]
+                } 
             }
         })
         .then(bandsRes => {

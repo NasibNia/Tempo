@@ -177,9 +177,9 @@ class HeaderBar extends Component {
             {this.state.loggedIn ? <h4>{this.state.userType + " suite" }</h4> : ""}          </div>
           <div className="header-items">
             {this.state.loggedIn ? search : ""}
+            {/* {headerIcon}
             {headerIcon}
-            {headerIcon}
-            {headerIcon}
+            {headerIcon} */}
             {button}
           </div>
         </div>

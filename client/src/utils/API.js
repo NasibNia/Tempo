@@ -26,7 +26,7 @@ export default {
     getTopBandsByDraw: function () {
         return axios.get("/api/bands/average_draw/");
     },
-    getBandByGenre : function(genre){
+    getBandsByGenre : function(genre){
         return axios.get("/api/bands/" + genre);
     },
     // Deletes the band with the given id
