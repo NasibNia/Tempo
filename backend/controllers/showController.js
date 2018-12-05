@@ -25,7 +25,7 @@ module.exports = {
     // will be called at route /api/shows/:showId/:user/:userId
     // where :user could be "band" or "venue"
     joinShow : function(req,res){
-        console.log("show join controller ", req.body)
+        console.log("show join controller ", req.body);
         // if band:
         if (req.params.user === "band") {
             db.BandShow.create ({
@@ -92,7 +92,7 @@ module.exports = {
                     } // if not
                     else {
                         console.log("User params not band or venue.");
-                        res.json("User params not band or venue.")
+                        res.json("User params not band or venue.");
                     }
                 })
                 .then(showsRes => {
@@ -158,7 +158,7 @@ module.exports = {
             
         } else {
             console.log("User params not band or venue.");
-            res.json("User params not band or venue.")
+            res.json("User params not band or venue.");
         }
     }
 
