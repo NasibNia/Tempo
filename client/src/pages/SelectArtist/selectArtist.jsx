@@ -6,6 +6,7 @@ import SelectArtistArray from "../../components/SelectArtist/Array/"
 import Criterion from "../../components/SelectArtist/Criterion"
 
 import TextField from '@material-ui/core/TextField';
+import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 
 import API from "../../utils/API";
@@ -20,6 +21,16 @@ const styles = theme => ({
     marginRight: theme.spacing.unit,
     transition: "0.3s ease-in-out",
 
+  },
+  paper: {
+    borderTop: `7px solid ${theme.palette.secondary.main}`,
+    marginTop: theme.spacing.unit * 10,
+    margin: "auto",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
+    width: "90%"
   },
 })
 
@@ -41,6 +52,7 @@ class SelectArtist extends Component {
       acoustics: false
 
     },
+    topArtists: ""
 
 
   };
@@ -83,18 +95,15 @@ class SelectArtist extends Component {
 
 
   handleKeyPress = event => {
-    let searchedName = this.state.search;
 
     if (event.key == 'Enter') {
-      console.log(this.state.search)
-      API.getBandName(searchedName).then(res => {
-        if (!res.data) {
-          console.log("Artist profile does not exist!")
-        } else {
-          console.log(res.data)
-          window.location.href = "/profile/" + res.data.id;
-        }
-      });
+      console.log(this.state.searchedGenre)
+
+      // return <SelectArtistArray genre={this.state.searchedGenre} />
+
+      this.setState({ 
+        topArtists: <SelectArtistArray genre={this.state.searchedGenre} />
+      })
 
     }
   }
@@ -102,9 +111,11 @@ class SelectArtist extends Component {
 
   render() {
     const { classes } = this.props;
+    
+    let artistArray = this.state.topArtists;
 
     return (
-      <div>
+      <Paper className={classes.paper}>
         <HeaderBar />
         <div>
           <TextField
@@ -127,10 +138,11 @@ class SelectArtist extends Component {
             value={this.state.searchedGenre}
             onKeyPress={this.handleKeyPress}
           />
-          <SelectArtistArray />
+          <hr></hr>
+          {artistArray}
         </div>
 
-      </div>
+      </Paper>
     )
   }
 

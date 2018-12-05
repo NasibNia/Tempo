@@ -31,7 +31,7 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Typography from '@material-ui/core/Typography';
 
 // Transitions
-import Zoom from 'react-reveal/Zoom';
+import Fade from 'react-reveal/Fade';
 
 import API from "../../utils/API.js";
 import axios from "axios";
@@ -468,7 +468,7 @@ class profile extends Component {
 
         if (this.state.userType === "artist") {
             profilePrompts = (
-                <Zoom>
+                <Fade>
                     <Paper className={classes.paper}>
                         <form className="container" noValidate autoComplete="off">
                             <div id="profileHeader">
@@ -637,12 +637,12 @@ class profile extends Component {
                             {this.state.loading && <CircularProgress size={30} className={classes.buttonProgress} />}
                         </form>
                     </Paper>
-                </Zoom>
+                </Fade>
             )
         }
         else if (this.state.userType === "venue") {
             profilePrompts = (
-                <Zoom>
+                <Fade>
                     <Paper className={classes.paper}>
                         <form className="container" noValidate autoComplete="off">
                             <div id="profileHeader">
@@ -801,7 +801,7 @@ class profile extends Component {
                             {this.state.loading && <CircularProgress size={30} className={classes.buttonProgress} />}
                         </form>
                     </Paper>
-                </Zoom>
+                </Fade>
             )
         }
 
