@@ -126,9 +126,10 @@ class NewsFeed extends Component {
             console.log("news is" ,res.data.data);
             this.state.messages = res.data;
         });
-        
+
         //Socket.io
-        this.socket = io.connect('http://localhost:3001');
+        // this.socket = io.connect('http://localhost:3001');
+        this.socket = io.connect();
 
         this.socket.on('RECEIVE_MESSAGE', function(data){
             addMessage(data);

@@ -159,7 +159,7 @@ const http = require('http');
 const server = http.createServer(app);
 const socket = require('socket.io');
 
-//   var socket = require('socket.io');
+// var socket = require('socket.io');
 // Socket setup & pass server
 // var io = socket(server);
 const io = socket(server);
