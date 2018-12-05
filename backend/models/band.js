@@ -64,11 +64,11 @@ module.exports = function(sequelize , DataTypes){
             allowNull: true
         },
         soundcloud : {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: true
         },
         spotify : {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: true
         },
         facebook : {

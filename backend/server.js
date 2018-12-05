@@ -126,6 +126,7 @@ app.use(passport.session()); // persistent login sessions
 
 ///===== 
 
+const path = require('path');
 
 
 const PORT = process.env.PORT || 3001;
@@ -148,7 +149,9 @@ app.use(passport.initialize()); // initialize passport
 app.use(passport.session()); // persistent login sessions
 const routes = require ("./routes");
 app.use('/', routes);
-
+// app.get("*", (req, res) => {
+//     res.sendFile(path.join(__dirname, "../client/build/index.html"));
+// });
 
 
 // Syncing our sequelize models and then starting our Express app
@@ -158,7 +161,7 @@ const http = require('http');
 const server = http.createServer(app);
 const socket = require('socket.io');
 
-//   var socket = require('socket.io');
+// var socket = require('socket.io');
 // Socket setup & pass server
 // var io = socket(server);
 const io = socket(server);
