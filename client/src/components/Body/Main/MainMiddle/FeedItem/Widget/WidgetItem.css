@@ -68,3 +68,7 @@ button.react-calendar__tile--active, button.react-calendar__tile--active {
     line-height: 18px;
     margin: 0 20px;;
 }
+
+.radar {
+    max-height: 500px;
+}
