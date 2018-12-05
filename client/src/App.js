@@ -19,6 +19,7 @@ import Splash from "./pages/Splash"
 import SignUpComponent from "./components/SignUp"
 import Profile from "./pages/Profile";
 import PublicProfile from "./pages/PublicProfile";
+import SelectArtists from "./pages/SelectArtist";
 // import Threejs from "./pages/Threejs";
 
 //STYLING
@@ -73,11 +74,16 @@ const App = () => (
           <Route exact path="/profile" component={Profile}/> 
           <Route exact path="/profile/:id" component={PublicProfile}/>
           {/* currently testing for logged in users  */}
+
           <Route exact path="/profileOf/" component={PublicProfile}/>                
+ 
+          <Route exact path="/postgig/selectartists" component={SelectArtists} />                
+          
+
+          {/* U N I M P O R T A N T */}
           <Route exact path="/contact" component={Contact} />         
           <Route exact path="/careers" component={Careers} />         
-          <Route exact path="/sutromusic" component={Careers} />                   
-          {/* <Route exact path="/threejs" component={Threejs} /> */}
+          <Route exact path="/sutromusic" component={Careers} />  
           <Route exact path="/terms" component={Terms}/>
           <Route exact path="/privacy" component={Privacy}/>
           <Route exact path="/sfskateclub" component={Philanthropy}/>

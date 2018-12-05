@@ -131,7 +131,6 @@ class WidgetItem extends Component {
             case "post gig":
                 return (
                     <div id="post-gig">
-                        <h1>Post a gig here</h1>
                         <Modal postType="show" url={this.props.url} userID={this.state.id} userType={this.props.userType} />
                     </div>
                 );

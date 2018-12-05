@@ -95,10 +95,10 @@ class ControlledExpansionPanels extends React.Component {
             //temporary line below for seeders
             subtitle = (elem.address);
         }
-        else if(elem.rating) {
+        else if (elem.rating) {
             subtitle = elem.rating;
         }
-        else{
+        else {
             let genres = [];
             if(elem.genres){
                 for(var i = 0; i < Object.keys(JSON.parse(elem.genres)).length; i++){
@@ -138,7 +138,7 @@ class ControlledExpansionPanels extends React.Component {
                 <div>
                     <p>Capacity: {elem.capacity}</p>
                     <p>Ticket Price: {elem.average_ticket_price}</p>
-                    <a href={elem.website} className = "panelVenueLink">Learn More</a>
+                    <a href={elem.website} className="panelVenueLink">Learn More</a>
                 </div>;
         }
 
@@ -152,8 +152,8 @@ class ControlledExpansionPanels extends React.Component {
                     </Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
-                    <Typography className = {classes.information}>
-                        <img src = {image} className = {classes.venueImage} />
+                    <Typography className={classes.information}>
+                        <img src={image} className={classes.venueImage} />
                         {information}
                     </Typography>
                 </ExpansionPanelDetails>

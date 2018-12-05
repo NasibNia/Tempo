@@ -47,7 +47,9 @@ app.use(express.json());
 
 if(process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
+
 }
+
 
 app.use(passport.initialize()); // initialize passport
 app.use(passport.session()); // persistent login sessions
