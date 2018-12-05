@@ -14,6 +14,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 
+const path = require ('path');
+
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
@@ -43,30 +45,21 @@ var db = require("./models");
 app.use(express.urlencoded({ extended : true }));
 app.use(express.json());
 
-// if(process.env.NODE_ENV === "production") {
-//     app.use(express.static("client/build"));
-// }
-const path = require ('path');
-if (process.env.NODE_ENV === "production") {
+if(process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
-    app.get("/*", function(req, res) {
-      res.sendFile(path.join(__dirname, "../client/build/index.html"));
-    });
-  }
-  
-  // else {
-  //   app.use(express.static(path.join(__dirname, '/client/public')));
-  //   app.get("/*", function(req, res) {
-  //     res.sendFile(path.join(__dirname, "../client/public/index.html"));
-  //   });
-  // }
+
+}
+
 
 app.use(passport.initialize()); // initialize passport
 app.use(passport.session()); // persistent login sessions
-const routes = require ("./routes");
-app.use('/', routes);
-
-
+const routes = require ("./routes/index.js");
+app.use(routes);
+// Send every other request to the React app
+// Define any API routes before this runs
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../client/build/index.html"));
+});
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================

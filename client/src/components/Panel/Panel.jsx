@@ -100,13 +100,14 @@ class ControlledExpansionPanels extends React.Component {
         }
         else {
             let genres = [];
-            if (elem.genres) {
-                for (var i = 0; i < Object.keys(JSON.parse(elem.genres)).length; i++) {
-                    if (JSON.parse(elem.genres)[Object.keys(JSON.parse(elem.genres))[i]] === true) {
-                        genres.push(Object.keys(JSON.parse(elem.genres))[i]);
-                    }
+            if(elem.genres){
+                for(var i = 0; i < Object.keys(JSON.parse(elem.genres)).length; i++){
+                if(JSON.parse(elem.genres)[Object.keys(JSON.parse(elem.genres))[i]] === true){
+                    genres.push(Object.keys(JSON.parse(elem.genres))[i]);
                 }
             }
+            }
+            
             subtitle = genres.join(", ");
         }
 
