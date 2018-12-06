@@ -8,6 +8,7 @@ router.route("/")
 router.route("/ready")
       .get(bandController.findReadyBands);
 
+
 router.route("/ticket_price/")
       .get(bandController.findBandByTicketPrice);
 
@@ -16,6 +17,7 @@ router.route("/average_draw/")
 
 router.route("/search/:name")
       .get(bandController.findBandByName);
+
 
 router.route("/search/:genre")
       .get(bandController.findBandByGenre);
@@ -40,6 +42,7 @@ router.route("/pop")
 
 router.route("/acoustics")
       .get(bandController.findAcousticsBands);
+
 
 router.route("/:id")
       .get(bandController.findBand)

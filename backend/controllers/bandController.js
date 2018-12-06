@@ -58,6 +58,7 @@ module.exports = {
 
     findBandByGenre : function(req,res){
 
+
        
         db.Band.findAll({
             where : {
@@ -66,6 +67,7 @@ module.exports = {
                 // } 
                 // [req.params.genre]: true
                 genres: req.params.genre
+
             }
         })
         .then(bandsRes => {
