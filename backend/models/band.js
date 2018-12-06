@@ -100,7 +100,7 @@ module.exports = function(sequelize , DataTypes){
         // },
 
         // genre : [
-        //         type: DataTypes.STRING
+        //         type: DataTypes.TEXT
         // ],
     
         // lookingForVenue : [

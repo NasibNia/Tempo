@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import Body from "../../components/Body";
 
@@ -23,8 +23,7 @@ class VenueHome extends Component {
         description: "",
         statistics: "",
         user: "venue",
-        loggedIn: true,
-        name: ""
+        loggedIn: true
     };
 
     componentDidMount() {
@@ -36,11 +35,13 @@ class VenueHome extends Component {
                 window.location.href = "/artist";
             } else {
                 console.log("user is venue")
-            //   this.setState({ loggedIn: true,
-            //                   name : res.data.user.name });
-              // this.loadShows(res.data.user.id);
+                this.setState({
+                    // loggedIn: true,
+                    name: res.data.user.name
+                });
+                // this.loadShows(res.data.user.id);
             }
-          });
+        });
     }
 
 
@@ -49,7 +50,7 @@ class VenueHome extends Component {
         return (
             <div>
                 {/* <Body /> */}
-                <Body userType={this.state.user} url={this.props.match} name={this.state.name}/>
+                <Body userType={this.state.user} url={this.props.match} name={this.state.name} />
 
             </div>
         )

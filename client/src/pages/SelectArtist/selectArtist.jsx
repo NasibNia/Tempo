@@ -64,11 +64,12 @@ class SelectArtist extends Component {
 
       if (!res.data.user.id) {
         this.setState({ loggedIn: false });
+        window.location.href = "/signin";
       }
       else {
 
         if (res.data.user.userType === "artist") {
-          return <Redirect to={'/artist/'} />
+          window.location.href = "/artist";
         }
         else if (res.data.user.userType === "venue") {
           this.setState({
@@ -101,7 +102,7 @@ class SelectArtist extends Component {
 
       // return <SelectArtistArray genre={this.state.searchedGenre} />
 
-      this.setState({ 
+      this.setState({
         topArtists: <SelectArtistArray genre={this.state.searchedGenre} />
       })
 
@@ -111,7 +112,7 @@ class SelectArtist extends Component {
 
   render() {
     const { classes } = this.props;
-    
+
     let artistArray = this.state.topArtists;
 
     return (
