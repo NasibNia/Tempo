@@ -21,6 +21,7 @@ import Profile from "./pages/Profile";
 import PublicProfile from "./pages/PublicProfile";
 import SelectArtists from "./pages/SelectArtist";
 // import Threejs from "./pages/Threejs";
+import NewsFeed from "./pages/NewsFeed";
 
 //STYLING
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -88,6 +89,8 @@ const App = () => (
           <Route exact path="/privacy" component={Privacy}/>
           <Route exact path="/sfskateclub" component={Philanthropy}/>
           {/* <Route component={NoMatch} /> */}
+
+          <Route exact path="/NewsFeed" component={NewsFeed}/>
         </Switch>
         {/* <Footer /> */}
       </MuiThemeProvider>

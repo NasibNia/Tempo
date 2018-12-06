@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import "./selectArtistArray.css";
-import Criterion from './../Criterion';
+import "./SelectArtistArray.css";
+import Criterion from '../Criterion';
 
 import API from "../../../utils/API";
 import App from '../../../App';
