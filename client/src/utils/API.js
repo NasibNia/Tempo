@@ -32,7 +32,7 @@ export default {
         return axios.get("/api/bands/search/" + genre);
     },
     getRockBands: function(){
-        return axios.get("api/bands/jazz")
+        return axios.get("api/bands/rock")
     },
     getJazzBands: function(){
         return axios.get("api/bands/jazz")
