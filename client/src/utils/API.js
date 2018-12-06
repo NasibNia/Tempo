@@ -78,6 +78,14 @@ export default {
         return axios.put("/api/shows/" + id, showData);
     },
 
+    //==================SHOWS==================
+    // Gets all ratings 
+
+    saveRating: function (ratingData) {
+        console.log("saverating", ratingData)
+        return axios.post("/api/ratings", ratingData)
+    },
+
     //==================PASSPORT==================
 
     // Check if user is logged-in 

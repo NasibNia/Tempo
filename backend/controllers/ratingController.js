@@ -40,6 +40,14 @@ module.exports = {
             });
     },
     
+    createRating: function(req, res) {
+        console.log("ratings.createRatings ", req.body);
+        db.Rating.create(req.body
+        ).then(ratingRes => {
+            res.json(ratingRes);
+        });
+    },
+
     findRating : function (req, res){
         db.Rating.findAll({
             where : {

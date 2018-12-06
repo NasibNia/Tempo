@@ -3,7 +3,9 @@ const ratingController = require ("../../controllers/ratingController");
 
 router.route("/")
         .get(ratingController.findAllRatings)
-        .post(ratingController.create);
+      //   .post(ratingController.create);
+        .post(ratingController.createRating);
+
 
 router.route("/:id")
       .get(ratingController.findRating)

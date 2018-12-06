@@ -1,5 +1,6 @@
 import React from 'react';
 import "./SideSection.css";
+import API from '../../../../../utils/API';
 
 //create an individual key for each item
 let keyCount = 0;
@@ -25,11 +26,11 @@ const generateRatings = (name, venueID) => {
                 <br></br>
                 <h4>{name}</h4>
                 <ul class="list-inline rating-list">
-                    <li onClick={handleRatingsClick} value="5" data-key={venueID}><i class="fas fa-star" ></i></li>
-                    <li onClick={handleRatingsClick} value="4" data-key={venueID}><i class="fas fa-star" ></i></li>
-                    <li onClick={handleRatingsClick} value="3" data-key={venueID}><i class="fas fa-star" ></i></li>
-                    <li onClick={handleRatingsClick} value="2" data-key={venueID}><i class="fas fa-star" ></i></li>
-                    <li onClick={handleRatingsClick} value="1" data-key={venueID}><i class="fas fa-star" ></i></li>
+                    <li onClick={handleRatingsClick} value="5" datakey={venueID}><i class="fas fa-star" ></i></li>
+                    <li onClick={handleRatingsClick} value="4" datakey={venueID}><i class="fas fa-star" ></i></li>
+                    <li onClick={handleRatingsClick} value="3" datakey={venueID}><i class="fas fa-star" ></i></li>
+                    <li onClick={handleRatingsClick} value="2" datakey={venueID}><i class="fas fa-star" ></i></li>
+                    <li onClick={handleRatingsClick} value="1" datakey={venueID}><i class="fas fa-star" ></i></li>
                 </ul>
                 <hr></hr>
             </div>
@@ -37,7 +38,29 @@ const generateRatings = (name, venueID) => {
 }
 
 const handleRatingsClick = event => {
-    console.log('The star was clicked.', event.currentTarget.value);
+    const id = event.currentTarget.getAttribute('datakey');
+    console.log('The star was clicked.', id);
+
+    let ratingsData = {
+        userIsBand: true,
+        bandId: id,
+        venueId: id,
+        rating: event.currentTarget.value
+    };
+
+    API.getUser().then(res => {
+        console.log(res.data)
+        if (res.data.user.userType === "artist") {
+            ratingsData.bandId = res.data.user.id;
+        } else {
+            ratingsData.userIsBand = false;
+            ratingsData.venueId = res.data.user.id;
+        }
+        console.log("rating obj is ", ratingsData)
+        API.saveRating(ratingsData).then (res => {
+            console.log(res)
+        })
+    })
   }
 
 const SideItem = props => {
