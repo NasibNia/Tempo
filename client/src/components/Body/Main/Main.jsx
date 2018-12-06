@@ -20,8 +20,17 @@ class Main extends Component {
                 .then(res => {
                     console.log("res.data", res.data);
                     // API.calculateRatingById()
-                    this.setState({ data: res.data })
-                }
+                    for (let i = 0; i < res.data.length; i++){
+                        API.calculateRatingById("venue", res.data[i].id)
+                        .then(ratingRes => {
+                            if (ratingRes.data.rating) {
+                                res.data[i].rating = ratingRes.data.rating
+                            }
+                            this.setState({ data: res.data })
+                            console.log("res.data", ratingRes)
+
+                        })
+                    }}
                 )
                 .catch(err => console.log(err));
                 API.getBands()
@@ -54,7 +63,9 @@ class Main extends Component {
                     for (let i = 0; i < res.data.length; i++){
                         API.calculateRatingById("venue", res.data[i].id)
                         .then(ratingRes => {
-                            res.data[i].rating = ratingRes.data.rating
+                            if (ratingRes.data.rating) {
+                                res.data[i].rating = ratingRes.data.rating
+                            }                            
                             this.setState({ data: res.data })
                             console.log("res.data", ratingRes)
 

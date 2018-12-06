@@ -14,7 +14,7 @@ const generateItems = (name, image, rating, link) => {
             <div className="side-icon" style={{backgroundImage: `url(${image})`}}></div>
             <div className="side-text">
                 <h4>{name}</h4>
-                <p>Rating:{rating}</p>
+                <p>Rating : {rating}</p>
             </div>
         </a>
     )
