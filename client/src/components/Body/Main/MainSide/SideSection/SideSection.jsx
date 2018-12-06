@@ -51,17 +51,21 @@ const handleRatingsClick = (event) => {
         rating: event.currentTarget.value
     };
 
+    let ratedType;
     API.getUser().then(res => {
         console.log(res.data)
         if (res.data.user.userType === "artist") {
             ratingsData.BandId = res.data.user.id;
+            ratedType = "venue"
         } else {
             ratingsData.userIsBand = false;
             ratingsData.VenueId = res.data.user.id;
+            ratedType = "artist"
         }
         console.log("rating obj is ", ratingsData)
-        API.saveRating(ratingsData).then (res => {
-            console.log("test",res)
+        API.saveRating(ratingsData).then (createRatingRes => {
+            console.log("test",createRatingRes)
+
         })
     })
   }

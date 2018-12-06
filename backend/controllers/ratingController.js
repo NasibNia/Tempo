@@ -216,7 +216,7 @@ module.exports = {
                     rating += ratingRes[i].rating;
                 }
                 rating = rating / ratingRes.length
-                res.json({rating : rating});
+                res.json({rating : rating.toFixed(2)});
             });
         } else {
             console.log("User params not band or venue.");

@@ -89,6 +89,10 @@ export default {
     getRatingsbyId: function (userType, id) {
         return axios.get("/api/ratings/" + userType + "/" + id + "/all")
     },
+
+    calculateRatingById: function (user, id){
+        return axios.get("/api/ratings/" + user + "/" + id + "/rating")
+    },
     //==================PASSPORT==================
 
     // Check if user is logged-in 
