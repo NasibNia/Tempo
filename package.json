@@ -40,6 +40,8 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.4",
     "react-scroll-to-component": "^1.0.2",
-    "sequelize": "^4.39.0"
+    "sequelize": "^4.39.0",
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0"
   }
 }

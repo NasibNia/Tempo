@@ -31,7 +31,7 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Typography from '@material-ui/core/Typography';
 
 // Transitions
-import Zoom from 'react-reveal/Zoom';
+import Fade from 'react-reveal/Fade';
 
 import API from "../../utils/API.js";
 import axios from "axios";
@@ -53,7 +53,7 @@ const styles = theme => ({
         flexDirection: 'column',
         alignItems: 'center',
         padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
-        width: "1000px"
+        width: "600px"
     },
     avatar: {
         // margin: "auto",
@@ -159,9 +159,11 @@ class profile extends Component {
         spotify: "",
         soundcloud: "",
         profilePic: "",
+        facebook: "",
         readyToGig: false,
         Year_est: 0,
-        ticket_price: 0,
+        ticket_price: 15,
+        average_draw: 0,
         capacity: 0,
         loggedIn: false,
         finishedUpdate: false,
@@ -179,7 +181,60 @@ class profile extends Component {
             if (!res.data.user.id) {
                 this.setState({ loggedIn: false });
             } else {
-                this.setState({ loggedIn: true, userId: res.data.user.id, name: res.data.user.name, userType: res.data.user.userType });
+
+                if (res.data.user.userType === "artist") {
+                    if (res.data.user.description) {
+                        this.setState({
+                            loggedIn: true,
+                            userId: res.data.user.id,
+                            name: res.data.user.name,
+                            userType: res.data.user.userType,
+                            description: res.data.user.description,
+                            soundcloud: res.data.user.soundcloud,
+                            spotify: res.data.user.spotify,
+                            facebook: res.data.user.facebook,
+                            ticket_price: res.data.user.ticket_price,
+                            average_draw: res.data.user.average_draw,
+                            profilePic: res.data.user.profilePic,
+                            genres: JSON.parse(res.data.user.genres),
+                            readyToGig: res.data.user.readyToGig
+                        });
+                    }
+                    else {
+                        this.setState({
+                            loggedIn: true,
+                            userId: res.data.user.id,
+                            name: res.data.user.name,
+                            userType: res.data.user.userType,
+                        });
+                    }
+
+                }
+                else if (res.data.user.userType === "venue") {
+                    if (res.data.user.description) {
+
+                        this.setState({
+                            loggedIn: true,
+                            userId: res.data.user.id,
+                            name: res.data.user.name,
+                            userType: res.data.user.userType,
+                            description: res.data.user.description,
+                            capacity: res.data.user.capacity,
+                            ticket_price: res.data.user.ticket_price,
+                            Year_est: res.data.user.Year_est,
+                            genres: JSON.parse(res.data.user.genres),
+                            readyToBook: res.data.user.readyToGig
+                        });
+                    }
+                    else {
+                        this.setState({
+                            loggedIn: true,
+                            userId: res.data.user.id,
+                            name: res.data.user.name,
+                            userType: res.data.user.userType,
+                        });
+                    }
+                }
             }
         });
 
@@ -200,7 +255,7 @@ class profile extends Component {
                     // finishedUpdate: true,
                 });
                 //updates the user information
-                console.log("user type" , this.state.userType)
+                console.log("user type", this.state.userType)
                 this.updateProfile();
             }, 2000);
         })
@@ -217,9 +272,20 @@ class profile extends Component {
                 description: this.state.description,
                 soundcloud: this.state.soundcloud,
                 spotify: this.state.spotify,
+                facebook: this.state.facebook,
+                ticket_price: this.state.ticket_price,
+                average_draw: this.state.average_draw,
                 profilePic: this.state.profilePic,
                 genres: JSON.stringify(this.state.genres),
-                readyToGig: this.state.readyToGig
+                readyToGig: this.state.readyToGig,
+                rock: this.state.genres.rock,
+                club: this.state.genres.club,
+                electronic: this.state.genres.electronic,
+                hiphop: this.state.genres.hiphop,
+                pop: this.state.genres.pop,
+                jazz: this.state.genres.jazz,
+                acoustics: this.state.genres.acoustics
+
             }
 
             API.updateBand(this.state.userId, profileInfo)
@@ -402,7 +468,7 @@ class profile extends Component {
 
         if (this.state.userType === "artist") {
             profilePrompts = (
-                <Zoom>
+                <Fade>
                     <Paper className={classes.paper}>
                         <form className="container" noValidate autoComplete="off">
                             <div id="profileHeader">
@@ -519,6 +585,42 @@ class profile extends Component {
                                 onChange={this.handleInputChange}
                                 value={this.state.soundcloud}
                             />
+                            <TextField
+                                id="filled-facebook-input"
+                                label="Enter the link to your Facebook page"
+                                className={classes.textField}
+                                type="url"
+                                name="facebook"
+                                autoComplete="current-facebook"
+                                margin="normal"
+                                // variant="filled"
+                                onChange={this.handleInputChange}
+                                value={this.state.facebook}
+                            />
+                            <FormControl className={classes.textField} style={{ marginTop: "10px" }}>
+                                <InputLabel htmlFor="filled-ticket_price-input">Current Ticket Price to Your Average Show</InputLabel>
+                                <Input
+                                    id="filled-ticket_price-input"
+                                    name="ticket_price"
+                                    type="number"
+                                    value={this.state.ticket_price}
+                                    autoComplete="current-ticket_price"
+                                    onChange={this.handleInputChange}
+                                    startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                                />
+                            </FormControl>
+                            <TextField
+                                id="filled-average_draw-input"
+                                label="What is the Average Draw (# of attendees) of your shows?"
+                                className={classes.textField}
+                                type="url"
+                                name="average_draw"
+                                autoComplete="current-average_draw"
+                                margin="normal"
+                                // variant="filled"
+                                onChange={this.handleInputChange}
+                                value={this.state.average_draw}
+                            />
                             <FormControlLabel
                                 control={<Checkbox value="readyToGig" onChange={this.handleReadyChange} checked={this.state.readyToGig} color="secondary" />}
                                 label="Are you ready to book performances?"
@@ -535,12 +637,12 @@ class profile extends Component {
                             {this.state.loading && <CircularProgress size={30} className={classes.buttonProgress} />}
                         </form>
                     </Paper>
-                </Zoom>
+                </Fade>
             )
         }
         else if (this.state.userType === "venue") {
             profilePrompts = (
-                <Zoom>
+                <Fade>
                     <Paper className={classes.paper}>
                         <form className="container" noValidate autoComplete="off">
                             <div id="profileHeader">
@@ -645,7 +747,7 @@ class profile extends Component {
                             onChange={this.handleInputChange}
                             value={this.state.ticket_price}
                         /> */}
-                            <FormControl className={classes.textField} style={{marginTop: "10px"}}>
+                            <FormControl className={classes.textField} style={{ marginTop: "10px" }}>
                                 <InputLabel htmlFor="filled-ticket_price-input">Enter the typical price of entry to your venue</InputLabel>
                                 <Input
                                     id="filled-ticket_price-input"
@@ -699,7 +801,7 @@ class profile extends Component {
                             {this.state.loading && <CircularProgress size={30} className={classes.buttonProgress} />}
                         </form>
                     </Paper>
-                </Zoom>
+                </Fade>
             )
         }
 

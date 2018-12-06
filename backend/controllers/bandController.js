@@ -56,12 +56,68 @@ module.exports = {
             });
     },
 
+    findBandByGenre : function(req,res){
+
+
+       
+        db.Band.findAll({
+            where : {
+                // genres = {
+                //     $contains: [`${req.params.genres}: true`]
+                // } 
+                // [req.params.genre]: true
+                genres: req.params.genre
+
+            }
+        })
+        .then(bandsRes => {
+            res.json(bandsRes);
+        });
+    },
+
     findReadyBands: function (req, res) {
         db.Band.findAll({
             where: {
                 readyToGig: true
             },
             include: [db.Show]
+        })
+            .then(bandsRes => {
+                res.json(bandsRes);
+            });
+    },
+
+    // These four need testing
+    findBandByTicketPrice: function (req, res) {
+        db.Band.findAll({
+            include: [{
+                model: db.Show
+                // ({
+                //     include : [{
+                //         model : db.Show
+                // }]
+                // })
+            }],
+            limit: 8,
+            order: [['ticket_price', 'DESC']]
+        })
+            .then(bandsRes => {
+                res.json(bandsRes);
+            });
+    },
+
+    findBandByDraw: function (req, res) {
+        db.Band.findAll({
+            include: [{
+                model: db.Show
+                // ({
+                //     include : [{
+                //         model : db.Show
+                // }]
+                // })
+            }],
+            limit: 8,
+            order: [['average_draw', 'DESC']]
         })
             .then(bandsRes => {
                 res.json(bandsRes);
@@ -92,6 +148,91 @@ module.exports = {
             .then(dbBands => res.json(dbBands));
     },
 
+    // Find All of a Specific Genre
+
+    findRockBands : function(req,res){
+
+        db.Band.findAll({
+            where : {
+                rock: true
+            }
+        })
+        .then(bandsRes => {
+            res.json(bandsRes);
+        });
+    },
+
+    findJazzBands : function(req,res){
+
+        db.Band.findAll({
+            where : {
+                jazz: true
+            }
+        })
+        .then(bandsRes => {
+            res.json(bandsRes);
+        });
+    },
+
+    findPopBands : function(req,res){
+
+        db.Band.findAll({
+            where : {
+                pop: true
+            }
+        })
+        .then(bandsRes => {
+            res.json(bandsRes);
+        });
+    },
+
+    findClubBands : function(req,res){
+
+        db.Band.findAll({
+            where : {
+                club: true
+            }
+        })
+        .then(bandsRes => {
+            res.json(bandsRes);
+        });
+    },
+
+    findElectronicBands : function(req,res){
+
+        db.Band.findAll({
+            where : {
+                electronic: true
+            }
+        })
+        .then(bandsRes => {
+            res.json(bandsRes);
+        });
+    },
+
+    findHiphopBands : function(req,res){
+
+        db.Band.findAll({
+            where : {
+                hiphop: true
+            }
+        })
+        .then(bandsRes => {
+            res.json(bandsRes);
+        });
+    },
+
+    findAcousticsBands : function(req,res){
+
+        db.Band.findAll({
+            where : {
+                acoustics: true
+            }
+        })
+        .then(bandsRes => {
+            res.json(bandsRes);
+        });
+    },
     // // Gets current rating and adds new rating to it, adds 1 to totalRated
     // addRating : function(req, res) {
     //     console.log("adding rating to band")

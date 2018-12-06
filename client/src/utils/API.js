@@ -14,10 +14,45 @@ export default {
     getBand: function (id) {
         return axios.get("/api/bands/" + id);
     },
-    // Gets the band with the given id
+    // Gets the band with the given name
     getBandName: function (name) {
         return axios.get("/api/bands/search/" + name);
     },
+    // Gets the top 10 bands by ticket price
+    getTopBandsByPrice: function () {
+        return axios.get("/api/bands/ticket_price/");
+    },
+    // Gets the top 10 bands by average draw
+    getTopBandsByDraw: function () {
+        return axios.get("/api/bands/average_draw/");
+    },
+
+    // Genre search API routes
+    getBandsByGenre : function(genre){
+        return axios.get("/api/bands/search/" + genre);
+    },
+    getRockBands: function(){
+        return axios.get("api/bands/jazz")
+    },
+    getJazzBands: function(){
+        return axios.get("api/bands/jazz")
+    },
+    getPopBands: function(){
+        return axios.get("api/bands/pop")
+    },
+    getClubBands: function(){
+        return axios.get("api/bands/club")
+    },
+    getElectronicBands: function(){
+        return axios.get("api/bands/electronic")
+    },
+    getAcousticsBands: function(){
+        return axios.get("api/bands/acoustics")
+    },
+    getHiphopBands: function(){
+        return axios.get("api/bands/hiphop")
+    },
+
     // Deletes the band with the given id
     deleteBand: function (id) {
         return axios.delete("/api/bands/" + id);
@@ -29,6 +64,8 @@ export default {
     updateBand: function (id, bandData) {
         return axios.put("/api/bands/" + id, bandData);
     },
+
+    
 
     //==================VENUES==================
     // Gets all venues 
@@ -95,6 +132,16 @@ export default {
     logout: () => {
         return axios.get("/logout", function (res) {
             // return res;
-        })
+        });
+    },
+
+    //==================NEWS==================
+    getNews : function () {
+        console.log("api get news in util");
+        return axios.get("/api/news");
+    },
+    saveNews : (newsData) => {
+        return axios.post("/api/news", newsData);
     }
+ 
 };

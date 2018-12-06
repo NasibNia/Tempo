@@ -39,15 +39,14 @@ let venueNewsFeed = [
         title: "Calendar",
         type: "calendar"
     },
-    {
-        title: "Community",
-        type: "community events"
-    },
+    // {
+    //     title: "Community",
+    //     type: "community events"
+    // },
     {
         title: "Gig Board",
         type: "gig board"
     },
-    ,
     {
         title: "Artist Directory",
         type: "artist directory"
@@ -56,10 +55,10 @@ let venueNewsFeed = [
         title: "Post A Gig",
         type: "post gig"
     },
-    {
-        title: "Past Gigs",
-        type: "past gigs"
-    }
+    // {
+    //     title: "Past Gigs",
+    //     type: "past gigs"
+    // }
 ]
 
 let keyCount = 0;
