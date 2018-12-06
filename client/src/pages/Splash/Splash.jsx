@@ -26,9 +26,13 @@ class Splash extends Component {
                 <div className="splash-section section-1" ref={div => { this.top = div }}>
                     <div className="text">
                         <Slide top>
-                            <img src="/assets/box-logo.png" alt="" id = "tempo"/>
+                            <img src="/assets/box-logo.png" alt="" id="tempo" />
                         </Slide>
                         <h1>Play More Music, Earn More Money</h1>
+                        {/* <div className="sign-up-links">
+                            <p className="hvr-sweep-to-right">LOG IN</p>
+                            <p className="hvr-sweep-to-right">SIGN UP</p>
+                        </div> */}
                     </div>
                     <div id="background-overlay">
                         <video autoPlay muted loop>
@@ -45,10 +49,10 @@ class Splash extends Component {
                 <div className="splash-section section-3" ref={div => { this.preview = div }}>
 
                     <div className="testimony1">
-                    <Fade bottom>
-                        <h1>‘TODAY, INDEPENDENT ARTISTS CAN DO EVERYTHING THAT MAJOR LABELS CAN.’</h1>
-                        <p>'Back when I started in the ‘90s you didn’t have a choice, you were either signed or unsigned. Today independent artists can do everything that the major labels can, within reason, as long as they have the know-how and budget.'<br></br><br></br><span className="text-right">-Music Business Worldwide</span></p>
-                        <h4></h4>
+                        <Fade bottom>
+                            <h1>‘TODAY, INDEPENDENT ARTISTS CAN DO EVERYTHING THAT MAJOR LABELS CAN.’</h1>
+                            <p>'Back when I started in the ‘90s you didn’t have a choice, you were either signed or unsigned. Today independent artists can do everything that the major labels can, within reason, as long as they have the know-how and budget.'<br></br><br></br><span className="text-right">-Music Business Worldwide</span></p>
+                            <h4></h4>
                         </Fade>
                     </div>
 
