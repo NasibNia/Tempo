@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import "./SideSection.css";
 import API from '../../../../../utils/API';
 
+
 //create an individual key for each item
 let keyCount = 0;
+
 
 const generateItems = (name, image, rating, link) => {
     keyCount++;
@@ -37,28 +39,29 @@ const generateRatings = (name, venueID) => {
     )
 }
 
-const handleRatingsClick = event => {
+// posts rating on star click
+const handleRatingsClick = (event) => {
     const id = event.currentTarget.getAttribute('datakey');
     console.log('The star was clicked.', id);
 
     let ratingsData = {
         userIsBand: true,
-        bandId: id,
-        venueId: id,
+        BandId: id,
+        VenueId: id,
         rating: event.currentTarget.value
     };
 
     API.getUser().then(res => {
         console.log(res.data)
         if (res.data.user.userType === "artist") {
-            ratingsData.bandId = res.data.user.id;
+            ratingsData.BandId = res.data.user.id;
         } else {
             ratingsData.userIsBand = false;
-            ratingsData.venueId = res.data.user.id;
+            ratingsData.VenueId = res.data.user.id;
         }
         console.log("rating obj is ", ratingsData)
         API.saveRating(ratingsData).then (res => {
-            console.log(res)
+            console.log("test",res)
         })
     })
   }
@@ -70,6 +73,23 @@ const SideItem = props => {
         )
     }
     else if (props.ratings) {
+        // API.getUser().then(res => {
+        //     API.getRatingsbyId(res.data.user.userType, res.data.user.id)
+        //     .then(res => {
+        //         console.log("ratings res", res)
+        //         for (let i = 0; i < res.data.length; i++){
+        //             for (let j = 0; j < props.ratings.length; j++) {
+        //                 console.log(res.data[i].VenueId, props.ratings[j].id)
+        //                 if (res.data[i].VenueId === props.ratings[j].id) {
+        //                     props.ratings.splice(j, 1)
+        //                 }
+
+        //             }
+        //         }
+        //         console.log("spliced ratings ", props.ratings)
+                
+        //     })
+        // })
         return (
             props.ratings.slice(0,3).map(elem => generateRatings(elem.name, elem.id)
         

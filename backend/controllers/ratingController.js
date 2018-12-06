@@ -22,23 +22,23 @@ module.exports = {
         });
     },
 
-    // Create new rating, needs rater, show, rated
-    create: function(req,res){
-        console.log("rating create controller", req.body);
-        console.log("user is  ", req.params.user);
-        // db.Rating.create(req.body)
-        db.Rating.create(
+    // // Create new rating, needs rater, show, rated
+    // create: function(req,res){
+    //     console.log("rating create controller", req.body);
+    //     console.log("user is  ", req.params.user);
+    //     // db.Rating.create(req.body)
+    //     db.Rating.create(
 
-        {
-            "userIsBand": true,
-            "BandId": 1,
-            "ShowId": 1,
-            "VenueId": 1,
-        })
-            .then(ratingRes => {
-                res.json(ratingRes);
-            });
-    },
+    //     {
+    //         "userIsBand": true,
+    //         "BandId": 1,
+    //         "ShowId": 1,
+    //         "VenueId": 1,
+    //     })
+    //         .then(ratingRes => {
+    //             res.json(ratingRes);
+    //         });
+    // },
     
     createRating: function(req, res) {
         console.log("ratings.createRatings ", req.body);
@@ -81,7 +81,7 @@ module.exports = {
     },
 
     findRatingsById : function (req, res){
-        if (req.params.user === "band"){
+        if (req.params.user === "artist"){
             db.Rating.findAll({
                 where : {
                     BandId : req.params.id,
@@ -107,7 +107,7 @@ module.exports = {
         }
     },
     findNullRatingsById : function (req, res){
-        if (req.params.user === "band"){
+        if (req.params.user === "artist"){
             db.Rating.findAll({
                 where : {
                     BandId : req.params.id,
@@ -135,7 +135,7 @@ module.exports = {
         }
     },
     findPastRatings : function (req, res){
-        if (req.params.user === "band"){
+        if (req.params.user === "artist"){
             db.Rating.findAll({
                 where : {
                     BandId : req.params.id,
@@ -163,7 +163,7 @@ module.exports = {
         }
     },    
     getUserRatings : function (req, res){
-        if (req.params.user === "band"){
+        if (req.params.user === "artist"){
             db.Rating.findAll({
                 where : {
                     BandId : req.params.id,
@@ -191,7 +191,7 @@ module.exports = {
         }
     },
     calculateRatingById : function (req, res){
-        if (req.params.user === "band"){
+        if (req.params.user === "artist"){
             db.Rating.findAll({
                 where : {
                     BandId : req.params.id,

@@ -33,10 +33,30 @@ class Main extends Component {
                 .catch(err => console.log(err));
             API.getVenues()
                 .then(res => {
-                    this.setState({ratings: res.data})
+
+                    API.getUser().then(userRes => {
+                        API.getRatingsbyId(userRes.data.user.userType, userRes.data.user.id)
+                        .then(ratingsRes => {
+                            console.log("ratings res", ratingsRes)
+                            for (let i = 0; i < ratingsRes.data.length; i++){
+                                for (let j = 0; j < res.data.length; j++) {
+                                    console.log(ratingsRes.data[i].VenueId, res.data[j].id)
+                                    if (ratingsRes.data[i].VenueId === res.data[j].id) {
+                                        res.data.splice(j, 1)
+                                    }
+            
+                                }
+                            }
+                            console.log("spliced ratings ", res.data)
+                            this.setState({ratings: res.data})
+                        })
+                    })
+                    
+
                 })
         }
     }
+
 
     render() {
         console.log("early data", this.state.data)
