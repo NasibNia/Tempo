@@ -57,12 +57,12 @@
 }
 
 .message-item:hover {
-    margin: 15px 10px;
+    /* margin: 15px 10px;
     background-color: #0684FC;
-    padding: 5px 20px 5px 20px;
+    padding: 5px 10px 5px 10px;
     color: white;
     border-radius: 80px;
-    height: 100px;
+    height: 100px; */
     cursor: pointer;
     width: 680px;
 }

@@ -171,7 +171,7 @@ class WidgetItem extends Component {
                             <div className="profile-text">
                                 <h2 style={{color: "#741D2B"}}>{this.state.name}</h2>
                                 <p>{this.state.description ? this.state.description :
-                                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam nisi ipsum, tempor ac lorem a, fringilla consequat lorem. Etiam congue enim arcu, at molestie dui porta et. Nullam in tristique mi. Maecenas ullamcorper, est sed aliquet placerat, arcu diam rutrum velit, sed gravida ante felis in lectus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam eu finibus lorem. Nulla mattis tellus eu mi tempor volutpat. Aliquam nec vestibulum augue. Morbi enim leo, vulputate a efficitur vel, molestie vitae nibh. Nullam porttitor scelerisque dapibus."
+                                    "Loading..."
                                 }
                                 </p>
                             </div>

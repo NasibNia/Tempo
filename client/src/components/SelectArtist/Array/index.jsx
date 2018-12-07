@@ -1,1 +1,1 @@
-export { default } from "./SelectArtistArray"
+export { default } from "./selectArtistArray"

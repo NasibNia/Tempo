@@ -13,19 +13,15 @@ const SelectArtistCard = props => {
                 <div className="artist-card-left">
                     <div className="artist-card-icon" style={{ backgroundImage: 'url(' + props.icon + ')' }}></div>
                     <div className="artist-card-subtitle"></div>
-                    <div className="artist-card-ratings">
-                        <h2>{props.tempoRating}</h2>
-                        <h2>${props.ticketPrice}</h2>
-                        <h2>{props.averageDraw}</h2>
-                    </div>
                 </div>
                 <div className="artist-card-right">
                     <div className="artist-name">
                         <h1>{props.artistName}</h1>
                     </div>
-
-                    <div className="artist-card-description">
-                        <p>{props.artistBio.length < 100 ? props.artistBio : props.artistBio.substring(0, 100) + "..."}</p>
+                    <div className="artist-card-ratings">
+                        <h2>Genre: Rock</h2>
+                        <h2>Average Ticket Price: ${props.ticketPrice}</h2>
+                        <h2>Average Draw: {props.averageDraw}</h2>
                     </div>
                 </div>
             </div>
