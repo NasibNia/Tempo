@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import "./SelectArtistArray.css";
+import "./selectArtistArray.css";
 import Criterion from '../Criterion';
 
 import API from "../../../utils/API";

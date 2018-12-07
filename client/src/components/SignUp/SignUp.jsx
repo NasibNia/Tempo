@@ -18,6 +18,9 @@ import LockIcon from '@material-ui/icons/LockOutlined';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import CheckIcon from '@material-ui/icons/Check';
+import ErrorIcon from '@material-ui/icons/Error';
+import CloseIcon from '@material-ui/icons/Close';
+import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import Grow from '@material-ui/core/Grow';
@@ -25,6 +28,8 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Typography from '@material-ui/core/Typography';
+import Snackbar from '@material-ui/core/Snackbar';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import API from "../../utils/API.js";
@@ -106,7 +111,19 @@ const styles = theme => ({
 
         }
 
-    }
+    }, 
+    message: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: "space-between"
+    },
+    errorMessage: {
+        backgroundColor: "#DD270B",
+        transition: "0.3s ease-in-out",
+        '&:hover': {
+            backgroundColor: theme.palette.secondary.dark,
+        }
+    },
 });
 
 function getSteps() {
@@ -158,7 +175,9 @@ class SignUp extends Component {
             email: "",
             password: "",
             passwordRepeat: ""
-        }
+        },
+        openSnack: false,
+        openErrorMessage: false
 
     }
 
@@ -193,6 +212,11 @@ class SignUp extends Component {
             )
         }
 
+        else{
+            console.log("Incorrect sign up")
+            this.setState({ openSnack: false, openErrorMessage: true });
+        }
+
 
     }
 
@@ -215,7 +239,10 @@ class SignUp extends Component {
                     }, () => console.log(this.state))
                 }
                 if (!results.data.success) {
-                    alert("incorrect username or password")
+                    console.log('Incorrect sign up');
+                    this.setState({ openSnack: false, openErrorMessage: true });
+
+                    // alert("incorrect username or password")
                 }
                 // window.location.href = "/artist";
             }
@@ -246,7 +273,8 @@ class SignUp extends Component {
                     }, () => console.log(this.state))
                 }
                 if (!results.data.success) {
-                    alert("incorrect username or password")
+                    this.setState({ openSnack: false, openErrorMessage: true });
+                    // alert("incorrect username or password")
                 }
                 // window.location.href = "/artist";
             }
@@ -296,6 +324,10 @@ class SignUp extends Component {
 
     handleClose = () => {
         this.setState({ open: false });
+    };
+
+    handleErrorClose = () => {
+        this.setState({ openSnack: false, openErrorMessage: false });
     };
 
     handleOpen = () => {
@@ -537,7 +569,8 @@ class SignUp extends Component {
                         />
                         <div id="addressInputs">
                             <TextField
-                                id="filled-city-input"
+                                id="fi
+                                lled-city-input"
                                 label="City"
                                 className={classes.textField}
                                 type="text"
@@ -701,6 +734,36 @@ class SignUp extends Component {
                         );
                     })}
                 </Stepper>
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left',
+                    }}
+                    open={this.state.openErrorMessage}
+                    autoHideDuration={6000}
+                    onClose={this.handleErrorClose}
+                >
+                    <SnackbarContent
+                        onClose={this.handleErrorClose}
+                        className={classes.errorMessage}
+                        message={
+                            <span className={classes.message}>
+                                <ErrorIcon style={{ marginRight: "5px" }} />
+                                {"Error! Please correctly fill in all fields."}
+                            </span>}
+                        action={[
+                            <IconButton
+                                key="close"
+                                aria-label="Close"
+                                color="inherit"
+                                className={classes.close}
+                                onClick={this.handleErrorClose}
+                            >
+                                <CloseIcon className={classes.icon} />
+                            </IconButton>
+                        ]}
+                    />
+                </Snackbar>
             </div>
 
 

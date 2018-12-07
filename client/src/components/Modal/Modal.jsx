@@ -105,6 +105,10 @@ class Modal extends React.Component {
             .then(res => {
                 console.log(res);
                 this.setState({ open: false, openSuccessMessage: true });
+
+                setTimeout(() => {
+                    window.location.href = "/postgig/selectartists"
+                }, 2000)
             }
             )
             .catch(err => console.log(err));
