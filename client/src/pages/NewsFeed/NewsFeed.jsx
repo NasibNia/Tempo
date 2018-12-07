@@ -98,7 +98,8 @@ class NewsFeed extends Component {
 
             user: "artist",
             loggedIn: true,
-            newsFeed: []
+            newsFeed: [],
+            userType: ""
         };
 
     }
@@ -109,13 +110,16 @@ class NewsFeed extends Component {
             console.log("artistHome component mounting check", res.data);
             if (!res.data.user) {
                 window.location.href = "/signin";
-            } else if (res.data.user.userType === "venue") {
-                window.location.href = "/venue";
+                // } else if (res.data.user.userType === "venue") {
+                //     window.location.href = "/signin";
 
             } else {
 
                 console.log("the user name is ", res.data.user.name);
-                this.setState({ username: res.data.user.name });
+                this.setState({
+                    username: res.data.user.name,
+                    userType: res.data.user.userType
+                });
 
                 // this.setState({ pic:res.data.user.profilePic});
 
@@ -170,29 +174,11 @@ class NewsFeed extends Component {
 
         return (
             <div>
-
-
-
-
-
-
-
-
-
-
-
                 <HeaderBar />
 
                 <div className="body-wrap" >
                     {/* ADD A CLASS TO THIS DIV */}
                     <Navigate method={this.changeState} userType={this.state.userType} name={this.props.name} pic={this.props.pic} />
-
-                    {/* <div class="paper">
-                        <h1>General Forum disscusion</h1>
-                    </div> */}
-
-
-
 
 
                     <div className="message-box-wrap">
@@ -212,16 +198,10 @@ class NewsFeed extends Component {
                             })}
                         </div>
                         <div className="message-header">
-                            <h1>What's Going on In Tempo</h1>     
+                            <h1>What's Going on In Tempo</h1>
                             <p></p>
                         </div>
                     </div>
-
-
-
-
-
-
 
                 </div>
             </div>
