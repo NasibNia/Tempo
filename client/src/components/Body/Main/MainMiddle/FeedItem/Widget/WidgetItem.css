@@ -62,11 +62,13 @@ button.react-calendar__tile--active, button.react-calendar__tile--active {
 
 .profile-text {
     width: 100%;
-}
-
-.profile-text p {
     line-height: 18px;
     margin: 0 20px;;
+}
+
+
+.profile-text h2 { 
+    font-size: 20px;
 }
 
 .radar {

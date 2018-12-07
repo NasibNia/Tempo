@@ -3,7 +3,6 @@ import { Redirect } from 'react-router-dom';
 
 import HeaderBar from "../../components/HeaderBar"
 import SelectArtistArray from "../../components/SelectArtist/Array/"
-import Criterion from "../../components/SelectArtist/Criterion"
 
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
