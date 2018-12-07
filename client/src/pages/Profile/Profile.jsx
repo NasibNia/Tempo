@@ -91,6 +91,9 @@ const styles = theme => ({
         flexDirection: 'row',
 
     },
+    booking: {
+        fontSize: "20px",
+    },
     dense: {
         marginTop: 16,
     },
@@ -622,7 +625,9 @@ class profile extends Component {
                                 value={this.state.average_draw}
                             />
                             <FormControlLabel
-                                control={<Checkbox value="readyToGig" onChange={this.handleReadyChange} checked={this.state.readyToGig} color="secondary" />}
+                                control={<Checkbox value="readyToGig" onChange={this.handleReadyChange} checked={this.state.readyToGig}
+                                className={classes.booking}
+                                color="secondary" />}
                                 label="Are you ready to book performances?"
                             />
                             <Button variant="contained"

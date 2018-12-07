@@ -30,7 +30,10 @@ class ArtistHome extends Component {
 
       } else {
 
-        // this.setState({ pic:res.data.user.profilePic});
+        this.setState({ 
+          pic:res.data.user.profilePic,
+          name:res.data.user.name,
+        });
 
       }
     });
@@ -55,7 +58,7 @@ class ArtistHome extends Component {
       <div>
         {/* {console.log("render item " + this.state.name)} */}
         {/* <Body pic={this.state.pic}/> */}
-        <Body userType={this.state.user}  />
+        <Body userType={this.state.user}  pic={this.state.pic} name={this.state.name}/>
 
         
       </div>

@@ -19,7 +19,7 @@ const radarData = {
             pointBorderColor: '#fff',
             pointHoverBackgroundColor: '#fff',
             pointHoverBorderColor: '#F9C784',
-            data: [5, 5, 3, 3, 1, 2, 3]
+            data: [5, 5, 3, 4, 4, 4, 5, 5, 1]
         },
         {
             label: 'The Ritz 09172018',
@@ -29,7 +29,7 @@ const radarData = {
             pointBorderColor: '#fff',
             pointHoverBackgroundColor: '#fff',
             pointHoverBorderColor: 'rgba(255,99,132,1)',
-            data: [5, 2, 3, 1, 5, 3, 3]
+            data: [5, 4, 3, 4, 5, 3, 5, 5, 1]
         }
     ]
 };
@@ -176,17 +176,20 @@ class WidgetItem extends Component {
                                 </p>
                             </div>
                         </div>
-                        <h1 style={{ marginTop: "20px" }}>Your Statistics</h1>
+                        <h1 style={{ marginTop: "70px", textAlign: "center" }}>Your Statistics</h1>
+                        <div className="radar">
                         <Radar
                             data={radarData}
                             ref='chart'
                             width={100}
-                            height={100}
+                            height={500}
                             maxHeight={100}
                             options={{
                                 maintainAspectRatio: false
                             }}
                         />
+                        </div>
+
                     </div>
                 );
             default:

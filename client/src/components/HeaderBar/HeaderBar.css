@@ -53,16 +53,17 @@
 
 #search-input{
     display: flex;
-    height: 100%;
-    margin-right: 40px;
+    /* height: 100%; */
+    margin-right: 0px;
 }
 
-#search-bar{
-    height: 100%;
+#search-bar {
+    /* height: 100%; */
     color: white;
     width: 120px;
     transition: 0.2s ease-in-out;
-    padding: 10px 0 5px 5px ;
+    padding: 5px 0 5px 10px ;
+    margin: 3px;
 }
 
 #search-bar:hover{

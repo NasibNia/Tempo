@@ -1,0 +1,15 @@
+#select-artist-title{
+    text-align: center;
+    font-size: 2.3em;
+    margin: 20px 0 20px 0;
+    /* border-radius: 10px;
+    background-color: #FF7460;
+    color: white;
+    padding: 3px 5px 3px 5px; */
+}
+
+.select-artist-controls{
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
