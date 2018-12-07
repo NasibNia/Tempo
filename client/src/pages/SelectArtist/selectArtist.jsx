@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import HeaderBar from "../../components/HeaderBar"
-import SelectArtistArray from "../../components/SelectArtist/Array/"
+import HeaderBar from "../../components/HeaderBar";
+import SelectArtistArray from "../../components/SelectArtist/Array";
 
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
@@ -24,7 +24,7 @@ import API from "../../utils/API";
 import axios from "axios";
 
 
-import "./selectartist.css"
+import "./SelectArtist.css"
 
 const styles = theme => ({
   formControl: {
