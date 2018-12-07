@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
 import HeaderBar from "../../components/HeaderBar";
-import SelectArtistArray from "../../components/SelectArtist/Array/";
+import SelectArtistArray from "../../components/SelectArtist/Array";
 
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
