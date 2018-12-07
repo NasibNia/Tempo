@@ -16,7 +16,8 @@ class ArtistHome extends Component {
     user: "artist",
     loggedIn: true,
     name: "",
-    pic: ""
+    pic: "",
+    userId: 0
   };
   
   componentDidMount() {
@@ -33,6 +34,7 @@ class ArtistHome extends Component {
         this.setState({ 
           pic:res.data.user.profilePic,
           name:res.data.user.name,
+          userId: res.data.user.name.id
         });
 
       }
@@ -58,7 +60,7 @@ class ArtistHome extends Component {
       <div>
         {/* {console.log("render item " + this.state.name)} */}
         {/* <Body pic={this.state.pic}/> */}
-        <Body userType={this.state.user}  pic={this.state.pic} name={this.state.name}/>
+        <Body userType={this.state.user}  pic={this.state.pic} name={this.state.name} id={this.state.id}/>
 
         
       </div>
