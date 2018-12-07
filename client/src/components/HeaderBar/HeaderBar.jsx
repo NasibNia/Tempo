@@ -19,7 +19,6 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     transition: "0.3s ease-in-out",
-
   },
 })
 

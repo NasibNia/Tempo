@@ -176,7 +176,7 @@ class WidgetItem extends Component {
                                 </p>
                             </div>
                         </div>
-                        <h1 style={{ marginTop: "20px" }}>Your Statistics</h1>
+                        <h1 style={{ marginTop: "70px", textAlign: "center" }}>Your Statistics</h1>
                         <div className="radar">
                         <Radar
                             data={radarData}

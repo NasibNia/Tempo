@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import io from 'socket.io-client';
 import API from "../../utils/API";
-
+import "./NewsFeed.css";
 
 
 const styles = theme => ({
@@ -88,7 +88,7 @@ const styles = theme => ({
 
 
 class NewsFeed extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -98,9 +98,9 @@ class NewsFeed extends Component {
 
             user: "artist",
             loggedIn: true,
-            newsFeed : []
+            newsFeed: []
         };
-   
+
     }
 
     componentDidMount() {
@@ -114,32 +114,32 @@ class NewsFeed extends Component {
 
             } else {
 
-            console.log("the user name is " , res.data.user.name);
-            this.setState({username : res.data.user.name});
+                console.log("the user name is ", res.data.user.name);
+                this.setState({ username: res.data.user.name });
 
-            // this.setState({ pic:res.data.user.profilePic});
+                // this.setState({ pic:res.data.user.profilePic});
 
             }
         });
 
         API.getNews()
-        .then(res => {
-            console.log("news is" ,res.data.data);
-            this.state.messages = res.data;
-        });
+            .then(res => {
+                console.log("news is", res.data.data);
+                this.state.messages = res.data;
+            });
 
         //Socket.io
         // this.socket = io.connect('http://localhost:3001');
         this.socket = io.connect();
 
 
-        this.socket.on('RECEIVE_MESSAGE', function(data){
+        this.socket.on('RECEIVE_MESSAGE', function (data) {
             addMessage(data);
         });
 
         const addMessage = data => {
             console.log(data);
-            this.setState({messages: [...this.state.messages, data]});
+            this.setState({ messages: [...this.state.messages, data] });
             console.log(this.state.messages);
         };
 
@@ -157,56 +157,75 @@ class NewsFeed extends Component {
                 author: this.state.username,
                 message: this.state.message
             });
-            this.setState({message: ''});
+            this.setState({ message: '' });
 
         };
 
-        
+
     }
 
-    render () {
+    render() {
         const { classes } = this.props;
         console.log(this.state.messages);
-        
+
         return (
             <div>
+
+
+
+
+
+
+
+
+
+
+
                 <HeaderBar />
-                <div > 
+
+                <div className="body-wrap" >
                     {/* ADD A CLASS TO THIS DIV */}
-                <Navigate method={this.changeState} userType={this.state.userType} name={this.props.name} pic={this.props.pic}/>
-                <div class="paper">
-                    <h1>General Forum disscusion</h1>
-                </div>
+                    <Navigate method={this.changeState} userType={this.state.userType} name={this.props.name} pic={this.props.pic} />
 
-                <div class="paper">
-                    <div className="messages">
-                        {this.state.messages.map(message => {
-                            return (
-                                <div>{message.author}: {message.message}</div>
-                            );
-                        })}
-                    </div>
-                </div>
+                    {/* <div class="paper">
+                        <h1>General Forum disscusion</h1>
+                    </div> */}
 
-                <div class="paper">
-                    <hr/>
 
-                    <div className="footer">
-                        {/* <TextField type="text" placeholder="Username" value={this.state.username} onChange={ev => this.setState({username: ev.target.value})} className="form-control"/>
+
+
+
+                    <div className="message-box-wrap">
+                        <div className="send-message">
+                            {/* <TextField type="text" placeholder="Username" value={this.state.username} onChange={ev => this.setState({username: ev.target.value})} className="form-control"/>
                         <br/> */}
-                        <TextField type="text" placeholder="Message" className="form-control" value={this.state.message} onChange={ev => this.setState({message: ev.target.value})}/>
-                        <br/>
-                        <Button variant="contained"
-                            color="primary" onClick={this.sendMessage} color = "primary">Send</Button>
-
-
+                            <TextField type="text" placeholder="Message" className="send-message-text-field" value={this.state.message} onChange={ev => this.setState({ message: ev.target.value })} />
+                            <br />
+                            <Button className="send-message-button" variant="contained"
+                                color="primary" onClick={this.sendMessage} color="primary">Send</Button>
+                        </div>
+                        <div className="message-box">
+                            {this.state.messages.map(message => {
+                                return (
+                                    <div className="message-item"><div className="small-profile-tile" style={{ backgroundImage: "url(" + {} + ")" }}></div><h3>{message.author} </h3><p> :  {message.message}</p></div>
+                                );
+                            })}
+                        </div>
+                        <div className="message-header">
+                            <h1>What's Going on In Tempo</h1>     
+                            <p></p>
+                        </div>
                     </div>
-                </div>
 
-                
+
+
+
+
+
+
                 </div>
             </div>
-            
+
         );
     }
 
