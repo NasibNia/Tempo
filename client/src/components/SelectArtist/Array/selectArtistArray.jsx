@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import "./SelectArtistArray.css";
+import "./selectArtistArray.css";
 
 import API from "../../../utils/API";
 import App from '../../../App';
@@ -138,7 +138,7 @@ class SelectArtistArray extends Component {
             }
         }
 
-        return this.sortByTicketPrice(lesser).concat(pivot, this.sortByTicketPrice(greater)).slice(0,9).reverse();
+        return this.sortByTicketPrice(lesser).concat(pivot, this.sortByTicketPrice(greater)).slice(0, 9).reverse();
 
     }
 
@@ -159,7 +159,7 @@ class SelectArtistArray extends Component {
             }
         }
 
-        return this.sortByDraw(lesser).concat(pivot, this.sortByDraw(greater)).slice(0,9).reverse();
+        return this.sortByDraw(lesser).concat(pivot, this.sortByDraw(greater)).slice(0, 9).reverse();
 
     }
 

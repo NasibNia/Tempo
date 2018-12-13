@@ -24,14 +24,14 @@ import API from "../../utils/API";
 import axios from "axios";
 
 
-import "./SelectArtist.css"
+import "./selectartist.css"
 
 const styles = theme => ({
   formControl: {
-    marginTop: theme.spacing.unit ,
+    marginTop: theme.spacing.unit,
     marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit* 3,
-    marginBottom: theme.spacing.unit* 3,
+    marginRight: theme.spacing.unit * 3,
+    marginBottom: theme.spacing.unit * 3,
     minWidth: 120
   },
   paper: {
