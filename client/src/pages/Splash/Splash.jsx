@@ -26,7 +26,7 @@ class Splash extends Component {
                 <div className="splash-section section-1" ref={div => { this.top = div }}>
                     <div className="text">
                         <Slide top>
-                            <img src="/assets/box-logo.png" alt="" id="tempo" />
+                            <img src="/assets/box-logo.png" alt="Tempo" id="tempo" />
                         </Slide>
                         <h1>Play More Music, Earn More Money</h1>
                         {/* <div className="sign-up-links">
@@ -65,10 +65,10 @@ class Splash extends Component {
                             <div className="card lite">
                                 <h3>Tempo <span className="icon1">Lite</span></h3>
                                 <ul>
-                                    <li><img className="check" src={require('./iconography-05.png')}></img>Find Gigs</li>
-                                    <li><img className="check" src={require('./iconography-05.png')}></img>Lite News Feed</li>
-                                    <li><img className="check" src={require('./iconography-05.png')}></img>Career Roadmap</li>
-                                    <li><img className="check" src={require('./iconography-05.png')}></img>Calendar App</li>
+                                    <li><img className="check" src={require('./iconography-05.png')}alt="Find Gigs"></img>Find Gigs</li>
+                                    <li><img className="check" src={require('./iconography-05.png')}alt="Lite News Feed"></img>Lite News Feed</li>
+                                    <li><img className="check" src={require('./iconography-05.png')}alt="Career Roadmap"></img>Career Roadmap</li>
+                                    <li><img className="check" src={require('./iconography-05.png')}alt="Calendar App"></img>Calendar App</li>
                                 </ul>
                             </div>
                         </Fade >
@@ -76,13 +76,13 @@ class Splash extends Component {
                             <div className="card pro">
                                 <h3>Tempo <span className="icon1">Pro</span></h3>
                                 <ul>
-                                    <li><img className="check" src={require('./iconography-05.png')}></img>Priority Applications</li>
-                                    <li><img className="check" src={require('./iconography-05.png')}></img>Pro News Feed</li>
-                                    <li><img className="check" src={require('./iconography-05.png')}></img>Real-time stats</li>
-                                    <li><img className="check" src={require('./iconography-05.png')}></img>All Local Events Listings</li>
-                                    <li><img className="check" src={require('./iconography-05.png')}></img>Venue Directory</li>
-                                    <li><img className="check" src={require('./iconography-05.png')}></img>All Lite Features</li>
-                                    <li><img className="check" src={require('./iconography-05.png')}></img>Weekly Updates</li>
+                                    <li><img className="check" src={require('./iconography-05.png')}alt="Priority Applications"></img>Priority Applications</li>
+                                    <li><img className="check" src={require('./iconography-05.png')}alt="Pro News Feed"></img>Pro News Feed</li>
+                                    <li><img className="check" src={require('./iconography-05.png')}alt="Real-Time Stats"></img>Real-Time Stats</li>
+                                    <li><img className="check" src={require('./iconography-05.png')}alt="All Local Event Listings"></img>All Local Events Listings</li>
+                                    <li><img className="check" src={require('./iconography-05.png')}alt="Venue Directory"></img>Venue Directory</li>
+                                    <li><img className="check" src={require('./iconography-05.png')}alt="All Lite Features"></img>All Lite Features</li>
+                                    <li><img className="check" src={require('./iconography-05.png')}alt="Weekly Updates"></img>Weekly Updates</li>
                                 </ul>
                             </div>
                         </Fade >
