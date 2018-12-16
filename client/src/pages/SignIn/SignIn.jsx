@@ -138,6 +138,7 @@ class SignIn extends Component {
             passwordRepeat: ""
         },
         loggedIn: false,
+        loginAttempts: 0,
         loading: false,
         redirect: false,
         userType: "",
@@ -153,8 +154,20 @@ class SignIn extends Component {
 
     handleClick = event => {
         event.preventDefault();
-        console.log("click")
+        this.state.loginAttempts++;
+        console.log("click", this.state.loginAttempts);
         // const newBand = bands;
+
+        if (this.state.loginAttempts <= 1) {
+            let errors = validations(
+                {
+                    email: this.state.email,
+                    password: this.state.password,
+                }
+            );
+
+            this.setState({ errors });
+        }
 
         this.setState(
             {
@@ -197,7 +210,7 @@ class SignIn extends Component {
 
             axios.post("/venue/login", newUser)
                 .then(results => {
-                    console.log("results is " , results);
+                    console.log("results is ", results);
                     if (results.data.success)
                         this.setState({
                             loggedIn: true,
@@ -223,14 +236,18 @@ class SignIn extends Component {
         const { name, value } = event.target;
         this.setState({ [name]: value });
 
-        let errors = validations(
-            {
-                email: this.state.email,
-                password: this.state.password,
-            }
-        );
+        if (this.state.loginAttempts >= 1) {
 
-        this.setState({ errors });
+
+            let errors = validations(
+                {
+                    email: this.state.email,
+                    password: this.state.password,
+                }
+            );
+
+            this.setState({ errors });
+        }
     };
 
     handleSubmitForm = event => {
