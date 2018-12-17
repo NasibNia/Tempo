@@ -1,0 +1,52 @@
+
+.body-wrap {
+    display: flex;
+    margin: 50px auto 0;
+    justify-content: center;
+    max-width: 1000px;
+}
+
+
+.postgig-box-wrap {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 740px;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column-reverse;
+    margin-top: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.message-box {
+    overflow: scroll;
+    background-color: rgba(0,0,0,.03);
+    height: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    max-height: 500px;
+}
+
+.small-profile-tile {
+    width: 30px;
+    height: 30px;
+    background-color: lightblue;
+    border-radius: 100px;
+    margin-right: 10px;
+    transition: .5s ease;
+    
+}
+
+.message-header {
+    background-color: white;
+    width: 100%;
+    padding: 20px 0;
+    position: absolute;
+    top: 0;
+}
+
+.message-header h1 {
+    font-size: 30px;
+}
