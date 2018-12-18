@@ -6,11 +6,10 @@ import Navigate from "../../components/Body/Navigate";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
+import Panel from "../../components/Panel";
 import API from "../../utils/API";
 
-import { withStyles } from '@material-ui/core/styles';
-
-import "./PostGig.css";
+import "./Directory.css";
 
 
 const styles = theme => ({
@@ -90,27 +89,14 @@ const styles = theme => ({
 });
 
 
-class PostGig extends Component {
+class Directory extends Component {
     state = {
         loggedIn: true,
         userType: "",
         userId: 0,
         name: "",
         pic: "",
-        searchedGenre: "",
-        genres: {
-          rock: false,
-          club: false,
-          electronic: false,
-          hiphop: false,
-          pop: false,
-          jazz: false,
-          acoustics: false
-    
-        },
-        topArtists: "",
-        checkedA: false,
-        checkedB: false
+        data: []
 
     }
 
@@ -123,9 +109,18 @@ class PostGig extends Component {
                 window.location.href = "/signin";
             }
             else {
-                console.log("Select Artist Mounting Check", res.data, res.data.user.id);
+                console.log("Directory Mounting Check", res.data, res.data.user.id);
                 if (res.data.user.userType === "artist") {
-                    window.location.href = "/artist";
+                    this.setState({
+                        loggedIn: true,
+                        userId: res.data.user.id,
+                        name: res.data.user.name,
+                        userType: res.data.user.userType,
+                        pic: res.data.user.profilePic
+
+                    });
+
+                    this.loadVenues();
                 }
                 else if (res.data.user.userType === "venue") {
                     this.setState({
@@ -133,14 +128,33 @@ class PostGig extends Component {
                         userId: res.data.user.id,
                         name: res.data.user.name,
                         userType: res.data.user.userType,
-                        pic: res.data.user.profilePic,
-                        genres: JSON.parse(res.data.user.genres),
-                    });
+                        pic: res.data.user.profilePic
 
+                    });
+                    this.loadBands();
                 }
             }
         });
     }
+
+    loadBands = () => {
+        API.getBands()
+            .then(res => {
+                // console.log(res);
+                this.setState({ data: res.data })
+            }
+            )
+            .catch(err => console.log(err));
+    };
+
+    loadVenues = () => {
+        API.getVenues()
+            .then(res => {
+                this.setState({ data: res.data })
+            }
+            )
+            .catch(err => console.log(err));
+    };
 
     render() {
         const { classes } = this.props;
@@ -151,10 +165,14 @@ class PostGig extends Component {
 
                 <div className="body-wrap" >
                     {/* ADD A CLASS TO THIS DIV */}
-                    <Navigate method={this.changeState} userType={this.state.userType} name={this.state.name} pic={this.state.pic} userId = {this.state.userId}/>
+                    <Navigate method={this.changeState} userType={this.state.userType} name={this.state.name} pic={this.state.pic} />
 
 
-                    <div className="postgig-box-wrap">
+                    <div className="directory-box-wrap">
+                        <h1>{this.state.userType === "artist" ? "Venue" : "Artist"} Directory</h1>
+                        {/* <h2>Search for Tempo Affiliates!</h2> */}
+                        {/* Add a Search Bar here in the future */}
+                        <Panel data={this.state.data} />
 
                     </div>
 
@@ -166,4 +184,4 @@ class PostGig extends Component {
 
 }
 
-export default withStyles(styles)(PostGig);
+export default Directory;

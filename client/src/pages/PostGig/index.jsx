@@ -1,1 +1,1 @@
-export { default } from "./NewsFeed.jsx";
+export { default } from "./PostGig.jsx";

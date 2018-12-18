@@ -99,7 +99,9 @@ class NewsFeed extends Component {
             user: "artist",
             loggedIn: true,
             newsFeed: [],
-            userType: ""
+            userType: "", 
+            pic: "",
+            userId: 0
         };
 
     }
@@ -118,7 +120,9 @@ class NewsFeed extends Component {
                 console.log("the user name is ", res.data.user.name);
                 this.setState({
                     username: res.data.user.name,
-                    userType: res.data.user.userType
+                    userType: res.data.user.userType,
+                    userId: res.data.user.userId,
+                    pic: res.data.user.profilePic
                 });
 
                 // this.setState({ pic:res.data.user.profilePic});
@@ -178,7 +182,7 @@ class NewsFeed extends Component {
 
                 <div className="body-wrap" >
                     {/* ADD A CLASS TO THIS DIV */}
-                    <Navigate method={this.changeState} userType={this.state.userType} name={this.props.name} pic={this.props.pic} />
+                    <Navigate method={this.changeState} userType={this.state.userType} name={this.state.username} pic={this.state.pic} userId = {this.state.userId}/>
 
 
                     <div className="message-box-wrap">
