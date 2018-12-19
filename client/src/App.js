@@ -19,7 +19,10 @@ import Splash from "./pages/Splash"
 import SignUpComponent from "./components/SignUp"
 import Profile from "./pages/Profile";
 import PublicProfile from "./pages/PublicProfile";
+import PostGig from "./pages/PostGig";
 import SelectArtists from "./pages/SelectArtist";
+import Directory from "./pages/Directory";
+
 // import Threejs from "./pages/Threejs";
 import NewsFeed from "./pages/NewsFeed";
 
@@ -77,9 +80,10 @@ const App = () => (
           {/* currently testing for logged in users  */}
 
           <Route exact path="/profileOf/" component={PublicProfile}/>                
- 
+          <Route exact path="/postgig" component={PostGig} />  
           <Route exact path="/postgig/selectartists" component={SelectArtists} />                
           
+          <Route exact path="/directory" component={Directory}/> 
 
           {/* U N I M P O R T A N T */}
           <Route exact path="/contact" component={Contact} />         

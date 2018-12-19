@@ -60,7 +60,7 @@ class ArtistHome extends Component {
       <div>
         {/* {console.log("render item " + this.state.name)} */}
         {/* <Body pic={this.state.pic}/> */}
-        <Body userType={this.state.user}  pic={this.state.pic} name={this.state.name} id={this.state.id}/>
+        <Body userType={this.state.user}  pic={this.state.pic} name={this.state.name} id={this.state.userId}/>
 
         
       </div>

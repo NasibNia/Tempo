@@ -99,6 +99,9 @@ class PublicProfile extends Component {
 
     state = {
         userId: 0,
+        userType: "",
+        username: "",
+        pic: "",
         profileId: 0,
         name: "",
         rating: 0.0,
@@ -130,9 +133,10 @@ class PublicProfile extends Component {
                 this.setState({
                     loggedIn: true,
                     userId: res.data.user.id,
-                    // name: res.data.user.name,
+                    username: res.data.user.name,
+                    userType: res.data.user.userType,
                     // description: res.data.user.description,
-                    // profilePic: res.data.user.profilePic,
+                    pic: res.data.user.profilePic,
                     // spotify: res.data.user.spotify,
                     // soundcloud: res.data.user.soundcloud
                 });
@@ -225,7 +229,7 @@ class PublicProfile extends Component {
                 <HeaderBar />
                 <HeaderBar userType={this.state.userType} />
                 <div className="body-wrap">
-                    <Navigate method={this.changeState} userType={this.state.userType} />
+                <Navigate method={this.changeState} userType={this.state.userType} name={this.state.username} pic={this.state.pic} userId = {this.state.userId}/>
                     <div className="profile-wrap">
                         <div className="profile-main">
                             {editProfile}

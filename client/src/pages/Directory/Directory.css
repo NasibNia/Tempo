@@ -1,0 +1,16 @@
+
+h1 {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.directory-box-wrap {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 740px;
+    min-height: 600px;
+    margin-top: 20px;
+    position: relative;
+    overflow: hidden;
+}

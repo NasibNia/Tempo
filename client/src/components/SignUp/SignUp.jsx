@@ -166,6 +166,7 @@ class SignUp extends Component {
         loggedIn: false,
         open: false,
         finishedSignup: false,
+        loginAttempts: 0,
         loading: false,
         redirect: false,
         activeStep: 0,
@@ -185,12 +186,28 @@ class SignUp extends Component {
 
     handleClick = event => {
         event.preventDefault();
-        console.log("click")
+        this.state.loginAttempts++;
+        console.log("click", this.state.loginAttempts);
 
         console.log ("user type is ", this.state.userType);
 
+        if(this.state.loginAttempts <= 1){
+let errors = validations(
+            {
+                name: this.state.name,
+                email: this.state.email,
+                password: this.state.password,
+                passwordRepeat: this.state.passwordRepeat
+            }
+        );
+
+        this.setState({ errors });
+        }
+        
+
         console.log("client errors", this.state.errors)
         console.log("should we pass?", !(this.state.errors.name || this.state.errors.email && this.state.errors.password))
+            
         if (!(this.state.errors.name && this.state.errors.email && this.state.errors.password)) {
             this.setState(
                 {
@@ -287,6 +304,9 @@ class SignUp extends Component {
         const { name, value } = event.target;
         this.setState({ [name]: value });
 
+        if(this.state.loginAttempts >= 1){
+
+
         let errors = validations(
             {
                 name: this.state.name,
@@ -297,7 +317,7 @@ class SignUp extends Component {
         );
 
         this.setState({ errors });
-
+        }
     };
 
     handleSubmitForm = event => {
