@@ -5,8 +5,12 @@ import Paper from '@material-ui/core/Paper';
 import Navigate from "../../components/Body/Navigate";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 import Panel from "../../components/Panel";
+
+import { withStyles } from '@material-ui/core/styles';
+
 import API from "../../utils/API";
 
 import "./Directory.css";
@@ -47,7 +51,7 @@ const styles = theme => ({
     },
     button: {
         display: 'block',
-        marginTop: theme.spacing.unit * 2
+        // padding: "15px"
     },
     formControl: {
         marginTop: theme.spacing.unit * 2,
@@ -96,6 +100,7 @@ class Directory extends Component {
         userId: 0,
         name: "",
         pic: "",
+        directorySearch: "",
         data: []
 
     }
@@ -156,8 +161,32 @@ class Directory extends Component {
             .catch(err => console.log(err));
     };
 
+    handleInputChange = event => {
+
+        const { name, value } = event.target;
+        this.setState({ [name]: value });
+
+    };
+
+    handleSearch = () => {
+        let searchedName = this.state.directorySearch;
+
+        // console.log(this.state.search)
+        // API.getBandName(searchedName).then(res => {
+        //     if (!res.data) {
+        //         console.log("Artist profile does not exist!")
+        //     } else {
+        //         console.log(res.data)
+        //         window.location.href = "/profile/" + res.data.id;
+        //     }
+        // });
+
+
+    }
+
     render() {
         const { classes } = this.props;
+        let searchText = this.state.userType === "artist" ? "Search Venue Directory" : "Search Artist Directory"
 
         return (
             <div>
@@ -165,13 +194,38 @@ class Directory extends Component {
 
                 <div className="body-wrap" >
                     {/* ADD A CLASS TO THIS DIV */}
-                    <Navigate method={this.changeState} userType={this.state.userType} name={this.state.name} pic={this.state.pic} />
+                    <Navigate method={this.changeState} userType={this.state.userType} name={this.state.name} pic={this.state.pic} userId={this.state.userId} />
 
 
                     <div className="directory-box-wrap">
                         <h1>{this.state.userType === "artist" ? "Venue" : "Artist"} Directory</h1>
                         {/* <h2>Search for Tempo Affiliates!</h2> */}
+
+                        <div id="search-directory">
+                            <TextField
+                                id="search-bar-directory"
+                                label={searchText}
+                                // className={classes.textField}
+                                type="search"
+                                name="directorySearch"
+                                autoComplete="search"
+                                margin="normal"
+                                variant="filled"
+                                onChange={this.handleInputChange}
+                                value={this.state.directorySearch}
+                            // onKeyPress={this.handleKeyPress}
+                            // helperText={this.state.errors.email}
+                            />
+                            <Button className={classes.button}
+                                id="search-directory-button"
+                                variant="contained"
+                                color="secondary"
+                                onClick={this.handleSearch}>
+                                <i class="fas fa-search" id="search-icon"></i>
+                            </Button>
+                        </div>
                         {/* Add a Search Bar here in the future */}
+                        <p className="directory-text">Showing {this.state.data.length} out of {this.state.data.length} venues</p>
                         <Panel data={this.state.data} />
 
                     </div>
@@ -184,4 +238,4 @@ class Directory extends Component {
 
 }
 
-export default Directory;
+export default withStyles(styles)(Directory);
