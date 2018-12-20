@@ -171,16 +171,20 @@ class Directory extends Component {
     handleSearch = () => {
         let searchedName = this.state.directorySearch;
 
-        // console.log(this.state.search)
-        // API.getBandName(searchedName).then(res => {
-        //     if (!res.data) {
-        //         console.log("Artist profile does not exist!")
-        //     } else {
-        //         console.log(res.data)
-        //         window.location.href = "/profile/" + res.data.id;
-        //     }
-        // });
+        if (this.state.userType === "artist") {
 
+        }
+        else if (this.state.userType === "venue") {
+            // console.log(this.state.search)
+            // API.getBandName(searchedName).then(res => {
+            //     if (!res.data) {
+            //         console.log("Artist profile does not exist!")
+            //     } else {
+            //         console.log(res.data)
+            //         window.location.href = "/profile/" + res.data.id;
+            //     }
+            // });F=
+        }
 
     }
 
