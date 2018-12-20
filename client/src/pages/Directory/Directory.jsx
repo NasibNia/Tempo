@@ -101,7 +101,8 @@ class Directory extends Component {
         name: "",
         pic: "",
         directorySearch: "",
-        data: []
+        data: [],
+        searchedData = []
 
     }
 
@@ -172,18 +173,30 @@ class Directory extends Component {
         let searchedName = this.state.directorySearch;
 
         if (this.state.userType === "artist") {
+            console.log("Artist Search", this.state.directorySearch)
+            API.getBandName(searchedName).then(res => {
+                if (!res.data) {
+                    console.log("Artist profile does not exist!")
+                } else {
+                    console.log(res.data);
+                    this.setState({ searchedData: res.data })
 
+                }
+            });
         }
         else if (this.state.userType === "venue") {
-            // console.log(this.state.search)
-            // API.getBandName(searchedName).then(res => {
+            console.log("Venue Search", this.state.directorySearch)
+            // Have to create this controller function in sequelize and in the API
+
+            // API.getVenueName(searchedName).then(res => {
             //     if (!res.data) {
             //         console.log("Artist profile does not exist!")
             //     } else {
-            //         console.log(res.data)
-            //         window.location.href = "/profile/" + res.data.id;
+            //         console.log(res.data);
+            //         this.setState({ searchedData: res.data })
+
             //     }
-            // });F=
+            // });
         }
 
     }
