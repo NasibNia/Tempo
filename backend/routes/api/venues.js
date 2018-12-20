@@ -8,6 +8,9 @@ router.route("/")
 router.route("/ready")
       .get(venueController.findReadyVenues);
 
+router.route("/search/:name")
+      .get(venueController.findVenueByName);
+
 router.route("/:id")
       .get(venueController.findVenue)
       .delete(venueController.deleteVenue)

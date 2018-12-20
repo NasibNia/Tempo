@@ -54,6 +54,18 @@ module.exports = {
             });
     },
 
+    findVenueByName: function (req, res) {
+        db.Venue.findOne({
+            where: {
+                name: req.params.name
+            },
+            include: { model: db.Show }
+        })
+            .then(venuesRes => {
+                res.json(venuesRes);
+            });
+    },
+
     // tested and working
     deleteVenue : function(req,res){
         db.Venue.destroy({

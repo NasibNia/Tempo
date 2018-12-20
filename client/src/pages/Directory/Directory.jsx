@@ -102,7 +102,8 @@ class Directory extends Component {
         pic: "",
         directorySearch: "",
         data: [],
-        searchedData = []
+        searchedData: [],
+        panelData: []
 
     }
 
@@ -141,13 +142,17 @@ class Directory extends Component {
                 }
             }
         });
+
     }
 
     loadBands = () => {
         API.getBands()
             .then(res => {
-                // console.log(res);
-                this.setState({ data: res.data })
+                console.log(res.data);
+                this.setState({
+                    data: res.data,
+                    panelData: res.data
+                })
             }
             )
             .catch(err => console.log(err));
@@ -156,7 +161,10 @@ class Directory extends Component {
     loadVenues = () => {
         API.getVenues()
             .then(res => {
-                this.setState({ data: res.data })
+                this.setState({
+                    data: res.data,
+                    panelData: res.data
+                })
             }
             )
             .catch(err => console.log(err));
@@ -173,30 +181,40 @@ class Directory extends Component {
         let searchedName = this.state.directorySearch;
 
         if (this.state.userType === "artist") {
-            console.log("Artist Search", this.state.directorySearch)
-            API.getBandName(searchedName).then(res => {
+
+            console.log("Venue Search", this.state.directorySearch);
+
+            API.getVenueName(searchedName).then(res => {
                 if (!res.data) {
-                    console.log("Artist profile does not exist!")
-                } else {
+                    console.log("Venue profile does not exist!")
+                }
+                else {
                     console.log(res.data);
-                    this.setState({ searchedData: res.data })
+                    this.setState({
+                        searchedData: res.data,
+                        panelData: res.data
+                    })
 
                 }
             });
         }
         else if (this.state.userType === "venue") {
-            console.log("Venue Search", this.state.directorySearch)
-            // Have to create this controller function in sequelize and in the API
 
-            // API.getVenueName(searchedName).then(res => {
-            //     if (!res.data) {
-            //         console.log("Artist profile does not exist!")
-            //     } else {
-            //         console.log(res.data);
-            //         this.setState({ searchedData: res.data })
+            console.log("Band Search", this.state.directorySearch)
 
-            //     }
-            // });
+            API.getBandName(searchedName).then(res => {
+                if (!res.data) {
+                    console.log("Artist profile does not exist!")
+                }
+                else {
+                    console.log(res.data);
+                    this.setState({
+                        searchedData: res.data,
+                        panelData: res.data
+                    })
+                }
+
+            });
         }
 
     }
@@ -204,6 +222,14 @@ class Directory extends Component {
     render() {
         const { classes } = this.props;
         let searchText = this.state.userType === "artist" ? "Search Venue Directory" : "Search Artist Directory"
+        let numberOfResults;
+
+        if(this.state.data.length < 10 ){
+            numberOfResults = this.state.data.length;
+        }
+        else{
+            numberOfResults = 10;
+        }
 
         return (
             <div>
@@ -242,8 +268,9 @@ class Directory extends Component {
                             </Button>
                         </div>
                         {/* Add a Search Bar here in the future */}
-                        <p className="directory-text">Showing {this.state.data.length} out of {this.state.data.length} venues</p>
-                        <Panel data={this.state.data} />
+                        <p className="directory-text">Showing {numberOfResults} out of {this.state.data.length} {this.state.userType === "artist" ? "Venues" : "Artists"}</p>
+
+                        <Panel data={this.state.panelData} />
 
                     </div>
 
