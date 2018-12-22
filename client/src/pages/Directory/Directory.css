@@ -40,3 +40,13 @@
     height: 52px;
     margin-top: 5px;
 }
+
+#directory-results-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#show-all-button{
+    height: 20px !important;
+}

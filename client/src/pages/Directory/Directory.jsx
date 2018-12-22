@@ -208,10 +208,14 @@ class Directory extends Component {
                 }
                 else {
                     console.log(res.data);
+                    let band = [res.data];
+
                     this.setState({
                         searchedData: res.data,
-                        panelData: res.data
+                        panelData: band
                     })
+
+                    console.log(this.state.panelData)
                 }
 
             });
@@ -219,13 +223,19 @@ class Directory extends Component {
 
     }
 
+    showAll = () => {
+        this.setState({
+            panelData: this.state.data
+        })
+    }
+
     render() {
         const { classes } = this.props;
         let searchText = this.state.userType === "artist" ? "Search Venue Directory" : "Search Artist Directory"
         let numberOfResults;
 
-        if(this.state.data.length < 10 ){
-            numberOfResults = this.state.data.length;
+        if(this.state.panelData.length < 10 ){
+            numberOfResults = this.state.panelData.length;
         }
         else{
             numberOfResults = 10;
@@ -268,7 +278,17 @@ class Directory extends Component {
                             </Button>
                         </div>
                         {/* Add a Search Bar here in the future */}
-                        <p className="directory-text">Showing {numberOfResults} out of {this.state.data.length} {this.state.userType === "artist" ? "Venues" : "Artists"}</p>
+                        <div id = "directory-results-header">
+                            <p className="directory-text">Showing {numberOfResults} out of {this.state.panelData.length} {this.state.userType === "artist" ? "Venues" : "Artists"}</p>
+                            <Button className={classes.button}
+                                id="show-all-button"
+                                variant="contained"
+                                color="primary"
+                                onClick={this.showAll}>
+                                Show All
+                            </Button>
+                        </div>
+                        
 
                         <Panel data={this.state.panelData} />
 
