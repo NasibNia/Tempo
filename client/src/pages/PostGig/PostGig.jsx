@@ -109,8 +109,6 @@ class PostGig extends Component {
     
         },
         topArtists: "",
-        checkedA: false,
-        checkedB: false
 
     }
 
@@ -123,7 +121,7 @@ class PostGig extends Component {
                 window.location.href = "/signin";
             }
             else {
-                console.log("Select Artist Mounting Check", res.data, res.data.user.id);
+                console.log("Post Gig Mounting Check", res.data, res.data.user.id);
                 if (res.data.user.userType === "artist") {
                     window.location.href = "/artist";
                 }
