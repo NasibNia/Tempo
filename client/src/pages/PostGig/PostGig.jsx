@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Body from "../../components/Body";
 import HeaderBar from "../../components/HeaderBar";
+import Modal from "../../components/Modal";
 import Paper from '@material-ui/core/Paper';
 import Navigate from "../../components/Body/Navigate";
 import Button from '@material-ui/core/Button';
@@ -99,14 +100,14 @@ class PostGig extends Component {
         pic: "",
         searchedGenre: "",
         genres: {
-          rock: false,
-          club: false,
-          electronic: false,
-          hiphop: false,
-          pop: false,
-          jazz: false,
-          acoustics: false
-    
+            rock: false,
+            club: false,
+            electronic: false,
+            hiphop: false,
+            pop: false,
+            jazz: false,
+            acoustics: false
+
         },
         topArtists: "",
 
@@ -149,10 +150,17 @@ class PostGig extends Component {
 
                 <div className="body-wrap" >
                     {/* ADD A CLASS TO THIS DIV */}
-                    <Navigate method={this.changeState} userType={this.state.userType} name={this.state.name} pic={this.state.pic} userId = {this.state.userId}/>
+                    <Navigate method={this.changeState} userType={this.state.userType} name={this.state.name} pic={this.state.pic} userId={this.state.userId} />
 
 
                     <div className="postgig-box-wrap">
+                        <h1>Post a Gig</h1>
+
+                        <h2>Quick-Post</h2>
+                        <h3>add a gig and adjust your settings later!</h3>
+                        <Modal postType="show" url={this.props.url} userID={this.state.userId} userType={this.props.userType} />
+                        <h2>Advanced</h2>
+                        <h3>Recommended</h3>
 
                     </div>
 
