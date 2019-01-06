@@ -22,7 +22,7 @@ class Body extends Component {
             <div>
                 <HeaderBar userType={this.state.userType} />
                 <div className="body-wrap">
-                    <Navigate method={this.changeState} userType={this.state.userType} name={this.props.name} pic={this.props.pic} userId = {20}/>
+                    <Navigate method={this.changeState} userType={this.state.userType} name={this.props.name} pic={this.props.pic} userId = {this.props.id}/>
 
                     <Main userType={this.state.userType} url={this.props.url} name={this.props.name}/>
 
