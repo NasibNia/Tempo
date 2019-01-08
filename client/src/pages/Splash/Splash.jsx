@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import "./splash.css"
+import { Link } from 'react-router-dom';
 import HeaderBar from "../../components/HeaderBar";
 import SignUp from "../../components/SignUp";
 import Footer from "../../components/Footer";
@@ -15,6 +15,7 @@ import Fade from 'react-reveal/Fade';
 import Slide from 'react-reveal/Slide';
 import scrollToComponent from 'react-scroll-to-component';
 
+import "./splash.css"
 
 const styles = theme => ({
     loginButton: {
@@ -64,14 +65,14 @@ class Splash extends Component {
                         </Slide>
                         <h1>Play More Music, Earn More Money</h1>
 
-                        {/* <div className="sign-up-links">
-                            <Button variant="outlined" color="default" className={classes.loginButton}>
+                        <div className="sign-up-links">
+                            <Link to = "/signin"><Button variant="outlined" color="default" className={classes.loginButton}>
                                 LOG IN
-                            </Button>
-                            <Button variant="contained" color="secondary" className={classes.signupButton}>
+                            </Button></Link>
+                            <Button variant="contained" color="secondary" className={classes.signupButton} onClick={() => scrollToComponent(this.signup, { offset: -150, align: 'top', duration: 1200 })}>
                                 SIGN UP
                             </Button>
-                        </div> */}
+                        </div>
                     </div>
                     <div id="background-overlay">
                         <video autoPlay muted loop>
@@ -128,7 +129,7 @@ class Splash extends Component {
                     </div>
                 </div>
                 <Fade>
-                    <SignUp />
+                    <SignUp ref={div => { this.signup = div }}/>
                 </Fade>
                 <Footer />
 
