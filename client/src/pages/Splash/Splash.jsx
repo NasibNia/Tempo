@@ -65,14 +65,14 @@ class Splash extends Component {
                         </Slide>
                         <h1>Play More Music, Earn More Money</h1>
 
-                        <div className="sign-up-links">
+                        {/* <div className="sign-up-links">
                             <Link to = "/signin"><Button variant="outlined" color="default" className={classes.loginButton}>
                                 LOG IN
                             </Button></Link>
                             <Button variant="contained" color="secondary" className={classes.signupButton} onClick={() => scrollToComponent(this.signup, { offset: -150, align: 'top', duration: 1200 })}>
                                 SIGN UP
                             </Button>
-                        </div>
+                        </div> */}
                     </div>
                     <div id="background-overlay">
                         <video autoPlay muted loop>
