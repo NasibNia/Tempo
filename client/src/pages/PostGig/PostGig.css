@@ -14,20 +14,28 @@
     width: 740px;
     min-height: 600px;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     margin-top: 20px;
     position: relative;
     overflow: hidden;
 }
 
-.message-box {
-    overflow: scroll;
-    background-color: rgba(0,0,0,.03);
-    height: 100%;
-    display: flex;
-    flex-direction: column-reverse;
-    max-height: 500px;
+.postgig-box-wrap h1 {
+    font-size: 30px;
+    margin-bottom: 20px;    
 }
+
+.postgig-box-wrap h2 {
+    font-size: 24px;
+    margin-top: 20px;    
+}
+
+.postgig-box-wrap h3 {
+    font-weight: normal;
+    font-style: italic;
+    margin: 5px 0 0 10px;
+}
+
 
 .small-profile-tile {
     width: 30px;

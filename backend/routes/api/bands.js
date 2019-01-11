@@ -18,7 +18,6 @@ router.route("/average_draw/")
 router.route("/search/:name")
       .get(bandController.findBandByName);
 
-
 router.route("/search/:genre")
       .get(bandController.findBandByGenre);
 

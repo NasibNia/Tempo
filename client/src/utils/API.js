@@ -28,28 +28,28 @@ export default {
     },
 
     // Genre search API routes
-    getBandsByGenre : function(genre){
+    getBandsByGenre: function (genre) {
         return axios.get("/api/bands/search/" + genre);
     },
-    getRockBands: function(){
+    getRockBands: function () {
         return axios.get("api/bands/rock")
     },
-    getJazzBands: function(){
+    getJazzBands: function () {
         return axios.get("api/bands/jazz")
     },
-    getPopBands: function(){
+    getPopBands: function () {
         return axios.get("api/bands/pop")
     },
-    getClubBands: function(){
+    getClubBands: function () {
         return axios.get("api/bands/club")
     },
-    getElectronicBands: function(){
+    getElectronicBands: function () {
         return axios.get("api/bands/electronic")
     },
-    getAcousticsBands: function(){
+    getAcousticsBands: function () {
         return axios.get("api/bands/acoustics")
     },
-    getHiphopBands: function(){
+    getHiphopBands: function () {
         return axios.get("api/bands/hiphop")
     },
 
@@ -65,7 +65,7 @@ export default {
         return axios.put("/api/bands/" + id, bandData);
     },
 
-    
+
 
     //==================VENUES==================
     // Gets all venues 
@@ -79,6 +79,10 @@ export default {
     // Gets the venue with the given id
     getVenue: function (id) {
         return axios.get("/api/venues/" + id);
+    },
+    // Gets the band with the given name
+    getVenueName: function (name) {
+        return axios.get("/api/venues/search/" + name);
     },
     // Deletes the venue with the given id
     deleteVenue: function (id) {
@@ -136,12 +140,12 @@ export default {
     },
 
     //==================NEWS==================
-    getNews : function () {
+    getNews: function () {
         console.log("api get news in util");
         return axios.get("/api/news");
     },
-    saveNews : (newsData) => {
+    saveNews: (newsData) => {
         return axios.post("/api/news", newsData);
     }
- 
+
 };

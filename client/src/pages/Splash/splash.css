@@ -44,9 +44,12 @@
 
 .sign-up-links{
     color: white;
-    position: absolute;
+    /* position: absolute; */
+    display: flex;
+    flex-direction: inherit;
     bottom: -100%;
-    left: 50% -75px;
+    justify-content: center;
+    /* align-content: bottom; */
     /* left: -75px; */
 }
 

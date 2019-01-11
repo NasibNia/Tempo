@@ -5,8 +5,12 @@ import Paper from '@material-ui/core/Paper';
 import Navigate from "../../components/Body/Navigate";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 import Panel from "../../components/Panel";
+
+import { withStyles } from '@material-ui/core/styles';
+
 import API from "../../utils/API";
 
 import "./Directory.css";
@@ -47,7 +51,7 @@ const styles = theme => ({
     },
     button: {
         display: 'block',
-        marginTop: theme.spacing.unit * 2
+        // padding: "15px"
     },
     formControl: {
         marginTop: theme.spacing.unit * 2,
@@ -96,7 +100,10 @@ class Directory extends Component {
         userId: 0,
         name: "",
         pic: "",
-        data: []
+        directorySearch: "",
+        data: [],
+        searchedData: [],
+        panelData: []
 
     }
 
@@ -135,13 +142,17 @@ class Directory extends Component {
                 }
             }
         });
+
     }
 
     loadBands = () => {
         API.getBands()
             .then(res => {
-                // console.log(res);
-                this.setState({ data: res.data })
+                console.log(res.data);
+                this.setState({
+                    data: res.data,
+                    panelData: res.data
+                })
             }
             )
             .catch(err => console.log(err));
@@ -150,14 +161,85 @@ class Directory extends Component {
     loadVenues = () => {
         API.getVenues()
             .then(res => {
-                this.setState({ data: res.data })
+                this.setState({
+                    data: res.data,
+                    panelData: res.data
+                })
             }
             )
             .catch(err => console.log(err));
     };
 
+    handleInputChange = event => {
+
+        const { name, value } = event.target;
+        this.setState({ [name]: value });
+
+    };
+
+    handleSearch = () => {
+        let searchedName = this.state.directorySearch;
+
+        if (this.state.userType === "artist") {
+
+            console.log("Venue Search", this.state.directorySearch);
+
+            API.getVenueName(searchedName).then(res => {
+                if (!res.data) {
+                    console.log("Venue profile does not exist!")
+                }
+                else {
+                    console.log(res.data);
+                    this.setState({
+                        searchedData: res.data,
+                        panelData: res.data
+                    })
+
+                }
+            });
+        }
+        else if (this.state.userType === "venue") {
+
+            console.log("Band Search", this.state.directorySearch)
+
+            API.getBandName(searchedName).then(res => {
+                if (!res.data) {
+                    console.log("Artist profile does not exist!")
+                }
+                else {
+                    console.log(res.data);
+                    let band = [res.data];
+
+                    this.setState({
+                        searchedData: res.data,
+                        panelData: band
+                    })
+
+                    console.log(this.state.panelData)
+                }
+
+            });
+        }
+
+    }
+
+    showAll = () => {
+        this.setState({
+            panelData: this.state.data
+        })
+    }
+
     render() {
         const { classes } = this.props;
+        let searchText = this.state.userType === "artist" ? "Search Venue Directory" : "Search Artist Directory"
+        let numberOfResults;
+
+        if(this.state.panelData.length < 10 ){
+            numberOfResults = this.state.panelData.length;
+        }
+        else{
+            numberOfResults = 10;
+        }
 
         return (
             <div>
@@ -165,14 +247,50 @@ class Directory extends Component {
 
                 <div className="body-wrap" >
                     {/* ADD A CLASS TO THIS DIV */}
-                    <Navigate method={this.changeState} userType={this.state.userType} name={this.state.name} pic={this.state.pic} />
+                    <Navigate method={this.changeState} userType={this.state.userType} name={this.state.name} pic={this.state.pic} userId={this.state.userId} />
 
 
                     <div className="directory-box-wrap">
                         <h1>{this.state.userType === "artist" ? "Venue" : "Artist"} Directory</h1>
                         {/* <h2>Search for Tempo Affiliates!</h2> */}
+
+                        <div id="search-directory">
+                            <TextField
+                                id="search-bar-directory"
+                                label={searchText}
+                                // className={classes.textField}
+                                type="search"
+                                name="directorySearch"
+                                autoComplete="search"
+                                margin="normal"
+                                variant="filled"
+                                onChange={this.handleInputChange}
+                                value={this.state.directorySearch}
+                            // onKeyPress={this.handleKeyPress}
+                            // helperText={this.state.errors.email}
+                            />
+                            <Button className={classes.button}
+                                id="search-directory-button"
+                                variant="contained"
+                                color="secondary"
+                                onClick={this.handleSearch}>
+                                <i class="fas fa-search" id="search-icon"></i>
+                            </Button>
+                        </div>
                         {/* Add a Search Bar here in the future */}
-                        <Panel data={this.state.data} />
+                        <div id = "directory-results-header">
+                            <p className="directory-text">Showing {numberOfResults} out of {this.state.panelData.length} {this.state.userType === "artist" ? "Venues" : "Artists"}</p>
+                            <Button className={classes.button}
+                                id="show-all-button"
+                                variant="contained"
+                                color="primary"
+                                onClick={this.showAll}>
+                                Show All
+                            </Button>
+                        </div>
+                        
+
+                        <Panel data={this.state.panelData} />
 
                     </div>
 
@@ -184,4 +302,4 @@ class Directory extends Component {
 
 }
 
-export default Directory;
+export default withStyles(styles)(Directory);

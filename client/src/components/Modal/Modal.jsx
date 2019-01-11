@@ -32,6 +32,7 @@ const styles = theme => ({
         margin: "10px auto",
         width: "100%",
         transition: "0.3s ease-in-out",
+        // fontWeight: "bold",
         textAlign: "center",
         '&:hover': {
             backgroundColor: theme.palette.secondary.light,
@@ -192,7 +193,7 @@ class Modal extends React.Component {
 
         return (
             <div>
-                <Button className={classes.button} onClick={this.handleClickOpen}>Click here to post a {this.props.postType.toUpperCase()}</Button>
+                <Button className={classes.button} color="secondary" variant="outlined" onClick={this.handleClickOpen}>Click here to post a {this.props.postType.toUpperCase()}</Button>
                 <Dialog
                     open={this.state.open}
                     onClose={this.handleClose}

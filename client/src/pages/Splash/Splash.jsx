@@ -1,13 +1,46 @@
 import React, { Component } from 'react';
-import "./splash.css"
+import { Link } from 'react-router-dom';
 import HeaderBar from "../../components/HeaderBar";
 import SignUp from "../../components/SignUp";
 import Footer from "../../components/Footer";
+
+// Material-UI
+import Button from '@material-ui/core/Button';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+
 
 // Animations
 import Fade from 'react-reveal/Fade';
 import Slide from 'react-reveal/Slide';
 import scrollToComponent from 'react-scroll-to-component';
+
+import "./splash.css"
+
+const styles = theme => ({
+    loginButton: {
+        margin: theme.spacing.unit,
+        color: "white",
+        borderColor: "white",
+        backgroundColor: "rgb(255, 255, 255, 0.2)",
+        '&:hover': {
+            backgroundColor: "rgb(255, 255, 255, 0.4)",
+            // color: theme.palette.primary.dark,
+            // borderColor: theme.palette.primary.dark
+        },
+    },
+    signupButton: {
+        margin: theme.spacing.unit,
+        backgroundColor: theme.palette.secondary.light,
+        '&:hover': {
+            backgroundColor: "rgb(248, 105, 83)",
+            
+        },
+    },
+    input: {
+        display: 'none',
+    },
+});
 
 class Splash extends Component {
 
@@ -16,6 +49,8 @@ class Splash extends Component {
     // }
 
     render() {
+        const { classes } = this.props;
+
         return (
             <div>
                 <div className="splash-nav">
@@ -29,9 +64,14 @@ class Splash extends Component {
                             <img src="/assets/box-logo.png" alt="Tempo" id="tempo" />
                         </Slide>
                         <h1>Play More Music, Earn More Money</h1>
+
                         {/* <div className="sign-up-links">
-                            <p className="hvr-sweep-to-right">LOG IN</p>
-                            <p className="hvr-sweep-to-right">SIGN UP</p>
+                            <Link to = "/signin"><Button variant="outlined" color="default" className={classes.loginButton}>
+                                LOG IN
+                            </Button></Link>
+                            <Button variant="contained" color="secondary" className={classes.signupButton} onClick={() => scrollToComponent(this.signup, { offset: -150, align: 'top', duration: 1200 })}>
+                                SIGN UP
+                            </Button>
                         </div> */}
                     </div>
                     <div id="background-overlay">
@@ -65,10 +105,10 @@ class Splash extends Component {
                             <div className="card lite">
                                 <h3>Tempo <span className="icon1">Lite</span></h3>
                                 <ul>
-                                    <li><img className="check" src={require('./iconography-05.png')}alt="Find Gigs"></img>Find Gigs</li>
-                                    <li><img className="check" src={require('./iconography-05.png')}alt="Lite News Feed"></img>Lite News Feed</li>
-                                    <li><img className="check" src={require('./iconography-05.png')}alt="Career Roadmap"></img>Career Roadmap</li>
-                                    <li><img className="check" src={require('./iconography-05.png')}alt="Calendar App"></img>Calendar App</li>
+                                    <li><img className="check" src={require('./iconography-05.png')} alt="Find Gigs"></img>Find Gigs</li>
+                                    <li><img className="check" src={require('./iconography-05.png')} alt="Lite News Feed"></img>Lite News Feed</li>
+                                    <li><img className="check" src={require('./iconography-05.png')} alt="Career Roadmap"></img>Career Roadmap</li>
+                                    <li><img className="check" src={require('./iconography-05.png')} alt="Calendar App"></img>Calendar App</li>
                                 </ul>
                             </div>
                         </Fade >
@@ -76,20 +116,20 @@ class Splash extends Component {
                             <div className="card pro">
                                 <h3>Tempo <span className="icon1">Pro</span></h3>
                                 <ul>
-                                    <li><img className="check" src={require('./iconography-05.png')}alt="Priority Applications"></img>Priority Applications</li>
-                                    <li><img className="check" src={require('./iconography-05.png')}alt="Pro News Feed"></img>Pro News Feed</li>
-                                    <li><img className="check" src={require('./iconography-05.png')}alt="Real-Time Stats"></img>Real-Time Stats</li>
-                                    <li><img className="check" src={require('./iconography-05.png')}alt="All Local Event Listings"></img>All Local Events Listings</li>
-                                    <li><img className="check" src={require('./iconography-05.png')}alt="Venue Directory"></img>Venue Directory</li>
-                                    <li><img className="check" src={require('./iconography-05.png')}alt="All Lite Features"></img>All Lite Features</li>
-                                    <li><img className="check" src={require('./iconography-05.png')}alt="Weekly Updates"></img>Weekly Updates</li>
+                                    <li><img className="check" src={require('./iconography-05.png')} alt="Priority Applications"></img>Priority Applications</li>
+                                    <li><img className="check" src={require('./iconography-05.png')} alt="Pro News Feed"></img>Pro News Feed</li>
+                                    <li><img className="check" src={require('./iconography-05.png')} alt="Real-Time Stats"></img>Real-Time Stats</li>
+                                    <li><img className="check" src={require('./iconography-05.png')} alt="All Local Event Listings"></img>All Local Events Listings</li>
+                                    <li><img className="check" src={require('./iconography-05.png')} alt="Venue Directory"></img>Venue Directory</li>
+                                    <li><img className="check" src={require('./iconography-05.png')} alt="All Lite Features"></img>All Lite Features</li>
+                                    <li><img className="check" src={require('./iconography-05.png')} alt="Weekly Updates"></img>Weekly Updates</li>
                                 </ul>
                             </div>
                         </Fade >
                     </div>
                 </div>
                 <Fade>
-                    <SignUp />
+                    <SignUp ref={div => { this.signup = div }}/>
                 </Fade>
                 <Footer />
 
@@ -99,4 +139,8 @@ class Splash extends Component {
 
 }
 
-export default Splash
+Splash.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(Splash);
