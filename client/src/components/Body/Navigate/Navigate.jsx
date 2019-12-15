@@ -18,7 +18,7 @@ const Navigate = props => {
     return (
         <div className="navigate-container">
             <div className="navigate-wrap">
-                <div className="navigate-chunk">
+                <div className="navigate-chunk">    
                     <h2>Your Profile</h2>
                     <Link to={props.userType === "artist" ? "/profile/" + props.userId : "/profile/"} style={{textDecoration: "none", color: "black"}}><NavigateItem icon={props.pic ? props.pic : "/assets/iconography2-02.png"
                     } text={props.name ? props.name : "Profile Name"} type={"profile"} onClick={props.method} radius={"25px"} /></Link>

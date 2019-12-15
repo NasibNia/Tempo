@@ -34,7 +34,7 @@ const styles = theme => ({
         backgroundColor: theme.palette.secondary.light,
         '&:hover': {
             backgroundColor: "rgb(248, 105, 83)",
-            
+
         },
     },
     input: {
@@ -129,7 +129,7 @@ class Splash extends Component {
                     </div>
                 </div>
                 <Fade>
-                    <SignUp ref={div => { this.signup = div }}/>
+                    <SignUp ref={div => { this.signup = div }} />
                 </Fade>
                 <Footer />
 
